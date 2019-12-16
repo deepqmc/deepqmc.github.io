@@ -1,8 +1,17 @@
 API
 ===
 
-Top-level
-------------------
-
 .. automodule:: deepqmc
-    :members:
+
+.. automodule:: deepqmc.fit
+
+.. automodule:: deepqmc.sampling
+
+.. automodule:: deepqmc.cli
+
+Wave functions
+--------------
+
+.. automodule:: deepqmc.wf
+
+.. automodule:: deepqmc.wf.paulinet
