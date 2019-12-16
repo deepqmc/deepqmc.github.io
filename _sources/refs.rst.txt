@@ -1,0 +1,6 @@
+References
+==========
+
+.. [Hermann19] J. Hermann, Z. Schätzle, F. Noé, Deep neural network solution
+    of the electronic Schrödinger equation. `arXiv:1909.08423
+    <http://arxiv.org/abs/1909.08423>`_.
