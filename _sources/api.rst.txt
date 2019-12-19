@@ -1,6 +1,8 @@
 API
 ===
 
+All classes with a documented Shape section are derived from :class:`torch.nn.Module`.
+
 .. automodule:: deepqmc
 
 .. automodule:: deepqmc.fit
