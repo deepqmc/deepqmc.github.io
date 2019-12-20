@@ -1,3 +1,4 @@
+==========
 References
 ==========
 
@@ -10,6 +11,6 @@ References
 .. [MaJCP05] A. Ma, M. D. Towler, N. D. Drummond, R. J. Needs, Scheme for adding
    electron–nucleus cusps to Gaussian orbitals. `J. Chem. Phys. 122, 224322
    <http://aip.scitation.org/doi/10.1063/1.1940588>`_ (2005).
-.. [dim4] For computational efficiency, coordinate differences :math:`(\mathbf r-\mathbf r')`
+.. [dim4] For computational efficiency, coordinate vectors :math:`\mathbf r`
    are sometimes passed around together with their squared norms,
-   :math:`|\mathbf r-\mathbf r'|^2`, as 4D vectors.
+   :math:`|\mathbf r|^2`, as 4D vectors.
