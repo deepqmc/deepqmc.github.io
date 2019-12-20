@@ -19,7 +19,7 @@
     <script type="text/javascript" src="_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="User guide" href="user-guide.html" />
+    <link rel="next" title="API" href="api.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -75,8 +75,9 @@
 </p>
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="refs.html">References</a></li>
 </ul>
 
@@ -84,7 +85,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="user-guide.html" title="next chapter">User guide</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API</a></li>
   </ul></li>
 </ul>
 </div>
@@ -108,10 +109,33 @@
             
   <div class="section" id="welcome-to-deepqmc">
 <h1>Welcome to DeepQMC<a class="headerlink" href="#welcome-to-deepqmc" title="Permalink to this headline">¶</a></h1>
+<p>DeepQMC implements variational quantum Monte Carlo for electrons in molecules, using deep neural networks written in <a class="reference external" href="https://pytorch.org">PyTorch</a> as trial wave functions. Besides the core functionality, it contains implementations of the following ansatzes:</p>
+<ul class="simple">
+<li><p>PauliNet: <a class="reference external" href="https://arxiv.org/abs/1909.08423">https://arxiv.org/abs/1909.08423</a></p></li>
+</ul>
+<div class="section" id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>Install and update using <a class="reference external" href="https://pip.pypa.io/en/stable/quickstart/">Pip</a>.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">deepqmc</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-simple-example">
+<h2>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">train</span>
+<span class="kn">from</span> <span class="nn">deepqmc.wf</span> <span class="kn">import</span> <span class="n">PauliNet</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;LiH&#39;</span><span class="p">)</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">PauliNet</span><span class="o">.</span><span class="n">from_hf</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+<span class="n">train</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-referencee">
+<h2>API referencee<a class="headerlink" href="#api-referencee" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-deepqmc">Training</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#wave-functions">Wave functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#paulinet">PauliNet</a></li>
@@ -119,8 +143,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="refs.html">References</a></li>
 </ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 

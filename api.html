@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>API reference &#8212; DeepQMC 0.1.0 documentation</title>
+    <title>API &#8212; DeepQMC 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="References" href="refs.html" />
-    <link rel="prev" title="User guide" href="user-guide.html" />
+    <link rel="prev" title="Welcome to DeepQMC" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -76,8 +76,7 @@
 </p>
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User guide</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-deepqmc">Training</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#wave-functions">Wave functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#paulinet">PauliNet</a></li>
@@ -85,6 +84,8 @@
 </li>
 </ul>
 </li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="refs.html">References</a></li>
 </ul>
 
@@ -92,7 +93,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="user-guide.html" title="previous chapter">User guide</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to DeepQMC</a></li>
       <li>Next: <a href="refs.html" title="next chapter">References</a></li>
   </ul></li>
 </ul>
@@ -115,8 +116,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="api-reference">
-<h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>The API is designed in such a way that entering it via the top-level <a class="reference internal" href="#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepqmc.train()</span></code></a> and <a class="reference internal" href="#deepqmc.wf.PauliNet.from_hf" title="deepqmc.wf.PauliNet.from_hf"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepqmc.wf.PauliNet.from_hf()</span></code></a> entry points enables complete specification of all parameters via nested dictionaries that can be encoded in a <a class="reference external" href="https://github.com/toml-lang/toml">TOML</a> file. The lower-level dictionaries (stored under <code class="docutils literal notranslate"><span class="pre">*_kwargs</span></code> keys) are gradually unwrapped and passed into lower-level API components.</p>
 <p>All classes documented below with a Shape section are derived from <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#torch.nn.Module" title="(in PyTorch vmaster (1.3.0a0+ee77ccb ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> and are to be used as such.</p>
 <div class="section" id="module-deepqmc">
