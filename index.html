@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-    <script type="text/javascript" src="_static/katex_autorenderer.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="installation.html" />
@@ -35,7 +35,7 @@
 
 
 
-<p class="blurb">Deep-learning quantum Monte Carlo</p>
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
 
 
 
@@ -102,7 +102,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="documentwrapper">
@@ -127,13 +127,14 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#virtual-environments">Virtual environments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#install-deepqmc">Install DeepQMC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#developing-deepqmc">Developing DeepQMC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#developing">Developing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#create-a-molecule">Create a molecule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#create-a-wave-function-ansatz">Create a wave function ansatz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#optimize-the-ansatz">Optimize the ansatz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#get-the-energy">Get the energy</a></li>
 </ul>
 </li>
 </ul>
@@ -145,7 +146,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-deepqmc">Training</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#wave-functions">Wave functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-deepqmc.wf">Wave functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#paulinet">PauliNet</a></li>
 </ul>
 </li>
@@ -169,7 +170,7 @@
       &copy;2019-2020, Frank Noé and collaborators.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-    <script type="text/javascript" src="_static/katex_autorenderer.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
@@ -36,7 +36,7 @@
 
 
 
-<p class="blurb">Deep-learning quantum Monte Carlo</p>
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
 
 
 
@@ -81,6 +81,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#create-a-molecule">Create a molecule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-wave-function-ansatz">Create a wave function ansatz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#optimize-the-ansatz">Optimize the ansatz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-the-energy">Get the energy</a></li>
 </ul>
 </li>
 </ul>
@@ -109,7 +110,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="documentwrapper">
@@ -120,7 +121,7 @@
             
   <div class="section" id="tutorial">
 <span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>This section describes the use of the high-level API of DeepQMC. For the lower-level API, go directly to the <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> documentation.</p>
+<p>This section describes the use of the high-level API of DeepQMC. For the lower-level API, consult directly the <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> documentation.</p>
 <div class="section" id="create-a-molecule">
 <h2>Create a molecule<a class="headerlink" href="#create-a-molecule" title="Permalink to this headline">¶</a></h2>
 <p>A molecule is represented by the <a class="reference internal" href="api.html#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> class in DeepQMC. The easiest way to get started is to work with one of the predefined molecules:</p>
@@ -146,9 +147,9 @@
 </div>
 <div class="section" id="create-a-wave-function-ansatz">
 <h2>Create a wave function ansatz<a class="headerlink" href="#create-a-wave-function-ansatz" title="Permalink to this headline">¶</a></h2>
-<p>All wave function ansatzes are available in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code> package. At the moment, the only available ansatz is <a class="reference internal" href="api.html#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>. The PauliNet class has three different constructors, differing in how low-level they are. The high-level <code class="xref py py-meth docutils literal notranslate"><span class="pre">PauliNet.from_hf()</span></code> constructor has default parameters for everything except for the molecule, and it runs the underlying multireference Hartree–Fock calculation which provides the orbitals on which the ansatz is built:</p>
+<p>All wave function ansatzes are available in the <a class="reference internal" href="api.html#module-deepqmc.wf" title="deepqmc.wf"><code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code></a> subpackage. At the moment, the only available ansatz is <a class="reference internal" href="api.html#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>. The PauliNet class has three different constructors, differing in how low-level they are. The high-level <code class="xref py py-meth docutils literal notranslate"><span class="pre">PauliNet.from_hf()</span></code> constructor has default parameters for everything except for the molecule, and it runs the underlying multireference Hartree–Fock calculation which provides the orbitals on which the ansatz is built:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc.wf</span> <span class="kn">import</span> <span class="n">PauliNet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">PauliNet</span><span class="o">.</span><span class="n">from_hf</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">PauliNet</span><span class="o">.</span><span class="n">from_hf</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cas</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
 <span class="go">converged SCF energy = -7.9846409186467</span>
 <span class="go">CASSCF energy = -8.00439006914284</span>
 <span class="go">CASCI E = -8.00439006914284  E(CI) = -1.10200121173341  S^2 = 0.0000000</span>
@@ -161,18 +162,28 @@
 <p>The high-level <a class="reference internal" href="api.html#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function is used to train the deep neural networks in the ansatz:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">train</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
-<span class="go">training:   0%|                                  | 0/10000 [00:00&lt;?, ?it/s]</span>
-<span class="go">sampling:  51%|█████████████             | 256/500 [00:26&lt;00:25,  9.88it/s]</span>
+<span class="go">training:   0%|▍       | 49/10000 [01:41&lt;5:43:40,  2.07s/it, E=-8.0378(27)]</span>
 </pre></div>
 </div>
-<p>The terminal output shows only how far has the training progressed. All monitoring of how well the training goes is done via <a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a>. The training run creates a Tensorboard event file in the <cite>runs/</cite> directory, which can be observed from Tensorboard:</p>
+<p>The terminal output shows only how far has the training progressed and the current estimate of the energy. More detailed monitoring of the training goes is available via <a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a>. The training run creates a Tensorboard event file in the <cite>runs/</cite> directory, which can be observed from Tensorboard:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tensorboard --logdir runs/
 TensorFlow installation not found - running with reduced feature set.
 Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
 TensorBoard 2.1.0 at http://localhost:6007/ (Press CTRL+C to quit)
 </pre></div>
 </div>
-<p>This launches a Tensorboard server which can be accessed in a web browser.</p>
+<p>This launches a Tensorboard server which can be accessed via a web browser at the printed URL.</p>
+</div>
+<div class="section" id="get-the-energy">
+<h2>Get the energy<a class="headerlink" href="#get-the-energy" title="Permalink to this headline">¶</a></h2>
+<p>The rough estimate of the expectation value of the energy of a trained wave function can be obtained already from the training run. A rigorous estimation with a statistical sampling error can be obtained with the high-level <a class="reference internal" href="api.html#deepqmc.evaluate" title="deepqmc.evaluate"><code class="xref py py-func docutils literal notranslate"><span class="pre">evaluate()</span></code></a> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluate</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<span class="go">evaluating: 100%|█████████| 500/500 [10:28&lt;00:00,  1.26s/it, E=-8.07000(19)]</span>
+<span class="go">{&#39;energy&#39;: -8.07000108151436+/-0.000193955696684799}</span>
+</pre></div>
+</div>
+<p>As in the case of the training, the evaluation can be also monitored with Tensorboard.</p>
 </div>
 </div>
 
@@ -187,7 +198,7 @@ TensorBoard 2.1.0 at http://localhost:6007/ (Press CTRL+C to quit)
       &copy;2019-2020, Frank Noé and collaborators.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

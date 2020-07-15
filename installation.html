@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-    <script type="text/javascript" src="_static/katex_autorenderer.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial" href="tutorial.html" />
@@ -36,7 +36,7 @@
 
 
 
-<p class="blurb">Deep-learning quantum Monte Carlo</p>
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
 
 
 
@@ -81,7 +81,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#virtual-environments">Virtual environments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-deepqmc">Install DeepQMC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#developing-deepqmc">Developing DeepQMC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing">Developing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
@@ -111,7 +111,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="documentwrapper">
@@ -124,7 +124,7 @@
 <span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="python-version">
 <h2>Python version<a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h2>
-<p>DeepQMC is compatible with Python 3.6, but Python 3.7 is recommended.</p>
+<p>DeepQMC is compatible with Python 3.7 and higher.</p>
 </div>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
@@ -133,6 +133,7 @@
 <li><p><a class="reference external" href="https://numpy.org">NumPy</a> is an essential library for numerical computation in Python.</p></li>
 <li><p><a class="reference external" href="https://pytorch.org">PyTorch</a> is one of the most popular Python frameworks for deep learning.</p></li>
 <li><p><a class="reference external" href="https://github.com/uiri/toml">TOML</a> implements the <a class="reference external" href="https://en.wikipedia.org/wiki/TOML">TOML</a> configuration file format in Python.</p></li>
+<li><p><a class="reference external" href="http://uncertainties-python-package.readthedocs.io">uncertainties</a> helps with propagation of uncertainties in calculations.</p></li>
 </ul>
 <div class="section" id="optional-dependencies">
 <h3>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline">¶</a></h3>
@@ -141,7 +142,9 @@
 <li><p><a class="reference external" href="https://www.scipy.org">SciPy</a> provides essential numerical algorithms.</p></li>
 <li><p><a class="reference external" href="http://pyscf.org">PySCF</a> implements quantum chemistry methods in Python. This is used to obtain the HF orbitals.</p></li>
 <li><p><a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a> is a practical tool for monitoring training of neural networks.</p></li>
+<li><p><a class="reference external" href="https://pillow.readthedocs.io/">Pillow</a> is used by Tensorboard to store pictures in the event files.</p></li>
 <li><p><a class="reference external" href="https://github.com/tqdm/tqdm">TQDM</a> provides progress bars.</p></li>
+<li><p><a class="reference external" href="https://www.h5py.org">h5py</a> handles IO for <a class="reference external" href="http://hdfgroup.org">&lt;HDF5</a> files.</p></li>
 </ul>
 </div>
 </div>
@@ -154,7 +157,7 @@ $ python3 -m venv venv
 $ source venv/bin/activate
 </pre></div>
 </div>
-<p>This code creates a virtual environment in the <cite>venv</cite> directory and actives it. As a result, the <cite>python</cite> and <cite>pip</cite> executables available in the shell are now in the <cite>venv/bin</cite> directory, and any package and its dependencies are installed locally.</p>
+<p>This code creates a virtual environment in the <code class="docutils literal notranslate"><span class="pre">venv</span></code> directory and actives it. As a result, the <code class="docutils literal notranslate"><span class="pre">python</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> executables available in the shell are now in the <code class="docutils literal notranslate"><span class="pre">venv/bin</span></code> directory, and any package and its dependencies are installed locally.</p>
 </div>
 <div class="section" id="install-deepqmc">
 <h2>Install DeepQMC<a class="headerlink" href="#install-deepqmc" title="Permalink to this headline">¶</a></h2>
@@ -167,15 +170,15 @@ $ source venv/bin/activate
 </pre></div>
 </div>
 </div>
-<div class="section" id="developing-deepqmc">
-<h2>Developing DeepQMC<a class="headerlink" href="#developing-deepqmc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="developing">
+<h2>Developing<a class="headerlink" href="#developing" title="Permalink to this headline">¶</a></h2>
 <p>To install DeepQMC from a local Git repository, use <a class="reference external" href="https://python-poetry.org">Poetry</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/noegroup/deepqmc
 $ cd deepqmc
 $ poetry install -E all
 </pre></div>
 </div>
-<p>In addition to all the optional dependencies above, this also installs <cite>pytest</cite>, <cite>coverage</cite>, and <cite>click</cite>.</p>
+<p>In addition to all the optional dependencies above, this also installs <a class="reference external" href="https://docs.pytest.org/">pytest</a>, <a class="reference external" href="https://coverage.readthedocs.io">Coverage.py</a>, and <a class="reference external" href="https://click.palletsprojects.com/">Click</a>.</p>
 </div>
 </div>
 
@@ -190,7 +193,7 @@ $ poetry install -E all
       &copy;2019-2020, Frank Noé and collaborators.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
