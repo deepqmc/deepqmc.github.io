@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>deepqmc.sampling &#8212; DeepQMC 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="../../_static/katex_autorenderer.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">DeepQMC</a></h1>
+
+
+
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=deepqmc&repo=deepqmc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
+    <img
+        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/deepqmc/deepqmc">
+    <img
+    alt="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    src="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../refs.html">References</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for deepqmc.sampling</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
+<span class="kn">from</span> <span class="nn">uncertainties</span> <span class="kn">import</span> <span class="n">ufloat</span><span class="p">,</span> <span class="n">unumpy</span> <span class="k">as</span> <span class="n">unp</span>
+
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">LUFactError</span>
+<span class="kn">from</span> <span class="nn">.physics</span> <span class="kn">import</span> <span class="n">clean_force</span><span class="p">,</span> <span class="n">local_energy</span><span class="p">,</span> <span class="n">pairwise_self_distance</span><span class="p">,</span> <span class="n">quantum_force</span>
+<span class="kn">from</span> <span class="nn">.plugins</span> <span class="kn">import</span> <span class="n">PLUGINS</span>
+<span class="kn">from</span> <span class="nn">.torchext</span> <span class="kn">import</span> <span class="n">assign_where</span><span class="p">,</span> <span class="n">is_cuda</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">energy_offset</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.0&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sample_wf&#39;</span><span class="p">,</span> <span class="s1">&#39;MetropolisSampler&#39;</span><span class="p">,</span> <span class="s1">&#39;LangevinSampler&#39;</span><span class="p">]</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sample_wf"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.sample_wf">[docs]</a><span class="k">def</span> <span class="nf">sample_wf</span><span class="p">(</span>  <span class="c1"># noqa: C901</span>
+    <span class="n">wf</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="p">,</span>
+    <span class="n">steps</span><span class="p">,</span>
+    <span class="n">writer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">log_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">block_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">equilibrate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sample a wave function and accumulate expectation values.</span>
+
+<span class="sd">    This is a low-level interface, see :func:`~deepqmc.evaluate` for a high-level</span>
+<span class="sd">    interface. This iterator iteratively draws samples from the sampler, detects</span>
+<span class="sd">    when equilibrium is reached, and starts calculating and accumulating</span>
+<span class="sd">    local energies to get an estimate of the energy. Diagnostics is written into</span>
+<span class="sd">    the Tensorboard writer, and every full block, the step index, the current</span>
+<span class="sd">    estimate of the energy, and the sampled electron coordinates are yielded.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wf (:class:`~deepqmc.wf.WaveFunction`): wave function model to be sampled</span>
+<span class="sd">        sampler (iterator): yields batches of electron coordinate samples</span>
+<span class="sd">        steps (iterator): yields step indexes</span>
+<span class="sd">        writer (:class:`torch.utils.tensorboard.writer.SummaryWriter`):</span>
+<span class="sd">            Tensorboard writer</span>
+<span class="sd">        log_dict (dict-like): step data will be stored in this dictionary if given</span>
+<span class="sd">        blocks (list): used as storage of blocks. If not given, the iterator</span>
+<span class="sd">            uses a local storage.</span>
+<span class="sd">        block_size (int): size of a block (a sequence of samples)</span>
+<span class="sd">        equilibrate (bool or int): if false, local energies are calculated and</span>
+<span class="sd">            accumulated from the first sampling step, if true equilibrium is</span>
+<span class="sd">            detected automatically, if integer argument, specifies number of</span>
+<span class="sd">            equilibration steps</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">blocks</span> <span class="k">if</span> <span class="n">blocks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="n">calculating_energy</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">equilibrate</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">sampler</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dist_means</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">equilibrate</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;eq&#39;</span>
+        <span class="n">dist_means</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist_means</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">dist_means</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pairwise_self_distance</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">calculating_energy</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">equilibrate</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;=</span> <span class="n">equilibrate</span><span class="p">:</span>
+                    <span class="n">calculating_energy</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">dist_means</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dist_means</span><span class="p">[:</span><span class="n">block_size</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">dist_means</span><span class="p">[</span><span class="o">-</span><span class="n">block_size</span><span class="p">:]</span><span class="o">.</span><span class="n">std</span><span class="p">():</span>
+                    <span class="n">calculating_energy</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">calculating_energy</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">step</span><span class="p">,</span> <span class="s1">&#39;eq&#39;</span>
+        <span class="k">if</span> <span class="n">calculating_energy</span><span class="p">:</span>
+            <span class="n">Es_loc</span> <span class="o">=</span> <span class="n">local_energy</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">wf</span><span class="p">,</span> <span class="n">keep_graph</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Es_loc</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">log_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;coords&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;E_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Es_loc</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;log_psis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_psis</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s1">&#39;sample_plugin&#39;</span> <span class="ow">in</span> <span class="n">PLUGINS</span><span class="p">:</span>
+                <span class="n">PLUGINS</span><span class="p">[</span><span class="s1">&#39;sample_plugin&#39;</span><span class="p">](</span><span class="n">wf</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="n">log_dict</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">==</span> <span class="n">block_size</span><span class="p">:</span>
+                <span class="n">buffer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+                <span class="n">block</span> <span class="o">=</span> <span class="n">unp</span><span class="o">.</span><span class="n">uarray</span><span class="p">(</span>
+                    <span class="n">buffer</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span>
+                    <span class="n">buffer</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)),</span>
+                <span class="p">)</span>
+                <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+                <span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
+                <span class="n">blocks_arr</span> <span class="o">=</span> <span class="n">unp</span><span class="o">.</span><span class="n">nominal_values</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="n">blocks_arr</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">blocks_arr</span><span class="p">))</span>
+                <span class="n">energy</span> <span class="o">=</span> <span class="n">ufloat</span><span class="p">(</span><span class="n">blocks_arr</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">err</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">calculating_energy</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;E_loc/mean&#39;</span><span class="p">,</span> <span class="n">Es_loc</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">energy_offset</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;E_loc/var&#39;</span><span class="p">,</span> <span class="n">Es_loc</span><span class="o">.</span><span class="n">var</span><span class="p">(),</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;E_loc/min&#39;</span><span class="p">,</span> <span class="n">Es_loc</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;E_loc/max&#39;</span><span class="p">,</span> <span class="n">Es_loc</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">step</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
+                    <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span>
+                        <span class="s1">&#39;E/value&#39;</span><span class="p">,</span> <span class="n">energy</span><span class="o">.</span><span class="n">nominal_value</span> <span class="o">-</span> <span class="n">energy_offset</span><span class="p">,</span> <span class="n">step</span>
+                    <span class="p">)</span>
+                    <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;E/error&#39;</span><span class="p">,</span> <span class="n">energy</span><span class="o">.</span><span class="n">std_dev</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Matplotlib not installed, will not generate figures&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+                <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_psis</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">add_figure</span><span class="p">(</span><span class="s1">&#39;log_psi&#39;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+                <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">add_figure</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">calculating_energy</span><span class="p">:</span>
+                    <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+                    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">Es_loc</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+                    <span class="n">writer</span><span class="o">.</span><span class="n">add_figure</span><span class="p">(</span><span class="s1">&#39;E_loc&#39;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
+                        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+                        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+                        <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">blocks_arr</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+                        <span class="n">writer</span><span class="o">.</span><span class="n">add_figure</span><span class="p">(</span><span class="s1">&#39;E_block&#39;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">calculating_energy</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">step</span><span class="p">,</span> <span class="n">energy</span></div>
+
+
+<span class="k">def</span> <span class="nf">samples_from</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">xs</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">xs</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">sampler</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Sampler</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">is_floating_point</span><span class="p">():</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+
+<div class="viewcode-block" id="MetropolisSampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.MetropolisSampler">[docs]</a><span class="k">class</span> <span class="nc">MetropolisSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Samples electronic wave functions with vanilla Metropolis--Hastings Monte Carlo.</span>
+
+<span class="sd">    An instance of this class is an iterator that yields 2-tuples of electron</span>
+<span class="sd">    coordinates and wave function values with shapes of :math:`(\cdot,N,3)` and</span>
+<span class="sd">    :math:`(\cdot)`, respectively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wf (:class:`~deepqmc.wf.WaveFunction`): wave function to sample from</span>
+<span class="sd">        rs (:class:`torch.Tensor`:math:`(\cdot,N,3)`): initial positions of the</span>
+<span class="sd">            Markov-chain walkers</span>
+<span class="sd">        tau (float): :math:`\tau`, proposal step size</span>
+<span class="sd">        n_first_certain (int): number of initial steps done with 100% acceptance</span>
+<span class="sd">        target_acceptance (float): initial step size is automatically adjusted</span>
+<span class="sd">            to achieve this requested acceptance</span>
+<span class="sd">        n_discard (int): number of steps in the beginning of the sampling that are</span>
+<span class="sd">            discarded</span>
+<span class="sd">        n_decorrelate (int): number of extra steps between yielded samples</span>
+<span class="sd">        max_age (int): maximum age of a walker without a move after which it is</span>
+<span class="sd">            moved with 100% acceptance</span>
+<span class="sd">        log_psi_threshold (float): steps into proposals with log wave function values</span>
+<span class="sd">            below this threshold are always rejected</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">wf</span><span class="p">,</span>
+        <span class="n">rs</span><span class="p">,</span>
+        <span class="n">writer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">tau</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">n_first_certain</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">target_acceptance</span><span class="o">=</span><span class="mf">0.57</span><span class="p">,</span>
+        <span class="n">n_discard</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">n_decorrelate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_age</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">log_psi_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wf</span> <span class="o">=</span> <span class="n">wf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_age</span> <span class="o">=</span> <span class="n">max_age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_first_certain</span> <span class="o">=</span> <span class="n">n_first_certain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_psi_threshold</span> <span class="o">=</span> <span class="n">log_psi_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_acceptance</span> <span class="o">=</span> <span class="n">target_acceptance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_discard</span> <span class="o">=</span> <span class="n">n_discard</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_decorrelate</span> <span class="o">=</span> <span class="n">n_decorrelate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;rs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tau</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">writer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;rs&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">log_psis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;log_psis&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sign_psis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;sign_psis&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_ages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;ages&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tau</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span>
+
+    <span class="k">def</span> <span class="nf">acceptance_prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rs</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">:</span>
+            <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wf</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
+        <span class="n">Ps_acc</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">log_psis</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="p">))</span>
+        <span class="c1"># Ps_acc might become 0 or inf, however this does not affect</span>
+        <span class="c1"># the stability of the remaining code</span>
+        <span class="k">return</span> <span class="n">Ps_acc</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span>
+
+    <span class="k">def</span> <span class="nf">extra_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">extra_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> sample_size=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> &#39;</span>
+            <span class="s1">&#39;n_electrons=</span><span class="si">{self.rs.shape[1]}</span><span class="s1"> tau=</span><span class="si">{self.tau}</span><span class="s1">&gt;&#39;</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="MetropolisSampler.from_mf"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.MetropolisSampler.from_mf">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_mf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wf</span><span class="p">,</span> <span class="n">mf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2_000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a sampler from a HF calculation.</span>
+
+<span class="sd">        The initial walker positions are sampled from Gaussians centered</span>
+<span class="sd">        on atoms, with charge distribution corresponding to the charge analysis</span>
+<span class="sd">        of the HF wave function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            wf (:class:`~deepqmc.wf.WaveFunction`): wave function to be sampled from</span>
+<span class="sd">            mf (:class:`pyscf.scf.hf.RHF`): HF calculation used to get Mulliken</span>
+<span class="sd">                partial charges, taken from ``wf.mf`` if not given</span>
+<span class="sd">            sample_size (int): number of Markov-chain walkers</span>
+<span class="sd">            kwargs: all other arguments are passed to the constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">rand_from_mf</span><span class="p">(</span><span class="n">mf</span> <span class="ow">or</span> <span class="n">wf</span><span class="o">.</span><span class="n">mf</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_cuda</span><span class="p">(</span><span class="n">wf</span><span class="p">):</span>
+            <span class="n">rs</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal</span><span class="p">()</span>
+        <span class="n">Ps_acc</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_vars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_prob</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
+        <span class="n">accepted</span> <span class="o">=</span> <span class="n">Ps_acc</span> <span class="o">&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand_like</span><span class="p">(</span><span class="n">Ps_acc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psi_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">accepted</span> <span class="o">=</span> <span class="n">accepted</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">log_psis</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psi_threshold</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psi_threshold</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">log_psis</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_age</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">accepted</span> <span class="o">=</span> <span class="n">accepted</span> <span class="o">|</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ages</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_age</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_first_certain</span><span class="p">:</span>
+            <span class="n">accepted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">accepted</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ages</span><span class="p">[</span><span class="n">accepted</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ages</span><span class="p">[</span><span class="o">~</span><span class="n">accepted</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">acceptance</span> <span class="o">=</span> <span class="n">accepted</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;acceptance&#39;</span><span class="p">:</span> <span class="n">acceptance</span><span class="p">,</span>
+            <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ages</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+            <span class="s1">&#39;tau&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">assign_where</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign_psis</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_vars</span><span class="p">()),</span>
+            <span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_vars</span><span class="p">),</span>
+            <span class="n">accepted</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_acceptance</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_acceptance</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">acceptance</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span>
+                <span class="s1">&#39;sampling/log_psis/mean&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span>
+                <span class="s1">&#39;sampling/dists/mean&#39;</span><span class="p">,</span>
+                <span class="n">pairwise_self_distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;sampling/acceptance&#39;</span><span class="p">,</span> <span class="n">acceptance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;sampling/tau&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span>
+                <span class="s1">&#39;sampling/age/max&#39;</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span>
+                <span class="s1">&#39;sampling/age/rms&#39;</span><span class="p">,</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extra_writer</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign_psis</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="n">info</span>
+
+    <span class="k">def</span> <span class="nf">iter_with_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">n_discard</span><span class="p">):</span>
+            <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_decorrelate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">sample</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="o">*</span><span class="n">sample</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_with_info</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">sample</span>
+
+<div class="viewcode-block" id="MetropolisSampler.iter_batches"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.MetropolisSampler.iter_batches">[docs]</a>    <span class="k">def</span> <span class="nf">iter_batches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">epoch_size</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="nb">range</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iterate over buffered batches sampled in epochs.</span>
+
+<span class="sd">        Each epoch, the wave function is sampled in one shot, the samples</span>
+<span class="sd">        are buffered, and used to form all batches within a given epoch, entirely</span>
+<span class="sd">        shuffled.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            epoch_size (int): number of batches per epoch</span>
+<span class="sd">            batch_size (int): number of samples in a batch</span>
+<span class="sd">            range (callable): alternative to :class:`range`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_total</span> <span class="o">=</span> <span class="n">epoch_size</span> <span class="o">*</span> <span class="n">batch_size</span>
+        <span class="n">n_steps</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n_total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">samples_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">))</span>
+            <span class="n">samples_ds</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">end_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:</span><span class="n">n_total</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">))</span>
+            <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">samples_ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">yield from</span> <span class="n">rs_dl</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">recompute_psi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;log_psis&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;sign_psis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recompute_psi</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;ages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">propagate_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;rs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span></div>
+
+
+<span class="k">def</span> <span class="nf">rand_from_mf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">elec_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">idxs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">mol</span>
+    <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">natm</span>
+    <span class="n">charges</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">atom_charges</span><span class="p">()</span>
+    <span class="n">n_electrons</span> <span class="o">=</span> <span class="n">charges</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">mol</span><span class="o">.</span><span class="n">charge</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">charges</span> <span class="o">-</span> <span class="n">mf</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">floor</span><span class="p">()</span>
+    <span class="n">repeats</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">rem</span> <span class="o">=</span> <span class="n">cs</span> <span class="o">-</span> <span class="n">base</span>
+    <span class="n">rem_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_electrons</span> <span class="o">-</span> <span class="n">base</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">rem_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">rem</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">rem_size</span><span class="p">)</span>
+        <span class="n">repeats</span><span class="p">[</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">rem_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">samples</span>
+        <span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">idxs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">repeats</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">n_electrons</span><span class="p">)</span>
+    <span class="n">idxs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">idxs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="n">idxs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bs</span><span class="p">)])</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atom_coords</span><span class="p">())</span><span class="o">.</span><span class="n">float</span><span class="p">()[</span><span class="n">idxs</span><span class="p">]</span>
+    <span class="n">rs</span> <span class="o">=</span> <span class="n">centers</span> <span class="o">+</span> <span class="n">elec_std</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">centers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rs</span>
+
+
+<div class="viewcode-block" id="LangevinSampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.LangevinSampler">[docs]</a><span class="k">class</span> <span class="nc">LangevinSampler</span><span class="p">(</span><span class="n">MetropolisSampler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Samples electronic wave functions with Langevin Monte Carlo.</span>
+
+<span class="sd">    Derived from :class:`MetropolisSampler`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">forces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;forces&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rs</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">forces</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span>
+            <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">acceptance_prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rs</span><span class="p">):</span>
+        <span class="n">forces</span><span class="p">,</span> <span class="p">(</span><span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qforce</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
+        <span class="n">log_G_ratios</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forces</span> <span class="o">+</span> <span class="n">forces</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span> <span class="o">-</span> <span class="n">rs</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forces</span> <span class="o">-</span> <span class="n">forces</span><span class="p">))</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">Ps_acc</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_G_ratios</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">log_psis</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_psis</span><span class="p">))</span>
+        <span class="c1"># Ps_acc might become 0 or inf, however this does not affect</span>
+        <span class="c1"># the stability of the remaining code</span>
+        <span class="k">return</span> <span class="n">Ps_acc</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span><span class="p">,</span> <span class="n">forces</span>
+
+    <span class="k">def</span> <span class="nf">qforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">forces</span><span class="p">,</span> <span class="p">(</span><span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span><span class="p">)</span> <span class="o">=</span> <span class="n">quantum_force</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wf</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">LUFactError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;rs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rs</span><span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;idxs&#39;</span><span class="p">]]</span>
+            <span class="k">raise</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">clean_force</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wf</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="p">(</span><span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">extra_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forces</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="nf">extra_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span>
+            <span class="s1">&#39;sampling/forces&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">forces</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_writer</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">recompute_psi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;forces&#39;</span><span class="p">],</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;log_psis&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;sign_psis&#39;</span><span class="p">]),</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qforce</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019-2020, Frank Noé and collaborators.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

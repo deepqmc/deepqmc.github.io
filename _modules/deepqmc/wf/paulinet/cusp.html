@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>deepqmc.wf.paulinet.cusp &#8212; DeepQMC 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/katex-math.css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="../../../../_static/katex_autorenderer.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">DeepQMC</a></h1>
+
+
+
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=deepqmc&repo=deepqmc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
+    <img
+        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/deepqmc/deepqmc">
+    <img
+    alt="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    src="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../refs.html">References</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for deepqmc.wf.paulinet.cusp</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ElectronicAsymptotic&#39;</span><span class="p">,</span> <span class="s1">&#39;CuspCorrection&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ElectronicAsymptotic"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.ElectronicAsymptotic">[docs]</a><span class="k">class</span> <span class="nc">ElectronicAsymptotic</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Jastrow factor with a correct electronic cusp.</span>
+
+<span class="sd">    The Jastrow factor is calculated from distances between all pairs of</span>
+<span class="sd">    electrons, :math:`d_{ij}`,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \mathrm \gamma</span>
+<span class="sd">        :=\sum_{ij}-\frac{c}{\alpha(1+\alpha d_{ij})}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cusp (float): *c*, target cusp value</span>
+<span class="sd">        alpha (float): :math:`\alpha`, rate of decay of the cusp function to 1.</span>
+
+<span class="sd">    Shape:</span>
+<span class="sd">        - Input, :math:`d_{ij}`: :math:`(*,N_\text{pair})`</span>
+<span class="sd">        - Output, :math:`\gamma`: :math:`(*)`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">cusp</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cusp</span> <span class="o">=</span> <span class="n">cusp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dists</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cusp</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dists</span><span class="p">)))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;cusp=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cusp</span><span class="si">}</span><span class="s1">, alpha=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s1">&#39;</span></div>
+
+
+<div class="viewcode-block" id="CuspCorrection"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.CuspCorrection">[docs]</a><span class="k">class</span> <span class="nc">CuspCorrection</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Corrects nuclear cusp of Gaussian-type molecular orbitals.</span>
+
+<span class="sd">    The implementation closely follows [MaJCP05]_. Each orbital</span>
+<span class="sd">    :math:`\varphi_\mu(\mathbf r)` is decomposed to its *s*-type part centered</span>
+<span class="sd">    on the *I*-th nucleus, and the rest,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \varphi_\mu(\mathbf r)=s_{\mu I}(|\mathbf r-\mathbf R_I|)</span>
+<span class="sd">        +\phi_{\mu I}(\mathbf r)</span>
+
+<span class="sd">    Within a cutoff radius, :math:`r_\text c`, the *s*-type part is replaced</span>
+<span class="sd">    by a 4-th order polynomial that fits on four boundary values,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \mathbf b_{\mu I}=\big(</span>
+<span class="sd">            s_{\mu I}(0),</span>
+<span class="sd">            s_{\mu I}(r_\text c),</span>
+<span class="sd">            s_{\mu I}&#39;(r_\text c),</span>
+<span class="sd">            s_{\mu I}&#39;&#39;(r_\text c)</span>
+<span class="sd">        \big)</span>
+
+<span class="sd">    The fifth coefficient of the polynomial is</span>
+<span class="sd">    fixed by the cusp condition,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \frac1{\varphi_\mu(\mathbf r)}\frac{\partial\varphi_\mu(\mathbf r)}</span>
+<span class="sd">        {\partial|\mathbf r-\mathbf R_I|}</span>
+<span class="sd">        \bigg|_{\mathbf r=\mathbf R_I}=-Z_I</span>
+
+<span class="sd">    The value of the corrected *s*-type part at the center,</span>
+<span class="sd">    :math:`s_{\mu I}(0)`, is further adjusted by a trainable relative shift,</span>
+<span class="sd">    :math:`\Delta_{\mu I}`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        charges (:class:`~torch.Tensor`:math:`(M)`): :math:`Z_I`, nuclear charges</span>
+<span class="sd">        n_orbitals (int): :math:`N_\text{orb}`, number of orbitals</span>
+<span class="sd">        rc (:class:`~torch.Tensor`:math:`(M)`): :math:`r_\text c`, cutoff radii</span>
+<span class="sd">        eps (float): :math:`\varepsilon`, numerical zero. An orbital</span>
+<span class="sd">            is considered to have a non-zero *s*-type part if</span>
+<span class="sd">            :math:`s_{\mu I}(0)&gt;\varepsilon`.</span>
+
+<span class="sd">    On output, the module returns the mask of corrected electron positions,</span>
+<span class="sd">    the indexes of the nuclei that triggered the correction, and the corrected</span>
+<span class="sd">    *s*-type part.</span>
+
+<span class="sd">    Shape:</span>
+<span class="sd">        - Input1, :math:`|\mathbf r-\mathbf R_I|^2`: :math:`(*,M)`</span>
+<span class="sd">        - Input2, :math:`\mathbf b_{\mu I}`: :math:`(4,M,N_\text{orb})`</span>
+<span class="sd">        - Input3, :math:`\varphi_\mu(\mathbf R_I)`: :math:`(M,N_\text{orb})`</span>
+<span class="sd">        - Output1, corrected?: :math:`(*,N_\text{orb})`</span>
+<span class="sd">        - Output2, which nucleus: :math:`(*)`</span>
+<span class="sd">        - Output3, corrected :math:`s_{\mu I}(r)`: :math:`(N_\text{corr})`,</span>
+<span class="sd">          where :math:`N_\text{corr}` is the number of nonzero elements in</span>
+<span class="sd">          the first output (only corrected orbitals are returned in a flattened</span>
+<span class="sd">          form)</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        shifts: orbital shifts :math:`\Delta_{\mu I}` of shape</span>
+<span class="sd">            :math:`(M,N_\text{orb})`, initialized to zero</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">n_orbitals</span><span class="p">,</span> <span class="n">rc</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;charges&#39;</span><span class="p">,</span> <span class="n">charges</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shifts</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span> <span class="n">n_orbitals</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;rc&#39;</span><span class="p">,</span> <span class="n">rc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span>
+
+    <span class="k">def</span> <span class="nf">_fit_cusp_poly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi_gto_boundary</span><span class="p">,</span> <span class="n">mos0</span><span class="p">):</span>
+        <span class="n">has_s_part</span> <span class="o">=</span> <span class="n">phi_gto_boundary</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span>
+        <span class="n">charges</span><span class="p">,</span> <span class="n">rc</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">has_s_part</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charges</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rc</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">phi_gto_boundary</span><span class="p">,</span> <span class="n">mos0</span><span class="p">,</span> <span class="n">shifts</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">rc</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">x</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">has_s_part</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">phi_gto_boundary</span><span class="p">,</span> <span class="n">mos0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shifts</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">rc</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">phi0</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">dphi</span><span class="p">,</span> <span class="n">d2phi</span> <span class="o">=</span> <span class="n">phi_gto_boundary</span>
+        <span class="n">phi0</span> <span class="o">=</span> <span class="n">phi0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">shifts</span><span class="p">)</span>
+        <span class="n">sgn</span> <span class="o">=</span> <span class="n">phi0</span><span class="o">.</span><span class="n">sign</span><span class="p">()</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">sgn</span> <span class="o">==</span> <span class="n">phi</span><span class="o">.</span><span class="n">sign</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">phi0</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">phi</span><span class="o">.</span><span class="n">abs</span><span class="p">()),</span>
+            <span class="mi">2</span> <span class="o">*</span> <span class="n">phi0</span> <span class="o">-</span> <span class="n">phi</span><span class="p">,</span>
+            <span class="mi">2</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">-</span> <span class="n">phi0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phi_m_C</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">-</span> <span class="n">C</span>
+        <span class="n">X1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phi_m_C</span><span class="p">))</span>
+        <span class="n">X2</span> <span class="o">=</span> <span class="n">dphi</span> <span class="o">/</span> <span class="n">phi_m_C</span>
+        <span class="n">X3</span> <span class="o">=</span> <span class="n">d2phi</span> <span class="o">/</span> <span class="n">phi_m_C</span>
+        <span class="n">X4</span> <span class="o">=</span> <span class="o">-</span><span class="n">charges</span> <span class="o">*</span> <span class="p">(</span><span class="n">mos0</span> <span class="o">+</span> <span class="n">phi0</span> <span class="o">*</span> <span class="n">shifts</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">phi0</span> <span class="o">-</span> <span class="n">C</span><span class="p">)</span>
+        <span class="n">X5</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phi0</span> <span class="o">-</span> <span class="n">C</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">C</span><span class="p">,</span> <span class="n">sgn</span><span class="p">,</span> <span class="n">fit_cusp_poly</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">X3</span><span class="p">,</span> <span class="n">X4</span><span class="p">,</span> <span class="n">X5</span><span class="p">),</span> <span class="n">has_s_part</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rs_2</span><span class="p">,</span> <span class="n">phi_gto_boundary</span><span class="p">,</span> <span class="n">mos0</span><span class="p">):</span>
+        <span class="c1"># TODO the indexing here is far from desirable, but I don&#39;t have time to</span>
+        <span class="c1"># clean it up now</span>
+        <span class="n">C</span><span class="p">,</span> <span class="n">sgn</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">has_s_part</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_cusp_poly</span><span class="p">(</span><span class="n">phi_gto_boundary</span><span class="p">,</span> <span class="n">mos0</span><span class="p">)</span>
+        <span class="n">rs_2_nearest</span><span class="p">,</span> <span class="n">center_idx</span> <span class="o">=</span> <span class="n">rs_2</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">maybe_corrected</span> <span class="o">=</span> <span class="n">rs_2_nearest</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rc</span><span class="p">[</span><span class="n">center_idx</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">rs_1</span> <span class="o">=</span> <span class="n">rs_2_nearest</span><span class="p">[</span><span class="n">maybe_corrected</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
+        <span class="n">corrected</span> <span class="o">=</span> <span class="n">maybe_corrected</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">has_s_part</span><span class="p">[</span><span class="n">center_idx</span><span class="p">]</span>
+        <span class="n">params_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">has_s_part</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">params_idx</span><span class="p">[</span><span class="n">has_s_part</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">has_s_part</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">params_idx</span><span class="o">.</span><span class="n">device</span>
+        <span class="p">)</span>
+        <span class="n">rs_1_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rs_1</span><span class="p">))[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">mos0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span>
+            <span class="n">corrected</span><span class="p">[</span><span class="n">maybe_corrected</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="n">C</span><span class="p">,</span> <span class="n">sgn</span><span class="p">,</span> <span class="o">*</span><span class="n">alphas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">sgn</span><span class="p">,</span> <span class="o">*</span><span class="n">alphas</span><span class="p">])[</span>
+            <span class="p">:,</span> <span class="n">params_idx</span><span class="p">[</span><span class="n">center_idx</span><span class="p">][</span><span class="n">corrected</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="n">phi_cusped</span> <span class="o">=</span> <span class="n">C</span> <span class="o">+</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">eval_cusp_poly</span><span class="p">(</span><span class="n">rs_1</span><span class="p">[</span><span class="n">rs_1_idx</span><span class="p">],</span> <span class="o">*</span><span class="n">alphas</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">corrected</span><span class="p">,</span> <span class="n">center_idx</span><span class="p">,</span> <span class="n">phi_cusped</span></div>
+
+
+<span class="k">def</span> <span class="nf">fit_cusp_poly</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">X3</span><span class="p">,</span> <span class="n">X4</span><span class="p">,</span> <span class="n">X5</span><span class="p">):</span>
+    <span class="n">X1_m_X5</span> <span class="o">=</span> <span class="n">X1</span> <span class="o">-</span> <span class="n">X5</span>
+    <span class="n">X2_2_m_X3</span> <span class="o">=</span> <span class="n">X2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">X3</span>
+    <span class="n">rc_2</span><span class="p">,</span> <span class="n">rc_3</span><span class="p">,</span> <span class="n">rc_4</span> <span class="o">=</span> <span class="n">rc</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">rc</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span> <span class="n">rc</span> <span class="o">**</span> <span class="mi">4</span>
+    <span class="n">a0</span> <span class="o">=</span> <span class="n">X5</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="n">X4</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="o">-</span><span class="n">X2_2_m_X3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">X2</span> <span class="o">+</span> <span class="n">X4</span><span class="p">)</span> <span class="o">/</span> <span class="n">rc</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">X1_m_X5</span> <span class="o">/</span> <span class="n">rc_2</span>
+    <span class="n">a3</span> <span class="o">=</span> <span class="n">X2_2_m_X3</span> <span class="o">/</span> <span class="n">rc</span> <span class="o">+</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">X2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X4</span><span class="p">)</span> <span class="o">/</span> <span class="n">rc_2</span> <span class="o">-</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">X1_m_X5</span> <span class="o">/</span> <span class="n">rc_3</span>
+    <span class="n">a4</span> <span class="o">=</span> <span class="o">-</span><span class="n">X2_2_m_X3</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">rc_2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">X2</span> <span class="o">+</span> <span class="n">X4</span><span class="p">)</span> <span class="o">/</span> <span class="n">rc_3</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X1_m_X5</span> <span class="o">/</span> <span class="n">rc_4</span>
+    <span class="k">return</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">,</span> <span class="n">a4</span>
+
+
+<span class="k">def</span> <span class="nf">eval_cusp_poly</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">,</span> <span class="n">a4</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">rs</span> <span class="o">+</span> <span class="n">a2</span> <span class="o">*</span> <span class="n">rs</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">a3</span> <span class="o">*</span> <span class="n">rs</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">a4</span> <span class="o">*</span> <span class="n">rs</span> <span class="o">**</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019-2020, Frank Noé and collaborators.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

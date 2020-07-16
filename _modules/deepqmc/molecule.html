@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>deepqmc.molecule &#8212; DeepQMC 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="../../_static/katex_autorenderer.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">DeepQMC</a></h1>
+
+
+
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=deepqmc&repo=deepqmc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
+    <img
+        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/deepqmc/deepqmc">
+    <img
+    alt="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    src="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../refs.html">References</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for deepqmc.molecule</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">resources</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">toml</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Molecule&#39;</span><span class="p">]</span>
+
+<span class="n">angstrom</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">0.52917721092</span>
+
+<span class="n">_SYSTEMS</span> <span class="o">=</span> <span class="n">toml</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resources</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s1">&#39;deepqmc.data&#39;</span><span class="p">,</span> <span class="s1">&#39;systems.toml&#39;</span><span class="p">))</span>
+<span class="n">_SYSTEM_FACTORIES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Hn&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">,</span> <span class="n">dist</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;coords&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">dist</span> <span class="o">/</span> <span class="n">angstrom</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))]</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;charges&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+        <span class="s1">&#39;charge&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;spin&#39;</span><span class="p">:</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">_ensure_fp</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">tensor</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">{</span><span class="n">torch</span><span class="o">.</span><span class="n">half</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">}:</span>
+        <span class="k">return</span> <span class="n">tensor</span>
+    <span class="k">return</span> <span class="n">tensor</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="Molecule"><a class="viewcode-back" href="../../api.html#deepqmc.Molecule">[docs]</a><span class="k">class</span> <span class="nc">Molecule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a molecule.</span>
+
+<span class="sd">    The array-like arguments accept anything that can be transformed to</span>
+<span class="sd">    :class:`torch.Tensor`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        coords (array-like, rank-2, float, a.u.): atom coordinates as rows</span>
+<span class="sd">        charges (array-like, rank-1, float): atom charges</span>
+<span class="sd">        charge (int): total charge of a molecule</span>
+<span class="sd">        spin (int): total spin multiplicity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">all_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_SYSTEMS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">spin</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;coords&#39;</span><span class="p">,</span> <span class="n">_ensure_fp</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">coords</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;charges&#39;</span><span class="p">,</span> <span class="n">_ensure_fp</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">charges</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="n">charge</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spin</span> <span class="o">=</span> <span class="n">spin</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charges</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">charges</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s1">&#39;Molecule(coords=</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">}</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;  charges=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">charges</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">}</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;  charge=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="si">}</span><span class="s1">, spin=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">spin</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;)&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">as_pyscf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">charge</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())),</span> <span class="n">coord</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">charge</span> <span class="ow">in</span> <span class="bp">self</span>
+        <span class="p">]</span>
+
+<div class="viewcode-block" id="Molecule.from_name"><a class="viewcode-back" href="../../api.html#deepqmc.Molecule.from_name">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a molecule from a database of named molecules.</span>
+
+<span class="sd">        The available names are in :attr:`Molecule.all_names`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">_SYSTEMS</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">_SYSTEM_FACTORIES</span><span class="p">:</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">_SYSTEM_FACTORIES</span><span class="p">[</span><span class="n">name</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="ow">not</span> <span class="n">kwargs</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;coords&#39;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="n">angstrom</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="o">**</span><span class="n">system</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019-2020, Frank Noé and collaborators.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
