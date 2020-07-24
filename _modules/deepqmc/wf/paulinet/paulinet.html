@@ -306,8 +306,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">n_backflows</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="k">else</span> <span class="n">backflow_spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">n_up</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n_down</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">use_sloglindet</span> <span class="o">=</span> <span class="s1">&#39;never&#39;</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Setting use_sloglindet to </span><span class="se">\&#39;</span><span class="s1">never</span><span class="se">\&#39;</span><span class="s1"> as not implemented for n=0 and n=1.&#39;</span><span class="p">)</span>
-        <span class="c1">#TODO implement sloglindet for special cases n=0 and n=1</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;Setting use_sloglindet to &quot;never&quot; as not implemented for n=0 and n=1.&#39;</span>
+            <span class="p">)</span>
+        <span class="c1"># TODO implement sloglindet for special cases n=0 and n=1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">use_sloglindet</span> <span class="o">=</span> <span class="n">use_sloglindet</span>
 
@@ -422,8 +424,8 @@
 <span class="sd">            mol (:class:`~deepqmc.Molecule`): molecule whose wave function</span>
 <span class="sd">                is represented</span>
 <span class="sd">            basis (str): basis of the internal HF calculation</span>
-<span class="sd">            cas ((int, int)): tuple of the number of active electrons and number of</span>
-<span class="sd">                active orbitals for a complete active space multireference</span>
+<span class="sd">            cas ((int, int)): tuple of the number of active orbitals and number of</span>
+<span class="sd">                active electrons for a complete active space multireference</span>
 <span class="sd">                HF calculation</span>
 <span class="sd">            pauli_kwargs: arguments passed to :func:`PauliNet.from_pyscf`</span>
 <span class="sd">            omni_kwargs: arguments passed to :class:`~deepqmc.wf.paulinet.OmniSchNet`</span>
