@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command-line interface &#8212; DeepQMC 0.1.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">DeepQMC</a></h1>
+
+
+
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=deepqmc&repo=deepqmc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
+    <img
+        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/deepqmc/deepqmc">
+    <img
+    alt="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    src="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hyperparameters">Hyperparameters</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="refs.html">References</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="tutorial.html" title="previous chapter">Tutorial</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="command-line-interface">
+<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the command-line interface (CLI) to DeepQMC.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Usage: deepqmc [OPTIONS] COMMAND [ARGS]...
+
+  DeepQMC runs quantum Monte Carlo with deep neural networks.
+
+Options:
+  -v, --verbose  Increase verbosity.
+  -q, --quiet    Suppres all output.
+  --help         Show this message and exit.
+
+Commands:
+  defaults  Print all hyperparameters and their default values.
+  evaluate  Estimate total energy of an ansatz via Monte Carlo sampling.
+  train     Train an ansatz with variational quantum Monte Carlo.
+</pre></div>
+</div>
+<p>The CLI mirrors the package <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> in a 1-to-1 correspondence, and as such the two main entry points are the <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> commands, which are just thin wrappers around the <code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">evaluate()</span></code> functions.</p>
+<p>The usage of all the commands can be obtained with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deepqmc</span> <span class="n">COMMAND</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Create a working directory with the <code class="docutils literal notranslate"><span class="pre">param.toml</span></code> file, which specifies all calculation hyperparameters, see <a class="reference internal" href="#hyperparameters"><span class="std std-ref">below</span></a> for details:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat lih/param.toml
+system = &#39;LiH&#39;
+ansatz = &#39;paulinet&#39;
+</pre></div>
+</div>
+<p>Train the wave function ansatz:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc train lih --save-every 20
+converged SCF energy = -7.9846409186467
+equilibrating: 49it [00:07,  6.62it/s]
+training:   0%|  | 46/10000 [01:37&lt;5:50:59,  2.12s/it, E=-8.0371(24)]
+</pre></div>
+</div>
+<p>This creates several files in the working directory, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">events.out.tfevents.*</span></code>: Tensorboard event file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit.h5</span></code>: HDF5 file with the training trajectory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chkpts/state-*.pt</span></code>: Checkpoint files with the saved state of the ansatz at particular steps</p></li>
+</ul>
+<p>Create a file <code class="docutils literal notranslate"><span class="pre">state.pt</span></code> in the working directory, with the state of the ansatz that should be evaluated, for example by creating a symbolic link:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ln -s chkpts/state-00040.pt lih/state.pt
+</pre></div>
+</div>
+<p>Evaluate the ansatz to get an estimate of the total energy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc evaluate lih
+evaluating:  24%|▋  | 136/565 [01:12&lt;03:40,  1.65it/s, E=-8.0396(17)]
+</pre></div>
+</div>
+<p>Similar to the <code class="docutils literal notranslate"><span class="pre">train</span></code> command, this creates a <code class="docutils literal notranslate"><span class="pre">sample.h5</span></code> file with the sampled local energies in the working directory.</p>
+</div>
+<div class="section" id="hyperparameters">
+<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this headline">¶</a></h2>
+<p>The CLI supports specification of hyperparameters via the <code class="docutils literal notranslate"><span class="pre">param.toml</span></code> file, placed in <code class="docutils literal notranslate"><span class="pre">WORKDIR</span></code>, which is passed to the individual commands. The structure of this file is derived from the <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a>. All hyperparameters and their default values can be printed in the TOML format with the <code class="docutils literal notranslate"><span class="pre">defaults</span></code> command. For convenience, they are reproduced here:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[train_kwargs]</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">epoch_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="s">&quot;AdamW&quot;</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">lr_scheduler</span> <span class="o">=</span> <span class="s">&quot;CyclicLR&quot;</span>
+<span class="n">equilibrate</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="k">[train_kwargs.optimizer_kwargs]</span>
+<span class="k">[train_kwargs.optimizer_kwargs.Adam]</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="k">[0.9, 0.9]</span>
+
+<span class="k">[train_kwargs.optimizer_kwargs.AdamW]</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="k">[0.9, 0.9]</span>
+<span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="k">[train_kwargs.lr_scheduler_kwargs]</span>
+<span class="k">[train_kwargs.lr_scheduler_kwargs.CyclicLR]</span>
+<span class="n">base_lr</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">max_lr</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">step_size_up</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;triangular2&quot;</span>
+<span class="n">cycle_momentum</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="k">[train_kwargs.lr_scheduler_kwargs.OneCycleLR]</span>
+<span class="n">max_lr</span> <span class="o">=</span> <span class="mf">0.005</span>
+<span class="n">total_steps</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">pct_start</span> <span class="o">=</span> <span class="mf">0.075</span>
+<span class="n">anneal_strategy</span> <span class="o">=</span> <span class="s">&quot;linear&quot;</span>
+
+<span class="k">[train_kwargs.lr_scheduler_kwargs.inverse]</span>
+<span class="n">decay_rate</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="k">[train_kwargs.lr_scheduler_kwargs.scan]</span>
+<span class="n">eq_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">1.05</span>
+
+<span class="k">[train_kwargs.fit_kwargs]</span>
+<span class="n">clip_outliers</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1">#: max_grad_norm = ...</span>
+<span class="c1">#: kfac = ...</span>
+
+<span class="k">[train_kwargs.sampler_kwargs]</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">n_first_certain</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">target_acceptance</span> <span class="o">=</span> <span class="mf">0.57</span>
+<span class="n">n_discard</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">n_decorrelate</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#: max_age = ...</span>
+<span class="c1">#: log_psi_threshold = ...</span>
+
+<span class="k">[evaluate_kwargs]</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="k">[evaluate_kwargs.sample_kwargs]</span>
+<span class="n">block_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">equilibrate</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="k">[evaluate_kwargs.sampler_kwargs]</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">n_first_certain</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">target_acceptance</span> <span class="o">=</span> <span class="mf">0.57</span>
+<span class="n">n_decorrelate</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="c1">#: max_age = ...</span>
+<span class="c1">#: log_psi_threshold = ...</span>
+
+<span class="k">[paulinet_kwargs]</span>
+<span class="n">basis</span> <span class="o">=</span> <span class="s">&quot;6-311g&quot;</span>
+<span class="c1">#: cas = ...</span>
+<span class="c1">#: workdir = ...</span>
+<span class="n">init_weights</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">freeze_mos</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">freeze_confs</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="n">conf_cutoff</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="c1">#: conf_limit = ...</span>
+<span class="n">cusp_correction</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">cusp_electrons</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">dist_feat_dim</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">dist_feat_cutoff</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">backflow_type</span> <span class="o">=</span> <span class="s">&quot;orbital&quot;</span>
+<span class="n">backflow_channels</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">backflow_transform</span> <span class="o">=</span> <span class="s">&quot;mult&quot;</span>
+<span class="n">rc_scaling</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">cusp_alpha</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">freeze_embed</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="k">[paulinet_kwargs.omni_kwargs]</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">with_jastrow</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">n_jastrow_layers</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">with_backflow</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">n_backflow_layers</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">with_r_backflow</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="k">[paulinet_kwargs.omni_kwargs.schnet_kwargs]</span>
+<span class="n">n_interactions</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">kernel_dim</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">version</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">layer_norm</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="k">[paulinet_kwargs.omni_kwargs.subnet_kwargs]</span>
+<span class="n">n_layers_w</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_layers_h</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">n_layers_g</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019-2020, Frank Noé and collaborators.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

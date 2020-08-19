@@ -86,6 +86,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line interface</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
@@ -146,6 +147,8 @@
 <li><p><a class="reference external" href="https://pillow.readthedocs.io/">Pillow</a> is used by Tensorboard to store pictures in the event files.</p></li>
 <li><p><a class="reference external" href="https://github.com/tqdm/tqdm">TQDM</a> provides progress bars.</p></li>
 <li><p><a class="reference external" href="https://www.h5py.org">h5py</a> handles IO for <a class="reference external" href="http://hdfgroup.org">HDF5</a> files.</p></li>
+<li><p><a class="reference external" href="https://click.palletsprojects.com">Click</a> helps with constructing command-line interfaces.</p></li>
+<li><p><a class="reference external" href="https://github.com/sdispater/tomlkit">TOML Kit</a> supports advanced TOML file manipulations.</p></li>
 </ul>
 </div>
 </div>
@@ -167,7 +170,7 @@ $ source venv/bin/activate
 </pre></div>
 </div>
 <p>To install all optional dependencies, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U deepqmc[wf,train]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U deepqmc[wf,train,cli]
 </pre></div>
 </div>
 </div>
@@ -179,7 +182,7 @@ $ cd deepqmc
 $ poetry install -E all
 </pre></div>
 </div>
-<p>In addition to all the optional dependencies above, this also installs <a class="reference external" href="https://docs.pytest.org/">pytest</a>, <a class="reference external" href="https://coverage.readthedocs.io">Coverage.py</a>, and <a class="reference external" href="https://click.palletsprojects.com/">Click</a>.</p>
+<p>In addition to all the optional dependencies above, this also installs <a class="reference external" href="https://docs.pytest.org/">pytest</a> and <a class="reference external" href="https://coverage.readthedocs.io">Coverage.py</a>.</p>
 </div>
 </div>
 
