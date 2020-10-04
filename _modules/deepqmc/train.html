@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>deepqmc.train &#8212; DeepQMC 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+    <script src="../../_static/katex_autorenderer.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">DeepQMC</a></h1>
+
+
+
+<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=deepqmc&repo=deepqmc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
+    <img
+        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/deepqmc/deepqmc">
+    <img
+    alt="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    src="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line interface</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../refs.html">References</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for deepqmc.train</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.tensorboard</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
+
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">NanError</span><span class="p">,</span> <span class="n">TrainingBlowup</span><span class="p">,</span> <span class="n">TrainingCrash</span>
+<span class="kn">from</span> <span class="nn">.ewm</span> <span class="kn">import</span> <span class="n">EWMMonitor</span>
+<span class="kn">from</span> <span class="nn">.fit</span> <span class="kn">import</span> <span class="n">LossEnergy</span><span class="p">,</span> <span class="n">fit_wf</span>
+<span class="kn">from</span> <span class="nn">.plugins</span> <span class="kn">import</span> <span class="n">PLUGINS</span>
+<span class="kn">from</span> <span class="nn">.sampling</span> <span class="kn">import</span> <span class="n">LangevinSampler</span><span class="p">,</span> <span class="n">sample_wf</span>
+<span class="kn">from</span> <span class="nn">.torchext</span> <span class="kn">import</span> <span class="n">is_cuda</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">H5LogTable</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">OPTIMIZER_KWARGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Adam&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;betas&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]},</span>
+    <span class="s1">&#39;AdamW&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;betas&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span> <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">SCHEDULER_KWARGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CyclicLR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;base_lr&#39;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span>
+        <span class="s1">&#39;max_lr&#39;</span><span class="p">:</span> <span class="mf">10e-3</span><span class="p">,</span>
+        <span class="s1">&#39;step_size_up&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+        <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;triangular2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cycle_momentum&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;OneCycleLR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;max_lr&#39;</span><span class="p">:</span> <span class="mf">5e-3</span><span class="p">,</span>
+        <span class="s1">&#39;total_steps&#39;</span><span class="p">:</span> <span class="mi">5_000</span><span class="p">,</span>
+        <span class="s1">&#39;pct_start&#39;</span><span class="p">:</span> <span class="mf">0.075</span><span class="p">,</span>
+        <span class="s1">&#39;anneal_strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;inverse&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;decay_rate&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">},</span>
+    <span class="s1">&#39;scan&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;eq_steps&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;rate&#39;</span><span class="p">:</span> <span class="mf">1.05</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="train"><a class="viewcode-back" href="../../api.html#deepqmc.train">[docs]</a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span>  <span class="c1"># noqa: C901</span>
+    <span class="n">wf</span><span class="p">,</span>
+    <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">save_every</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_rewind</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">blowup_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">raise_blowup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_every</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">chkpts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">n_steps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">epoch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;AdamW&#39;</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="n">OPTIMIZER_KWARGS</span><span class="p">,</span>
+    <span class="n">lr_scheduler</span><span class="o">=</span><span class="s1">&#39;CyclicLR&#39;</span><span class="p">,</span>
+    <span class="n">lr_scheduler_kwargs</span><span class="o">=</span><span class="n">SCHEDULER_KWARGS</span><span class="p">,</span>
+    <span class="n">equilibrate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fit_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sampler_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Train a wave function model.</span>
+
+<span class="sd">    This is the main top-level entry point of the DeepQMC package. This function</span>
+<span class="sd">    initializes a :class:`~deepqmc.sampling.LangevinSampler`, an optimizer, a</span>
+<span class="sd">    learning rate scheduler, optionally restores a previously stored training</span>
+<span class="sd">    state, sets up a Tensorboard writer, and calls :func:`~deepqmc.fit.fit_wf`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wf (:class:`~deepqmc.wf.WaveFunction`): wave function model to be trained</span>
+<span class="sd">        workdir (str): path where to store Tensorboard event file, intermediate</span>
+<span class="sd">            parameter states, and HDF5 file with the fit trajectory</span>
+<span class="sd">        save_every (int): number of steps between storing current parameter state</span>
+<span class="sd">        state (dict): restore optimizer and scheduler states from a stored state</span>
+<span class="sd">        n_steps (int): number of optimization steps</span>
+<span class="sd">        batch_size (int): number of samples used in a single step</span>
+<span class="sd">        epoch_size (int): number of steps between sampling from the wave function</span>
+<span class="sd">        optimizer (str): name of the optimizer from :mod:`torch.optim`</span>
+<span class="sd">        learning_rate (float): learning rate for gradient-descent optimizers</span>
+<span class="sd">        optimizer_kwargs (dict): extra arguments passed to the optimizers, organized</span>
+<span class="sd">            by optimizer name</span>
+<span class="sd">        lr_scheduler (str): name of the learning rate scheduling scheme</span>
+
+<span class="sd">            - :data:`None` -- no learning rate scheduling</span>
+<span class="sd">            - uppercase name -- name from :mod:`torch.optim.lr_scheduler`</span>
+<span class="sd">            - ``&#39;inverse&#39;`` -- :math:`\mathrm{lr}(n):=1/(1+n/r)`, where *r*</span>
+<span class="sd">              is decay rate</span>
+<span class="sd">            - ``&#39;scan&#39;`` -- :math:`\mathrm{lr})(n):=sr^{n-n_0}`</span>
+<span class="sd">        lr_scheduler_kwargs (dict): extra arguments passed to the scheduler,</span>
+<span class="sd">            organized by scheduler name</span>
+<span class="sd">        equilibrate (bool): whether to equilibrate sampler before training</span>
+<span class="sd">        fit_kwargs (dict): arguments passed to :func:`~deepqmc.fit.fit_wf`</span>
+<span class="sd">        sampler_kwargs (dict): arguments passed to</span>
+<span class="sd">            :class:`~deepqmc.sampling.LangevinSampler`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;optimizer_factory&#39;</span> <span class="ow">in</span> <span class="n">PLUGINS</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using a plugin for optimizer_factory&#39;</span><span class="p">)</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">PLUGINS</span><span class="p">[</span><span class="s1">&#39;optimizer_factory&#39;</span><span class="p">](</span><span class="n">wf</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">optimizer_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">OPTIMIZER_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="p">{}),</span>
+            <span class="o">**</span><span class="n">optimizer_kwargs</span><span class="p">[</span><span class="n">optimizer</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Using </span><span class="si">{</span><span class="n">optimizer</span><span class="si">}</span><span class="s1"> optimizer, &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;lr = </span><span class="si">{</span><span class="n">learning_rate</span><span class="si">}</span><span class="s1">, params = </span><span class="si">{</span><span class="n">optimizer_kwargs</span><span class="si">!r}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)(</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">optimizer_kwargs</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;scheduler_factory&#39;</span> <span class="ow">in</span> <span class="n">PLUGINS</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using a plugin for scheduler_factory&#39;</span><span class="p">)</span>
+        <span class="n">scheduler</span> <span class="o">=</span> <span class="n">PLUGINS</span><span class="p">[</span><span class="s1">&#39;scheduler_factory&#39;</span><span class="p">](</span><span class="n">opt</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">lr_scheduler</span><span class="p">:</span>
+        <span class="n">scheduler_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">SCHEDULER_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">lr_scheduler</span><span class="p">,</span> <span class="p">{}),</span>
+            <span class="o">**</span><span class="n">lr_scheduler_kwargs</span><span class="p">[</span><span class="n">lr_scheduler</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using </span><span class="si">{</span><span class="n">lr_scheduler</span><span class="si">}</span><span class="s1"> scheduler, params = </span><span class="si">{</span><span class="n">scheduler_kwargs</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lr_scheduler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">islower</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">lr_scheduler</span> <span class="o">==</span> <span class="s1">&#39;inverse&#39;</span><span class="p">:</span>
+
+                <span class="k">def</span> <span class="nf">lr_lambda</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="n">decay_rate</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">lr_scheduler</span> <span class="o">==</span> <span class="s1">&#39;scan&#39;</span><span class="p">:</span>
+
+                <span class="k">def</span> <span class="nf">lr_lambda</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">eq_steps</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">eq_steps</span> <span class="k">else</span> <span class="n">start</span> <span class="o">*</span> <span class="n">rate</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">eq_steps</span><span class="p">)</span>
+
+            <span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">LambdaLR</span><span class="p">(</span>
+                <span class="n">opt</span><span class="p">,</span> <span class="n">partial</span><span class="p">(</span><span class="n">lr_lambda</span><span class="p">,</span> <span class="o">**</span><span class="n">scheduler_kwargs</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scheduler</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="p">,</span> <span class="n">lr_scheduler</span><span class="p">)(</span>
+                <span class="n">opt</span><span class="p">,</span> <span class="o">**</span><span class="n">scheduler_kwargs</span>
+            <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">scheduler</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># The convention here is that states/steps are numbered as slices/elements</span>
+    <span class="c1"># in a Python list. For example, step 0 takes state 0 to state 1. The</span>
+    <span class="c1"># progress bar really displays states, not steps, as it goes from 0 to</span>
+    <span class="c1"># n_steps, that is, it goes through n_steps+1 states.</span>
+    <span class="k">if</span> <span class="n">state</span><span class="p">:</span>
+        <span class="n">init_step</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;wf&#39;</span><span class="p">])</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;opt&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">scheduler</span><span class="p">:</span>
+            <span class="n">scheduler</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;scheduler&#39;</span><span class="p">])</span>
+        <span class="n">monitor</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;monitor&#39;</span><span class="p">]</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Restored from a state at step </span><span class="si">{</span><span class="n">init_step</span><span class="si">}</span><span class="s1">, &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;energy </span><span class="si">{</span><span class="n">monitor</span><span class="o">.</span><span class="n">mean_of</span><span class="p">(</span><span class="s2">&quot;mean_slow&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1">S</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">init_step</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">monitor</span> <span class="o">=</span> <span class="n">EWMMonitor</span><span class="p">(</span><span class="n">blowup_thre</span><span class="o">=</span><span class="n">blowup_threshold</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Will work in </span><span class="si">{</span><span class="n">workdir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">workdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">workdir</span><span class="p">)</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">flush_secs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">purge_step</span><span class="o">=</span><span class="n">init_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span>
+            <span class="s1">&#39;hyperparameters&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">** = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">  </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+        <span class="p">)</span>
+        <span class="n">chkpts_dir</span> <span class="o">=</span> <span class="n">workdir</span> <span class="o">/</span> <span class="s1">&#39;chkpts&#39;</span>
+        <span class="n">chkpts_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">workdir</span> <span class="o">/</span> <span class="s1">&#39;fit.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">libver</span><span class="o">=</span><span class="s1">&#39;v110&#39;</span><span class="p">)</span>
+        <span class="n">h5file</span><span class="o">.</span><span class="n">swmr_mode</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">H5LogTable</span><span class="p">(</span><span class="n">h5file</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">init_step</span><span class="p">)</span>
+        <span class="n">h5file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">log_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="s1">&#39;sampler_factory&#39;</span> <span class="ow">in</span> <span class="n">PLUGINS</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using a plugin for sampler_factory&#39;</span><span class="p">)</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">PLUGINS</span><span class="p">[</span><span class="s1">&#39;sampler_factory&#39;</span><span class="p">](</span><span class="n">wf</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using LangevinSampler, params = </span><span class="si">{</span><span class="n">sampler_kwargs</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">LangevinSampler</span><span class="o">.</span><span class="n">from_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">sampler_kwargs</span> <span class="ow">or</span> <span class="p">{}))</span>
+    <span class="k">if</span> <span class="n">equilibrate</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Equilibrating...&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">count</span><span class="p">(),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;equilibrating&#39;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="k">as</span> <span class="n">steps</span><span class="p">:</span>
+            <span class="nb">next</span><span class="p">(</span>
+                <span class="n">sample_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">sampler</span><span class="o">.</span><span class="n">iter_with_info</span><span class="p">(),</span> <span class="n">steps</span><span class="p">,</span> <span class="n">equilibrate</span><span class="o">=</span><span class="n">equilibrate</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Equilibrated&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Initializing training&#39;</span><span class="p">)</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">trange</span><span class="p">(</span>
+        <span class="n">init_step</span><span class="p">,</span>
+        <span class="n">n_steps</span><span class="p">,</span>
+        <span class="n">initial</span><span class="o">=</span><span class="n">init_step</span><span class="p">,</span>
+        <span class="n">total</span><span class="o">=</span><span class="n">n_steps</span><span class="p">,</span>
+        <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;training&#39;</span><span class="p">,</span>
+        <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">chkpts</span> <span class="o">=</span> <span class="n">chkpts</span> <span class="k">if</span> <span class="n">chkpts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="n">last_log</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">fit_wf</span><span class="p">(</span>
+            <span class="n">wf</span><span class="p">,</span>
+            <span class="n">LossEnergy</span><span class="p">(),</span>
+            <span class="n">opt</span><span class="p">,</span>
+            <span class="n">sampler</span><span class="o">.</span><span class="n">iter_batches</span><span class="p">(</span>
+                <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                <span class="n">epoch_size</span><span class="o">=</span><span class="n">epoch_size</span><span class="p">,</span>
+                <span class="nb">range</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">trange</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;sampling&#39;</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">steps</span><span class="p">,</span>
+            <span class="n">log_dict</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">row</span> <span class="k">if</span> <span class="n">workdir</span> <span class="k">else</span> <span class="n">log_dict</span><span class="p">,</span>
+            <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">,</span>
+            <span class="o">**</span><span class="p">(</span><span class="n">fit_kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
+        <span class="p">):</span>
+            <span class="c1"># at this point, the wf model and optimizer are already at state step+1</span>
+            <span class="n">monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;E_loc&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">workdir</span> <span class="k">else</span> <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;E_loc&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">monitor</span><span class="o">.</span><span class="n">blowup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">monitor</span><span class="o">.</span><span class="n">step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Detected EWM outlier in step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># now monitor is at state `step+1`. if blowup was detected, the</span>
+            <span class="c1"># blowup is reported to occur at step `step`.</span>
+            <span class="k">if</span> <span class="n">monitor</span><span class="o">.</span><span class="n">blowup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;in_blowup&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">raise_blowup</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">TrainingBlowup</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">monitor</span><span class="o">.</span><span class="n">blowup</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Detected training blowup in step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">mean_of</span><span class="p">(</span><span class="s1">&#39;mean_slow&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">energy</span><span class="o">.</span><span class="n">std_dev</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">steps</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">E</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">energy</span><span class="si">:</span><span class="s1">S</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="n">last_log</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Progress: </span><span class="si">{</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1">, energy = </span><span class="si">{</span><span class="n">energy</span><span class="si">:</span><span class="s1">S</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">last_log</span> <span class="o">=</span> <span class="n">now</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;wf&#39;</span><span class="p">:</span> <span class="n">wf</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+                <span class="s1">&#39;opt&#39;</span><span class="p">:</span> <span class="n">opt</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+                <span class="s1">&#39;monitor&#39;</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">monitor</span><span class="p">),</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="n">scheduler</span><span class="p">:</span>
+                <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+                <span class="n">state</span><span class="p">[</span><span class="s1">&#39;scheduler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scheduler</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+            <span class="n">chkpts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+            <span class="n">chkpts</span> <span class="o">=</span> <span class="n">chkpts</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_ewm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">energy</span><span class="o">.</span><span class="n">n</span>
+                <span class="n">h5file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">save_every</span> <span class="ow">and</span> <span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">save_every</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">state_file</span> <span class="o">=</span> <span class="n">chkpts_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;state-</span><span class="si">{</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="si">:</span><span class="s1">05d</span><span class="si">}</span><span class="s1">.pt&#39;</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_file</span><span class="p">)</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Saved state in </span><span class="si">{</span><span class="n">state_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">is_cuda</span><span class="p">(</span><span class="n">wf</span><span class="p">):</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                            <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">memory_summary</span><span class="p">(</span><span class="n">abbreviated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="p">)</span>
+            <span class="k">if</span> <span class="n">return_every</span> <span class="ow">and</span> <span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">return_every</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">NanError</span><span class="p">,</span> <span class="n">TrainingBlowup</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">n</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Caught exception in step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">NanError</span><span class="p">)</span> <span class="ow">and</span> <span class="n">workdir</span><span class="p">:</span>
+            <span class="n">dump</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;wf&#39;</span><span class="p">:</span> <span class="n">wf</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">&#39;rs&#39;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">rs</span><span class="p">}</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">dump</span><span class="p">,</span> <span class="n">workdir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;nanerror-</span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s1">05d</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s1">.pt&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">monitor</span><span class="o">.</span><span class="n">blowup</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Exception while in blowup detection mode&#39;</span><span class="p">)</span>
+            <span class="n">blowup_step</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">blowup</span><span class="p">[</span><span class="s1">&#39;init&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">blowup_step</span> <span class="o">=</span> <span class="n">step</span>
+        <span class="n">target_step</span> <span class="o">=</span> <span class="n">blowup_step</span> <span class="o">-</span> <span class="n">min_rewind</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Need to rewind at least to: </span><span class="si">{</span><span class="n">target_step</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">chkpts</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="n">target_step</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found a restart step in memory: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">chkpts</span> <span class="o">=</span> <span class="n">chkpts</span><span class="p">[:</span><span class="o">-</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="n">TrainingCrash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">chkpts</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">for</span> <span class="n">state_file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">chkpts_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;state-*.pt&#39;</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">state_file</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="n">target_step</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found a restart step on disk: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">TrainingCrash</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">state_file</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Found no restart step&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">TrainingCrash</span><span class="p">()</span> <span class="kn">from</span> <span class="nn">e</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">steps</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">h5file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019-2020, Frank Noé and collaborators.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

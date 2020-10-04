@@ -1,10 +1,9 @@
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial &#8212; DeepQMC 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -126,7 +125,7 @@
 <p>This section describes the use of the high-level API of DeepQMC. For the lower-level API, consult directly the <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> documentation.</p>
 <div class="section" id="create-a-molecule">
 <h2>Create a molecule<a class="headerlink" href="#create-a-molecule" title="Permalink to this headline">¶</a></h2>
-<p>A molecule is represented by the <code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code> class in DeepQMC. The easiest way to get started is to work with one of the predefined molecules:</p>
+<p>A molecule is represented by the <a class="reference internal" href="api.html#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> class in DeepQMC. The easiest way to get started is to work with one of the predefined molecules:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">Molecule</span>
 
 <span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;LiH&#39;</span><span class="p">)</span>
@@ -149,7 +148,7 @@
 </div>
 <div class="section" id="create-a-wave-function-ansatz">
 <h2>Create a wave function ansatz<a class="headerlink" href="#create-a-wave-function-ansatz" title="Permalink to this headline">¶</a></h2>
-<p>All wave function ansatzes are available in the <a class="reference internal" href="api.html#module-deepqmc.wf" title="deepqmc.wf"><code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code></a> subpackage. At the moment, the only available ansatz is <code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code>. The PauliNet class has three different constructors, differing in how low-level they are. The high-level <code class="xref py py-meth docutils literal notranslate"><span class="pre">PauliNet.from_hf()</span></code> constructor has default parameters for everything except for the molecule, and it runs the underlying multireference Hartree–Fock calculation which provides the orbitals on which the ansatz is built:</p>
+<p>All wave function ansatzes are available in the <a class="reference internal" href="api.html#module-deepqmc.wf" title="deepqmc.wf"><code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code></a> subpackage. At the moment, the only available ansatz is <a class="reference internal" href="api.html#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>. The PauliNet class has three different constructors, differing in how low-level they are. The high-level <code class="xref py py-meth docutils literal notranslate"><span class="pre">PauliNet.from_hf()</span></code> constructor has default parameters for everything except for the molecule, and it runs the underlying multireference Hartree–Fock calculation which provides the orbitals on which the ansatz is built:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc.wf</span> <span class="kn">import</span> <span class="n">PauliNet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">PauliNet</span><span class="o">.</span><span class="n">from_hf</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cas</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
 <span class="go">converged SCF energy = -7.9846409186467</span>
@@ -161,7 +160,7 @@
 </div>
 <div class="section" id="optimize-the-ansatz">
 <h2>Optimize the ansatz<a class="headerlink" href="#optimize-the-ansatz" title="Permalink to this headline">¶</a></h2>
-<p>The high-level <code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code> function is used to train the deep neural networks in the ansatz:</p>
+<p>The high-level <a class="reference internal" href="api.html#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function is used to train the deep neural networks in the ansatz:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">train</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
 <span class="go">training:   0%|▍       | 49/10000 [01:41&lt;5:43:40,  2.07s/it, E=-8.0378(27)]</span>
@@ -178,7 +177,7 @@ TensorBoard 2.1.0 at http://localhost:6007/ (Press CTRL+C to quit)
 </div>
 <div class="section" id="get-the-energy">
 <h2>Get the energy<a class="headerlink" href="#get-the-energy" title="Permalink to this headline">¶</a></h2>
-<p>The rough estimate of the expectation value of the energy of a trained wave function can be obtained already from the training run. A rigorous estimation with a statistical sampling error can be obtained with the high-level <code class="xref py py-func docutils literal notranslate"><span class="pre">evaluate()</span></code> function:</p>
+<p>The rough estimate of the expectation value of the energy of a trained wave function can be obtained already from the training run. A rigorous estimation with a statistical sampling error can be obtained with the high-level <a class="reference internal" href="api.html#deepqmc.evaluate" title="deepqmc.evaluate"><code class="xref py py-func docutils literal notranslate"><span class="pre">evaluate()</span></code></a> function:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">evaluate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">evaluate</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
 <span class="go">evaluating: 100%|█████████| 500/500 [10:28&lt;00:00,  1.26s/it, E=-8.07000(19)]</span>
@@ -200,7 +199,7 @@ TensorBoard 2.1.0 at http://localhost:6007/ (Press CTRL+C to quit)
       &copy;2019-2020, Frank Noé and collaborators.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
