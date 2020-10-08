@@ -139,31 +139,31 @@ state, sets up a Tensorboard writer, and calls <a class="reference internal" hre
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function model to be trained</p></li>
-<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – path where to store Tensorboard event file, intermediate
+<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path where to store Tensorboard event file, intermediate
 parameter states, and HDF5 file with the fit trajectory</p></li>
-<li><p><strong>save_every</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of steps between storing current parameter state</p></li>
-<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – restore optimizer and scheduler states from a stored state</p></li>
-<li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of optimization steps</p></li>
-<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of samples used in a single step</p></li>
-<li><p><strong>epoch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of steps between sampling from the wave function</p></li>
-<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – name of the optimizer from <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#module-torch.optim" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></li>
-<li><p><strong>learning_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – learning rate for gradient-descent optimizers</p></li>
-<li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – extra arguments passed to the optimizers, organized
+<li><p><strong>save_every</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of steps between storing current parameter state</p></li>
+<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – restore optimizer and scheduler states from a stored state</p></li>
+<li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of optimization steps</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of samples used in a single step</p></li>
+<li><p><strong>epoch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of steps between sampling from the wave function</p></li>
+<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the optimizer from <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#module-torch.optim" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></li>
+<li><p><strong>learning_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – learning rate for gradient-descent optimizers</p></li>
+<li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to the optimizers, organized
 by optimizer name</p></li>
-<li><p><strong>lr_scheduler</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>name of the learning rate scheduling scheme</p>
+<li><p><strong>lr_scheduler</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – <p>name of the learning rate scheduling scheme</p>
 <ul>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> – no learning rate scheduling</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> – no learning rate scheduling</p></li>
 <li><p>uppercase name – name from <code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim.lr_scheduler</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'inverse'</span></code> – <span class="math">\(\mathrm{lr}(n):=1/(1+n/r)\)</span>, where <em>r</em>
 is decay rate</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'scan'</span></code> – <span class="math">\(\mathrm{lr})(n):=sr^{n-n_0}\)</span></p></li>
 </ul>
 </p></li>
-<li><p><strong>lr_scheduler_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – extra arguments passed to the scheduler,
+<li><p><strong>lr_scheduler_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to the scheduler,
 organized by scheduler name</p></li>
-<li><p><strong>equilibrate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether to equilibrate sampler before training</p></li>
-<li><p><strong>fit_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – arguments passed to <a class="reference internal" href="#deepqmc.fit.fit_wf" title="deepqmc.fit.fit_wf"><code class="xref py py-func docutils literal notranslate"><span class="pre">fit_wf()</span></code></a></p></li>
-<li><p><strong>sampler_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – arguments passed to
+<li><p><strong>equilibrate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether to equilibrate sampler before training</p></li>
+<li><p><strong>fit_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – arguments passed to <a class="reference internal" href="#deepqmc.fit.fit_wf" title="deepqmc.fit.fit_wf"><code class="xref py py-func docutils literal notranslate"><span class="pre">fit_wf()</span></code></a></p></li>
+<li><p><strong>sampler_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – arguments passed to
 <a class="reference internal" href="#deepqmc.sampling.LangevinSampler" title="deepqmc.sampling.LangevinSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">LangevinSampler</span></code></a></p></li>
 </ul>
 </dd>
@@ -181,16 +181,16 @@ sets up a Tensorboard writer, and calls <a class="reference internal" href="#dee
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function model to be evaluated</p></li>
-<li><p><strong>store_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether to store individual sampled electron configuraitons</p></li>
-<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – path where to store Tensorboard event file and HDF5 file with
+<li><p><strong>store_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether to store individual sampled electron configuraitons</p></li>
+<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path where to store Tensorboard event file and HDF5 file with
 sampling block energies</p></li>
-<li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of sampling steps</p></li>
-<li><p><strong>sample_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of Markov-chain walkers</p></li>
-<li><p><strong>n_decorrelate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of extra steps between samples included
+<li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of sampling steps</p></li>
+<li><p><strong>sample_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of Markov-chain walkers</p></li>
+<li><p><strong>n_decorrelate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of extra steps between samples included
 in the expectation value averaging</p></li>
-<li><p><strong>sampler_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – extra arguments passed to
+<li><p><strong>sampler_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to
 <a class="reference internal" href="#deepqmc.sampling.LangevinSampler" title="deepqmc.sampling.LangevinSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">LangevinSampler</span></code></a></p></li>
-<li><p><strong>sample_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – extra arguments passed to
+<li><p><strong>sample_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to
 <a class="reference internal" href="#deepqmc.sampling.sample_wf" title="deepqmc.sampling.sample_wf"><code class="xref py py-func docutils literal notranslate"><span class="pre">sample_wf()</span></code></a></p></li>
 </ul>
 </dd>
@@ -198,7 +198,7 @@ in the expectation value averaging</p></li>
 <dd class="field-even"><p>Expectation values with standard errors.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -212,10 +212,10 @@ in the expectation value averaging</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>coords</strong> (<em>array-like</em><em>, </em><em>rank-2</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>a.u.</em>) – atom coordinates as rows</p></li>
-<li><p><strong>charges</strong> (<em>array-like</em><em>, </em><em>rank-1</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – atom charges</p></li>
-<li><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – total charge of a molecule</p></li>
-<li><p><strong>spin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – total spin multiplicity</p></li>
+<li><p><strong>coords</strong> (<em>array-like</em><em>, </em><em>rank-2</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>a.u.</em>) – atom coordinates as rows</p></li>
+<li><p><strong>charges</strong> (<em>array-like</em><em>, </em><em>rank-1</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – atom charges</p></li>
+<li><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – total charge of a molecule</p></li>
+<li><p><strong>spin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – total spin multiplicity</p></li>
 </ul>
 </dd>
 </dl>
@@ -250,20 +250,20 @@ energy and wave function values</p></li>
 <li><p><strong>steps</strong> (<em>iterator</em>) – yields step indexes</p></li>
 <li><p><strong>writer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code>) – Tensorboard writer</p></li>
 <li><p><strong>log_dict</strong> (<em>dict-like</em>) – batch data will be stored in this dictionary if given</p></li>
-<li><p><strong>require_energy_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether the loss function requires
+<li><p><strong>require_energy_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the loss function requires
 gradients of the local energy</p></li>
-<li><p><strong>require_psi_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether the loss function requires
+<li><p><strong>require_psi_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the loss function requires
 gradients of the wave function</p></li>
-<li><p><strong>subbatch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of samples for a single vectorized loss evaluation.
+<li><p><strong>subbatch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of samples for a single vectorized loss evaluation.
 If None and on a GPU, subbatch_size is estimated, else if None and on a CPU,
 no subbatching is done.</p></li>
-<li><p><strong>max_memory</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – maximum amount of allocated GPU memory (MiB) to be
-considered if automatically estimating the subbatch_size. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>
+<li><p><strong>max_memory</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – maximum amount of allocated GPU memory (MiB) to be
+considered if automatically estimating the subbatch_size. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>
 and subbatch_size is estimated, the maximum memory is set to the total
-free GPU memory. When training on CPU always set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>.</p></li>
-<li><p><strong>clip_outliers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether to clip local energy outliers</p></li>
-<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – multiple of MAE defining outliers</p></li>
-<li><p><strong>max_grad_norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – maximum gradient norm passed to
+free GPU memory. When training on CPU always set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>.</p></li>
+<li><p><strong>clip_outliers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether to clip local energy outliers</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – multiple of MAE defining outliers</p></li>
+<li><p><strong>max_grad_norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – maximum gradient norm passed to
 <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.utils.clip_grad_norm_.html#torch.nn.utils.clip_grad_norm_" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.nn.utils.clip_grad_norm_()</span></code></a></p></li>
 </ul>
 </dd>
@@ -319,10 +319,10 @@ estimate of the energy, and the sampled electron coordinates are yielded.</p>
 <li><p><strong>steps</strong> (<em>iterator</em>) – yields step indexes</p></li>
 <li><p><strong>writer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code>) – Tensorboard writer</p></li>
 <li><p><strong>log_dict</strong> (<em>dict-like</em>) – step data will be stored in this dictionary if given</p></li>
-<li><p><strong>blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – used as storage of blocks. If not given, the iterator
+<li><p><strong>blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – used as storage of blocks. If not given, the iterator
 uses a local storage.</p></li>
-<li><p><strong>block_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – size of a block (a sequence of samples)</p></li>
-<li><p><strong>equilibrate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – if false, local energies are calculated and
+<li><p><strong>block_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – size of a block (a sequence of samples)</p></li>
+<li><p><strong>equilibrate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – if false, local energies are calculated and
 accumulated from the first sampling step, if true equilibrium is
 detected automatically, if integer argument, specifies number of
 equilibration steps</p></li>
@@ -344,16 +344,16 @@ coordinates and wave function values with shapes of <span class="math">\((\cdot,
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function to sample from</p></li>
 <li><p><strong>rs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a><span class="math">\((\cdot,N,3)\)</span>) – initial positions of the
 Markov-chain walkers</p></li>
-<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – <span class="math">\(\tau\)</span>, proposal step size</p></li>
-<li><p><strong>n_first_certain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of initial steps done with 100% acceptance</p></li>
-<li><p><strong>target_acceptance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – initial step size is automatically adjusted
+<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\tau\)</span>, proposal step size</p></li>
+<li><p><strong>n_first_certain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of initial steps done with 100% acceptance</p></li>
+<li><p><strong>target_acceptance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – initial step size is automatically adjusted
 to achieve this requested acceptance</p></li>
-<li><p><strong>n_discard</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of steps in the beginning of the sampling that are
+<li><p><strong>n_discard</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of steps in the beginning of the sampling that are
 discarded</p></li>
-<li><p><strong>n_decorrelate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of extra steps between yielded samples</p></li>
-<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – maximum age of a walker without a move after which it is
+<li><p><strong>n_decorrelate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of extra steps between yielded samples</p></li>
+<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – maximum age of a walker without a move after which it is
 moved with 100% acceptance</p></li>
-<li><p><strong>log_psi_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – steps into proposals with log wave function values
+<li><p><strong>log_psi_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – steps into proposals with log wave function values
 below this threshold are always rejected</p></li>
 </ul>
 </dd>
@@ -369,7 +369,7 @@ otherwise taken from the nuclear charges.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function to be sampled from</p></li>
-<li><p><strong>sample_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of Markov-chain walkers</p></li>
+<li><p><strong>sample_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of Markov-chain walkers</p></li>
 <li><p><strong>kwargs</strong> – all other arguments are passed to the constructor</p></li>
 </ul>
 </dd>
@@ -386,9 +386,9 @@ shuffled.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>epoch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of batches per epoch</p></li>
-<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of samples in a batch</p></li>
-<li><p><strong>range</strong> (<em>callable</em>) – alternative to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a></p></li>
+<li><p><strong>epoch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of batches per epoch</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of samples in a batch</p></li>
+<li><p><strong>range</strong> (<em>callable</em>) – alternative to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -467,18 +467,18 @@ enforces correct electronic cusp conditions.</p>
 <span class="math">\(\rightarrow\kappa_{q\mu i}\)</span></p></li>
 <li><p><strong>omni_factory</strong> (<em>callable</em>) – constructor for a combined Jastrow factor and backflow,
 with interface identical to <a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet" title="deepqmc.wf.paulinet.OmniSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">OmniSchNet</span></code></a></p></li>
-<li><p><strong>n_configurations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of electron configurations</p></li>
-<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of distinct molecular orbitals used across all
+<li><p><strong>n_configurations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of electron configurations</p></li>
+<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of distinct molecular orbitals used across all
 configurations if given, otherwise the larger of the number of spin-up
 and spin-down electrons</p></li>
 <li><p><strong>mo_factory</strong> (<em>callable</em>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.MolecularOrbital" title="deepqmc.wf.paulinet.MolecularOrbital"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularOrbital</span></code></a>
 as <code class="docutils literal notranslate"><span class="pre">net_factory</span></code></p></li>
-<li><p><strong>cusp_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether nuclear cusp correction is used</p></li>
-<li><p><strong>cusp_electrons</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether electronic cusp function is used</p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
-<li><p><strong>dist_feat_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>a.u.</em>) – distance at which distance features
+<li><p><strong>cusp_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether nuclear cusp correction is used</p></li>
+<li><p><strong>cusp_electrons</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether electronic cusp function is used</p></li>
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
+<li><p><strong>dist_feat_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>a.u.</em>) – distance at which distance features
 go to zero</p></li>
-<li><p><strong>backflow_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(C\)</span>, number of backflow channels</p></li>
+<li><p><strong>backflow_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(C\)</span>, number of backflow channels</p></li>
 <li><p><strong>omni_kwargs</strong> – arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet" title="deepqmc.wf.paulinet.OmniSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">OmniSchNet</span></code></a></p></li>
 </ul>
 </dd>
@@ -502,11 +502,11 @@ variable of shape <span class="math">\((1,N_\text{det})\)</span></p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>) – molecule whose wave function
 is represented</p></li>
-<li><p><strong>basis</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – basis of the internal HF calculation</p></li>
-<li><p><strong>cas</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>)</em>) – tuple of the number of active orbitals and number of
+<li><p><strong>basis</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – basis of the internal HF calculation</p></li>
+<li><p><strong>cas</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>)</em>) – tuple of the number of active orbitals and number of
 active electrons for a complete active space multireference
 HF calculation</p></li>
-<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – path where PySCF calculations are cached</p></li>
+<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path where PySCF calculations are cached</p></li>
 <li><p><strong>kwargs</strong> – all other arguments are passed to <a class="reference internal" href="#deepqmc.wf.PauliNet.from_pyscf" title="deepqmc.wf.PauliNet.from_pyscf"><code class="xref py py-func docutils literal notranslate"><span class="pre">PauliNet.from_pyscf()</span></code></a></p></li>
 </ul>
 </dd>
@@ -520,16 +520,16 @@ HF calculation</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mf</strong> (<a class="reference external" href="http://pyscf.org/pyscf/scf.html#pyscf.scf.hf.RHF" title="(in PySCF v1.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.scf.hf.RHF</span></code></a> | <a class="reference external" href="http://pyscf.org/pyscf/mcscf.html#pyscf.mcscf.mc1step.CASSCF" title="(in PySCF v1.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.mcscf.mc1step.CASSCF</span></code></a>) – restricted (multireference) HF calculation</p></li>
-<li><p><strong>init_weights</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether molecular orbital coefficients and
+<li><p><strong>mf</strong> (<a class="reference external" href="http://pyscf.org/pyscf/modules/scf.html#pyscf.scf.hf.RHF" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.scf.hf.RHF</span></code></a> | <a class="reference external" href="http://pyscf.org/pyscf/modules/mcscf.html#pyscf.mcscf.mc1step.CASSCF" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.mcscf.mc1step.CASSCF</span></code></a>) – restricted (multireference) HF calculation</p></li>
+<li><p><strong>init_weights</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether molecular orbital coefficients and
 configuration coefficients are initialized from the HF calculation</p></li>
-<li><p><strong>freeze_mos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether the MO coefficients are frozen for
+<li><p><strong>freeze_mos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the MO coefficients are frozen for
 gradient optimization</p></li>
-<li><p><strong>freeze_confs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether the configuration coefficients are
+<li><p><strong>freeze_confs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the configuration coefficients are
 frozen for gradient optimization</p></li>
-<li><p><strong>conf_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – determinants with a linear coefficient above
+<li><p><strong>conf_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – determinants with a linear coefficient above
 this threshold are included in the determinant expansion</p></li>
-<li><p><strong>conf_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – if given, at maximum the given number of configurations
+<li><p><strong>conf_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – if given, at maximum the given number of configurations
 with the largest linear coefficients are used in the ansatz</p></li>
 <li><p><strong>kwargs</strong> – all other arguments are passed to the <a class="reference internal" href="#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>
 constructor</p></li>
@@ -569,21 +569,21 @@ that SchNet is called anew in the next pass.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>) – molecule whose wave function is represented</p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
-<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of molecular orbitals</p></li>
-<li><p><strong>n_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(C\)</span>, number of backflow channels</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf x_i^{(L)})\)</span>, dimension of SchNet
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
+<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of molecular orbitals</p></li>
+<li><p><strong>n_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(C\)</span>, number of backflow channels</p></li>
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf x_i^{(L)})\)</span>, dimension of SchNet
 embeddings</p></li>
-<li><p><strong>with_jastrow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – if false, the Jastrow part is void</p></li>
-<li><p><strong>n_jastrow_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of layers in the Jastrow factor network</p></li>
-<li><p><strong>with_backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – if false, the backflow part is void
+<li><p><strong>with_jastrow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if false, the Jastrow part is void</p></li>
+<li><p><strong>n_jastrow_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the Jastrow factor network</p></li>
+<li><p><strong>with_backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if false, the backflow part is void
 <span class="math">\(\tilde\varphi_{\mu i}(\mathbf r):=\varphi_\mu(\mathbf r_i)\)</span></p></li>
-<li><p><strong>n_backflow_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of layers in the backflow network</p></li>
-<li><p><strong>with_r_backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether real-space backflow is used</p></li>
-<li><p><strong>schnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
-<li><p><strong>subnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFactory" title="deepqmc.wf.paulinet.SubnetFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetFactory</span></code></a></p></li>
+<li><p><strong>n_backflow_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the backflow network</p></li>
+<li><p><strong>with_r_backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether real-space backflow is used</p></li>
+<li><p><strong>schnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
+<li><p><strong>subnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFactory" title="deepqmc.wf.paulinet.SubnetFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetFactory</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -693,18 +693,18 @@ represented by vanilla fully-connected (deep) neural networks,
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(N^\uparrow\)</span>, number of spin-up electrons</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(N^\downarrow\)</span>, number of spin-down electrons</p></li>
-<li><p><strong>n_nuclei</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <em>M</em>, number of nuclei in a molecule</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf X)\)</span>, dimension of electron embeddings</p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N^\uparrow\)</span>, number of spin-up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N^\downarrow\)</span>, number of spin-down electrons</p></li>
+<li><p><strong>n_nuclei</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <em>M</em>, number of nuclei in a molecule</p></li>
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf X)\)</span>, dimension of electron embeddings</p></li>
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
 <li><p><strong>subnet_metafactory</strong> (<em>callable</em>) – factory,
 <span class="math">\((\dim(\mathbf e),\dim(\mathbf w),\dim(\mathbf X))\)</span>
 <span class="math">\(\rightarrow(\mathbf w,\mathbf h,\mathbf g)\)</span>, with the
 interface of <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFactory" title="deepqmc.wf.paulinet.SubnetFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetFactory</span></code></a></p></li>
-<li><p><strong>n_interactions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <em>L</em>, number of message passing iterations</p></li>
-<li><p><strong>kernel_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf w)\)</span>, dimension of the convolution kernel</p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – architecture version, one of <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">2</span></code></p></li>
+<li><p><strong>n_interactions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <em>L</em>, number of message passing iterations</p></li>
+<li><p><strong>kernel_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf w)\)</span>, dimension of the convolution kernel</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – architecture version, one of <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">2</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -741,16 +741,16 @@ otherwise</p></li>
 <em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">SubnetFactory</code><span class="sig-paren">(</span><em class="sig-param">dist_feat_dim</em>, <em class="sig-param">kernel_dim</em>, <em class="sig-param">embedding_dim</em>, <em class="sig-param">*</em>, <em class="sig-param">n_layers_w=2</em>, <em class="sig-param">n_layers_h=1</em>, <em class="sig-param">n_layers_g=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/schnet.html#SubnetFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.SubnetFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates subnetworks for <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a>.</p>
 <p>The <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a> constructor expects this class constructor. To
-change the default subnetwork depths, use <a class="reference external" href="https://docs.python.org/3/library/functools.html#functools.partial" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a>.</p>
+change the default subnetwork depths, use <a class="reference external" href="https://docs.python.org/3/library/functools.html#functools.partial" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
-<li><p><strong>kernel_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf w)\)</span>, dimension of the convolution kernel</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf X)\)</span>, dimension of electron embeddings</p></li>
-<li><p><strong>n_layers_w</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of layers in the <span class="math">\(\mathbf w\)</span> networks</p></li>
-<li><p><strong>n_layers_h</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of layers in the <span class="math">\(\mathbf h\)</span> networks</p></li>
-<li><p><strong>n_layers_g</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of layers in the <span class="math">\(\mathbf g\)</span> networks</p></li>
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
+<li><p><strong>kernel_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf w)\)</span>, dimension of the convolution kernel</p></li>
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf X)\)</span>, dimension of electron embeddings</p></li>
+<li><p><strong>n_layers_w</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the <span class="math">\(\mathbf w\)</span> networks</p></li>
+<li><p><strong>n_layers_h</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the <span class="math">\(\mathbf h\)</span> networks</p></li>
+<li><p><strong>n_layers_g</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the <span class="math">\(\mathbf g\)</span> networks</p></li>
 </ul>
 </dd>
 </dl>
@@ -782,9 +782,9 @@ change the default subnetwork depths, use <a class="reference external" href="ht
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of features</p></li>
-<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>a.u.</em>) – distance at which all features go to zero</p></li>
-<li><p><strong>envelope</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>type of envelope for distance features</p>
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of features</p></li>
+<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>a.u.</em>) – distance at which all features go to zero</p></li>
+<li><p><strong>envelope</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – <p>type of envelope for distance features</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">'physnet'</span></code>: taken from <a class="reference internal" href="refs.html#unkejctc19" id="id3"><span>[UnkeJCTC19]</span></a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'nocusp'</span></code>: used in <a class="reference internal" href="refs.html#hermannnc20" id="id4"><span>[HermannNC20]</span></a></p></li>
@@ -840,9 +840,9 @@ fixed by the cusp condition,</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>charges</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(Z_I\)</span>, nuclear charges</p></li>
-<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of orbitals</p></li>
+<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of orbitals</p></li>
 <li><p><strong>rc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(r_\text c\)</span>, cutoff radii</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – <span class="math">\(\varepsilon\)</span>, numerical zero. An orbital
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\varepsilon\)</span>, numerical zero. An orbital
 is considered to have a non-zero <em>s</em>-type part if
 <span class="math">\(s_{\mu I}(0)&gt;\varepsilon\)</span>.</p></li>
 </ul>
@@ -887,8 +887,8 @@ electrons, <span class="math">\(d_{ij}\)</span>,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cusp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – <em>c</em>, target cusp value</p></li>
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – <span class="math">\(\alpha\)</span>, rate of decay of the cusp function to 1.</p></li>
+<li><p><strong>cusp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <em>c</em>, target cusp value</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\alpha\)</span>, rate of decay of the cusp function to 1.</p></li>
 </ul>
 </dd>
 </dl>
@@ -938,14 +938,14 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>) – target molecule</p></li>
 <li><p><strong>basis</strong> (<a class="reference internal" href="#deepqmc.wf.paulinet.GTOBasis" title="deepqmc.wf.paulinet.GTOBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOBasis</span></code></a>) – basis functions</p></li>
-<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of molecular orbitals</p></li>
+<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of molecular orbitals</p></li>
 <li><p><strong>net_factory</strong> (<em>callable</em>) – factory,
 <span class="math">\((M,\dim(\mathbf e),N_\text{orb})\)</span>
 <span class="math">\(\rightarrow\boldsymbol\Phi_{\boldsymbol\theta}\)</span></p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
-<li><p><strong>cusp_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether the cusp correction should be applied</p></li>
-<li><p><strong>rc_scaling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – <em>q</em>, global scaling for cusp correction cutoff radii</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – numerical zero, passed to <a class="reference internal" href="#deepqmc.wf.paulinet.CuspCorrection" title="deepqmc.wf.paulinet.CuspCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CuspCorrection</span></code></a></p></li>
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
+<li><p><strong>cusp_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the cusp correction should be applied</p></li>
+<li><p><strong>rc_scaling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <em>q</em>, global scaling for cusp correction cutoff radii</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – numerical zero, passed to <a class="reference internal" href="#deepqmc.wf.paulinet.CuspCorrection" title="deepqmc.wf.paulinet.CuspCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CuspCorrection</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -972,8 +972,8 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mf</strong> (<a class="reference external" href="http://pyscf.org/pyscf/scf.html#pyscf.scf.hf.RHF" title="(in PySCF v1.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.scf.hf.RHF</span></code></a> | <a class="reference external" href="http://pyscf.org/pyscf/mcscf.html#pyscf.mcscf.mc1step.CASSCF" title="(in PySCF v1.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.mcscf.mc1step.CASSCF</span></code></a>) – restricted (multireference) HF calculation</p></li>
-<li><p><strong>freeze_mos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether the MO coefficients should be frozen</p></li>
+<li><p><strong>mf</strong> (<a class="reference external" href="http://pyscf.org/pyscf/modules/scf.html#pyscf.scf.hf.RHF" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.scf.hf.RHF</span></code></a> | <a class="reference external" href="http://pyscf.org/pyscf/modules/mcscf.html#pyscf.mcscf.mc1step.CASSCF" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.mcscf.mc1step.CASSCF</span></code></a>) – restricted (multireference) HF calculation</p></li>
+<li><p><strong>freeze_mos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the MO coefficients should be frozen</p></li>
 </ul>
 </dd>
 </dl>
@@ -987,14 +987,14 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 <dd><p>Maps electron coordinates to Gaussian-type basis functions.</p>
 <p>The basis consists of Gaussian-type shells of various angular degree, <em>l</em>,
 centered at <span class="math">\(\mathbf R_I\)</span>, each containing <span class="math">\((2l+1)\)</span> basis functions.</p>
-<p>An instance can be queried with <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> to obtain the total number of
+<p>An instance can be queried with <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> to obtain the total number of
 basis functions, <span class="math">\(N_\text{basis}\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>centers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M,3)\)</span>) – <span class="math">\(\mathbf R_I\)</span>, basis
 center coordinates</p></li>
-<li><p><strong>shells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – each item is a 2-tuple (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#deepqmc.wf.paulinet.GTOShell" title="deepqmc.wf.paulinet.GTOShell"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOShell</span></code></a>)
+<li><p><strong>shells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – each item is a 2-tuple (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#deepqmc.wf.paulinet.GTOShell" title="deepqmc.wf.paulinet.GTOShell"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOShell</span></code></a>)
 encoding a shell placed at a center given by its index</p></li>
 </ul>
 </dd>
@@ -1012,7 +1012,7 @@ encoding a shell placed at a center given by its index</p></li>
 <dd><p>Construct the basis from a PySCF molecule object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mol</strong> (<a class="reference external" href="http://pyscf.org/pyscf/gto.html#pyscf.gto.mole.Mole" title="(in PySCF v1.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.gto.mole.Mole</span></code></a>) – a molecule</p>
+<dd class="field-odd"><p><strong>mol</strong> (<a class="reference external" href="http://pyscf.org/pyscf/modules/gto.html#pyscf.gto.mole.Mole" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.gto.mole.Mole</span></code></a>) – a molecule</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1031,12 +1031,12 @@ part is encoded as a linear combination of Gaussians,</p>
 :=x^{l_x}y^{l_y}z^{l_z}\sum_m\mathrm c_me^{-\zeta_mr^2}
 
 \]</div>
-<p>The instance can be queried with <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> to get the total number of
+<p>The instance can be queried with <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> to get the total number of
 different angular momenta, <span class="math">\(N_\mathbf l\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>l</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – <em>l</em>, total angular momentum</p></li>
+<li><p><strong>l</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <em>l</em>, total angular momentum</p></li>
 <li><p><strong>coeffs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(c_m\)</span>, Gaussian
 linear coefficients</p></li>
 <li><p><strong>zetas</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(\zeta_m\)</span>, Gaussian
