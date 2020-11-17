@@ -7,15 +7,15 @@
     <title>API &#8212; DeepQMC 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
     <script src="_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -124,7 +124,7 @@
   <div class="section" id="api">
 <span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>The API is designed in such a way that entering it via the top-level <a class="reference internal" href="#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepqmc.train()</span></code></a> and <a class="reference internal" href="#deepqmc.wf.PauliNet.from_hf" title="deepqmc.wf.PauliNet.from_hf"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepqmc.wf.PauliNet.from_hf()</span></code></a> entry points enables complete specification of all parameters via nested dictionaries that can be encoded in a <a class="reference external" href="https://github.com/toml-lang/toml">TOML</a> file, which is used by the <a class="reference internal" href="cli.html#cli"><span class="std std-ref">Command-line interface</span></a>. The lower-level dictionaries (stored under <code class="docutils literal notranslate"><span class="pre">*_kwargs</span></code> keys) are gradually unwrapped and passed into lower-level API components.</p>
-<p>All classes documented below with a Shape section are derived from <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> and are to be used as such.</p>
+<p>All classes documented below with a Shape section are derived from <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> and are to be used as such.</p>
 <div class="section" id="module-deepqmc">
 <span id="training"></span><h2>Training<a class="headerlink" href="#module-deepqmc" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -146,7 +146,7 @@ parameter states, and HDF5 file with the fit trajectory</p></li>
 <li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of optimization steps</p></li>
 <li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of samples used in a single step</p></li>
 <li><p><strong>epoch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of steps between sampling from the wave function</p></li>
-<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the optimizer from <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#module-torch.optim" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></li>
+<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the optimizer from <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#module-torch.optim" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></li>
 <li><p><strong>learning_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – learning rate for gradient-descent optimizers</p></li>
 <li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to the optimizers, organized
 by optimizer name</p></li>
@@ -208,7 +208,7 @@ in the expectation value averaging</p></li>
 <em class="property">class </em><code class="sig-prename descclassname">deepqmc.</code><code class="sig-name descname">Molecule</code><span class="sig-paren">(</span><em class="sig-param">coords</em>, <em class="sig-param">charges</em>, <em class="sig-param">charge</em>, <em class="sig-param">spin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/molecule.html#Molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.Molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a molecule.</p>
 <p>The array-like arguments accept anything that can be transformed to
-<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>.</p>
+<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -245,10 +245,10 @@ can do some additional processing such as learning rate scheduling.</p>
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function model to be fitted</p></li>
 <li><p><strong>loss_func</strong> (<a class="reference internal" href="#deepqmc.fit.WaveFunctionLoss" title="deepqmc.fit.WaveFunctionLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunctionLoss</span></code></a>) – loss function that accepts local
 energy and wave function values</p></li>
-<li><p><strong>opt</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.optim.Optimizer</span></code></a>) – optimizer</p></li>
+<li><p><strong>opt</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.optim.Optimizer</span></code></a>) – optimizer</p></li>
 <li><p><strong>sampler</strong> (<em>iterator</em>) – yields batches of electron coordinate samples</p></li>
 <li><p><strong>steps</strong> (<em>iterator</em>) – yields step indexes</p></li>
-<li><p><strong>writer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code>) – Tensorboard writer</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code></a>) – Tensorboard writer</p></li>
 <li><p><strong>log_dict</strong> (<em>dict-like</em>) – batch data will be stored in this dictionary if given</p></li>
 <li><p><strong>require_energy_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the loss function requires
 gradients of the local energy</p></li>
@@ -264,7 +264,7 @@ free GPU memory. When training on CPU always set to <a class="reference external
 <li><p><strong>clip_outliers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether to clip local energy outliers</p></li>
 <li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – multiple of MAE defining outliers</p></li>
 <li><p><strong>max_grad_norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – maximum gradient norm passed to
-<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.utils.clip_grad_norm_.html#torch.nn.utils.clip_grad_norm_" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.nn.utils.clip_grad_norm_()</span></code></a></p></li>
+<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.utils.clip_grad_norm_.html#torch.nn.utils.clip_grad_norm_" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.nn.utils.clip_grad_norm_()</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -317,7 +317,7 @@ estimate of the energy, and the sampled electron coordinates are yielded.</p>
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function model to be sampled</p></li>
 <li><p><strong>sampler</strong> (<em>iterator</em>) – yields batches of electron coordinate samples</p></li>
 <li><p><strong>steps</strong> (<em>iterator</em>) – yields step indexes</p></li>
-<li><p><strong>writer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code>) – Tensorboard writer</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code></a>) – Tensorboard writer</p></li>
 <li><p><strong>log_dict</strong> (<em>dict-like</em>) – step data will be stored in this dictionary if given</p></li>
 <li><p><strong>blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – used as storage of blocks. If not given, the iterator
 uses a local storage.</p></li>
@@ -342,7 +342,7 @@ coordinates and wave function values with shapes of <span class="math">\((\cdot,
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function to sample from</p></li>
-<li><p><strong>rs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a><span class="math">\((\cdot,N,3)\)</span>) – initial positions of the
+<li><p><strong>rs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a><span class="math">\((\cdot,N,3)\)</span>) – initial positions of the
 Markov-chain walkers</p></li>
 <li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\tau\)</span>, proposal step size</p></li>
 <li><p><strong>n_first_certain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of initial steps done with 100% acceptance</p></li>
@@ -424,69 +424,72 @@ shuffled.</p>
 <h3>PauliNet<a class="headerlink" href="#paulinet" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="deepqmc.wf.PauliNet">
-<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.</code><code class="sig-name descname">PauliNet</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">basis</em>, <em class="sig-param">jastrow_factory=None</em>, <em class="sig-param">backflow_factory=None</em>, <em class="sig-param">omni_factory=None</em>, <em class="sig-param">n_configurations=1</em>, <em class="sig-param">n_orbitals=None</em>, <em class="sig-param">mo_factory=None</em>, <em class="sig-param">return_log=True</em>, <em class="sig-param">use_sloglindet='training'</em>, <em class="sig-param">*</em>, <em class="sig-param">cusp_correction=True</em>, <em class="sig-param">cusp_electrons=True</em>, <em class="sig-param">dist_feat_dim=32</em>, <em class="sig-param">dist_feat_cutoff=10.0</em>, <em class="sig-param">backflow_type='orbital'</em>, <em class="sig-param">backflow_channels=1</em>, <em class="sig-param">backflow_transform='mult'</em>, <em class="sig-param">rc_scaling=1.0</em>, <em class="sig-param">cusp_alpha=10.0</em>, <em class="sig-param">freeze_embed=False</em>, <em class="sig-param">omni_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/paulinet.html#PauliNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.PauliNet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.</code><code class="sig-name descname">PauliNet</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">basis</em>, <em class="sig-param">n_configurations=1</em>, <em class="sig-param">n_orbitals=None</em>, <em class="sig-param">return_log=True</em>, <em class="sig-param">use_sloglindet='training'</em>, <em class="sig-param">*</em>, <em class="sig-param">cusp_correction=True</em>, <em class="sig-param">cusp_electrons=True</em>, <em class="sig-param">backflow_type='orbital'</em>, <em class="sig-param">backflow_channels=1</em>, <em class="sig-param">backflow_transform='mult'</em>, <em class="sig-param">rc_scaling=1.0</em>, <em class="sig-param">cusp_alpha=10.0</em>, <em class="sig-param">freeze_embed=False</em>, <em class="sig-param">omni_factory='omni_schnet'</em>, <em class="sig-param">omni_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/paulinet.html#PauliNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.PauliNet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements the PauliNet ansatz from <a class="reference internal" href="refs.html#hermannnc20" id="id2"><span>[HermannNC20]</span></a>.</p>
 <p>Derived from <a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>. This constructor provides a fully
 flexible low-level interface. See the alternative constructors for the
 high-level interfaces.</p>
 <p>The PauliNet ansatz combines a multireference Slater determinant expansion,
 Gaussian-type cusp-corrected molecular orbitals (<code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularOrbital</span></code>),
-electronic cusp Jastrow factor (<code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicAsymptotic</span></code>) and many-body
-Jastrow factor and backflow transformation represented by neural networks
-that use featurized particle distances,
-<span class="math">\(\mathbf e(|\mathbf r-\mathbf r'|)\)</span> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DistanceBasis</span></code>), as input,</p>
+electronic cusp Jastrow factor (<code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicAsymptotic</span></code>) and
+trainable Jastrow factor and backflow transformation (<code class="xref py py-class docutils literal notranslate"><span class="pre">OmniSchNet</span></code>).</p>
 <div class="math">
-\[\psi_{\boldsymbol\theta}(\mathbf r)
-  =\mathrm e^{\gamma(\mathbf r)+J_{\boldsymbol\theta}(\mathbf r)}
-  \sum_{pq} c_p
-  \det[\tilde\varphi_{\boldsymbol\theta,q{\mu_p}i}^\uparrow(\mathbf r)]
-  \det[\tilde\varphi_{\boldsymbol\theta,q{\mu_p}i}^\downarrow(\mathbf r)] \\
-\tilde\varphi_{\boldsymbol\theta,q\mu i}(\mathbf r)
-  :=\big(1+2\tanh(\kappa_{\boldsymbol\theta,q\mu i}(\mathbf r))\big)
-  \varphi_\mu(\mathbf r_i)
+\[\psi_{\boldsymbol\theta}(\mathbf r) =\mathrm e^{\gamma(\mathbf
+r)+J_{\boldsymbol\theta}(\mathbf x_i^{(L)})}
+\sum_{pq}\frac{c_p}{N_\text{bf}}
+\det[\tilde{\boldsymbol\varphi}_{\boldsymbol\theta,pq}^\uparrow(\mathbf
+r)]
+\det[\tilde{\boldsymbol\varphi}_{\boldsymbol\theta,pq}^\downarrow(\mathbf
+r)] \\ \tilde\varphi_{\boldsymbol\theta,pq\nu i}(\mathbf r)
+:=\varphi_{\mu_{p\nu}}(\mathbf r_i)\star\big(\mathbf f_{*_1}(\mathbf
+x_i^{(L)})\big)_{*_2} \\ (*_1,*_2)=\begin{cases} (q,\mu_{p\nu}) &
+\text{orbital-type backflow} \\ (pq,\nu) & \text{determinant-type
+backflow} \end{cases}
 
 \]</div>
-<p>Here, <span class="math">\(c_p,\mu_p\)</span> define the multideterminant expansion,
-<span class="math">\(\varphi_\mu(\mathbf r)\)</span> are the baseline
-single-electron molecular orbitals, <span class="math">\(J_{\boldsymbol\theta}(\mathbf r)\)</span>
-is the permutation-invariant deep Jastrow factor,
-<span class="math">\(\kappa_{\boldsymbol\theta,q\mu i}(\mathbf r)\)</span> is the <span class="math">\(q\)</span>-th
-channel of the permutation-equivariant deep backflow, and <span class="math">\(\gamma\)</span>
-enforces correct electronic cusp conditions.</p>
+<p>Here, <span class="math">\(\mathbf x_i^{(L)}\)</span> are the permutation-equivariant electron
+embeddings obtained from a graph neural network, <span class="math">\(\mu_{p\nu}\)</span>
+defines the electron configurations with the corresponding linear coefficients
+<span class="math">\(c_p\)</span>, <span class="math">\(\varphi_\mu(\mathbf r)\)</span> are
+the baseline single-electron molecular orbitals,
+<span class="math">\(J_{\boldsymbol\theta}\)</span> is the permutation-invariant deep Jastrow
+factor, <span class="math">\(\mathbf f_{\boldsymbol\theta}\)</span> is the
+permutation-equivariant deep backflow, and <span class="math">\(\gamma\)</span>
+enforces correct electronic cusp conditions.
+Based on the type of the backflow, the backflow is applied either
+orbital-wise or determinant-wise, and <span class="math">\(\star\)</span> can be either multiplication
+or addition.
+<span class="math">\(N_\text{bf}\)</span> different backflows indexed by <span class="math">\(q\)</span> are used with
+each electron configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>) – molecule whose wave function is represented</p></li>
 <li><p><strong>basis</strong> (<a class="reference internal" href="#deepqmc.wf.paulinet.GTOBasis" title="deepqmc.wf.paulinet.GTOBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOBasis</span></code></a>) – basis for the molecular orbitals</p></li>
-<li><p><strong>jastrow_factory</strong> (<em>callable</em>) – constructor for a Jastrow factor,
-<span class="math">\((M,\dim(\mathbf e),N^\uparrow,N^\downarrow)\)</span>
-<span class="math">\(\rightarrow(\mathbf e_{ij},\mathbf e_{iI})\rightarrow J\)</span></p></li>
-<li><p><strong>backflow_factory</strong> (<em>callable</em>) – constructor for a backflow,
-<span class="math">\((M,\dim(\mathbf e),N^\uparrow,N^\downarrow,N_\text{orb},C)\)</span>
-<span class="math">\(\rightarrow(\mathbf e_{ij},\mathbf e_{iI})\)</span>
-<span class="math">\(\rightarrow\kappa_{q\mu i}\)</span></p></li>
-<li><p><strong>omni_factory</strong> (<em>callable</em>) – constructor for a combined Jastrow factor and backflow,
-with interface identical to <a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet" title="deepqmc.wf.paulinet.OmniSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">OmniSchNet</span></code></a></p></li>
 <li><p><strong>n_configurations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of electron configurations</p></li>
 <li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of distinct molecular orbitals used across all
 configurations if given, otherwise the larger of the number of spin-up
 and spin-down electrons</p></li>
-<li><p><strong>mo_factory</strong> (<em>callable</em>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.MolecularOrbital" title="deepqmc.wf.paulinet.MolecularOrbital"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularOrbital</span></code></a>
-as <code class="docutils literal notranslate"><span class="pre">net_factory</span></code></p></li>
 <li><p><strong>cusp_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether nuclear cusp correction is used</p></li>
 <li><p><strong>cusp_electrons</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether electronic cusp function is used</p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
-<li><p><strong>dist_feat_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>a.u.</em>) – distance at which distance features
-go to zero</p></li>
-<li><p><strong>backflow_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(C\)</span>, number of backflow channels</p></li>
-<li><p><strong>omni_kwargs</strong> – arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet" title="deepqmc.wf.paulinet.OmniSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">OmniSchNet</span></code></a></p></li>
+<li><p><strong>backflow_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – <code class="docutils literal notranslate"><span class="pre">'orbital'</span></code> for orbital-type backflow, <code class="docutils literal notranslate"><span class="pre">'det'</span></code>
+for determinant-type backflow</p></li>
+<li><p><strong>backflow_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{bf}\)</span>, number of backflow channels</p></li>
+<li><p><strong>backflow_transform</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – <p>specifies the <span class="math">\(\star\)</span> operation:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'mult'</span></code> – <span class="math">\(x\star y:=x\big(1+2\tanh(y)\big)\)</span></p></li>
+</ul>
+</p></li>
+<li><p><strong>omni_factory</strong> (<em>callable</em>) – constructor for combined a Jastrow and backflow,
+<span class="math">\((M,N^\uparrow,N^\downarrow,N_\text{orb},N_\text{bf})\)</span>
+<span class="math">\(\rightarrow(r_{ij},R_{iI})\rightarrow (J,f_{q\mu i})\)</span></p></li>
+<li><p><strong>omni_kwargs</strong> – extra arguments passed to <code class="docutils literal notranslate"><span class="pre">omni_factory</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>jastrow</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> representing the Jastrow factor</p></li>
-<li><p><strong>backflow</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> representing the backflow transformation</p></li>
-<li><p><strong>conf_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents
+<li><p><strong>omni</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> representing Jastrow and backflow</p></li>
+<li><p><strong>conf_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents
 the multireference coefficients <span class="math">\(c_p\)</span> via its <code class="xref py py-attr docutils literal notranslate"><span class="pre">weight</span></code>
 variable of shape <span class="math">\((1,N_\text{det})\)</span></p></li>
 </ul>
@@ -542,76 +545,64 @@ constructor</p></li>
 
 <span class="target" id="module-deepqmc.wf.paulinet"></span><dl class="class">
 <dt id="deepqmc.wf.paulinet.OmniSchNet">
-<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">OmniSchNet</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">dist_feat_dim</em>, <em class="sig-param">n_up</em>, <em class="sig-param">n_down</em>, <em class="sig-param">n_orbitals</em>, <em class="sig-param">n_channels</em>, <em class="sig-param">*</em>, <em class="sig-param">embedding_dim=128</em>, <em class="sig-param">with_jastrow=True</em>, <em class="sig-param">n_jastrow_layers=3</em>, <em class="sig-param">with_backflow=True</em>, <em class="sig-param">n_backflow_layers=3</em>, <em class="sig-param">with_r_backflow=False</em>, <em class="sig-param">schnet_kwargs=None</em>, <em class="sig-param">subnet_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#OmniSchNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.OmniSchNet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">OmniSchNet</code><span class="sig-paren">(</span><em class="sig-param">n_atoms</em>, <em class="sig-param">n_up</em>, <em class="sig-param">n_down</em>, <em class="sig-param">n_orbitals</em>, <em class="sig-param">n_backflows</em>, <em class="sig-param">*</em>, <em class="sig-param">dist_feat_dim=32</em>, <em class="sig-param">dist_feat_cutoff=10.0</em>, <em class="sig-param">mb_embedding_dim=128</em>, <em class="sig-param">mf_embedding_dim=128</em>, <em class="sig-param">jastrow='many-body'</em>, <em class="sig-param">jastrow_kwargs=None</em>, <em class="sig-param">backflow='many-body'</em>, <em class="sig-param">backflow_kwargs=None</em>, <em class="sig-param">schnet_kwargs=None</em>, <em class="sig-param">subnet_kwargs=None</em>, <em class="sig-param">mf_schnet_kwargs=None</em>, <em class="sig-param">mf_subnet_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#OmniSchNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.OmniSchNet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combined Jastrow/backflow neural network based on SchNet.</p>
-<p>This module uses a single <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a> instance to build
-many-body feature representations of electrons, which are subsequently
-passed as an input into additional trainable functions to obtain the Jastrow
-factor and backflow transformations. This enables the use of a single SchNet
-module within <a class="reference internal" href="#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>, which itself makes no
-assumptions about parameter sharing by the Jastrow factor and backflow
-network modules.</p>
+<p>This module uses an instance of <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a> to build a
+many-body or a mean-field feature representation of electrons, which are
+subsequently passed as an input into additional trainable functions to
+obtain many-body or mean-field Jastrow factor and backflow transformations.
+The mean-field embeddings are obtained with a variant of
+<a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a> with the electron–electron message passing omitted.
+The type of embeddings used for Jastrow and backflow can be chosen
+individually and equivalent embbedings are shared. The module is used to
+generate the Jastrow factor and backflow transformation within
+<a class="reference internal" href="#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>.</p>
 <p>The Jastrow factor and backflow are obtained as</p>
 <div class="math">
-\[J:=\eta_{\boldsymbol\theta}\big(\textstyle\sum_i\mathbf x_i^{(L)}\big),\qquad
-\kappa_{q\mu i}(\mathbf r)
+\[J:=\eta_{\boldsymbol\theta}\big(\textstyle\sum_i\mathbf
+x_i^{(L)}\big),\qquad
+f_{q\mu i}(\mathbf r)
 :=\Big(\boldsymbol\kappa_{\boldsymbol\theta,q}\big(\mathbf
 x_i^{(L)}\big)\Big)_\mu
 
 \]</div>
 <p>where <span class="math">\(\eta_{\boldsymbol\theta}\)</span> and
-<span class="math">\(\boldsymbol\kappa_{\boldsymbol\theta,q}\)</span> are vanilla deep neural networks.</p>
-<p>The Jastrow and backflow are obtained by calling <a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet.forward_jastrow" title="deepqmc.wf.paulinet.OmniSchNet.forward_jastrow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward_jastrow()</span></code></a> and
-<a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet.forward_backflow" title="deepqmc.wf.paulinet.OmniSchNet.forward_backflow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward_backflow()</span></code></a>, which calls SchNet only once under the hood. After
-the forward pass is finished, <span class="math">\(close\)</span> must be called, which ensures
-that SchNet is called anew in the next pass.</p>
+<span class="math">\(\boldsymbol\kappa_{\boldsymbol\theta,q}\)</span> are vanilla deep
+neural networks and <span class="math">\(\mathbf x_i^{(L)}\)</span> are either the many-body or
+mean-field embedding.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>) – molecule whose wave function is represented</p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
+<li><p><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(M\)</span>, number of atoms</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N^\uparrow\)</span>, number of spin-up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N^\downarrow\)</span>, number of spin-down electrons</p></li>
 <li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of molecular orbitals</p></li>
-<li><p><strong>n_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(C\)</span>, number of backflow channels</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf x_i^{(L)})\)</span>, dimension of SchNet
-embeddings</p></li>
-<li><p><strong>with_jastrow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if false, the Jastrow part is void</p></li>
-<li><p><strong>n_jastrow_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the Jastrow factor network</p></li>
-<li><p><strong>with_backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if false, the backflow part is void
-<span class="math">\(\tilde\varphi_{\mu i}(\mathbf r):=\varphi_\mu(\mathbf r_i)\)</span></p></li>
-<li><p><strong>n_backflow_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of layers in the backflow network</p></li>
-<li><p><strong>with_r_backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether real-space backflow is used</p></li>
+<li><p><strong>n_backflows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{bf}\)</span>, number of backflow channnels</p></li>
+<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
+<li><p><strong>dist_feat_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><em>a.u.</em>) – distance at which distance features
+go to zero</p></li>
+<li><p><strong>mb_embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – dimension of many-body SchNet embeddings</p></li>
+<li><p><strong>mf_embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – dimension of mean-field SchNet embeddings</p></li>
+<li><p><strong>jastrow</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type of Jastrow – <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>, <code class="docutils literal notranslate"><span class="pre">'mean-field'</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">'many-body'</span></code></p></li>
+<li><p><strong>jastrow_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.Jastrow" title="deepqmc.wf.paulinet.Jastrow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Jastrow</span></code></a></p></li>
+<li><p><strong>backflow</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type of backflow – <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>, <code class="docutils literal notranslate"><span class="pre">'mean-field'</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">'many-body'</span></code></p></li>
+<li><p><strong>backflow_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.Backflow" title="deepqmc.wf.paulinet.Backflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Backflow</span></code></a></p></li>
 <li><p><strong>schnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
 <li><p><strong>subnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFactory" title="deepqmc.wf.paulinet.SubnetFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetFactory</span></code></a></p></li>
+<li><p><strong>mf_schnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to the mean-field variant
+of <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a></p></li>
+<li><p><strong>mf_subnet_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFactory" title="deepqmc.wf.paulinet.SubnetFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetFactory</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
 <dl class="simple">
 <dt>Shape:</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet.forward_jastrow" title="deepqmc.wf.paulinet.OmniSchNet.forward_jastrow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward_jastrow()</span></code></a>:</dt><dd><ul>
-<li><p>Input1, <span class="math">\(\mathbf e(\lvert\mathbf r_i-\mathbf r_j\rvert)\)</span>:
-<span class="math">\((*,N,N,\dim(\mathbf e))\)</span></p></li>
-<li><p>Input2, <span class="math">\(\mathbf e(\lvert\mathbf r_i-\mathbf R_I\rvert)\)</span>:
-<span class="math">\((*,N,M,\dim(\mathbf e))\)</span></p></li>
-<li><p>Output, <span class="math">\(J\)</span>: <span class="math">\((*)\)</span></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference internal" href="#deepqmc.wf.paulinet.OmniSchNet.forward_backflow" title="deepqmc.wf.paulinet.OmniSchNet.forward_backflow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward_backflow()</span></code></a>:</dt><dd><ul>
-<li><p>Input1, <span class="math">\(\mathbf e(\lvert\mathbf r_i-\mathbf r_j\rvert)\)</span>:
-<span class="math">\((*,N,N,\dim(\mathbf e))\)</span></p></li>
-<li><p>Input2, <span class="math">\(\mathbf e(\lvert\mathbf r_i-\mathbf R_I\rvert)\)</span>:
-<span class="math">\((*,N,M,\dim(\mathbf e))\)</span></p></li>
-<li><p>Output, <span class="math">\(\kappa_{q\mu i}\)</span>:
-<span class="math">\((*,C,N,N_\text{orb})\)</span></p></li>
-</ul>
-</dd>
-</dl>
-</li>
+<li><p>Input1, <span class="math">\(\lvert\mathbf r_i-\mathbf r_j\rvert\)</span>: <span class="math">\((*,N,N)\)</span></p></li>
+<li><p>Input2, <span class="math">\(\lvert\mathbf r_i-\mathbf R_I\rvert\)</span>: <span class="math">\((*,N,M)\)</span></p></li>
+<li><p>Output1, <span class="math">\(J\)</span>: <span class="math">\((*)\)</span></p></li>
+<li><p>Output2, <span class="math">\(f_{q\mu i}\)</span>: <span class="math">\((*,N_\text{bf},N,N_\text{orb})\)</span></p></li>
 </ul>
 </dd>
 </dl>
@@ -619,29 +610,96 @@ embeddings</p></li>
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>schnet</strong> – <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a> network</p></li>
-<li><p><strong>jastrow</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html#torch.nn.Sequential" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code></a> representing a vanilla DNN</p></li>
-<li><p><strong>backflow</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html#torch.nn.Sequential" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code></a> representing a vanilla DNN</p></li>
+<li><p><strong>mf_schnet</strong> – mean-field variant of <a class="reference internal" href="#deepqmc.wf.paulinet.ElectronicSchNet" title="deepqmc.wf.paulinet.ElectronicSchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicSchNet</span></code></a> network</p></li>
+<li><p><strong>jastrow</strong> – <a class="reference internal" href="#deepqmc.wf.paulinet.Jastrow" title="deepqmc.wf.paulinet.Jastrow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Jastrow</span></code></a> network</p></li>
+<li><p><strong>backflow</strong> – <a class="reference internal" href="#deepqmc.wf.paulinet.Backflow" title="deepqmc.wf.paulinet.Backflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Backflow</span></code></a> network</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="deepqmc.wf.paulinet.OmniSchNet.forward_backflow">
-<code class="sig-name descname">forward_backflow</code><span class="sig-paren">(</span><em class="sig-param">edges_elec</em>, <em class="sig-param">edges_nuc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#OmniSchNet.forward_backflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.OmniSchNet.forward_backflow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate backflow.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="deepqmc.wf.paulinet.OmniSchNet.forward_close">
-<code class="sig-name descname">forward_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#OmniSchNet.forward_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.OmniSchNet.forward_close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clear the cached SchNet embeddings.</p>
+<dl class="class">
+<dt id="deepqmc.wf.paulinet.Jastrow">
+<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">Jastrow</code><span class="sig-paren">(</span><em class="sig-param">embedding_dim</em>, <em class="sig-param">activation_factory=&lt;class 'deepqmc.torchext.utils.SSP'&gt;</em>, <em class="sig-param">*</em>, <em class="sig-param">n_layers=3</em>, <em class="sig-param">sum_first=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#Jastrow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.Jastrow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jastrow network <span class="math">\(\eta_{\boldsymbol \theta}\)</span>.</p>
+<p>The Jastrow factor consists of a vanilla neural network with logarithmically
+progressing layer widths that maps the electronic embeddings to the final
+Jastrow factor,</p>
+<div class="math">
+\[J :=
+\begin{cases}
+\eta_{\boldsymbol \theta}\big(\textstyle\sum_i \mathbf x_i^
+{(L)}\big) & \text{if }\texttt{sum\_first}\\
+\textstyle\sum_i\eta_{\boldsymbol \theta}\big(\mathbf x_i^
+{(L)}\big) & \text{otherwise}
+\end{cases}
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf x_i^{(L)})\)</span>,
+dimension of electronic embedding input</p></li>
+<li><p><strong>activation_factory</strong> (<em>callable</em>) – creates activation functions between
+layers</p></li>
+<li><p><strong>n_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of neural network layers</p></li>
+<li><p><strong>sum_first</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether embeddings are summed before passed to the
+network</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><p>Input, <span class="math">\(\mathbf x_i^{(L)}\)</span>: <span class="math">\((*,N,D)\)</span></p></li>
+<li><p>Output, <span class="math">\(J\)</span>: <span class="math">\((*)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><strong>net</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html#torch.nn.Sequential" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code></a> representing vanilla neural network</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="deepqmc.wf.paulinet.OmniSchNet.forward_jastrow">
-<code class="sig-name descname">forward_jastrow</code><span class="sig-paren">(</span><em class="sig-param">edges_elec</em>, <em class="sig-param">edges_nuc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#OmniSchNet.forward_jastrow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.OmniSchNet.forward_jastrow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate Jastrow factor.</p>
-</dd></dl>
+<dl class="class">
+<dt id="deepqmc.wf.paulinet.Backflow">
+<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">Backflow</code><span class="sig-paren">(</span><em class="sig-param">embedding_dim</em>, <em class="sig-param">n_orbitals</em>, <em class="sig-param">n_backflows</em>, <em class="sig-param">activation_factory=&lt;class 'deepqmc.torchext.utils.SSP'&gt;</em>, <em class="sig-param">*</em>, <em class="sig-param">n_layers=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/omni.html#Backflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.Backflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents backflow networks <span class="math">\(\boldsymbol\kappa_{\boldsymbol\theta,q}\)</span>.</p>
+<p>The backflow transformation consists of <span class="math">\(N_\text{bf}\)</span> vanilla neural
+networks with logarithmically progressing layer width maping the electronic
+embeddings to the backflow transformations,</p>
+<div class="math">
+\[\mathbf f_i := \mathbf \kappa_{\boldsymbol \theta}\big(\mathbf x_i^{(L,
+\text{mf/bf})}\big)
 
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf x_i^{(L)})\)</span>,
+dimension of electronic embedding input</p></li>
+<li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span> number of orbitals</p></li>
+<li><p><strong>n_backflows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{bf}\)</span> number of backflows</p></li>
+<li><p><strong>activation_factory</strong> (<em>callable</em>) – creates activation functions between
+layers</p></li>
+<li><p><strong>n_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of neural network layers</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><p>Input, <span class="math">\(\mathbf x_i^{(L)}\)</span>: <span class="math">\((*,N,D)\)</span></p></li>
+<li><p>Output, <span class="math">\(f_{q\mu i}\)</span>: <span class="math">\((*,N_\text{bf},N,N_\text{orb})\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><strong>nets</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleList.html#torch.nn.ModuleList" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleList</span></code></a> containing <span class="math">\(N_text{bf}\)</span>
+vanilla neural networks</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
@@ -725,11 +783,11 @@ interface of <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFact
 <span class="math">\(N^\uparrow=N^\downarrow\)</span> and <span class="math">\((2,\dim(\mathbf X))\)</span>
 otherwise</p></li>
 <li><p><strong>Y</strong> – nuclear embeddings of shape <span class="math">\((M,\dim(\mathbf w))\)</span></p></li>
-<li><p><strong>w</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
+<li><p><strong>w</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
 <span class="math">\(\mathbf w^{(\cdot)}\)</span> subnetworks</p></li>
-<li><p><strong>g</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
+<li><p><strong>g</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
 <span class="math">\(\mathbf g^{(\cdot)}\)</span> subnetworks</p></li>
-<li><p><strong>h</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
+<li><p><strong>h</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
 <span class="math">\(\mathbf h^{(\cdot)}\)</span> subnetworks</p></li>
 </ul>
 </dd>
@@ -839,9 +897,9 @@ fixed by the cusp condition,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>charges</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(Z_I\)</span>, nuclear charges</p></li>
+<li><p><strong>charges</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(Z_I\)</span>, nuclear charges</p></li>
 <li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of orbitals</p></li>
-<li><p><strong>rc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(r_\text c\)</span>, cutoff radii</p></li>
+<li><p><strong>rc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(r_\text c\)</span>, cutoff radii</p></li>
 <li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\varepsilon\)</span>, numerical zero. An orbital
 is considered to have a non-zero <em>s</em>-type part if
 <span class="math">\(s_{\mu I}(0)&gt;\varepsilon\)</span>.</p></li>
@@ -903,7 +961,7 @@ electrons, <span class="math">\(d_{ij}\)</span>,</p>
 
 <dl class="class">
 <dt id="deepqmc.wf.paulinet.MolecularOrbital">
-<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">MolecularOrbital</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">basis</em>, <em class="sig-param">n_orbitals</em>, <em class="sig-param">net_factory=None</em>, <em class="sig-param">dist_feat_dim=None</em>, <em class="sig-param">cusp_correction=True</em>, <em class="sig-param">rc_scaling=1.0</em>, <em class="sig-param">eps=1e-06</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/molorb.html#MolecularOrbital"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.MolecularOrbital" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">MolecularOrbital</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">basis</em>, <em class="sig-param">n_orbitals</em>, <em class="sig-param">cusp_correction=True</em>, <em class="sig-param">rc_scaling=1.0</em>, <em class="sig-param">eps=1e-06</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/molorb.html#MolecularOrbital"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.MolecularOrbital" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates molecular orbitals from electron coordinates.</p>
 <p>This module combines up to four submodules that sequentially transform
 electron coordinates into molecular orbitals (MOs).</p>
@@ -911,7 +969,7 @@ electron coordinates into molecular orbitals (MOs).</p>
 <li><p><a class="reference internal" href="#deepqmc.wf.paulinet.GTOBasis" title="deepqmc.wf.paulinet.GTOBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOBasis</span></code></a> transforms
 <span class="math">\((\mathbf r-\mathbf R_I)\)</span> to basis functions
 <span class="math">\(\xi_p(\mathbf r)\)</span></p></li>
-<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> transforms <span class="math">\(\xi_p(\mathbf r)\)</span> to
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> transforms <span class="math">\(\xi_p(\mathbf r)\)</span> to
 molecular orbitals, <span class="math">\(\varphi_\mu(\mathbf r)\)</span>,</p>
 <div class="math">
 \[\varphi_\mu(\mathbf r):=\sum_p C_{p\mu}\xi_p(\mathbf r)
@@ -920,7 +978,7 @@ molecular orbitals, <span class="math">\(\varphi_\mu(\mathbf r)\)</span>,</p>
 </li>
 <li><p>(optional) <a class="reference internal" href="#deepqmc.wf.paulinet.CuspCorrection" title="deepqmc.wf.paulinet.CuspCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CuspCorrection</span></code></a> corrects
 <span class="math">\(\varphi_\mu(\mathbf r)\)</span> to satisfy nuclear cusp conditions</p></li>
-<li><p>(optional) Some trainable function <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a>
+<li><p>(optional) Some trainable function <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a>
 updates the MOs using distance features
 <span class="math">\(\mathbf e(|\mathbf r-\mathbf R_I|)\)</span>,</p>
 <div class="math">
@@ -960,7 +1018,7 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
-<dd class="field-odd"><p><strong>mo_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents MO coefficients
+<dd class="field-odd"><p><strong>mo_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents MO coefficients
 <span class="math">\(C_{p\mu}\)</span> via its <code class="xref py py-attr docutils literal notranslate"><span class="pre">weight</span></code> variable of shape
 <span class="math">\((N_\text{orb},N_\text{basis})\)</span></p>
 </dd>
@@ -992,7 +1050,7 @@ basis functions, <span class="math">\(N_\text{basis}\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>centers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M,3)\)</span>) – <span class="math">\(\mathbf R_I\)</span>, basis
+<li><p><strong>centers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M,3)\)</span>) – <span class="math">\(\mathbf R_I\)</span>, basis
 center coordinates</p></li>
 <li><p><strong>shells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – each item is a 2-tuple (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#deepqmc.wf.paulinet.GTOShell" title="deepqmc.wf.paulinet.GTOShell"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOShell</span></code></a>)
 encoding a shell placed at a center given by its index</p></li>
@@ -1037,9 +1095,9 @@ different angular momenta, <span class="math">\(N_\mathbf l\)</span></p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>l</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <em>l</em>, total angular momentum</p></li>
-<li><p><strong>coeffs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(c_m\)</span>, Gaussian
+<li><p><strong>coeffs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(c_m\)</span>, Gaussian
 linear coefficients</p></li>
-<li><p><strong>zetas</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+4392e52 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(\zeta_m\)</span>, Gaussian
+<li><p><strong>zetas</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(\zeta_m\)</span>, Gaussian
 exponential coefficients</p></li>
 </ul>
 </dd>

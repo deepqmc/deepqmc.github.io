@@ -7,15 +7,15 @@
     <title>deepqmc.wf.paulinet.omni &#8212; DeepQMC 0.2.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/katex-math.css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
     <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
     <script src="../../../../_static/language_data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
     <script src="../../../../_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -120,157 +120,295 @@
 
 <span class="kn">from</span> <span class="nn">deepqmc.torchext</span> <span class="kn">import</span> <span class="n">SSP</span><span class="p">,</span> <span class="n">get_log_dnn</span>
 
-<span class="kn">from</span> <span class="nn">.backflow</span> <span class="kn">import</span> <span class="n">Backflow</span>
+<span class="kn">from</span> <span class="nn">.distbasis</span> <span class="kn">import</span> <span class="n">DistanceBasis</span>
 <span class="kn">from</span> <span class="nn">.schnet</span> <span class="kn">import</span> <span class="n">ElectronicSchNet</span><span class="p">,</span> <span class="n">SubnetFactory</span>
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.0&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.0&#39;</span>
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OmniSchNet&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Jastrow"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.Jastrow">[docs]</a><span class="k">class</span> <span class="nc">Jastrow</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Jastrow network :math:`\eta_{\boldsymbol \theta}`.</span>
+
+<span class="sd">    The Jastrow factor consists of a vanilla neural network with logarithmically</span>
+<span class="sd">    progressing layer widths that maps the electronic embeddings to the final</span>
+<span class="sd">    Jastrow factor,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        J :=</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">        \eta_{\boldsymbol \theta}\big(\textstyle\sum_i \mathbf x_i^</span>
+<span class="sd">        {(L)}\big) &amp; \text{if }\texttt{sum\_first}\\</span>
+<span class="sd">        \textstyle\sum_i\eta_{\boldsymbol \theta}\big(\mathbf x_i^</span>
+<span class="sd">        {(L)}\big) &amp; \text{otherwise}</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        embedding_dim (int):  :math:`\dim(\mathbf x_i^{(L)})`,</span>
+<span class="sd">            dimension of electronic embedding input</span>
+<span class="sd">        activation_factory (callable): creates activation functions between</span>
+<span class="sd">            layers</span>
+<span class="sd">        n_layers (int): number of neural network layers</span>
+<span class="sd">        sum_first (bool): whether embeddings are summed before passed to the</span>
+<span class="sd">            network</span>
+
+<span class="sd">    Shape:</span>
+<span class="sd">        - Input, :math:`\mathbf x_i^{(L)}`: :math:`(*,N,D)`</span>
+<span class="sd">        - Output, :math:`J`: :math:`(*)`</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        net: :class:`torch.nn.Sequential` representing vanilla neural network</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">activation_factory</span><span class="o">=</span><span class="n">SSP</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sum_first</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">get_log_dnn</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">activation_factory</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="n">n_layers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sum_first</span> <span class="o">=</span> <span class="n">sum_first</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_first</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">xs</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">xs</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Backflow"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.Backflow">[docs]</a><span class="k">class</span> <span class="nc">Backflow</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents backflow networks :math:`\boldsymbol\kappa_{\boldsymbol\theta,q}`.</span>
+
+<span class="sd">    The backflow transformation consists of :math:`N_\text{bf}` vanilla neural</span>
+<span class="sd">    networks with logarithmically progressing layer width maping the electronic</span>
+<span class="sd">    embeddings to the backflow transformations,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \mathbf f_i := \mathbf \kappa_{\boldsymbol \theta}\big(\mathbf x_i^{(L,</span>
+<span class="sd">        \text{mf/bf})}\big)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        embedding_dim (int): :math:`\dim(\mathbf x_i^{(L)})`,</span>
+<span class="sd">            dimension of electronic embedding input</span>
+<span class="sd">        n_orbitals (int): :math:`N_\text{orb}` number of orbitals</span>
+<span class="sd">        n_backflows (int): :math:`N_\text{bf}` number of backflows</span>
+<span class="sd">        activation_factory (callable): creates activation functions between</span>
+<span class="sd">            layers</span>
+<span class="sd">        n_layers (int): number of neural network layers</span>
+
+<span class="sd">    Shape:</span>
+<span class="sd">        - Input, :math:`\mathbf x_i^{(L)}`: :math:`(*,N,D)`</span>
+<span class="sd">        - Output, :math:`f_{q\mu i}`: :math:`(*,N_\text{bf},N,N_\text{orb})`</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        nets: :class:`torch.nn.ModuleList` containing :math:`N_text{bf}`</span>
+<span class="sd">            vanilla neural networks</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">embedding_dim</span><span class="p">,</span>
+        <span class="n">n_orbitals</span><span class="p">,</span>
+        <span class="n">n_backflows</span><span class="p">,</span>
+        <span class="n">activation_factory</span><span class="o">=</span><span class="n">SSP</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">n_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">nets</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">get_log_dnn</span><span class="p">(</span>
+                <span class="n">embedding_dim</span><span class="p">,</span>
+                <span class="n">n_orbitals</span><span class="p">,</span>
+                <span class="n">activation_factory</span><span class="p">,</span>
+                <span class="n">n_layers</span><span class="o">=</span><span class="n">n_layers</span><span class="p">,</span>
+                <span class="n">last_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_backflows</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nets</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">nets</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">net</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nets</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">SchNetMeanFieldLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factory</span><span class="p">,</span> <span class="n">n_up</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">w_subnet</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">g_subnet</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">):</span>
+        <span class="n">z_nuc</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">(</span><span class="n">edges_nuc</span><span class="p">)</span> <span class="o">*</span> <span class="n">Y</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">(</span><span class="n">z_nuc</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MeanFieldElectronicSchNet</span><span class="p">(</span><span class="n">ElectronicSchNet</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mean-field variant of :class:`ElectronicSchNet`.</span>
+
+<span class="sd">    This mean-field variant of the graph neural nework :class:`ElectronicSchNet`</span>
+<span class="sd">    uses :class:`SchNetMeanFieldLayer` as default, removing electronic</span>
+<span class="sd">    interactions and returning mean-field electronic embeddings. In contrast</span>
+<span class="sd">    to :class:`ElectronicSchNet` the :meth:`forward` only uses nuclear edges.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">LAYER_FACTORIES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mean-field&#39;</span><span class="p">:</span> <span class="n">SchNetMeanFieldLayer</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;mean-field&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">):</span>
+        <span class="o">*</span><span class="n">batch_dims</span><span class="p">,</span> <span class="n">n_elec</span> <span class="o">=</span> <span class="n">edges_nuc</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">edges_elec_dummy</span> <span class="o">=</span> <span class="n">edges_nuc</span><span class="o">.</span><span class="n">new_empty</span><span class="p">(</span><span class="o">*</span><span class="n">batch_dims</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">edges_elec_dummy</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="OmniSchNet"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.OmniSchNet">[docs]</a><span class="k">class</span> <span class="nc">OmniSchNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Combined Jastrow/backflow neural network based on SchNet.</span>
 
-<span class="sd">    This module uses a single :class:`ElectronicSchNet` instance to build</span>
-<span class="sd">    many-body feature representations of electrons, which are subsequently</span>
-<span class="sd">    passed as an input into additional trainable functions to obtain the Jastrow</span>
-<span class="sd">    factor and backflow transformations. This enables the use of a single SchNet</span>
-<span class="sd">    module within :class:`~deepqmc.wf.PauliNet`, which itself makes no</span>
-<span class="sd">    assumptions about parameter sharing by the Jastrow factor and backflow</span>
-<span class="sd">    network modules.</span>
+<span class="sd">    This module uses an instance of :class:`ElectronicSchNet` to build a</span>
+<span class="sd">    many-body or a mean-field feature representation of electrons, which are</span>
+<span class="sd">    subsequently passed as an input into additional trainable functions to</span>
+<span class="sd">    obtain many-body or mean-field Jastrow factor and backflow transformations.</span>
+<span class="sd">    The mean-field embeddings are obtained with a variant of</span>
+<span class="sd">    :class:`ElectronicSchNet` with the electron--electron message passing omitted.</span>
+<span class="sd">    The type of embeddings used for Jastrow and backflow can be chosen</span>
+<span class="sd">    individually and equivalent embbedings are shared. The module is used to</span>
+<span class="sd">    generate the Jastrow factor and backflow transformation within</span>
+<span class="sd">    :class:`~deepqmc.wf.PauliNet`.</span>
 
 <span class="sd">    The Jastrow factor and backflow are obtained as</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">        J:=\eta_{\boldsymbol\theta}\big(\textstyle\sum_i\mathbf x_i^{(L)}\big),\qquad</span>
-<span class="sd">        \kappa_{q\mu i}(\mathbf r)</span>
+<span class="sd">        J:=\eta_{\boldsymbol\theta}\big(\textstyle\sum_i\mathbf</span>
+<span class="sd">        x_i^{(L)}\big),\qquad</span>
+<span class="sd">        f_{q\mu i}(\mathbf r)</span>
 <span class="sd">        :=\Big(\boldsymbol\kappa_{\boldsymbol\theta,q}\big(\mathbf</span>
 <span class="sd">        x_i^{(L)}\big)\Big)_\mu</span>
 
 <span class="sd">    where :math:`\eta_{\boldsymbol\theta}` and</span>
-<span class="sd">    :math:`\boldsymbol\kappa_{\boldsymbol\theta,q}` are vanilla deep neural networks.</span>
-
-<span class="sd">    The Jastrow and backflow are obtained by calling :meth:`forward_jastrow` and</span>
-<span class="sd">    :meth:`forward_backflow`, which calls SchNet only once under the hood. After</span>
-<span class="sd">    the forward pass is finished, :math:`close` must be called, which ensures</span>
-<span class="sd">    that SchNet is called anew in the next pass.</span>
+<span class="sd">    :math:`\boldsymbol\kappa_{\boldsymbol\theta,q}` are vanilla deep</span>
+<span class="sd">    neural networks and :math:`\mathbf x_i^{(L)}` are either the many-body or</span>
+<span class="sd">    mean-field embedding.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mol (:class:`~deepqmc.Molecule`): molecule whose wave function is represented</span>
-<span class="sd">        dist_feat_dim (int): passed to :class:`ElectronicSchNet`</span>
-<span class="sd">        n_up (int): passed to :class:`ElectronicSchNet`</span>
-<span class="sd">        n_down (int): passed to :class:`ElectronicSchNet`</span>
+<span class="sd">        n_atoms (int): :math:`M`, number of atoms</span>
+<span class="sd">        n_up (int): :math:`N^\uparrow`, number of spin-up electrons</span>
+<span class="sd">        n_down (int): :math:`N^\downarrow`, number of spin-down electrons</span>
 <span class="sd">        n_orbitals (int): :math:`N_\text{orb}`, number of molecular orbitals</span>
-<span class="sd">        n_channels (int): :math:`C`, number of backflow channels</span>
-<span class="sd">        embedding_dim (int): :math:`\dim(\mathbf x_i^{(L)})`, dimension of SchNet</span>
-<span class="sd">            embeddings</span>
-<span class="sd">        with_jastrow (bool): if false, the Jastrow part is void</span>
-<span class="sd">        n_jastrow_layers (int): number of layers in the Jastrow factor network</span>
-<span class="sd">        with_backflow (bool): if false, the backflow part is void</span>
-<span class="sd">            :math:`\tilde\varphi_{\mu i}(\mathbf r):=\varphi_\mu(\mathbf r_i)`</span>
-<span class="sd">        n_backflow_layers (int): number of layers in the backflow network</span>
-<span class="sd">        with_r_backflow (bool): whether real-space backflow is used</span>
+<span class="sd">        n_backflows (int): :math:`N_\text{bf}`, number of backflow channnels</span>
+<span class="sd">        dist_feat_dim (int): :math:`\dim(\mathbf e)`, number of distance features</span>
+<span class="sd">        dist_feat_cutoff (float, a.u.): distance at which distance features</span>
+<span class="sd">            go to zero</span>
+<span class="sd">        mb_embedding_dim (int): dimension of many-body SchNet embeddings</span>
+<span class="sd">        mf_embedding_dim (int): dimension of mean-field SchNet embeddings</span>
+<span class="sd">        jastrow (str): type of Jastrow -- :data:`None`, ``&#39;mean-field&#39;``, or</span>
+<span class="sd">            ``&#39;many-body&#39;``</span>
+<span class="sd">        jastrow_kwargs (dict): extra arguments passed to :class:`Jastrow`</span>
+<span class="sd">        backflow (str): type of backflow -- :data:`None`, ``&#39;mean-field&#39;``, or</span>
+<span class="sd">            ``&#39;many-body&#39;``</span>
+<span class="sd">        backflow_kwargs (dict): extra arguments passed to :class:`Backflow`</span>
 <span class="sd">        schnet_kwargs (dict): extra arguments passed to :class:`ElectronicSchNet`</span>
 <span class="sd">        subnet_kwargs (dict): extra arguments passed to :class:`SubnetFactory`</span>
+<span class="sd">        mf_schnet_kwargs (dict): extra arguments passed to the mean-field variant</span>
+<span class="sd">            of :class:`ElectronicSchNet`</span>
+<span class="sd">        mf_subnet_kwargs (dict): extra arguments passed to :class:`SubnetFactory`</span>
 
 <span class="sd">    Shape:</span>
-<span class="sd">        - :meth:`forward_jastrow`:</span>
-<span class="sd">            - Input1, :math:`\mathbf e(\lvert\mathbf r_i-\mathbf r_j\rvert)`:</span>
-<span class="sd">              :math:`(*,N,N,\dim(\mathbf e))`</span>
-<span class="sd">            - Input2, :math:`\mathbf e(\lvert\mathbf r_i-\mathbf R_I\rvert)`:</span>
-<span class="sd">              :math:`(*,N,M,\dim(\mathbf e))`</span>
-<span class="sd">            - Output, :math:`J`: :math:`(*)`</span>
-<span class="sd">        - :meth:`forward_backflow`:</span>
-<span class="sd">            - Input1, :math:`\mathbf e(\lvert\mathbf r_i-\mathbf r_j\rvert)`:</span>
-<span class="sd">              :math:`(*,N,N,\dim(\mathbf e))`</span>
-<span class="sd">            - Input2, :math:`\mathbf e(\lvert\mathbf r_i-\mathbf R_I\rvert)`:</span>
-<span class="sd">              :math:`(*,N,M,\dim(\mathbf e))`</span>
-<span class="sd">            - Output, :math:`\kappa_{q\mu i}`:</span>
-<span class="sd">              :math:`(*,C,N,N_\text{orb})`</span>
+<span class="sd">        - Input1, :math:`\lvert\mathbf r_i-\mathbf r_j\rvert`: :math:`(*,N,N)`</span>
+<span class="sd">        - Input2, :math:`\lvert\mathbf r_i-\mathbf R_I\rvert`: :math:`(*,N,M)`</span>
+<span class="sd">        - Output1, :math:`J`: :math:`(*)`</span>
+<span class="sd">        - Output2, :math:`f_{q\mu i}`: :math:`(*,N_\text{bf},N,N_\text{orb})`</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        schnet: :class:`ElectronicSchNet` network</span>
-<span class="sd">        jastrow: :class:`torch.nn.Sequential` representing a vanilla DNN</span>
-<span class="sd">        backflow: :class:`torch.nn.Sequential` representing a vanilla DNN</span>
+<span class="sd">        mf_schnet: mean-field variant of :class:`ElectronicSchNet` network</span>
+<span class="sd">        jastrow: :class:`Jastrow` network</span>
+<span class="sd">        backflow: :class:`Backflow` network</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">mol</span><span class="p">,</span>
-        <span class="n">dist_feat_dim</span><span class="p">,</span>
+        <span class="n">n_atoms</span><span class="p">,</span>
         <span class="n">n_up</span><span class="p">,</span>
         <span class="n">n_down</span><span class="p">,</span>
         <span class="n">n_orbitals</span><span class="p">,</span>
-        <span class="n">n_channels</span><span class="p">,</span>
+        <span class="n">n_backflows</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-        <span class="n">with_jastrow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">n_jastrow_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">with_backflow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">n_backflow_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">with_r_backflow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">dist_feat_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">dist_feat_cutoff</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+        <span class="n">mb_embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">mf_embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">jastrow</span><span class="o">=</span><span class="s1">&#39;many-body&#39;</span><span class="p">,</span>
+        <span class="n">jastrow_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">backflow</span><span class="o">=</span><span class="s1">&#39;many-body&#39;</span><span class="p">,</span>
+        <span class="n">backflow_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">schnet_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">subnet_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">mf_schnet_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">mf_subnet_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="k">assert</span> <span class="n">jastrow</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;mean-field&#39;</span><span class="p">,</span> <span class="s1">&#39;many-body&#39;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">backflow</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;mean-field&#39;</span><span class="p">,</span> <span class="s1">&#39;many-body&#39;</span><span class="p">]</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">schnet</span> <span class="o">=</span> <span class="n">ElectronicSchNet</span><span class="p">(</span>
-            <span class="n">n_up</span><span class="p">,</span>
-            <span class="n">n_down</span><span class="p">,</span>
-            <span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span>
-            <span class="n">dist_feat_dim</span><span class="o">=</span><span class="n">dist_feat_dim</span><span class="p">,</span>
-            <span class="n">embedding_dim</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span>
-            <span class="n">subnet_metafactory</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">SubnetFactory</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">subnet_kwargs</span> <span class="ow">or</span> <span class="p">{})),</span>
-            <span class="o">**</span><span class="p">(</span><span class="n">schnet_kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dist_basis</span> <span class="o">=</span> <span class="n">DistanceBasis</span><span class="p">(</span>
+            <span class="n">dist_feat_dim</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">dist_feat_cutoff</span><span class="p">,</span> <span class="n">envelope</span><span class="o">=</span><span class="s1">&#39;nocusp&#39;</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">with_jastrow</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span> <span class="o">=</span> <span class="n">get_log_dnn</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">SSP</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="n">n_jastrow_layers</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">forward_jastrow</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">with_backflow</span><span class="p">:</span>
-            <span class="n">backflow</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">get_log_dnn</span><span class="p">(</span>
-                    <span class="n">embedding_dim</span><span class="p">,</span>
-                    <span class="n">n_orbitals</span><span class="p">,</span>
-                    <span class="n">SSP</span><span class="p">,</span>
-                    <span class="n">n_layers</span><span class="o">=</span><span class="n">n_backflow_layers</span><span class="p">,</span>
-                    <span class="n">last_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_channels</span><span class="p">)</span>
-            <span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">backflow</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">forward_backflow</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">with_r_backflow</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span> <span class="o">=</span> <span class="n">Backflow</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">forward_r_backflow</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schnet</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">ElectronicSchNet</span><span class="p">(</span>
+                <span class="n">n_up</span><span class="p">,</span>
+                <span class="n">n_down</span><span class="p">,</span>
+                <span class="n">n_atoms</span><span class="p">,</span>
+                <span class="n">dist_feat_dim</span><span class="o">=</span><span class="n">dist_feat_dim</span><span class="p">,</span>
+                <span class="n">embedding_dim</span><span class="o">=</span><span class="n">mb_embedding_dim</span><span class="p">,</span>
+                <span class="n">subnet_metafactory</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">SubnetFactory</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">subnet_kwargs</span> <span class="ow">or</span> <span class="p">{})),</span>
+                <span class="o">**</span><span class="p">(</span><span class="n">schnet_kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;many-body&#39;</span> <span class="ow">in</span> <span class="p">[</span><span class="n">jastrow</span><span class="p">,</span> <span class="n">backflow</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mf_schnet</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">MeanFieldElectronicSchNet</span><span class="p">(</span>
+                <span class="n">n_up</span><span class="p">,</span>
+                <span class="n">n_down</span><span class="p">,</span>
+                <span class="n">n_atoms</span><span class="p">,</span>
+                <span class="n">dist_feat_dim</span><span class="o">=</span><span class="n">dist_feat_dim</span><span class="p">,</span>
+                <span class="n">embedding_dim</span><span class="o">=</span><span class="n">mf_embedding_dim</span><span class="p">,</span>
+                <span class="n">subnet_metafactory</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">SubnetFactory</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">mf_subnet_kwargs</span> <span class="ow">or</span> <span class="p">{})),</span>
+                <span class="o">**</span><span class="p">(</span><span class="n">mf_schnet_kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;mean-field&#39;</span> <span class="ow">in</span> <span class="p">[</span><span class="n">jastrow</span><span class="p">,</span> <span class="n">backflow</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">embedding_dim</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mean-field&#39;</span><span class="p">:</span> <span class="n">mf_embedding_dim</span><span class="p">,</span> <span class="s1">&#39;many-body&#39;</span><span class="p">:</span> <span class="n">mb_embedding_dim</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jastrow_type</span> <span class="o">=</span> <span class="n">jastrow</span>
+        <span class="k">if</span> <span class="n">jastrow</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span> <span class="o">=</span> <span class="n">Jastrow</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">[</span><span class="n">jastrow</span><span class="p">],</span> <span class="o">**</span><span class="p">(</span><span class="n">jastrow_kwargs</span> <span class="ow">or</span> <span class="p">{}))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span> <span class="o">=</span> <span class="n">backflow</span>
+        <span class="k">if</span> <span class="n">backflow</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="o">=</span> <span class="n">Backflow</span><span class="p">(</span>
+                <span class="n">embedding_dim</span><span class="p">[</span><span class="n">backflow</span><span class="p">],</span>
+                <span class="n">n_orbitals</span><span class="p">,</span>
+                <span class="n">n_backflows</span><span class="p">,</span>
+                <span class="o">**</span><span class="p">(</span><span class="n">backflow_kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
+            <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_get_embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">):</span>
-        <span class="n">edges_id</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">edges_elec</span><span class="p">)</span> <span class="o">+</span> <span class="nb">id</span><span class="p">(</span><span class="n">edges_nuc</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dist_feats_id&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">edges_id</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s1">&#39;dist_feats_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_id</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s1">&#39;embeddings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schnet</span><span class="p">(</span><span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s1">&#39;embeddings&#39;</span><span class="p">]</span>
-
-<div class="viewcode-block" id="OmniSchNet.forward_jastrow"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.OmniSchNet.forward_jastrow">[docs]</a>    <span class="k">def</span> <span class="nf">forward_jastrow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluate Jastrow factor.&quot;&quot;&quot;</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_embeddings</span><span class="p">(</span><span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
-        <span class="n">J</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span><span class="p">(</span><span class="n">xs</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">J</span></div>
-
-<div class="viewcode-block" id="OmniSchNet.forward_backflow"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.OmniSchNet.forward_backflow">[docs]</a>    <span class="k">def</span> <span class="nf">forward_backflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluate backflow.&quot;&quot;&quot;</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_embeddings</span><span class="p">(</span><span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">bf</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="k">for</span> <span class="n">bf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">xs</span></div>
-
-    <span class="k">def</span> <span class="nf">forward_r_backflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">):</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_embeddings</span><span class="p">(</span><span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
-
-<div class="viewcode-block" id="OmniSchNet.forward_close"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.OmniSchNet.forward_close">[docs]</a>    <span class="k">def</span> <span class="nf">forward_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clear the cached SchNet embeddings.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div></div>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dists_nuc</span><span class="p">,</span> <span class="n">dists_elec</span><span class="p">):</span>
+        <span class="n">edges_nuc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_basis</span><span class="p">(</span><span class="n">dists_nuc</span><span class="p">)</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mf_schnet</span><span class="p">:</span>
+            <span class="n">embeddings</span><span class="p">[</span><span class="s1">&#39;mean-field&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mf_schnet</span><span class="p">(</span><span class="n">edges_nuc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">schnet</span><span class="p">:</span>
+            <span class="n">edges_elec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_basis</span><span class="p">(</span><span class="n">dists_elec</span><span class="p">)</span>
+            <span class="n">embeddings</span><span class="p">[</span><span class="s1">&#39;many-body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schnet</span><span class="p">(</span><span class="n">edges_elec</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
+        <span class="n">jastrow</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">jastrow_type</span><span class="p">])</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow_type</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">backflow</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">jastrow</span><span class="p">,</span> <span class="n">backflow</span></div>
 </pre></div>
 
           </div>

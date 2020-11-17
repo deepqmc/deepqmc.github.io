@@ -7,15 +7,15 @@
     <title>deepqmc.wf.paulinet.paulinet &#8212; DeepQMC 0.2.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/katex-math.css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
     <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
     <script src="../../../../_static/language_data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
     <script src="../../../../_static/katex_autorenderer.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -121,18 +121,17 @@
 
 <span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">Molecule</span>
 <span class="kn">from</span> <span class="nn">deepqmc.physics</span> <span class="kn">import</span> <span class="n">pairwise_diffs</span><span class="p">,</span> <span class="n">pairwise_distance</span>
+<span class="kn">from</span> <span class="nn">deepqmc.plugins</span> <span class="kn">import</span> <span class="n">PLUGINS</span>
 <span class="kn">from</span> <span class="nn">deepqmc.torchext</span> <span class="kn">import</span> <span class="n">sloglindet</span><span class="p">,</span> <span class="n">triu_flat</span>
 <span class="kn">from</span> <span class="nn">deepqmc.wf</span> <span class="kn">import</span> <span class="n">WaveFunction</span>
 
 <span class="kn">from</span> <span class="nn">.cusp</span> <span class="kn">import</span> <span class="n">CuspCorrection</span><span class="p">,</span> <span class="n">ElectronicAsymptotic</span>
-<span class="kn">from</span> <span class="nn">.distbasis</span> <span class="kn">import</span> <span class="n">DistanceBasis</span>
 <span class="kn">from</span> <span class="nn">.gto</span> <span class="kn">import</span> <span class="n">GTOBasis</span>
 <span class="kn">from</span> <span class="nn">.molorb</span> <span class="kn">import</span> <span class="n">MolecularOrbital</span>
-<span class="kn">from</span> <span class="nn">.omni</span> <span class="kn">import</span> <span class="n">OmniSchNet</span><span class="p">,</span> <span class="n">SubnetFactory</span>
+<span class="kn">from</span> <span class="nn">.omni</span> <span class="kn">import</span> <span class="n">OmniSchNet</span>
 <span class="kn">from</span> <span class="nn">.pyscfext</span> <span class="kn">import</span> <span class="n">pyscf_from_mol</span>
-<span class="kn">from</span> <span class="nn">.schnet</span> <span class="kn">import</span> <span class="n">ElectronicSchNet</span>
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.0&#39;</span>
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PauliNet&#39;</span><span class="p">]</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -159,97 +158,90 @@
 
 <span class="sd">    The PauliNet ansatz combines a multireference Slater determinant expansion,</span>
 <span class="sd">    Gaussian-type cusp-corrected molecular orbitals (:class:`MolecularOrbital`),</span>
-<span class="sd">    electronic cusp Jastrow factor (:class:`ElectronicAsymptotic`) and many-body</span>
-<span class="sd">    Jastrow factor and backflow transformation represented by neural networks</span>
-<span class="sd">    that use featurized particle distances,</span>
-<span class="sd">    :math:`\mathbf e(|\mathbf r-\mathbf r&#39;|)` (:class:`DistanceBasis`), as input,</span>
+<span class="sd">    electronic cusp Jastrow factor (:class:`ElectronicAsymptotic`) and</span>
+<span class="sd">    trainable Jastrow factor and backflow transformation (:class:`OmniSchNet`).</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">        \psi_{\boldsymbol\theta}(\mathbf r)</span>
-<span class="sd">          =\mathrm e^{\gamma(\mathbf r)+J_{\boldsymbol\theta}(\mathbf r)}</span>
-<span class="sd">          \sum_{pq} c_p</span>
-<span class="sd">          \det[\tilde\varphi_{\boldsymbol\theta,q{\mu_p}i}^\uparrow(\mathbf r)]</span>
-<span class="sd">          \det[\tilde\varphi_{\boldsymbol\theta,q{\mu_p}i}^\downarrow(\mathbf r)] \\</span>
-<span class="sd">        \tilde\varphi_{\boldsymbol\theta,q\mu i}(\mathbf r)</span>
-<span class="sd">          :=\big(1+2\tanh(\kappa_{\boldsymbol\theta,q\mu i}(\mathbf r))\big)</span>
-<span class="sd">          \varphi_\mu(\mathbf r_i)</span>
+<span class="sd">        \psi_{\boldsymbol\theta}(\mathbf r) =\mathrm e^{\gamma(\mathbf</span>
+<span class="sd">        r)+J_{\boldsymbol\theta}(\mathbf x_i^{(L)})}</span>
+<span class="sd">        \sum_{pq}\frac{c_p}{N_\text{bf}}</span>
+<span class="sd">        \det[\tilde{\boldsymbol\varphi}_{\boldsymbol\theta,pq}^\uparrow(\mathbf</span>
+<span class="sd">        r)]</span>
+<span class="sd">        \det[\tilde{\boldsymbol\varphi}_{\boldsymbol\theta,pq}^\downarrow(\mathbf</span>
+<span class="sd">        r)] \\ \tilde\varphi_{\boldsymbol\theta,pq\nu i}(\mathbf r)</span>
+<span class="sd">        :=\varphi_{\mu_{p\nu}}(\mathbf r_i)\star\big(\mathbf f_{*_1}(\mathbf</span>
+<span class="sd">        x_i^{(L)})\big)_{*_2} \\ (*_1,*_2)=\begin{cases} (q,\mu_{p\nu}) &amp;</span>
+<span class="sd">        \text{orbital-type backflow} \\ (pq,\nu) &amp; \text{determinant-type</span>
+<span class="sd">        backflow} \end{cases}</span>
 
-<span class="sd">    Here, :math:`c_p,\mu_p` define the multideterminant expansion,</span>
-<span class="sd">    :math:`\varphi_\mu(\mathbf r)` are the baseline</span>
-<span class="sd">    single-electron molecular orbitals, :math:`J_{\boldsymbol\theta}(\mathbf r)`</span>
-<span class="sd">    is the permutation-invariant deep Jastrow factor,</span>
-<span class="sd">    :math:`\kappa_{\boldsymbol\theta,q\mu i}(\mathbf r)` is the :math:`q`-th</span>
-<span class="sd">    channel of the permutation-equivariant deep backflow, and :math:`\gamma`</span>
+<span class="sd">    Here, :math:`\mathbf x_i^{(L)}` are the permutation-equivariant electron</span>
+<span class="sd">    embeddings obtained from a graph neural network, :math:`\mu_{p\nu}`</span>
+<span class="sd">    defines the electron configurations with the corresponding linear coefficients</span>
+<span class="sd">    :math:`c_p`, :math:`\varphi_\mu(\mathbf r)` are</span>
+<span class="sd">    the baseline single-electron molecular orbitals,</span>
+<span class="sd">    :math:`J_{\boldsymbol\theta}` is the permutation-invariant deep Jastrow</span>
+<span class="sd">    factor, :math:`\mathbf f_{\boldsymbol\theta}` is the</span>
+<span class="sd">    permutation-equivariant deep backflow, and :math:`\gamma`</span>
 <span class="sd">    enforces correct electronic cusp conditions.</span>
+<span class="sd">    Based on the type of the backflow, the backflow is applied either</span>
+<span class="sd">    orbital-wise or determinant-wise, and :math:`\star` can be either multiplication</span>
+<span class="sd">    or addition.</span>
+<span class="sd">    :math:`N_\text{bf}` different backflows indexed by :math:`q` are used with</span>
+<span class="sd">    each electron configuration.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol (:class:`~deepqmc.Molecule`): molecule whose wave function is represented</span>
 <span class="sd">        basis (:class:`~deepqmc.wf.paulinet.GTOBasis`): basis for the molecular orbitals</span>
-<span class="sd">        jastrow_factory (callable): constructor for a Jastrow factor,</span>
-<span class="sd">            :math:`(M,\dim(\mathbf e),N^\uparrow,N^\downarrow)`</span>
-<span class="sd">            :math:`\rightarrow(\mathbf e_{ij},\mathbf e_{iI})\rightarrow J`</span>
-<span class="sd">        backflow_factory (callable): constructor for a backflow,</span>
-<span class="sd">            :math:`(M,\dim(\mathbf e),N^\uparrow,N^\downarrow,N_\text{orb},C)`</span>
-<span class="sd">            :math:`\rightarrow(\mathbf e_{ij},\mathbf e_{iI})`</span>
-<span class="sd">            :math:`\rightarrow\kappa_{q\mu i}`</span>
-<span class="sd">        omni_factory (callable): constructor for a combined Jastrow factor and backflow,</span>
-<span class="sd">            with interface identical to :class:`~deepqmc.wf.paulinet.OmniSchNet`</span>
 <span class="sd">        n_configurations (int): number of electron configurations</span>
 <span class="sd">        n_orbitals (int): number of distinct molecular orbitals used across all</span>
 <span class="sd">            configurations if given, otherwise the larger of the number of spin-up</span>
 <span class="sd">            and spin-down electrons</span>
-<span class="sd">        mo_factory (callable): passed to :class:`~deepqmc.wf.paulinet.MolecularOrbital`</span>
-<span class="sd">            as ``net_factory``</span>
 <span class="sd">        cusp_correction (bool): whether nuclear cusp correction is used</span>
 <span class="sd">        cusp_electrons (bool): whether electronic cusp function is used</span>
-<span class="sd">        dist_feat_dim (int): :math:`\dim(\mathbf e)`, number of distance features</span>
-<span class="sd">        dist_feat_cutoff (float, a.u.): distance at which distance features</span>
-<span class="sd">            go to zero</span>
-<span class="sd">        backflow_channels (int): :math:`C`, number of backflow channels</span>
-<span class="sd">        omni_kwargs: arguments passed to :class:`~deepqmc.wf.paulinet.OmniSchNet`</span>
+<span class="sd">        backflow_type (str): ``&#39;orbital&#39;`` for orbital-type backflow, ``&#39;det&#39;``</span>
+<span class="sd">            for determinant-type backflow</span>
+<span class="sd">        backflow_channels (int): :math:`N_\text{bf}`, number of backflow channels</span>
+<span class="sd">        backflow_transform (str): specifies the :math:`\star` operation:</span>
+
+<span class="sd">            - ``&#39;mult&#39;`` -- :math:`x\star y:=x\big(1+2\tanh(y)\big)`</span>
+<span class="sd">        omni_factory (callable): constructor for combined a Jastrow and backflow,</span>
+<span class="sd">            :math:`(M,N^\uparrow,N^\downarrow,N_\text{orb},N_\text{bf})`</span>
+<span class="sd">            :math:`\rightarrow(r_{ij},R_{iI})\rightarrow (J,f_{q\mu i})`</span>
+<span class="sd">        omni_kwargs: extra arguments passed to ``omni_factory``</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        jastrow: :class:`torch.nn.Module` representing the Jastrow factor</span>
-<span class="sd">        backflow: :class:`torch.nn.Module` representing the backflow transformation</span>
+<span class="sd">        omni: :class:`torch.nn.Module` representing Jastrow and backflow</span>
 <span class="sd">        conf_coeff: :class:`torch.nn.Linear` with no bias that represents</span>
 <span class="sd">            the multireference coefficients :math:`c_p` via its :attr:`weight`</span>
 <span class="sd">            variable of shape :math:`(1,N_\text{det})`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">OMNI_FACTORIES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;omni_schnet&#39;</span><span class="p">:</span> <span class="n">OmniSchNet</span><span class="p">}</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mol</span><span class="p">,</span>
         <span class="n">basis</span><span class="p">,</span>
-        <span class="n">jastrow_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">backflow_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">omni_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">n_configurations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">n_orbitals</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">mo_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">return_log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">use_sloglindet</span><span class="o">=</span><span class="s1">&#39;training&#39;</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">cusp_correction</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">cusp_electrons</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">dist_feat_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-        <span class="n">dist_feat_cutoff</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
         <span class="n">backflow_type</span><span class="o">=</span><span class="s1">&#39;orbital&#39;</span><span class="p">,</span>
         <span class="n">backflow_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">backflow_transform</span><span class="o">=</span><span class="s1">&#39;mult&#39;</span><span class="p">,</span>
         <span class="n">rc_scaling</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">cusp_alpha</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
         <span class="n">freeze_embed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">omni_factory</span><span class="o">=</span><span class="s1">&#39;omni_schnet&#39;</span><span class="p">,</span>
         <span class="n">omni_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">assert</span> <span class="n">use_sloglindet</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;never&#39;</span><span class="p">,</span> <span class="s1">&#39;training&#39;</span><span class="p">,</span> <span class="s1">&#39;always&#39;</span><span class="p">}</span>
         <span class="k">assert</span> <span class="n">return_log</span> <span class="ow">or</span> <span class="n">use_sloglindet</span> <span class="o">==</span> <span class="s1">&#39;never&#39;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
         <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dist_basis</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">DistanceBasis</span><span class="p">(</span><span class="n">dist_feat_dim</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">dist_feat_cutoff</span><span class="p">,</span> <span class="n">envelope</span><span class="o">=</span><span class="s1">&#39;nocusp&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mo_factory</span> <span class="ow">or</span> <span class="n">jastrow_factory</span> <span class="ow">or</span> <span class="n">backflow_factory</span> <span class="ow">or</span> <span class="n">omni_factory</span>
-            <span class="k">else</span> <span class="kc">None</span>
-        <span class="p">)</span>
         <span class="n">n_orbitals</span> <span class="o">=</span> <span class="n">n_orbitals</span> <span class="ow">or</span> <span class="nb">max</span><span class="p">(</span><span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">)</span>
         <span class="n">confs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_up</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_down</span><span class="p">))]</span> <span class="o">+</span> <span class="p">[</span>
             <span class="nb">sum</span><span class="p">((</span><span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="n">n_orbitals</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">)),</span> <span class="p">[])</span>
@@ -265,8 +257,6 @@
             <span class="n">mol</span><span class="p">,</span>
             <span class="n">basis</span><span class="p">,</span>
             <span class="n">n_orbitals</span><span class="p">,</span>
-            <span class="n">net_factory</span><span class="o">=</span><span class="n">mo_factory</span><span class="p">,</span>
-            <span class="n">dist_feat_dim</span><span class="o">=</span><span class="n">dist_feat_dim</span><span class="p">,</span>
             <span class="n">cusp_correction</span><span class="o">=</span><span class="n">cusp_correction</span><span class="p">,</span>
             <span class="n">rc_scaling</span><span class="o">=</span><span class="n">rc_scaling</span><span class="p">,</span>
         <span class="p">)</span>
@@ -274,11 +264,6 @@
             <span class="p">(</span><span class="n">ElectronicAsymptotic</span><span class="p">(</span><span class="n">cusp</span><span class="o">=</span><span class="n">cusp</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">cusp_alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">cusp</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">cusp_electrons</span>
             <span class="k">else</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">jastrow_factory</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="n">dist_feat_dim</span><span class="p">,</span> <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">jastrow_factory</span>
-            <span class="k">else</span> <span class="kc">None</span>
         <span class="p">)</span>
         <span class="n">backflow_spec</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;orbital&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_orbitals</span><span class="p">,</span> <span class="n">backflow_channels</span><span class="p">],</span>
@@ -288,27 +273,24 @@
             <span class="n">backflow_spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span> <span class="o">=</span> <span class="n">backflow_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">backflow_transform</span> <span class="o">=</span> <span class="n">backflow_transform</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">backflow_factory</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="n">dist_feat_dim</span><span class="p">,</span> <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">,</span> <span class="o">*</span><span class="n">backflow_spec</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">backflow_factory</span>
+        <span class="k">if</span> <span class="s1">&#39;paulinet.omni_factory&#39;</span> <span class="ow">in</span> <span class="n">PLUGINS</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using a plugin for paulinet.omni_factory&#39;</span><span class="p">)</span>
+            <span class="n">omni_factory</span> <span class="o">=</span> <span class="n">PLUGINS</span><span class="p">[</span><span class="s1">&#39;paulinet.omni_factory&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omni_factory</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">omni_kwargs</span><span class="p">:</span>
+                <span class="n">omni_kwargs</span> <span class="o">=</span> <span class="n">omni_kwargs</span><span class="p">[</span><span class="n">omni_factory</span><span class="p">]</span>
+            <span class="n">omni_factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OMNI_FACTORIES</span><span class="p">[</span><span class="n">omni_factory</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omni</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">omni_factory</span><span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">coords</span><span class="p">),</span> <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">,</span> <span class="o">*</span><span class="n">backflow_spec</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">omni_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">omni_factory</span>
             <span class="k">else</span> <span class="kc">None</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">omni_factory</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="ow">not</span> <span class="n">backflow_factory</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">jastrow_factory</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">omni</span> <span class="o">=</span> <span class="n">omni_factory</span><span class="p">(</span>
-                <span class="n">mol</span><span class="p">,</span> <span class="n">dist_feat_dim</span><span class="p">,</span> <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">,</span> <span class="o">*</span><span class="n">backflow_spec</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">omni_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="o">.</span><span class="n">forward_backflow</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="o">.</span><span class="n">forward_r_backflow</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="o">.</span><span class="n">forward_jastrow</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">omni</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_log</span> <span class="o">=</span> <span class="n">return_log</span>
         <span class="k">if</span> <span class="n">freeze_embed</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">requires_grad_embeddings_</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_determinants</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">confs</span><span class="p">)</span> <span class="o">*</span> <span class="n">backflow_channels</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_backflows</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="k">else</span> <span class="n">backflow_spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">n_up</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n_down</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">use_sloglindet</span> <span class="o">=</span> <span class="s1">&#39;never&#39;</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
@@ -336,12 +318,19 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">DEFAULTS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">.omni</span> <span class="kn">import</span> <span class="n">Backflow</span><span class="p">,</span> <span class="n">Jastrow</span>
+        <span class="kn">from</span> <span class="nn">.schnet</span> <span class="kn">import</span> <span class="n">ElectronicSchNet</span><span class="p">,</span> <span class="n">SubnetFactory</span>
+
         <span class="k">return</span> <span class="p">{</span>
             <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">from_hf</span><span class="p">,</span> <span class="s1">&#39;kwargs&#39;</span><span class="p">):</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_pyscf</span><span class="p">,</span>
             <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">from_pyscf</span><span class="p">,</span> <span class="s1">&#39;kwargs&#39;</span><span class="p">):</span> <span class="bp">cls</span><span class="p">,</span>
-            <span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;omni_kwargs&#39;</span><span class="p">):</span> <span class="n">OmniSchNet</span><span class="p">,</span>
+            <span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;omni_kwargs&#39;</span><span class="p">):</span> <span class="bp">cls</span><span class="o">.</span><span class="n">OMNI_FACTORIES</span><span class="p">,</span>
             <span class="p">(</span><span class="n">OmniSchNet</span><span class="p">,</span> <span class="s1">&#39;schnet_kwargs&#39;</span><span class="p">):</span> <span class="n">ElectronicSchNet</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">OmniSchNet</span><span class="p">,</span> <span class="s1">&#39;mf_schnet_kwargs&#39;</span><span class="p">):</span> <span class="p">(</span><span class="n">ElectronicSchNet</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]),</span>
             <span class="p">(</span><span class="n">OmniSchNet</span><span class="p">,</span> <span class="s1">&#39;subnet_kwargs&#39;</span><span class="p">):</span> <span class="n">SubnetFactory</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">OmniSchNet</span><span class="p">,</span> <span class="s1">&#39;mf_subnet_kwargs&#39;</span><span class="p">):</span> <span class="n">SubnetFactory</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">OmniSchNet</span><span class="p">,</span> <span class="s1">&#39;jastrow_kwargs&#39;</span><span class="p">):</span> <span class="n">Jastrow</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">OmniSchNet</span><span class="p">,</span> <span class="s1">&#39;backflow_kwargs&#39;</span><span class="p">):</span> <span class="n">Backflow</span><span class="p">,</span>
         <span class="p">}</span>
 
 <div class="viewcode-block" id="PauliNet.from_pyscf"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.PauliNet.from_pyscf">[docs]</a>    <span class="nd">@classmethod</span>
@@ -416,7 +405,7 @@
             <span class="n">mf</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">spin</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">basis</span> <span class="o">=</span> <span class="n">GTOBasis</span><span class="o">.</span><span class="n">from_pyscf</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
-        <span class="n">wf</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;omni_factory&#39;</span><span class="p">:</span> <span class="n">OmniSchNet</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">})</span>
+        <span class="n">wf</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">init_weights</span><span class="p">:</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">init_from_pyscf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">freeze_mos</span><span class="o">=</span><span class="n">freeze_mos</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">confs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -477,33 +466,23 @@
         <span class="n">n_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">coords</span>
         <span class="n">diffs_nuc</span> <span class="o">=</span> <span class="n">pairwise_diffs</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">coords</span><span class="p">,</span> <span class="n">rs</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">end_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)]),</span> <span class="n">coords</span><span class="p">)</span>
-        <span class="n">edges_nuc</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">dist_basis</span><span class="p">(</span><span class="n">diffs_nuc</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">())</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">net</span>
-            <span class="k">else</span> <span class="kc">None</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">cusp_same</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span><span class="p">:</span>
-            <span class="n">dists_elec</span> <span class="o">=</span> <span class="n">pairwise_distance</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">rs</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span><span class="p">:</span>
-            <span class="n">edges_nuc</span> <span class="o">=</span> <span class="n">edges_nuc</span><span class="p">[</span><span class="n">n_atoms</span><span class="p">:]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_dim</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_basis</span><span class="p">(</span><span class="n">dists_elec</span><span class="p">),</span> <span class="n">edges_nuc</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span><span class="p">:</span>
-            <span class="n">rs_flowed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_backflow</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="o">*</span><span class="n">edges</span><span class="p">)</span>
-            <span class="n">diffs_nuc</span> <span class="o">=</span> <span class="n">pairwise_diffs</span><span class="p">(</span>
-                <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">coords</span><span class="p">,</span> <span class="n">rs_flowed</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">end_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)]),</span> <span class="n">coords</span>
+        <span class="n">dists_elec</span> <span class="o">=</span> <span class="n">pairwise_distance</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">rs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="p">:</span>
+            <span class="n">dists_nuc</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">diffs_nuc</span><span class="p">[</span><span class="n">n_atoms</span><span class="p">:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_dim</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span><span class="p">(</span><span class="n">diffs_nuc</span><span class="p">,</span> <span class="n">edges_nuc</span><span class="p">)</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo</span><span class="p">(</span><span class="n">diffs_nuc</span><span class="p">)</span>
         <span class="c1"># get orbitals as [bs, 1, i, mu]</span>
         <span class="n">xs</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span><span class="p">:</span>
-            <span class="n">fs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span><span class="p">(</span><span class="o">*</span><span class="n">edges</span><span class="p">)</span>  <span class="c1"># [bs, q, i, mu/nu]</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span> <span class="o">==</span> <span class="s1">&#39;orbital&#39;</span><span class="p">:</span>
-                <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backflow_op</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+        <span class="c1"># get jastrow J and backflow fs (as [bs, q, i, mu/nu])</span>
+        <span class="n">J</span><span class="p">,</span> <span class="n">fs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="p">(</span><span class="n">dists_nuc</span><span class="p">,</span> <span class="n">dists_elec</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span> <span class="k">else</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span> <span class="o">==</span> <span class="s1">&#39;orbital&#39;</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backflow_op</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
         <span class="c1"># form dets as [bs, q, p, i, nu]</span>
         <span class="n">conf_up</span><span class="p">,</span> <span class="n">conf_down</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">confs</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">confs</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="p">:]</span>
         <span class="n">det_up</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">,</span> <span class="n">conf_up</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">det_down</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="p">:,</span> <span class="n">conf_down</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span> <span class="o">==</span> <span class="s1">&#39;det&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow_type</span> <span class="o">==</span> <span class="s1">&#39;det&#39;</span><span class="p">:</span>
             <span class="n">n_conf</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">confs</span><span class="p">)</span>
             <span class="n">fs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="n">fs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">n_conf</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_conf</span><span class="p">)))</span>
             <span class="n">det_up</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backflow_op</span><span class="p">(</span><span class="n">det_up</span><span class="p">,</span> <span class="n">fs</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">])</span>
@@ -552,11 +531,8 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_log</span>
                 <span class="k">else</span> <span class="n">psi</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">cusp_same</span> <span class="o">+</span> <span class="n">cusp_anti</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span><span class="p">:</span>
-            <span class="n">J</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jastrow</span><span class="p">(</span><span class="o">*</span><span class="n">edges</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">J</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">psi</span> <span class="o">=</span> <span class="n">psi</span> <span class="o">+</span> <span class="n">J</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_log</span> <span class="k">else</span> <span class="n">psi</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">omni</span><span class="o">.</span><span class="n">forward_close</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">sign</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_log</span> <span class="k">else</span> <span class="n">psi</span></div>
 </pre></div>
 
