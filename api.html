@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>API &#8212; DeepQMC 0.2.0 documentation</title>
+    <title>API &#8212; DeepQMC 0.0.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
@@ -124,7 +124,7 @@
   <div class="section" id="api">
 <span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>The API is designed in such a way that entering it via the top-level <a class="reference internal" href="#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepqmc.train()</span></code></a> and <a class="reference internal" href="#deepqmc.wf.PauliNet.from_hf" title="deepqmc.wf.PauliNet.from_hf"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepqmc.wf.PauliNet.from_hf()</span></code></a> entry points enables complete specification of all parameters via nested dictionaries that can be encoded in a <a class="reference external" href="https://github.com/toml-lang/toml">TOML</a> file, which is used by the <a class="reference internal" href="cli.html#cli"><span class="std std-ref">Command-line interface</span></a>. The lower-level dictionaries (stored under <code class="docutils literal notranslate"><span class="pre">*_kwargs</span></code> keys) are gradually unwrapped and passed into lower-level API components.</p>
-<p>All classes documented below with a Shape section are derived from <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> and are to be used as such.</p>
+<p>All classes documented below with a Shape section are derived from <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> and are to be used as such.</p>
 <div class="section" id="module-deepqmc">
 <span id="training"></span><h2>Training<a class="headerlink" href="#module-deepqmc" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -146,7 +146,7 @@ parameter states, and HDF5 file with the fit trajectory</p></li>
 <li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of optimization steps</p></li>
 <li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of samples used in a single step</p></li>
 <li><p><strong>epoch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of steps between sampling from the wave function</p></li>
-<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the optimizer from <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#module-torch.optim" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></li>
+<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the optimizer from <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#module-torch.optim" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></li>
 <li><p><strong>learning_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – learning rate for gradient-descent optimizers</p></li>
 <li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – extra arguments passed to the optimizers, organized
 by optimizer name</p></li>
@@ -208,7 +208,7 @@ in the expectation value averaging</p></li>
 <em class="property">class </em><code class="sig-prename descclassname">deepqmc.</code><code class="sig-name descname">Molecule</code><span class="sig-paren">(</span><em class="sig-param">coords</em>, <em class="sig-param">charges</em>, <em class="sig-param">charge</em>, <em class="sig-param">spin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/molecule.html#Molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.Molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a molecule.</p>
 <p>The array-like arguments accept anything that can be transformed to
-<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>.</p>
+<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -245,10 +245,10 @@ can do some additional processing such as learning rate scheduling.</p>
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function model to be fitted</p></li>
 <li><p><strong>loss_func</strong> (<a class="reference internal" href="#deepqmc.fit.WaveFunctionLoss" title="deepqmc.fit.WaveFunctionLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunctionLoss</span></code></a>) – loss function that accepts local
 energy and wave function values</p></li>
-<li><p><strong>opt</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.optim.Optimizer</span></code></a>) – optimizer</p></li>
+<li><p><strong>opt</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.optim.Optimizer</span></code></a>) – optimizer</p></li>
 <li><p><strong>sampler</strong> (<em>iterator</em>) – yields batches of electron coordinate samples</p></li>
 <li><p><strong>steps</strong> (<em>iterator</em>) – yields step indexes</p></li>
-<li><p><strong>writer</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code></a>) – Tensorboard writer</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code></a>) – Tensorboard writer</p></li>
 <li><p><strong>log_dict</strong> (<em>dict-like</em>) – batch data will be stored in this dictionary if given</p></li>
 <li><p><strong>require_energy_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the loss function requires
 gradients of the local energy</p></li>
@@ -264,7 +264,7 @@ free GPU memory. When training on CPU always set to <a class="reference external
 <li><p><strong>clip_outliers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether to clip local energy outliers</p></li>
 <li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – multiple of MAE defining outliers</p></li>
 <li><p><strong>max_grad_norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – maximum gradient norm passed to
-<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.utils.clip_grad_norm_.html#torch.nn.utils.clip_grad_norm_" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.nn.utils.clip_grad_norm_()</span></code></a></p></li>
+<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.utils.clip_grad_norm_.html#torch.nn.utils.clip_grad_norm_" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.nn.utils.clip_grad_norm_()</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -317,7 +317,7 @@ estimate of the energy, and the sampled electron coordinates are yielded.</p>
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function model to be sampled</p></li>
 <li><p><strong>sampler</strong> (<em>iterator</em>) – yields batches of electron coordinate samples</p></li>
 <li><p><strong>steps</strong> (<em>iterator</em>) – yields step indexes</p></li>
-<li><p><strong>writer</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code></a>) – Tensorboard writer</p></li>
+<li><p><strong>writer</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.tensorboard.writer.SummaryWriter</span></code></a>) – Tensorboard writer</p></li>
 <li><p><strong>log_dict</strong> (<em>dict-like</em>) – step data will be stored in this dictionary if given</p></li>
 <li><p><strong>blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – used as storage of blocks. If not given, the iterator
 uses a local storage.</p></li>
@@ -342,7 +342,7 @@ coordinates and wave function values with shapes of <span class="math">\((\cdot,
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wf</strong> (<a class="reference internal" href="#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>) – wave function to sample from</p></li>
-<li><p><strong>rs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a><span class="math">\((\cdot,N,3)\)</span>) – initial positions of the
+<li><p><strong>rs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a><span class="math">\((\cdot,N,3)\)</span>) – initial positions of the
 Markov-chain walkers</p></li>
 <li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\tau\)</span>, proposal step size</p></li>
 <li><p><strong>n_first_certain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of initial steps done with 100% acceptance</p></li>
@@ -488,8 +488,8 @@ for determinant-type backflow</p></li>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>omni</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> representing Jastrow and backflow</p></li>
-<li><p><strong>conf_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents
+<li><p><strong>omni</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a> representing Jastrow and backflow</p></li>
+<li><p><strong>conf_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents
 the multireference coefficients <span class="math">\(c_p\)</span> via its <code class="xref py py-attr docutils literal notranslate"><span class="pre">weight</span></code>
 variable of shape <span class="math">\((1,N_\text{det})\)</span></p></li>
 </ul>
@@ -657,7 +657,7 @@ network</p></li>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
-<dd class="field-odd"><p><strong>net</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html#torch.nn.Sequential" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code></a> representing vanilla neural network</p>
+<dd class="field-odd"><p><strong>net</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html#torch.nn.Sequential" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code></a> representing vanilla neural network</p>
 </dd>
 </dl>
 </dd></dl>
@@ -696,7 +696,7 @@ layers</p></li>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
-<dd class="field-odd"><p><strong>nets</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleList.html#torch.nn.ModuleList" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleList</span></code></a> containing <span class="math">\(N_text{bf}\)</span>
+<dd class="field-odd"><p><strong>nets</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleList.html#torch.nn.ModuleList" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleList</span></code></a> containing <span class="math">\(N_text{bf}\)</span>
 vanilla neural networks</p>
 </dd>
 </dl>
@@ -783,11 +783,11 @@ interface of <a class="reference internal" href="#deepqmc.wf.paulinet.SubnetFact
 <span class="math">\(N^\uparrow=N^\downarrow\)</span> and <span class="math">\((2,\dim(\mathbf X))\)</span>
 otherwise</p></li>
 <li><p><strong>Y</strong> – nuclear embeddings of shape <span class="math">\((M,\dim(\mathbf w))\)</span></p></li>
-<li><p><strong>w</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
+<li><p><strong>w</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
 <span class="math">\(\mathbf w^{(\cdot)}\)</span> subnetworks</p></li>
-<li><p><strong>g</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
+<li><p><strong>g</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
 <span class="math">\(\mathbf g^{(\cdot)}\)</span> subnetworks</p></li>
-<li><p><strong>h</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
+<li><p><strong>h</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ModuleDict.html#torch.nn.ModuleDict" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ModuleDict</span></code></a> that contain all trainable
 <span class="math">\(\mathbf h^{(\cdot)}\)</span> subnetworks</p></li>
 </ul>
 </dd>
@@ -897,9 +897,9 @@ fixed by the cusp condition,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>charges</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(Z_I\)</span>, nuclear charges</p></li>
+<li><p><strong>charges</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(Z_I\)</span>, nuclear charges</p></li>
 <li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of orbitals</p></li>
-<li><p><strong>rc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(r_\text c\)</span>, cutoff radii</p></li>
+<li><p><strong>rc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M)\)</span>) – <span class="math">\(r_\text c\)</span>, cutoff radii</p></li>
 <li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <span class="math">\(\varepsilon\)</span>, numerical zero. An orbital
 is considered to have a non-zero <em>s</em>-type part if
 <span class="math">\(s_{\mu I}(0)&gt;\varepsilon\)</span>.</p></li>
@@ -969,7 +969,7 @@ electron coordinates into molecular orbitals (MOs).</p>
 <li><p><a class="reference internal" href="#deepqmc.wf.paulinet.GTOBasis" title="deepqmc.wf.paulinet.GTOBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOBasis</span></code></a> transforms
 <span class="math">\((\mathbf r-\mathbf R_I)\)</span> to basis functions
 <span class="math">\(\xi_p(\mathbf r)\)</span></p></li>
-<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> transforms <span class="math">\(\xi_p(\mathbf r)\)</span> to
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> transforms <span class="math">\(\xi_p(\mathbf r)\)</span> to
 molecular orbitals, <span class="math">\(\varphi_\mu(\mathbf r)\)</span>,</p>
 <div class="math">
 \[\varphi_\mu(\mathbf r):=\sum_p C_{p\mu}\xi_p(\mathbf r)
@@ -978,7 +978,7 @@ molecular orbitals, <span class="math">\(\varphi_\mu(\mathbf r)\)</span>,</p>
 </li>
 <li><p>(optional) <a class="reference internal" href="#deepqmc.wf.paulinet.CuspCorrection" title="deepqmc.wf.paulinet.CuspCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CuspCorrection</span></code></a> corrects
 <span class="math">\(\varphi_\mu(\mathbf r)\)</span> to satisfy nuclear cusp conditions</p></li>
-<li><p>(optional) Some trainable function <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a>
+<li><p>(optional) Some trainable function <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a>
 updates the MOs using distance features
 <span class="math">\(\mathbf e(|\mathbf r-\mathbf R_I|)\)</span>,</p>
 <div class="math">
@@ -1018,7 +1018,7 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
-<dd class="field-odd"><p><strong>mo_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents MO coefficients
+<dd class="field-odd"><p><strong>mo_coeff</strong> – <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a> with no bias that represents MO coefficients
 <span class="math">\(C_{p\mu}\)</span> via its <code class="xref py py-attr docutils literal notranslate"><span class="pre">weight</span></code> variable of shape
 <span class="math">\((N_\text{orb},N_\text{basis})\)</span></p>
 </dd>
@@ -1050,7 +1050,7 @@ basis functions, <span class="math">\(N_\text{basis}\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>centers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M,3)\)</span>) – <span class="math">\(\mathbf R_I\)</span>, basis
+<li><p><strong>centers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\((M,3)\)</span>) – <span class="math">\(\mathbf R_I\)</span>, basis
 center coordinates</p></li>
 <li><p><strong>shells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – each item is a 2-tuple (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#deepqmc.wf.paulinet.GTOShell" title="deepqmc.wf.paulinet.GTOShell"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOShell</span></code></a>)
 encoding a shell placed at a center given by its index</p></li>
@@ -1070,7 +1070,7 @@ encoding a shell placed at a center given by its index</p></li>
 <dd><p>Construct the basis from a PySCF molecule object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mol</strong> (<a class="reference external" href="http://pyscf.org/pyscf/modules/gto.html#pyscf.gto.mole.Mole" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.gto.mole.Mole</span></code></a>) – a molecule</p>
+<dd class="field-odd"><p><strong>mol</strong> (<a class="reference external" href="http://pyscf.org/pyscf/modules/gto.html#id0" title="(in PySCF v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.gto.mole.Mole</span></code></a>) – a molecule</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1095,9 +1095,9 @@ different angular momenta, <span class="math">\(N_\mathbf l\)</span></p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>l</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <em>l</em>, total angular momentum</p></li>
-<li><p><strong>coeffs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(c_m\)</span>, Gaussian
+<li><p><strong>coeffs</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(c_m\)</span>, Gaussian
 linear coefficients</p></li>
-<li><p><strong>zetas</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+0bc39c0 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(\zeta_m\)</span>, Gaussian
+<li><p><strong>zetas</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a><span class="math">\(N_\text g\)</span>) – <span class="math">\(\zeta_m\)</span>, Gaussian
 exponential coefficients</p></li>
 </ul>
 </dd>
@@ -1123,7 +1123,7 @@ exponential coefficients</p></li>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2019-2020, Frank Noé and collaborators.
+      &copy;2019-2021, Frank Noé and collaborators.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
