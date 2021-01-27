@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>API &#8212; DeepQMC 0.0.0 documentation</title>
+    <title>API &#8212; DeepQMC 0.3.0.post1.dev0+44a81ef documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
@@ -963,7 +963,7 @@ electrons, <span class="math">\(d_{ij}\)</span>,</p>
 <dt id="deepqmc.wf.paulinet.MolecularOrbital">
 <em class="property">class </em><code class="sig-prename descclassname">deepqmc.wf.paulinet.</code><code class="sig-name descname">MolecularOrbital</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">basis</em>, <em class="sig-param">n_orbitals</em>, <em class="sig-param">cusp_correction=True</em>, <em class="sig-param">rc_scaling=1.0</em>, <em class="sig-param">eps=1e-06</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deepqmc/wf/paulinet/molorb.html#MolecularOrbital"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepqmc.wf.paulinet.MolecularOrbital" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates molecular orbitals from electron coordinates.</p>
-<p>This module combines up to four submodules that sequentially transform
+<p>This module combines three submodules that sequentially transform
 electron coordinates into molecular orbitals (MOs).</p>
 <ol class="arabic">
 <li><p><a class="reference internal" href="#deepqmc.wf.paulinet.GTOBasis" title="deepqmc.wf.paulinet.GTOBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOBasis</span></code></a> transforms
@@ -978,15 +978,6 @@ molecular orbitals, <span class="math">\(\varphi_\mu(\mathbf r)\)</span>,</p>
 </li>
 <li><p>(optional) <a class="reference internal" href="#deepqmc.wf.paulinet.CuspCorrection" title="deepqmc.wf.paulinet.CuspCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CuspCorrection</span></code></a> corrects
 <span class="math">\(\varphi_\mu(\mathbf r)\)</span> to satisfy nuclear cusp conditions</p></li>
-<li><p>(optional) Some trainable function <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a>
-updates the MOs using distance features
-<span class="math">\(\mathbf e(|\mathbf r-\mathbf R_I|)\)</span>,</p>
-<div class="math">
-\[\varphi_\mu(\mathbf r):=\boldsymbol\Phi_{\boldsymbol\theta}
-(\varphi_\mu(\mathbf r), \{\mathbf e(|\mathbf r-\mathbf R_I|)\})
-
-\]</div>
-</li>
 </ol>
 <p>If (3) applies, this module also determines the cusp correction cutoff radii
 as <span class="math">\(r_\text c:=q/Z\)</span>, where <em>q</em> is a global factor and <em>Z</em> is a nuclear
@@ -997,10 +988,6 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 <li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>) – target molecule</p></li>
 <li><p><strong>basis</strong> (<a class="reference internal" href="#deepqmc.wf.paulinet.GTOBasis" title="deepqmc.wf.paulinet.GTOBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">GTOBasis</span></code></a>) – basis functions</p></li>
 <li><p><strong>n_orbitals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(N_\text{orb}\)</span>, number of molecular orbitals</p></li>
-<li><p><strong>net_factory</strong> (<em>callable</em>) – factory,
-<span class="math">\((M,\dim(\mathbf e),N_\text{orb})\)</span>
-<span class="math">\(\rightarrow\boldsymbol\Phi_{\boldsymbol\theta}\)</span></p></li>
-<li><p><strong>dist_feat_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – <span class="math">\(\dim(\mathbf e)\)</span>, number of distance features</p></li>
 <li><p><strong>cusp_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether the cusp correction should be applied</p></li>
 <li><p><strong>rc_scaling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – <em>q</em>, global scaling for cusp correction cutoff radii</p></li>
 <li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – numerical zero, passed to <a class="reference internal" href="#deepqmc.wf.paulinet.CuspCorrection" title="deepqmc.wf.paulinet.CuspCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CuspCorrection</span></code></a></p></li>
@@ -1010,8 +997,6 @@ charge, and if any two cutoff spheres overlap, reduces the radii accordingly.</p
 <dl class="simple">
 <dt>Shape:</dt><dd><ul class="simple">
 <li><p>Input1, <span class="math">\((\mathbf r-\mathbf R_I)\)</span>: <span class="math">\((*,M,4)\)</span>, see <a class="reference internal" href="refs.html#dim4" id="id6"><span>[dim4]</span></a></p></li>
-<li><p>Input2, optional, <span class="math">\(\mathbf e(|\mathbf r-\mathbf R_I|)\)</span>:
-<span class="math">\((*,M,\dim(\mathbf e))\)</span></p></li>
 <li><p>Output, <span class="math">\(\varphi_\mu(\mathbf r)\)</span>: <span class="math">\((*,N_\text{orb})\)</span></p></li>
 </ul>
 </dd>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>deepqmc.wf.paulinet.molorb &#8212; DeepQMC 0.0.0 documentation</title>
+    <title>deepqmc.wf.paulinet.molorb &#8212; DeepQMC 0.3.0.post1.dev0+44a81ef documentation</title>
     <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
@@ -133,7 +133,7 @@
 <div class="viewcode-block" id="MolecularOrbital"><a class="viewcode-back" href="../../../../api.html#deepqmc.wf.paulinet.MolecularOrbital">[docs]</a><span class="k">class</span> <span class="nc">MolecularOrbital</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluates molecular orbitals from electron coordinates.</span>
 
-<span class="sd">    This module combines up to four submodules that sequentially transform</span>
+<span class="sd">    This module combines three submodules that sequentially transform</span>
 <span class="sd">    electron coordinates into molecular orbitals (MOs).</span>
 
 <span class="sd">    1. :class:`~deepqmc.wf.paulinet.GTOBasis` transforms</span>
@@ -146,13 +146,6 @@
 <span class="sd">           \varphi_\mu(\mathbf r):=\sum_p C_{p\mu}\xi_p(\mathbf r)</span>
 <span class="sd">    3. (optional) :class:`CuspCorrection` corrects</span>
 <span class="sd">       :math:`\varphi_\mu(\mathbf r)` to satisfy nuclear cusp conditions</span>
-<span class="sd">    4. (optional) Some trainable function :class:`torch.nn.Module`</span>
-<span class="sd">       updates the MOs using distance features</span>
-<span class="sd">       :math:`\mathbf e(|\mathbf r-\mathbf R_I|)`,</span>
-
-<span class="sd">       .. math::</span>
-<span class="sd">           \varphi_\mu(\mathbf r):=\boldsymbol\Phi_{\boldsymbol\theta}</span>
-<span class="sd">           (\varphi_\mu(\mathbf r), \{\mathbf e(|\mathbf r-\mathbf R_I|)\})</span>
 
 <span class="sd">    If (3) applies, this module also determines the cusp correction cutoff radii</span>
 <span class="sd">    as :math:`r_\text c:=q/Z`, where *q* is a global factor and *Z* is a nuclear</span>
@@ -162,18 +155,12 @@
 <span class="sd">        mol (:class:`~deepqmc.Molecule`): target molecule</span>
 <span class="sd">        basis (:class:`~deepqmc.wf.paulinet.GTOBasis`): basis functions</span>
 <span class="sd">        n_orbitals (int): :math:`N_\text{orb}`, number of molecular orbitals</span>
-<span class="sd">        net_factory (callable): factory,</span>
-<span class="sd">            :math:`(M,\dim(\mathbf e),N_\text{orb})`</span>
-<span class="sd">            :math:`\rightarrow\boldsymbol\Phi_{\boldsymbol\theta}`</span>
-<span class="sd">        dist_feat_dim (int): :math:`\dim(\mathbf e)`, number of distance features</span>
 <span class="sd">        cusp_correction (bool): whether the cusp correction should be applied</span>
 <span class="sd">        rc_scaling (float): *q*, global scaling for cusp correction cutoff radii</span>
 <span class="sd">        eps (float): numerical zero, passed to :class:`CuspCorrection`</span>
 
 <span class="sd">    Shape:</span>
 <span class="sd">        - Input1, :math:`(\mathbf r-\mathbf R_I)`: :math:`(*,M,4)`, see [dim4]_</span>
-<span class="sd">        - Input2, optional, :math:`\mathbf e(|\mathbf r-\mathbf R_I|)`:</span>
-<span class="sd">          :math:`(*,M,\dim(\mathbf e))`</span>
 <span class="sd">        - Output, :math:`\varphi_\mu(\mathbf r)`: :math:`(*,N_\text{orb})`</span>
 
 <span class="sd">    Attributes:</span>
