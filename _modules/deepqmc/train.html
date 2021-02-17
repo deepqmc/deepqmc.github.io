@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>deepqmc.train &#8212; DeepQMC 0.3.0.post6.dev0+2d1e859 documentation</title>
+    <title>deepqmc.train &#8212; DeepQMC 0.3.0.post7.dev0+34dfc04 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
@@ -291,11 +291,6 @@
         <span class="p">)</span>
         <span class="n">chkpts_dir</span> <span class="o">=</span> <span class="n">workdir</span> <span class="o">/</span> <span class="s1">&#39;chkpts&#39;</span>
         <span class="n">chkpts_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">workdir</span> <span class="o">/</span> <span class="s1">&#39;fit.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">libver</span><span class="o">=</span><span class="s1">&#39;v110&#39;</span><span class="p">)</span>
-        <span class="n">h5file</span><span class="o">.</span><span class="n">swmr_mode</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">table</span> <span class="o">=</span> <span class="n">H5LogTable</span><span class="p">(</span><span class="n">h5file</span><span class="p">)</span>
-        <span class="n">table</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">init_step</span><span class="p">)</span>
-        <span class="n">h5file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">log_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -321,6 +316,12 @@
         <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;training&#39;</span><span class="p">,</span>
         <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
+        <span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">workdir</span> <span class="o">/</span> <span class="s1">&#39;fit.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">libver</span><span class="o">=</span><span class="s1">&#39;v110&#39;</span><span class="p">)</span>
+        <span class="n">h5file</span><span class="o">.</span><span class="n">swmr_mode</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">H5LogTable</span><span class="p">(</span><span class="n">h5file</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">init_step</span><span class="p">)</span>
+        <span class="n">h5file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
     <span class="n">chkpts</span> <span class="o">=</span> <span class="n">chkpts</span> <span class="k">if</span> <span class="n">chkpts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
     <span class="n">last_log</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">try</span><span class="p">:</span>
