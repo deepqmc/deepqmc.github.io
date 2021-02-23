@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>deepqmc.train &#8212; DeepQMC 0.3.0.post8.dev0+8e6f186 documentation</title>
+    <title>deepqmc.train &#8212; DeepQMC 0.3.0.post11.dev0+4c9baba documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
@@ -225,7 +225,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">optimizer_kwargs</span> <span class="o">=</span> <span class="p">{</span>
             <span class="o">**</span><span class="n">OPTIMIZER_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="p">{}),</span>
-            <span class="o">**</span><span class="n">optimizer_kwargs</span><span class="p">[</span><span class="n">optimizer</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">optimizer_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="p">{}),</span>
         <span class="p">}</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="sa">f</span><span class="s1">&#39;Using </span><span class="si">{</span><span class="n">optimizer</span><span class="si">}</span><span class="s1"> optimizer, &#39;</span>
@@ -240,7 +240,7 @@
     <span class="k">elif</span> <span class="n">lr_scheduler</span><span class="p">:</span>
         <span class="n">scheduler_kwargs</span> <span class="o">=</span> <span class="p">{</span>
             <span class="o">**</span><span class="n">SCHEDULER_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">lr_scheduler</span><span class="p">,</span> <span class="p">{}),</span>
-            <span class="o">**</span><span class="n">lr_scheduler_kwargs</span><span class="p">[</span><span class="n">lr_scheduler</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">lr_scheduler_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">lr_scheduler</span><span class="p">,</span> <span class="p">{}),</span>
         <span class="p">}</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using </span><span class="si">{</span><span class="n">lr_scheduler</span><span class="si">}</span><span class="s1"> scheduler, params = </span><span class="si">{</span><span class="n">scheduler_kwargs</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lr_scheduler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">islower</span><span class="p">():</span>
