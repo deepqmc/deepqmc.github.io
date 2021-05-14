@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>deepqmc.fit &#8212; DeepQMC 0.3.0 documentation</title>
+    <title>deepqmc.fit &#8212; DeepQMC 0.3.0.post20.dev0+7fed46e documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
@@ -46,18 +46,6 @@
 
 
 
-
-
-    
-
-<p>
-<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
-    <img
-        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
-        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
-    />
-</a>
-</p>
 
 
 
@@ -114,7 +102,6 @@
             
   <h1>Source code for deepqmc.fit</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">nullcontext</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -199,7 +186,6 @@
     <span class="n">clip_outliers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">q</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="n">max_grad_norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">kfac</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit a wave function using the variational principle and gradient descent.</span>
 
@@ -251,26 +237,22 @@
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;estimated optimal subbatch size: </span><span class="si">{</span><span class="n">subbatch_size</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">log_psi0s</span><span class="p">,</span> <span class="n">sign_psi0s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">sampler</span><span class="p">):</span>
         <span class="n">rs_batch</span> <span class="o">=</span> <span class="n">rs</span>
-        <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
         <span class="n">subbatch_size</span> <span class="o">=</span> <span class="n">subbatch_size</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
         <span class="n">subbatches</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">rs</span><span class="p">,</span> <span class="n">log_psi0s</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">DataLoader</span><span class="p">(</span>
             <span class="n">TensorDataset</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">log_psi0s</span><span class="p">,</span> <span class="n">sign_psi0s</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">subbatch_size</span>
         <span class="p">):</span>
-            <span class="k">with</span> <span class="n">kfac</span><span class="o">.</span><span class="n">track_forward</span><span class="p">()</span> <span class="k">if</span> <span class="n">kfac</span> <span class="k">else</span> <span class="n">nullcontext</span><span class="p">():</span>
-                <span class="n">Es_loc</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span> <span class="o">=</span> <span class="n">local_energy</span><span class="p">(</span>
-                    <span class="n">rs</span><span class="p">,</span>
-                    <span class="n">wf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="kc">False</span><span class="p">),</span>
-                    <span class="n">create_graph</span><span class="o">=</span><span class="n">require_energy_gradient</span><span class="p">,</span>
-                    <span class="n">keep_graph</span><span class="o">=</span><span class="n">require_psi_gradient</span><span class="p">,</span>
-                <span class="p">)</span>
+            <span class="n">Es_loc</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">sign_psis</span> <span class="o">=</span> <span class="n">local_energy</span><span class="p">(</span>
+                <span class="n">rs</span><span class="p">,</span>
+                <span class="n">wf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="kc">False</span><span class="p">),</span>
+                <span class="n">create_graph</span><span class="o">=</span><span class="n">require_energy_gradient</span><span class="p">,</span>
+                <span class="n">keep_graph</span><span class="o">=</span><span class="n">require_psi_gradient</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="n">log_ws</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">log_psis</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">log_psi0s</span>
             <span class="n">Es_loc_loss</span> <span class="o">=</span> <span class="n">log_clipped_outliers</span><span class="p">(</span><span class="n">Es_loc</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="k">if</span> <span class="n">clip_outliers</span> <span class="k">else</span> <span class="n">Es_loc</span>
             <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">Es_loc_loss</span><span class="p">,</span> <span class="n">log_psis</span><span class="p">,</span> <span class="n">normalize_mean</span><span class="p">(</span><span class="n">log_ws</span><span class="o">.</span><span class="n">exp</span><span class="p">()))</span>
-            <span class="k">with</span> <span class="n">kfac</span><span class="o">.</span><span class="n">track_backward</span><span class="p">()</span> <span class="k">if</span> <span class="n">kfac</span> <span class="k">else</span> <span class="n">nullcontext</span><span class="p">():</span>
-                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">kfac</span><span class="p">:</span>
-                <span class="n">kfac</span><span class="o">.</span><span class="n">step_update</span><span class="p">(</span><span class="n">loss_func</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">subbatches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">(</span>
@@ -325,11 +307,6 @@
             <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;sign_psis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign_psis</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
             <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;log_ws&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_ws</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
             <span class="n">log_dict</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
-        <span class="k">if</span> <span class="n">kfac</span><span class="p">:</span>
-            <span class="n">kfac</span><span class="o">.</span><span class="n">step_precondition</span><span class="p">()</span>
-            <span class="n">fnorm</span><span class="p">,</span> <span class="n">gnorm</span> <span class="o">=</span> <span class="n">kfac</span><span class="o">.</span><span class="n">step_rescale</span><span class="p">()</span>
-            <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;kfac/KL&#39;</span><span class="p">,</span> <span class="n">fnorm</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-            <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;kfac/dE&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">gnorm</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
         <span class="k">yield</span> <span class="n">step</span><span class="p">,</span> <span class="n">ufloat</span><span class="p">(</span><span class="n">E_loc_mean</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">E_loc_err</span><span class="o">.</span><span class="n">item</span><span class="p">())</span></div>
 

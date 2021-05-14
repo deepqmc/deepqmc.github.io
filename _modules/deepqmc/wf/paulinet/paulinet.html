@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>deepqmc.wf.paulinet.paulinet &#8212; DeepQMC 0.3.0 documentation</title>
+    <title>deepqmc.wf.paulinet.paulinet &#8212; DeepQMC 0.3.0.post20.dev0+7fed46e documentation</title>
     <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
@@ -46,18 +46,6 @@
 
 
 
-
-
-    
-
-<p>
-<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
-    <img
-        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
-        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
-    />
-</a>
-</p>
 
 
 
@@ -438,12 +426,12 @@
         <span class="n">wf</span><span class="o">.</span><span class="n">mf</span> <span class="o">=</span> <span class="n">mf</span>
         <span class="k">return</span> <span class="n">wf</span></div>
 
-    <span class="k">def</span> <span class="nf">pop_chargse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">pop_charges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mf</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">pop_charges</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">mf</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">charges</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_backflow_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backflow_transform</span> <span class="o">==</span> <span class="s1">&#39;mult&#39;</span><span class="p">:</span>

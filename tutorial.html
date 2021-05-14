@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Tutorial &#8212; DeepQMC 0.3.0 documentation</title>
+    <title>Tutorial &#8212; DeepQMC 0.3.0.post20.dev0+7fed46e documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
@@ -48,18 +48,6 @@
 
 
 
-
-
-    
-
-<p>
-<a class="badge" href="https://travis-ci.org/deepqmc/deepqmc">
-    <img
-        alt="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
-        src="https://secure.travis-ci.org/deepqmc/deepqmc.svg?branch=master"
-    />
-</a>
-</p>
 
 
 
@@ -137,11 +125,11 @@
 </pre></div>
 </div>
 <p>Molecule can be also crated from scratch, by specifying the nuclear coordinates and charges, and the total charge and spin multiplicity:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>  <span class="c1"># H2+</span>
-    <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.058</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
-    <span class="n">charges</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="n">charge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">spin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>  <span class="c1"># LiH</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span>
+    <span class="n">charges</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -150,10 +138,10 @@
 <h2>Create a wave function ansatz<a class="headerlink" href="#create-a-wave-function-ansatz" title="Permalink to this headline">¶</a></h2>
 <p>All wave function ansatzes are available in the <a class="reference internal" href="api.html#module-deepqmc.wf" title="deepqmc.wf"><code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code></a> subpackage. At the moment, the only available ansatz is <a class="reference internal" href="api.html#deepqmc.wf.PauliNet" title="deepqmc.wf.PauliNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PauliNet</span></code></a>. The PauliNet class has three different constructors, differing in how low-level they are. The high-level <code class="xref py py-meth docutils literal notranslate"><span class="pre">PauliNet.from_hf()</span></code> constructor has default parameters for everything except for the molecule, and it runs the underlying multireference Hartree–Fock calculation which provides the orbitals on which the ansatz is built:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc.wf</span> <span class="kn">import</span> <span class="n">PauliNet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">PauliNet</span><span class="o">.</span><span class="n">from_hf</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cas</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">PauliNet</span><span class="o">.</span><span class="n">from_hf</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cas</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
 <span class="go">converged SCF energy = -7.9846409186467</span>
-<span class="go">CASSCF energy = -8.00439006914284</span>
-<span class="go">CASCI E = -8.00439006914284  E(CI) = -1.10200121173341  S^2 = 0.0000000</span>
+<span class="go">CASSCF energy = -8.00207829274895</span>
+<span class="go">CASCI E = -8.00207829274895  E(CI) = -1.09953139208267  S^2 = 0.0000000</span>
 </pre></div>
 </div>
 <p>All the parameters and their physical meaning are described in the <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> reference.</p>
