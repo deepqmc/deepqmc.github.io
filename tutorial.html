@@ -154,8 +154,11 @@
 <span class="go">training:   0%|▍       | 49/10000 [01:41&lt;5:43:40,  2.07s/it, E=-8.0378(27)]</span>
 </pre></div>
 </div>
-<p>The terminal output shows only how far has the training progressed and the current estimate of the energy. More detailed monitoring of the training goes is available via <a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a>. The training run creates a Tensorboard event file in the <cite>runs/</cite> directory, which can be observed from Tensorboard:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tensorboard --logdir runs/
+<p>The terminal output shows only how far has the training progressed and the current estimate of the energy. More detailed monitoring of the training goes is available via <a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a>. When <a class="reference internal" href="api.html#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> is called with an optional <code class="docutils literal notranslate"><span class="pre">workdir</span></code> argument, the training run creates a Tensorboard event file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s1">&#39;runs/01&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tensorboard --logdir runs/
 TensorFlow installation not found - running with reduced feature set.
 Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
 TensorBoard 2.1.0 at http://localhost:6007/ (Press CTRL+C to quit)
