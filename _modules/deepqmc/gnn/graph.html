@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>deepqmc.gnn.graph &#8212; DeepQMC 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/gnn/graph';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">DeepQMC 1.0.0 documentation</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../tutorial.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../cli.html">
+                        Command-line interface
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../refs.html">
+                        References
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../tutorial.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../cli.html">
+                        Command-line interface
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../refs.html">
+                        References
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for deepqmc.gnn.graph</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.tree_util</span> <span class="kn">import</span> <span class="n">tree_map</span><span class="p">,</span> <span class="n">tree_structure</span><span class="p">,</span> <span class="n">tree_transpose</span>
+
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">no_grad</span>
+
+<span class="n">GraphEdges</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;GraphEdges&#39;</span><span class="p">,</span> <span class="s1">&#39;senders receivers features&#39;</span><span class="p">)</span>
+<span class="n">GraphNodes</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;GraphNodes&#39;</span><span class="p">,</span> <span class="s1">&#39;nuclei electrons&#39;</span><span class="p">)</span>
+<span class="n">Graph</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Graph&#39;</span><span class="p">,</span> <span class="s1">&#39;nodes edges&#39;</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;GraphEdgeBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MolecularGraphEdgeBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GraphUpdate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;difference_callback&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">all_graph_edges</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos_receiver</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create all graph edges.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pos_sender (float, (:math:`N_\text{nodes}`, 3)): coordinates of graph</span>
+<span class="sd">            nodes that send edges.</span>
+<span class="sd">        pos_receiver (float, (:math:`M_\text{nodes}`, 3)): coordinates of graph</span>
+<span class="sd">            nodes that receive edges.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int, (:math:`N`, :math:`M`): matrix of node indeces, indicating</span>
+<span class="sd">        the receiver node of the :math:`N \cdot M` possible edges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">pos_receiver</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="n">pos_sender</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos_receiver</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">mask_self_edges</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mask the edges where sender and receiver nodes have the same index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        idx (int, (:math:`N_\text{nodes}`, :math:`N_\text{nodes}`)):</span>
+<span class="sd">            index of receiving nodes, assumed to be square since sets of sender</span>
+<span class="sd">            and receiver nodes should be identical.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int, (:math:`N_\text{nodes}`, :math:`N_\text{nodes}`): matrix of</span>
+<span class="sd">        receiving node indeces, the appropriate entries masked with</span>
+<span class="sd">        :math:`N_\text{nodes}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">self_mask</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+        <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">self_mask</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">idx</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">prune_graph_edges</span><span class="p">(</span>
+    <span class="n">pos_sender</span><span class="p">,</span>
+    <span class="n">pos_receiver</span><span class="p">,</span>
+    <span class="n">cutoff</span><span class="p">,</span>
+    <span class="n">idx</span><span class="p">,</span>
+    <span class="n">occupancy_limit</span><span class="p">,</span>
+    <span class="n">offsets</span><span class="p">,</span>
+    <span class="n">mask_vals</span><span class="p">,</span>
+    <span class="n">feature_callback</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Discards graph edges which have a distance larger than :data:`cutoff`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pos_sender (float, (:math:`N_{nodes}`, 3)): coordinates of graph nodes</span>
+<span class="sd">            that send edges.</span>
+<span class="sd">        pos_receiver (float, (:math:`M_{nodes}`, 3)): coordinates of graph nodes</span>
+<span class="sd">            that receive edges.</span>
+<span class="sd">        cutoff (float): cutoff distance above which edges are discarded.</span>
+<span class="sd">        idx (int, (:math:`N_\text{nodes}`, :math:`N_\text{nodes}`)): matrix of</span>
+<span class="sd">            receiving node indices as created by :func:`all_graph_edges`</span>
+<span class="sd">            (or :func:`mask_self_edges`).</span>
+<span class="sd">        occupancy_limit (int): the number of edges that can be considered</span>
+<span class="sd">            without overflow. The arrays describing the edges will have</span>
+<span class="sd">            a last dimension of size :data:`occupancy_limit`.</span>
+<span class="sd">        offsets ((int, int)): node index offset to be added to the returned</span>
+<span class="sd">            sender and receiver node indeces respectively.</span>
+<span class="sd">        mask_vals ((int, int)): if :data:`occupancy_limit` is larger than the number</span>
+<span class="sd">            of valid edges, the remaining node indices will be filled with these</span>
+<span class="sd">            values for the sender and receiver nodes respectively</span>
+<span class="sd">            (i.e. the value to pad the node index arrays with).</span>
+<span class="sd">        feature_callback (Callable): a function that takes the sender positions,</span>
+<span class="sd">            receiver positions, sender node indeces and receiver node indeces and</span>
+<span class="sd">            returns some data (features) computed for the edges.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ~jax.types.GraphEdges: object containing the indeces of the edge</span>
+<span class="sd">        sending and edge receiving nodes, along with the features associated</span>
+<span class="sd">        with the edges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">apply_callback</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos2</span><span class="p">,</span> <span class="n">sender_idx</span><span class="p">,</span> <span class="n">receiver_idx</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Apply the feature_callback function, or return no features.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">feature_callback</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos2</span><span class="p">,</span> <span class="n">sender_idx</span><span class="p">,</span> <span class="n">receiver_idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">feature_callback</span>
+            <span class="k">else</span> <span class="p">{}</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pos_sender</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">pos_receiver</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ones</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">occupancy_limit</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">sender_idx</span> <span class="o">=</span> <span class="n">offsets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="n">receiver_idx</span> <span class="o">=</span> <span class="n">offsets</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">GraphEdges</span><span class="p">(</span>
+                <span class="n">sender_idx</span><span class="p">,</span>
+                <span class="n">receiver_idx</span><span class="p">,</span>
+                <span class="n">apply_callback</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos_receiver</span><span class="p">,</span> <span class="n">sender_idx</span><span class="p">,</span> <span class="n">receiver_idx</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="nd">@no_grad</span>
+    <span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">receiver</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute pairwise distances between inputs.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">receiver</span> <span class="o">-</span> <span class="n">sender</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">N_sender</span><span class="p">,</span> <span class="n">N_receiver</span> <span class="o">=</span> <span class="n">pos_sender</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos_receiver</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sender_idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_sender</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">idx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">sender_idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">sender_idx</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="n">receiver_idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">[</span><span class="n">sender_idx</span><span class="p">],</span> <span class="n">pos_receiver</span><span class="p">[</span><span class="n">receiver_idx</span><span class="p">])</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">distances</span> <span class="o">&lt;</span> <span class="n">cutoff</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">receiver_idx</span> <span class="o">&lt;</span> <span class="n">N_receiver</span><span class="p">)</span>
+    <span class="n">cumsum</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+    <span class="n">occupancy</span> <span class="o">=</span> <span class="n">cumsum</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># edge buffer is one larger than occupancy_limit:</span>
+    <span class="c1"># masked edges assigned to last position and discarded</span>
+    <span class="n">out_sender_idx</span><span class="p">,</span> <span class="n">out_receiver_idx</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">mask_val</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">occupancy_limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mask_val</span><span class="p">,</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mask_vals</span><span class="p">,</span> <span class="n">offsets</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cumsum</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">occupancy_limit</span><span class="p">)</span>
+
+    <span class="n">sender_idx</span> <span class="o">=</span> <span class="n">out_sender_idx</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">sender_idx</span><span class="p">)[:</span><span class="n">occupancy_limit</span><span class="p">]</span>
+    <span class="n">receiver_idx</span> <span class="o">=</span> <span class="n">out_receiver_idx</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">receiver_idx</span><span class="p">)[:</span><span class="n">occupancy_limit</span><span class="p">]</span>
+
+    <span class="n">features</span> <span class="o">=</span> <span class="n">apply_callback</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos_receiver</span><span class="p">,</span> <span class="n">sender_idx</span><span class="p">,</span> <span class="n">receiver_idx</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GraphEdges</span><span class="p">(</span><span class="n">sender_idx</span> <span class="o">+</span> <span class="n">offsets</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">receiver_idx</span> <span class="o">+</span> <span class="n">offsets</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">features</span><span class="p">),</span>
+        <span class="n">occupancy</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="difference_callback"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.graph.difference_callback">[docs]</a><span class="k">def</span> <span class="nf">difference_callback</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos_receiver</span><span class="p">,</span> <span class="n">sender_idx</span><span class="p">,</span> <span class="n">receiver_idx</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;feature_callback computing the Euclidian difference vector for each edge.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_receiver</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">sender_idx</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">pos_receiver</span><span class="p">[</span><span class="n">receiver_idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos_sender</span><span class="p">[</span><span class="n">sender_idx</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">diffs</span></div>
+
+
+<div class="viewcode-block" id="GraphEdgeBuilder"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.graph.GraphEdgeBuilder">[docs]</a><span class="k">def</span> <span class="nf">GraphEdgeBuilder</span><span class="p">(</span>
+    <span class="n">cutoff</span><span class="p">,</span>
+    <span class="n">mask_self</span><span class="p">,</span>
+    <span class="n">offsets</span><span class="p">,</span>
+    <span class="n">mask_vals</span><span class="p">,</span>
+    <span class="n">feature_callback</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a function that builds graph edges.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cutoff (float): the cutoff distance above which edges are discarded.</span>
+<span class="sd">        mask_self (bool): whether to mask edges between nodes of the same index.</span>
+<span class="sd">        offsets ((int, int)): node index offset to be added to the returned</span>
+<span class="sd">            sender and receiver node indeces respectively.</span>
+<span class="sd">        mask_vals ((int, int)): if ``occupancy_limit`` is larger than the number</span>
+<span class="sd">            of valid edges, the remaining node indices will be filled with these</span>
+<span class="sd">            values for the sender and receiver nodes respectively</span>
+<span class="sd">            (i.e. the value to pad the node index arrays with).</span>
+<span class="sd">        feature_callback (Callable): a function that takes the sender positions,</span>
+<span class="sd">            receiver positions, sender node indeces and receiver node indeces and</span>
+<span class="sd">            returns some data (features) computed for the edges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos_receiver</span><span class="p">,</span> <span class="n">occupancies</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build graph edges.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pos_sender (float, (:math:`N_{nodes}`, 3)): coordinates of graph nodes</span>
+<span class="sd">                that send edges.</span>
+<span class="sd">            pos_receiver (float, (:math:`M_{nodes}`, 3)): coordinates of graph nodes</span>
+<span class="sd">                that receive edges.</span>
+<span class="sd">            occupancies (int, (:data:`occupancy_limit`)): array to store</span>
+<span class="sd">                occupancies in.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: a tuple containing the graph edges, the input occupancies</span>
+<span class="sd">            updated with the current occupancy, and the number of stored</span>
+<span class="sd">            occupancies.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">pos_sender</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">pos_receiver</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sender</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">mask_self</span> <span class="ow">or</span> <span class="n">pos_sender</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">pos_receiver</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">occupancy_limit</span> <span class="o">=</span> <span class="n">occupancies</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">edges_idx</span> <span class="o">=</span> <span class="n">all_graph_edges</span><span class="p">(</span><span class="n">pos_sender</span><span class="p">,</span> <span class="n">pos_receiver</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mask_self</span><span class="p">:</span>
+            <span class="n">edges_idx</span> <span class="o">=</span> <span class="n">mask_self_edges</span><span class="p">(</span><span class="n">edges_idx</span><span class="p">)</span>
+        <span class="n">edges</span><span class="p">,</span> <span class="n">occupancy</span> <span class="o">=</span> <span class="n">prune_graph_edges</span><span class="p">(</span>
+            <span class="n">pos_sender</span><span class="p">,</span>
+            <span class="n">pos_receiver</span><span class="p">,</span>
+            <span class="n">cutoff</span><span class="p">,</span>
+            <span class="n">edges_idx</span><span class="p">,</span>
+            <span class="n">occupancy_limit</span><span class="p">,</span>
+            <span class="n">offsets</span><span class="p">,</span>
+            <span class="n">mask_vals</span><span class="p">,</span>
+            <span class="n">feature_callback</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">edges</span><span class="p">,</span>
+            <span class="n">occupancies</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">occupancies</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">occupancy</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">build</span></div>
+
+
+<span class="k">def</span> <span class="nf">concatenate_edges</span><span class="p">(</span><span class="n">edges_and_occs</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Concatenate two edge lists.</span>
+
+<span class="sd">    Utility function used only internally, e.g. to concatenate ``uu`` and ``dd``</span>
+<span class="sd">    edges to get all ``same`` edges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">edge_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge_occ</span> <span class="ow">in</span> <span class="n">edges_and_occs</span><span class="p">]</span>
+    <span class="n">occupancies</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">edge_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge_occ</span> <span class="ow">in</span> <span class="n">edges_and_occs</span><span class="p">)</span>
+    <span class="n">edge_of_lists</span> <span class="o">=</span> <span class="n">tree_transpose</span><span class="p">(</span>
+        <span class="n">tree_structure</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)),</span> <span class="n">tree_structure</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">edges</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">tree_map</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">,</span> <span class="n">edge_of_lists</span><span class="p">,</span> <span class="n">is_leaf</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)),</span>
+        <span class="n">occupancies</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="MolecularGraphEdgeBuilder"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.graph.MolecularGraphEdgeBuilder">[docs]</a><span class="k">def</span> <span class="nf">MolecularGraphEdgeBuilder</span><span class="p">(</span>
+    <span class="n">n_nuc</span><span class="p">,</span> <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">,</span> <span class="n">nuc_coords</span><span class="p">,</span> <span class="n">edge_types</span><span class="p">,</span> <span class="n">kwargs_by_edge_type</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a function that builds many types of molecular edges.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_nuc (int): number of nuclei.</span>
+<span class="sd">        n_up (int): number of spin-up electrons.</span>
+<span class="sd">        n_down (int): number of spin-down electrons.</span>
+<span class="sd">        nuc_coords (float, (:math:`N_\text{nuc}`, 3)): coordinates of nuclei.</span>
+<span class="sd">        edge_types (List[str]): list of edge type names to build. Possible names are:</span>
+
+<span class="sd">                - ``&#39;nn&#39;``: nuclei-&gt;nuclei edges</span>
+<span class="sd">                - ``&#39;ne&#39;``: nuclei-&gt;electrons edges</span>
+<span class="sd">                - ``&#39;en&#39;``: electrons-&gt;nuclei edges</span>
+<span class="sd">                - ``&#39;same&#39;``: edges betwen same-spin electrons</span>
+<span class="sd">                - ``&#39;anti&#39;``: edges betwen opposite-spin electrons</span>
+<span class="sd">        kwargs_by_edge_type (dict): a mapping from names of edge types to the</span>
+<span class="sd">            kwargs to be passed to the :class:`GraphEdgeBuilder` of that edge type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_elec</span> <span class="o">=</span> <span class="n">n_up</span> <span class="o">+</span> <span class="n">n_down</span>
+    <span class="n">builder_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;nn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;nn&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;ne&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ne&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;same&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;uu&#39;</span><span class="p">,</span> <span class="s1">&#39;dd&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;anti&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ud&#39;</span><span class="p">,</span> <span class="s1">&#39;du&#39;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="n">fix_kwargs_of_builder_type</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;nn&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_nuc</span><span class="p">,</span> <span class="n">n_nuc</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;ne&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_nuc</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_elec</span><span class="p">,</span> <span class="n">n_nuc</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;uu&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_elec</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">)},</span>
+        <span class="s1">&#39;dd&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_up</span><span class="p">,</span> <span class="n">n_up</span><span class="p">),</span>
+            <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_elec</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;ud&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_elec</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">),</span>
+            <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_up</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;du&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;mask_self&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;mask_vals&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_elec</span><span class="p">,</span> <span class="n">n_elec</span><span class="p">),</span>
+            <span class="s1">&#39;offsets&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_up</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="n">builders</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">builder_type</span><span class="p">:</span> <span class="n">GraphEdgeBuilder</span><span class="p">(</span>
+            <span class="o">**</span><span class="p">((</span><span class="n">kwargs_by_edge_type</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edge_type</span><span class="p">)),</span>
+            <span class="o">**</span><span class="n">fix_kwargs_of_builder_type</span><span class="p">[</span><span class="n">builder_type</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">edge_type</span> <span class="ow">in</span> <span class="n">edge_types</span>
+        <span class="k">for</span> <span class="n">builder_type</span> <span class="ow">in</span> <span class="n">builder_mapping</span><span class="p">[</span><span class="n">edge_type</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">build_same</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">occs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">concatenate_edges</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;uu&#39;</span><span class="p">](</span><span class="n">r</span><span class="p">[:</span><span class="n">n_up</span><span class="p">],</span> <span class="n">r</span><span class="p">[:</span><span class="n">n_up</span><span class="p">],</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;same&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;dd&#39;</span><span class="p">](</span><span class="n">r</span><span class="p">[</span><span class="n">n_up</span><span class="p">:],</span> <span class="n">r</span><span class="p">[</span><span class="n">n_up</span><span class="p">:],</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;same&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build_anti</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">occs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">concatenate_edges</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;ud&#39;</span><span class="p">](</span><span class="n">r</span><span class="p">[:</span><span class="n">n_up</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="n">n_up</span><span class="p">:],</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;anti&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;du&#39;</span><span class="p">](</span><span class="n">r</span><span class="p">[</span><span class="n">n_up</span><span class="p">:],</span> <span class="n">r</span><span class="p">[:</span><span class="n">n_up</span><span class="p">],</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;anti&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="n">build_rules</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;nn&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">,</span> <span class="n">occs</span><span class="p">:</span> <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;nn&#39;</span><span class="p">](</span><span class="n">nuc_coords</span><span class="p">,</span> <span class="n">nuc_coords</span><span class="p">,</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;nn&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;ne&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">,</span> <span class="n">occs</span><span class="p">:</span> <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;ne&#39;</span><span class="p">](</span><span class="n">nuc_coords</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;ne&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">,</span> <span class="n">occs</span><span class="p">:</span> <span class="n">builders</span><span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">](</span><span class="n">r</span><span class="p">,</span> <span class="n">nuc_coords</span><span class="p">,</span> <span class="n">occs</span><span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;same&#39;</span><span class="p">:</span> <span class="n">build_same</span><span class="p">,</span>
+        <span class="s1">&#39;anti&#39;</span><span class="p">:</span> <span class="n">build_anti</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">occupancies</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build many types of molecular graph edges.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            r (float (:math:`N_\text{elec}`, 3)): electron coordinates.</span>
+<span class="sd">            occupancies (dict): mapping of edge type names to arrays where the occupancy</span>
+<span class="sd">                of the given edge type is stored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_up</span> <span class="o">+</span> <span class="n">n_down</span>
+
+        <span class="n">edges_and_occs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">edge_type</span><span class="p">:</span> <span class="n">build_rules</span><span class="p">[</span><span class="n">edge_type</span><span class="p">](</span><span class="n">r</span><span class="p">,</span> <span class="n">occupancies</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">edge_type</span> <span class="ow">in</span> <span class="n">edge_types</span>
+        <span class="p">}</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">edge_and_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">edge_and_occ</span> <span class="ow">in</span> <span class="n">edges_and_occs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">occupancies</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">edge_and_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">edge_and_occ</span> <span class="ow">in</span> <span class="n">edges_and_occs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">return</span> <span class="n">edges</span><span class="p">,</span> <span class="n">occupancies</span>
+
+    <span class="k">return</span> <span class="n">build</span></div>
+
+
+<div class="viewcode-block" id="GraphUpdate"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.graph.GraphUpdate">[docs]</a><span class="k">def</span> <span class="nf">GraphUpdate</span><span class="p">(</span>
+    <span class="n">aggregate_edges_for_nodes_fn</span><span class="p">,</span>
+    <span class="n">update_nodes_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">update_edges_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a function that updates a graph.</span>
+
+<span class="sd">    The update function is tailored to be used in GNNs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        aggregate_edges_for_nodes_fn (bool): whether to perform the aggregation</span>
+<span class="sd">            of edges for nodes.</span>
+<span class="sd">        update_nodes_fn (Callable): optional, function that updates the nodes.</span>
+<span class="sd">        update_edges_fn (Callable): optional, function that updates the edges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">update_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">graph</span>
+
+        <span class="k">if</span> <span class="n">update_edges_fn</span><span class="p">:</span>
+            <span class="n">edges</span> <span class="o">=</span> <span class="n">update_edges_fn</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">update_nodes_fn</span><span class="p">:</span>
+            <span class="n">aggregated_edges</span> <span class="o">=</span> <span class="n">aggregate_edges_for_nodes_fn</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="n">update_nodes_fn</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">aggregated_edges</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Graph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">update_graph</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2019-2022, Frank Noé and collaborators.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="theme-version">
+    Built with the
+    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
+        PyData Sphinx Theme
+    </a>
+    0.12.0.
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

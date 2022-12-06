@@ -1,304 +1,567 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Command-line interface &#8212; DeepQMC 0.3.0.post20.dev0+7fed46e documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Command-line interface &#8212; DeepQMC 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
     <script src="_static/katex_autorenderer.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cli';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
     <link rel="prev" title="Tutorial" href="tutorial.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
-  </head><body>
-  <div class="document">
-    
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">DeepQMC</a></h1>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
 
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
 
-<p class="blurb">Deep-learning quantum Monte Carlo for electrons in real space</p>
-
-
-
-
-<p>
-<iframe src="https://ghbtns.com/github-btn.html?user=deepqmc&repo=deepqmc&type=watch&count=true&size=large&v=2"
-  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
-</p>
-
-
-
-
-
-
-
-    
-
-<p>
-<a class="badge" href="https://codecov.io/github/deepqmc/deepqmc">
-    <img
-    alt="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
-    src="https://codecov.io/github/deepqmc/deepqmc/coverage.svg?branch=master"
-    />
-</a>
-</p>
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-line interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hyperparameters">Hyperparameters</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="refs.html">References</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="tutorial.html" title="previous chapter">Tutorial</a></li>
-      <li>Next: <a href="api.html" title="next chapter">API</a></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">DeepQMC 1.0.0 documentation</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorial.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Command-line interface
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="refs.html">
+                        References
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
       </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
           
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
 
-          <div class="body" role="main">
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorial.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Command-line interface
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="refs.html">
+                        References
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameters">
+   Hyperparameters
+  </a>
+ </li>
+</ul>
+
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
             
-  <div class="section" id="command-line-interface">
-<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h1>
-<p>This section describes the command-line interface (CLI) to DeepQMC.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Usage: deepqmc [OPTIONS] COMMAND [ARGS]...
-
-  DeepQMC runs quantum Monte Carlo with deep neural networks.
-
-Options:
-  -v, --verbose  Increase verbosity.
-  -q, --quiet    Suppres all output.
-  --help         Show this message and exit.
-
-Commands:
-  defaults  Print all hyperparameters and their default values.
-  evaluate  Estimate total energy of an ansatz via Monte Carlo sampling.
-  train     Train an ansatz with variational quantum Monte Carlo.
-</pre></div>
-</div>
-<p>The CLI mirrors the package <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> in a 1-to-1 correspondence, and as such the two main entry points are the <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> commands, which are just thin wrappers around the <a class="reference internal" href="api.html#deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> and <a class="reference internal" href="api.html#deepqmc.evaluate" title="deepqmc.evaluate"><code class="xref py py-func docutils literal notranslate"><span class="pre">evaluate()</span></code></a> functions.</p>
-<p>The usage of all the commands can be obtained with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deepqmc</span> <span class="n">COMMAND</span> <span class="o">--</span><span class="n">help</span>
-</pre></div>
-</div>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>Create a working directory with the <code class="docutils literal notranslate"><span class="pre">param.toml</span></code> file, which specifies all calculation hyperparameters, see <a class="reference internal" href="#hyperparameters"><span class="std std-ref">below</span></a> for details:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat lih/param.toml
-system = &#39;LiH&#39;
-ansatz = &#39;paulinet&#39;
-</pre></div>
-</div>
-<p>Train the wave function ansatz:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc train lih --save-every 20
-converged SCF energy = -7.9846409186467
-equilibrating: 49it [00:07,  6.62it/s]
-training:   0%|  | 46/10000 [01:37&lt;5:50:59,  2.12s/it, E=-8.0371(24)]
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="command-line-interface">
+<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading">#</a></h1>
+<p>This section describes the <a class="reference external" href="https://hydra.cc/">hydra</a> based command-line interface (CLI) to DeepQMC. The tutorial exemplifies a basic training and evaluation through the command line. For more advanced functionality such as multiruns or interaction with slurm see the <a class="reference external" href="https://hydra.cc/docs/intro/">hydra docs</a>.</p>
+<p>The CLI provides simple access to the functionalities of the <a class="reference internal" href="api.html#module-deepqmc" title="deepqmc"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepqmc</span></code></a> package. The main tasks comprise <code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">restart</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code>, which are thin wrappers around the <a class="reference internal" href="api.html#module-deepqmc.train"><span class="std std-ref">train</span></a> function.</p>
+<blockquote>
+<div><p>Available tasks:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">train</span></code>:      Trains the ansatz with variational Monte Carlo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate</span></code>:   Evaluates the total energy of an ansatz via Monte Carlo sampling.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restart</span></code>:    Restarts/continues the training from a stored training checkpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">defaults</span></code>:   Collects the default hyperparameters for the main DeepQMC functions.</p></li>
+</ul>
+</div></blockquote>
+<p>The train function creates a directory which contains the logs as well as the hyperparameters for the training (<code class="docutils literal notranslate"><span class="pre">.hydra</span></code>). For <code class="docutils literal notranslate"><span class="pre">restart</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> the restdir of the former training run has to be provided. Specifying arguments when executing the command will overwrite the configuration stored in the restdir. This enables changing certain parameters, such as the number of training / evaluation steps, but can result in errors if the requested hyperparameters conflict with the recovered train state.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>A training can be run via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc hydra.run.dir=workdir hamil.mol.name=LiH
 </pre></div>
 </div>
 <p>This creates several files in the working directory, including:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">events.out.tfevents.*</span></code>: Tensorboard event file</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fit.h5</span></code>: HDF5 file with the training trajectory</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chkpts/state-*.pt</span></code>: Checkpoint files with the saved state of the ansatz at particular steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train/events.out.tfevents.*</span></code> - Tensorboard event file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train/result.h5</span></code> - HDF5 file with the training trajectory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train/state-*.pt</span></code> - Checkpoint files with the saved state of the ansatz at particular steps</p></li>
 </ul>
-<p>Create a file <code class="docutils literal notranslate"><span class="pre">state.pt</span></code> in the working directory, with the state of the ansatz that should be evaluated, for example by creating a symbolic link:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ln -s chkpts/state-00040.pt lih/state.pt
+<p>The training can be continued or recoverd from a training checkpoint:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=restart task.restdir=workdir
 </pre></div>
 </div>
-<p>Evaluate the ansatz to get an estimate of the total energy:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc evaluate lih
-evaluating:  24%|▋  | 136/565 [01:12&lt;03:40,  1.65it/s, E=-8.0396(17)]
+<p>The evaluation of the energy of a trained wavefunction ansatz is obtained via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=evaluate task.restdir=workdir
 </pre></div>
 </div>
-<p>Similar to the <code class="docutils literal notranslate"><span class="pre">train</span></code> command, this creates a <code class="docutils literal notranslate"><span class="pre">sample.h5</span></code> file with the sampled local energies in the working directory.</p>
-</div>
-<div class="section" id="hyperparameters">
-<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this headline">¶</a></h2>
-<p>The CLI supports specification of hyperparameters via the <code class="docutils literal notranslate"><span class="pre">param.toml</span></code> file, placed in <code class="docutils literal notranslate"><span class="pre">WORKDIR</span></code>, which is passed to the individual commands. The structure of this file is derived from the <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a>. All hyperparameters and their default values can be printed in the TOML format with the <code class="docutils literal notranslate"><span class="pre">defaults</span></code> command. For convenience, they are reproduced here:</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[train_kwargs]</span>
-<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">epoch_size</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="s">&quot;AdamW&quot;</span>
-<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">lr_scheduler</span> <span class="o">=</span> <span class="s">&quot;CyclicLR&quot;</span>
-<span class="n">equilibrate</span> <span class="o">=</span> <span class="kc">true</span>
-
-<span class="k">[train_kwargs.optimizer_kwargs]</span>
-<span class="k">[train_kwargs.optimizer_kwargs.Adam]</span>
-<span class="n">betas</span> <span class="o">=</span> <span class="k">[0.9, 0.9]</span>
-
-<span class="k">[train_kwargs.optimizer_kwargs.AdamW]</span>
-<span class="n">betas</span> <span class="o">=</span> <span class="k">[0.9, 0.9]</span>
-<span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">0.01</span>
-
-<span class="k">[train_kwargs.lr_scheduler_kwargs]</span>
-<span class="k">[train_kwargs.lr_scheduler_kwargs.CyclicLR]</span>
-<span class="n">base_lr</span> <span class="o">=</span> <span class="mf">0.0001</span>
-<span class="n">max_lr</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">step_size_up</span> <span class="o">=</span> <span class="mi">250</span>
-<span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;triangular2&quot;</span>
-<span class="n">cycle_momentum</span> <span class="o">=</span> <span class="kc">false</span>
-
-<span class="k">[train_kwargs.lr_scheduler_kwargs.OneCycleLR]</span>
-<span class="n">max_lr</span> <span class="o">=</span> <span class="mf">0.005</span>
-<span class="n">total_steps</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="n">pct_start</span> <span class="o">=</span> <span class="mf">0.075</span>
-<span class="n">anneal_strategy</span> <span class="o">=</span> <span class="s">&quot;linear&quot;</span>
-
-<span class="k">[train_kwargs.lr_scheduler_kwargs.inverse]</span>
-<span class="n">decay_rate</span> <span class="o">=</span> <span class="mi">200</span>
-
-<span class="k">[train_kwargs.lr_scheduler_kwargs.scan]</span>
-<span class="n">eq_steps</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">start</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">rate</span> <span class="o">=</span> <span class="mf">1.05</span>
-
-<span class="k">[train_kwargs.fit_kwargs]</span>
-<span class="n">clip_outliers</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="c1">#: max_grad_norm = ...</span>
-<span class="c1">#: kfac = ...</span>
-
-<span class="k">[train_kwargs.sampler_kwargs]</span>
-<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">2000</span>
-<span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">n_first_certain</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">target_acceptance</span> <span class="o">=</span> <span class="mf">0.57</span>
-<span class="n">n_discard</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="n">n_decorrelate</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="c1">#: max_age = ...</span>
-<span class="c1">#: log_psi_threshold = ...</span>
-
-<span class="k">[evaluate_kwargs]</span>
-<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">1000</span>
-
-<span class="k">[evaluate_kwargs.sample_kwargs]</span>
-<span class="n">block_size</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">equilibrate</span> <span class="o">=</span> <span class="kc">true</span>
-
-<span class="k">[evaluate_kwargs.sampler_kwargs]</span>
-<span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">n_first_certain</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">target_acceptance</span> <span class="o">=</span> <span class="mf">0.57</span>
-<span class="n">n_decorrelate</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="c1">#: max_age = ...</span>
-<span class="c1">#: log_psi_threshold = ...</span>
-
-<span class="k">[paulinet_kwargs]</span>
-<span class="n">basis</span> <span class="o">=</span> <span class="s">&quot;6-311g&quot;</span>
-<span class="c1">#: cas = ...</span>
-<span class="c1">#: workdir = ...</span>
-<span class="n">init_weights</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">freeze_mos</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">freeze_confs</span> <span class="o">=</span> <span class="kc">false</span>
-<span class="n">conf_cutoff</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="c1">#: conf_limit = ...</span>
-<span class="n">cusp_correction</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">cusp_electrons</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">dist_feat_dim</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">dist_feat_cutoff</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="n">backflow_type</span> <span class="o">=</span> <span class="s">&quot;orbital&quot;</span>
-<span class="n">backflow_channels</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">backflow_transform</span> <span class="o">=</span> <span class="s">&quot;mult&quot;</span>
-<span class="n">rc_scaling</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">cusp_alpha</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="n">freeze_embed</span> <span class="o">=</span> <span class="kc">false</span>
-
-<span class="k">[paulinet_kwargs.omni_kwargs]</span>
-<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">with_jastrow</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">n_jastrow_layers</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">with_backflow</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">n_backflow_layers</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">with_r_backflow</span> <span class="o">=</span> <span class="kc">false</span>
-
-<span class="k">[paulinet_kwargs.omni_kwargs.schnet_kwargs]</span>
-<span class="n">n_interactions</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">kernel_dim</span> <span class="o">=</span> <span class="mi">64</span>
-<span class="n">version</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">layer_norm</span> <span class="o">=</span> <span class="kc">false</span>
-
-<span class="k">[paulinet_kwargs.omni_kwargs.subnet_kwargs]</span>
-<span class="n">n_layers_w</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">n_layers_h</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">n_layers_g</span> <span class="o">=</span> <span class="mi">1</span>
+<p>This again generates a Tensorboard event file and a <code class="docutils literal notranslate"><span class="pre">sample.h5</span></code> file holding the sampled local energies.</p>
+</section>
+<section id="hyperparameters">
+<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h2>
+<p>A list of the most relevant hyperparameters and their default values can be obtained with the <code class="docutils literal notranslate"><span class="pre">task=defaults</span></code> argument. The defaults are automatically colleceted from the main deepqmc components and logged in YAML format. For convenience, they are reproduced here:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MolecularHamiltonian</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">mol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="nt">Molecule</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">coords</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">charges</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">spin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bohr</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="nt">train</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sample_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">  </span><span class="nt">max_restarts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
+<span class="w">  </span><span class="nt">max_eq_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pretrain_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pretrain_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">    </span><span class="nt">sample_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="w">    </span><span class="nt">baseline_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6-31G</span><span class="w"></span>
+<span class="w">      </span><span class="nt">cas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="w">  </span><span class="nt">opt_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">adam</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span><span class="w"></span>
+<span class="w">      </span><span class="nt">b1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span><span class="w"></span>
+<span class="w">      </span><span class="nt">b2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span><span class="w"></span>
+<span class="w">    </span><span class="nt">adamw</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span><span class="w"></span>
+<span class="w">      </span><span class="nt">b1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span><span class="w"></span>
+<span class="w">      </span><span class="nt">b2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span><span class="w"></span>
+<span class="w">    </span><span class="nt">kfac</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">learning_rate_schedule</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/name:deepqmc.utils.%3Clambda%3E</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">damping_schedule</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/name:deepqmc.utils.%3Clambda%3E</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">norm_constraint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fit_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">clip_width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">exclude_width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.inf</span><span class="w"></span>
+<span class="w">    </span><span class="nt">clip_quantile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.95</span><span class="w"></span>
+<span class="w">  </span><span class="nt">chkpts_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
+<span class="w">    </span><span class="nt">min_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"></span>
+<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.95</span><span class="w"></span>
+<span class="nt">MetropolisSampler</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tau</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">target_acceptance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.57</span><span class="w"></span>
+<span class="w">  </span><span class="nt">max_age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="nt">DecorrSampler</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">???</span><span class="w"></span>
+<span class="nt">ResampledSampler</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="w">  </span><span class="nt">treshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="nt">PauliNet</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">full_determinant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cusp_electrons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cusp_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">backflow_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orbital</span><span class="w"></span>
+<span class="w">  </span><span class="nt">backflow_channels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">  </span><span class="nt">backflow_transform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mult</span><span class="w"></span>
+<span class="w">  </span><span class="nt">omni_factory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+<span class="w">  </span><span class="nt">omni_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">embedding_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128</span><span class="w"></span>
+<span class="w">    </span><span class="nt">gnn_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">cutoff</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span><span class="w"></span>
+<span class="w">      </span><span class="nt">n_interactions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
+<span class="w">      </span><span class="nt">kernel_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">64</span><span class="w"></span>
+<span class="w">      </span><span class="nt">fix_init_emb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">    </span><span class="nt">jastrow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="nt">jastrow_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">n_layers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
+<span class="w">      </span><span class="nt">sum_first</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Jastrow</span><span class="w"></span>
+<span class="w">    </span><span class="nt">backflow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="nt">backflow_kwargs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">n_layers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backflow</span><span class="w"></span>
+<span class="w">      </span><span class="nt">param_scaling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">mo_scaling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="tutorial.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Tutorial</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">API</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
           </div>
           
+          
+          
+          
         </div>
-      </div>
-    <div class="clearer"></div>
-  </div>
-    <div class="footer">
-      &copy;2019-2021, Frank Noé and collaborators.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/cli.rst.txt"
-          rel="nofollow">Page source</a>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
     </div>
+  </div>
 
+  
     
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
     
+<p class="copyright">
+
+    &copy; Copyright 2019-2022, Frank Noé and collaborators.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="theme-version">
+    Built with the
+    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
+        PyData Sphinx Theme
+    </a>
+    0.12.0.
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="tocsection sourcelink">
+    <a href="_sources/cli.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+  </div>
+  
+</div>
+  </footer>
   </body>
 </html>
