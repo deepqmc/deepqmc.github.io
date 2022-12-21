@@ -374,9 +374,9 @@
 </div>
 <p>This creates several files in the working directory, including:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">train/events.out.tfevents.*</span></code> - Tensorboard event file</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">train/result.h5</span></code> - HDF5 file with the training trajectory</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">train/state-*.pt</span></code> - Checkpoint files with the saved state of the ansatz at particular steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training/events.out.tfevents.*</span></code> - Tensorboard event file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training/result.h5</span></code> - HDF5 file with the training trajectory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training/state-*.pt</span></code> - Checkpoint files with the saved state of the ansatz at particular steps</p></li>
 </ul>
 <p>The training can be continued or recoverd from a training checkpoint:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=restart task.restdir=workdir
@@ -386,7 +386,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=evaluate task.restdir=workdir
 </pre></div>
 </div>
-<p>This again generates a Tensorboard event file and a <code class="docutils literal notranslate"><span class="pre">sample.h5</span></code> file holding the sampled local energies.</p>
+<p>This again generates a Tensorboard event file <code class="docutils literal notranslate"><span class="pre">evaluation\events.out.tfevents.*</span></code> and an HDF5 file <code class="docutils literal notranslate"><span class="pre">evaluation\result.h5</span></code> file holding the sampled local energies.</p>
 </section>
 <section id="hyperparameters">
 <span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h2>
