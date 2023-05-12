@@ -1,7 +1,10 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,23 +18,23 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
-<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -45,78 +48,87 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/train';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="docsearch:language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
-
   
-  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
   <label class="overlay overlay-primary" for="__primary"></label>
-
   
-  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
   <label class="overlay overlay-secondary" for="__secondary"></label>
-
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
-      
-<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-    </div>
+</form></div>
   </div>
-
   
-  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
   <label class="sidebar-toggle primary-toggle" for="__primary">
-      <span class="fa-solid fa-bars"></span>
+    <span class="fa-solid fa-bars"></span>
   </label>
-  <div id="navbar-start">
-    
-    
   
-
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
 
 <a class="navbar-brand logo" href="../../index.html">
-
   
   
   
-  
-  
-  
-  
-
   
   
     <p class="title logo__title">DeepQMC 1.0.0 documentation</p>
   
-</a>
+</a></div>
     
   </div>
-
+  
   
   <div class="col-lg-9 navbar-header-items">
-    <div id="navbar-center" class="mr-auto">
+    
+    <div class="me-auto navbar-header-items__center">
       
-      <div class="navbar-center-item">
-        <nav class="navbar-nav">
-    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
-        Site Navigation
-    </p>
-    <ul id="navbar-main-elements" class="navbar-nav">
-        
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../installation.html">
                         Installation
@@ -151,32 +163,39 @@
                       </a>
                     </li>
                 
-    </ul>
-</nav>
-      </div>
+  </ul>
+</nav></div>
       
     </div>
-
-    <div id="navbar-end">
+    
+    
+    <div class="navbar-header-items__end">
       
-        <div class="navbar-end-item navbar-persistent--container">
+        <div class="navbar-item navbar-persistent--container">
           
-<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
-  <i class="fa-solid fa-magnifying-glass"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
         </div>
       
       
-      <div class="navbar-end-item">
-        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
     <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
     <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-</button>
-      </div>
+  </button>
+`);
+</script></div>
       
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
         <li class="nav-item">
           
           
@@ -185,49 +204,54 @@
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span>
+          
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
             <label class="sr-only">GitHub</label></a>
         </li>
-      </ul>
-      </div>
+</ul></div>
       
     </div>
+    
   </div>
-
-
   
   
     <div class="navbar-persistent--mobile">
-<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
-  <i class="fa-solid fa-magnifying-glass"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
     </div>
   
 
   
-
 </div>
-  </nav>
-  
 
+    </nav>
+  
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
+
   
   <div class="sidebar-header-items sidebar-primary__section">
     
     
       <div class="sidebar-header-items__center">
-      
-      <div class="navbar-center-item">
-        <nav class="navbar-nav">
-    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
-        Site Navigation
-    </p>
-    <ul id="navbar-main-elements" class="navbar-nav">
         
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../installation.html">
                         Installation
@@ -262,27 +286,28 @@
                       </a>
                     </li>
                 
-    </ul>
-</nav>
+  </ul>
+</nav></div>
+        
       </div>
-      
-      </div>
-    
-
     
     
-    <div class="sidebar-header-items__end">
-      
-      <div class="navbar-end-item">
-        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
     <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
     <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-</button>
-      </div>
-      
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
         <li class="nav-item">
           
           
@@ -291,49 +316,72 @@
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span>
+          
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
             <label class="sr-only">GitHub</label></a>
         </li>
-      </ul>
+</ul></div>
+        
       </div>
-      
-    </div>
     
   </div>
-
   
-  <div class="sidebar-start-items sidebar-primary__section">
-    <div class="sidebar-start-items__item">
-    </div>
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-  
-
-  
-  <div class="sidebar-end-items sidebar-primary__section">
-    <div class="sidebar-end-items__item">
-    </div>
-  </div>
-
   
   <div id="rtd-footer-container"></div>
 
+
       </div>
+      
       <main id="main-content" class="bd-main">
         
         
-        <div class="bd-content">
-          <div class="bd-article-container">
-            
-            <div class="bd-header-article">
-                
-            </div>
-            
-            
-            <article class="bd-article" role="main">
+          <div class="bd-content">
+            <div class="bd-article-container">
               
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">deepqmc.train</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <h1>Source code for deepqmc.train</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
 
@@ -342,18 +390,18 @@
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">import</span> <span class="nn">kfac_jax</span>
 <span class="kn">import</span> <span class="nn">optax</span>
-<span class="kn">import</span> <span class="nn">tensorboard.summary</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">tree_util</span>
 <span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
 <span class="kn">from</span> <span class="nn">uncertainties</span> <span class="kn">import</span> <span class="n">ufloat</span>
 
 <span class="kn">from</span> <span class="nn">.ewm</span> <span class="kn">import</span> <span class="n">init_ewm</span>
 <span class="kn">from</span> <span class="nn">.fit</span> <span class="kn">import</span> <span class="n">fit_wf</span>
-<span class="kn">from</span> <span class="nn">.log</span> <span class="kn">import</span> <span class="n">CheckpointStore</span><span class="p">,</span> <span class="n">H5LogTable</span><span class="p">,</span> <span class="n">update_tensorboard_writer</span>
+<span class="kn">from</span> <span class="nn">.log</span> <span class="kn">import</span> <span class="n">CheckpointStore</span><span class="p">,</span> <span class="n">H5LogTable</span><span class="p">,</span> <span class="n">TensorboardMetricLogger</span>
 <span class="kn">from</span> <span class="nn">.physics</span> <span class="kn">import</span> <span class="n">pairwise_self_distance</span>
 <span class="kn">from</span> <span class="nn">.pretrain</span> <span class="kn">import</span> <span class="n">pretrain</span>
-<span class="kn">from</span> <span class="nn">.sampling</span> <span class="kn">import</span> <span class="n">equilibrate</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">InverseSchedule</span>
-<span class="kn">from</span> <span class="nn">.wf.base</span> <span class="kn">import</span> <span class="n">init_wf_params</span><span class="p">,</span> <span class="n">state_callback</span>
+<span class="kn">from</span> <span class="nn">.sampling</span> <span class="kn">import</span> <span class="n">MultimoleculeSampler</span><span class="p">,</span> <span class="n">equilibrate</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">InverseSchedule</span><span class="p">,</span> <span class="n">segment_nanmean</span>
+<span class="kn">from</span> <span class="nn">.wf.base</span> <span class="kn">import</span> <span class="n">init_wf_params</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span>
 
@@ -386,10 +434,10 @@
     <span class="n">ansatz</span><span class="p">,</span>
     <span class="n">opt</span><span class="p">,</span>
     <span class="n">sampler</span><span class="p">,</span>
+    <span class="n">mols</span><span class="p">,</span>
     <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">train_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">init_step</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">state_callback</span><span class="o">=</span><span class="n">state_callback</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">steps</span><span class="p">,</span>
     <span class="n">sample_size</span><span class="p">,</span>
@@ -400,7 +448,10 @@
     <span class="n">pretrain_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">opt_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">fit_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">chkptdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">chkpts_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">metric_logger</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_idx_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Train or evaluate a JAX wave function model.</span>
 
@@ -426,13 +477,13 @@
 <span class="sd">            - :data:`None`: no optimizer is used, e.g. the evaluation of the Ansatz</span>
 <span class="sd">                is performed.</span>
 <span class="sd">        sampler (~deepqmc.sampling.Sampler): a sampler instance</span>
-<span class="sd">        workdir (str): optional, path, where results and checkpoints should be saved.</span>
+<span class="sd">        mols (~deepqmc.molecule.Molecule): a molecule or a sequence of molecules to</span>
+<span class="sd">            consider.</span>
+<span class="sd">        workdir (str): optional, path, where results should be saved.</span>
 <span class="sd">        train_state (~deepqmc.fit.TrainState): optional, training checkpoint to</span>
 <span class="sd">            restore training or run evaluation.</span>
 <span class="sd">        init_step (int): optional, initial step index, useful if</span>
 <span class="sd">            calculation is restarted from checkpoint saved on disk.</span>
-<span class="sd">        state_callback (Callable): optional, a function processing the :class:`haiku`</span>
-<span class="sd">            state of the wave function Ansatz.</span>
 <span class="sd">        steps (int): optional, number of optimization steps.</span>
 <span class="sd">        sample_size (int): the number of samples considered in a batch</span>
 <span class="sd">        seed (int): the seed used for PRNG.</span>
@@ -446,11 +497,20 @@
 <span class="sd">        opt_kwargs (dict): optional, extra arguments passed to the optimizer.</span>
 <span class="sd">        fit_kwargs (dict): optional, extra arguments passed to the :func:`~.fit.fit_wf`</span>
 <span class="sd">            function.</span>
+<span class="sd">        chkptdir (str): optional, path, where checkpoints should be saved. Checkpoints</span>
+<span class="sd">            are only saved if :data:`workdir` is not :data:`None`. Default:</span>
+<span class="sd">            data:`workdir`.</span>
 <span class="sd">        chkpts_kwargs (dict): optional, extra arguments for checkpointing.</span>
+<span class="sd">        metric_logger: optional, an object that consumes metric logging information.</span>
+<span class="sd">            If not specified, the default `~.log.TensorboardMetricLogger` is used</span>
+<span class="sd">            to create tensorboard logs.</span>
+<span class="sd">        mol_idx_factory (Callable): optional, callback for computing the indices</span>
+<span class="sd">            of the molecule from which samples are to be taken in a given step.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rng</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;evaluation&#39;</span> <span class="k">if</span> <span class="n">opt</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;training&#39;</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">MultimoleculeSampler</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">mol_idx_factory</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">opt_kwargs</span> <span class="o">=</span> <span class="n">OPT_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="p">{})</span> <span class="o">|</span> <span class="p">(</span><span class="n">opt_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="p">(</span>
@@ -459,13 +519,23 @@
             <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">optax</span><span class="p">,</span> <span class="n">opt</span><span class="p">)(</span><span class="o">**</span><span class="n">opt_kwargs</span><span class="p">)</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
-        <span class="n">workdir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">workdir</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s1">&#39;</span>
-        <span class="n">chkpts</span> <span class="o">=</span> <span class="n">CheckpointStore</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">chkpts_kwargs</span> <span class="ow">or</span> <span class="p">{}))</span>
-        <span class="n">writer</span> <span class="o">=</span> <span class="n">tensorboard</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="n">workdir</span><span class="p">)</span>
+        <span class="n">workdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="n">chkptdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chkptdir</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">chkptdir</span> <span class="k">else</span> <span class="n">workdir</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">chkptdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">chkpts</span> <span class="o">=</span> <span class="n">CheckpointStore</span><span class="p">(</span><span class="n">chkptdir</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">chkpts_kwargs</span> <span class="ow">or</span> <span class="p">{}))</span>
+        <span class="k">if</span> <span class="n">metric_logger</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">workdir</span><span class="p">:</span>
+            <span class="n">metric_logger</span> <span class="o">=</span> <span class="n">TensorboardMetricLogger</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">))</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Setting up HDF5 file...&#39;</span><span class="p">)</span>
-        <span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">workdir</span><span class="si">}</span><span class="s1">/result.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">libver</span><span class="o">=</span><span class="s1">&#39;v110&#39;</span><span class="p">)</span>
+        <span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="s1">&#39;result.h5&#39;</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">libver</span><span class="o">=</span><span class="s1">&#39;v110&#39;</span><span class="p">)</span>
         <span class="n">h5file</span><span class="o">.</span><span class="n">swmr_mode</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">table</span> <span class="o">=</span> <span class="n">H5LogTable</span><span class="p">(</span><span class="n">h5file</span><span class="p">)</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">mols</span><span class="p">):</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">h5file</span><span class="o">.</span><span class="n">require_group</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">H5LogTable</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">init_step</span><span class="p">)</span>
+            <span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
         <span class="n">h5file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
     <span class="n">pbar</span> <span class="o">=</span> <span class="kc">None</span>
@@ -477,11 +547,12 @@
                     <span class="s1">&#39;evaluation&#39;</span><span class="p">:</span> <span class="s1">&#39;Start evaluation&#39;</span><span class="p">,</span>
                 <span class="p">}[</span><span class="n">mode</span><span class="p">]</span>
             <span class="p">)</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">train_state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">rng</span><span class="p">,</span> <span class="n">rng_init</span><span class="p">,</span> <span class="n">rng_eq</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">rng</span><span class="p">,</span> <span class="n">rng_init</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
             <span class="n">params</span> <span class="o">=</span> <span class="n">init_wf_params</span><span class="p">(</span><span class="n">rng_init</span><span class="p">,</span> <span class="n">hamil</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">)</span>
-            <span class="n">num_params</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_reduce</span><span class="p">(</span>
-                <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">num_params</span> <span class="o">=</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_reduce</span><span class="p">(</span>
+                <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of model parameters: </span><span class="si">{</span><span class="n">num_params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">pretrain_steps</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;training&#39;</span><span class="p">:</span>
@@ -497,9 +568,10 @@
                         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
                     <span class="n">opt_pretrain</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">optax</span><span class="p">,</span> <span class="n">opt_pretrain</span><span class="p">)</span>
                 <span class="n">opt_pretrain</span> <span class="o">=</span> <span class="n">opt_pretrain</span><span class="p">(</span><span class="o">**</span><span class="n">opt_pretrain_kwargs</span><span class="p">)</span>
-                <span class="n">ewm_state</span><span class="p">,</span> <span class="n">update_ewm</span> <span class="o">=</span> <span class="n">init_ewm</span><span class="p">(</span><span class="n">decay_alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">ewm_state</span><span class="p">,</span> <span class="n">update_ewm</span> <span class="o">=</span> <span class="n">init_ewm</span><span class="p">(</span><span class="n">decay_alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="n">ewm_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="n">ewm_state</span><span class="p">]</span>
                 <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pretrain_steps</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;pretrain&#39;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">loss</span> <span class="ow">in</span> <span class="n">pretrain</span><span class="p">(</span>  <span class="c1"># noqa: B007</span>
+                <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">losses</span> <span class="ow">in</span> <span class="n">pretrain</span><span class="p">(</span>  <span class="c1"># noqa: B007</span>
                     <span class="n">rng_pretrain</span><span class="p">,</span>
                     <span class="n">hamil</span><span class="p">,</span>
                     <span class="n">ansatz</span><span class="p">,</span>
@@ -509,21 +581,41 @@
                     <span class="n">sample_size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span>
                     <span class="n">baseline_kwargs</span><span class="o">=</span><span class="n">pretrain_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;baseline_kwargs&#39;</span><span class="p">,</span> <span class="p">{}),</span>
                 <span class="p">):</span>
-                    <span class="n">ewm_state</span> <span class="o">=</span> <span class="n">update_ewm</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">ewm_state</span><span class="p">)</span>
-                    <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">MSE</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span><span class="si">:</span><span class="s1">0.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                    <span class="n">pretrain_stats</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s1">&#39;MSE/ewm&#39;</span><span class="p">:</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span><span class="p">}</span>
-                    <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
-                        <span class="n">update_tensorboard_writer</span><span class="p">(</span>
-                            <span class="n">writer</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">pretrain_stats</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;pretraining&#39;</span>
-                        <span class="p">)</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pretraining completed with MSE = </span><span class="si">{</span><span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span><span class="si">:</span><span class="s1">0.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">mol_idx</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">mol_idx</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                    <span class="n">per_mol_losses</span> <span class="o">=</span> <span class="n">segment_nanmean</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">mol_idx</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">))</span>
+                    <span class="n">ewm_states</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">ewm_state</span> <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_ewm</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">ewm_state</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">loss</span><span class="p">,</span> <span class="n">ewm_state</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">per_mol_losses</span><span class="p">,</span> <span class="n">ewm_states</span><span class="p">)</span>
+                    <span class="p">]</span>
+                    <span class="n">ewm_means</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span> <span class="k">if</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+                        <span class="k">for</span> <span class="n">ewm_state</span> <span class="ow">in</span> <span class="n">ewm_states</span>
+                    <span class="p">]</span>
+                    <span class="n">mse_rep</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s1">0.2e</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">mean</span> <span class="ow">in</span> <span class="n">ewm_means</span><span class="p">)</span>
+                    <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">MSE</span><span class="o">=</span><span class="n">mse_rep</span><span class="p">)</span>
+                    <span class="n">pretrain_stats</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;per_mol&#39;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">per_mol_losses</span><span class="p">,</span>
+                            <span class="s1">&#39;MSE/ewm&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                                <span class="p">[</span><span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span> <span class="k">for</span> <span class="n">ewm_state</span> <span class="ow">in</span> <span class="n">ewm_states</span><span class="p">]</span>
+                            <span class="p">),</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span> <span class="n">metric_logger</span><span class="p">:</span>
+                        <span class="n">metric_logger</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">pretrain_stats</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;pretraining&#39;</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pretraining completed with MSE = </span><span class="si">{</span><span class="n">mse_rep</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">train_state</span> <span class="ow">or</span> <span class="n">train_state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rng</span><span class="p">,</span> <span class="n">rng_eq</span><span class="p">,</span> <span class="n">rng_smpl_init</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
             <span class="n">smpl_state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
-                <span class="n">rng</span><span class="p">,</span> <span class="n">partial</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">state_callback</span>
+                <span class="n">rng_smpl_init</span><span class="p">,</span>
+                <span class="n">partial</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span>
+                <span class="n">sample_size</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Equilibrating sampler...&#39;</span><span class="p">)</span>
             <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
                 <span class="n">count</span><span class="p">()</span> <span class="k">if</span> <span class="n">max_eq_steps</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_eq_steps</span><span class="p">),</span>
-                <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;equilibrate&#39;</span><span class="p">,</span>
+                <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;equilibrate sampler&#39;</span><span class="p">,</span>
                 <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">smpl_state</span><span class="p">,</span> <span class="n">smpl_stats</span> <span class="ow">in</span> <span class="n">equilibrate</span><span class="p">(</span>  <span class="c1"># noqa: B007</span>
@@ -531,23 +623,25 @@
                 <span class="n">partial</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span>
                 <span class="n">sampler</span><span class="p">,</span>
                 <span class="n">smpl_state</span><span class="p">,</span>
-                <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">pairwise_self_distance</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="k">lambda</span> <span class="n">phys_conf</span><span class="p">:</span> <span class="n">pairwise_self_distance</span><span class="p">(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
                 <span class="n">pbar</span><span class="p">,</span>
-                <span class="n">state_callback</span><span class="p">,</span>
+                <span class="n">sample_size</span><span class="p">,</span>
                 <span class="n">block_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
             <span class="p">):</span>
-                <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">smpl_state</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s1">5.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
-                    <span class="n">update_tensorboard_writer</span><span class="p">(</span>
-                        <span class="n">writer</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">smpl_stats</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;equilibration&#39;</span>
-                    <span class="p">)</span>
+                <span class="n">tau_rep</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tau</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">sampler</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="s1">&#39;tau&#39;</span><span class="p">,</span> <span class="n">smpl_state</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="n">tau_rep</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">metric_logger</span><span class="p">:</span>
+                    <span class="n">metric_logger</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">smpl_stats</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;equilibration&#39;</span><span class="p">)</span>
             <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">train_state</span> <span class="o">=</span> <span class="n">smpl_state</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">workdir</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;training&#39;</span><span class="p">:</span>
-                <span class="n">chkpts</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">init_step</span><span class="p">,</span> <span class="n">train_state</span><span class="p">)</span>
+                <span class="n">chkpts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">init_step</span><span class="p">,</span> <span class="n">train_state</span><span class="p">)</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Start </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">best_ene</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">ewm_state</span><span class="p">,</span> <span class="n">update_ewm</span> <span class="o">=</span> <span class="n">init_ewm</span><span class="p">()</span>
+        <span class="n">ewm_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="n">ewm_state</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_restarts</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">pbar</span> <span class="o">=</span> <span class="n">trange</span><span class="p">(</span>
@@ -566,34 +660,67 @@
                     <span class="n">sampler</span><span class="p">,</span>
                     <span class="n">sample_size</span><span class="p">,</span>
                     <span class="n">pbar</span><span class="p">,</span>
-                    <span class="n">state_callback</span><span class="p">,</span>
                     <span class="n">train_state</span><span class="p">,</span>
                     <span class="o">**</span><span class="p">(</span><span class="n">fit_kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
                 <span class="p">):</span>
-                    <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">log</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                    <span class="n">psi</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span>
+                        <span class="s1">&#39;psi&#39;</span><span class="p">,</span>
+                        <span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span><span class="p">,</span>
+                        <span class="n">sampler</span><span class="o">.</span><span class="n">select_idxs</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">psi</span><span class="o">.</span><span class="n">log</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
                         <span class="k">raise</span> <span class="n">NanError</span><span class="p">()</span>
-                    <span class="n">ewm_state</span> <span class="o">=</span> <span class="n">update_ewm</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;E_loc/mean&#39;</span><span class="p">],</span> <span class="n">ewm_state</span><span class="p">)</span>
-                    <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
-                        <span class="s1">&#39;energy/ewm&#39;</span><span class="p">:</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
-                        <span class="s1">&#39;energy/ewm_error&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ewm_state</span><span class="o">.</span><span class="n">sqerr</span><span class="p">),</span>
-                        <span class="o">**</span><span class="n">stats</span><span class="p">,</span>
+                    <span class="n">mol_idx</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">mol_idx</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                    <span class="n">per_mol_energy</span> <span class="o">=</span> <span class="n">segment_nanmean</span><span class="p">(</span><span class="n">E_loc</span><span class="p">,</span> <span class="n">mol_idx</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">))</span>
+                    <span class="n">ewm_states</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">ewm_state</span> <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ene</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_ewm</span><span class="p">(</span><span class="n">ene</span><span class="p">,</span> <span class="n">ewm_state</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">ene</span><span class="p">,</span> <span class="n">ewm_state</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">per_mol_energy</span><span class="p">,</span> <span class="n">ewm_states</span><span class="p">)</span>
+                    <span class="p">]</span>
+                    <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;per_mol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;energy/ewm&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                            <span class="p">[</span><span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span> <span class="k">for</span> <span class="n">ewm_state</span> <span class="ow">in</span> <span class="n">ewm_states</span><span class="p">]</span>
+                        <span class="p">),</span>
+                        <span class="s1">&#39;energy/ewm_error&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                            <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ewm_state</span><span class="o">.</span><span class="n">sqerr</span> <span class="k">for</span> <span class="n">ewm_state</span> <span class="ow">in</span> <span class="n">ewm_states</span><span class="p">])</span>
+                        <span class="p">),</span>
+                        <span class="o">**</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;per_mol&#39;</span><span class="p">],</span>
                     <span class="p">}</span>
-                    <span class="n">ene</span> <span class="o">=</span> <span class="n">ufloat</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;energy/ewm&#39;</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;energy/ewm_error&#39;</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="n">ene</span><span class="o">.</span><span class="n">s</span><span class="p">:</span>
-                        <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">E</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ene</span><span class="si">:</span><span class="s1">S</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">best_ene</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ene</span><span class="o">.</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">best_ene</span><span class="o">.</span><span class="n">s</span><span class="p">:</span>
+                    <span class="n">ene</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">ufloat</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;per_mol&#39;</span><span class="p">][</span><span class="s1">&#39;energy/ewm&#39;</span><span class="p">],</span>
+                            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;per_mol&#39;</span><span class="p">][</span><span class="s1">&#39;energy/ewm_error&#39;</span><span class="p">],</span>
+                        <span class="p">)</span>
+                    <span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">s</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ene</span><span class="p">):</span>
+                        <span class="n">energies</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s1">S</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ene</span><span class="p">)</span>
+                        <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">E</span><span class="o">=</span><span class="n">energies</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">best_ene</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
+                            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">y</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">ene</span><span class="p">,</span> <span class="n">best_ene</span><span class="p">)</span>
+                        <span class="p">):</span>
                             <span class="n">best_ene</span> <span class="o">=</span> <span class="n">ene</span>
-                            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Progress: </span><span class="si">{</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s1">, energy = </span><span class="si">{</span><span class="n">ene</span><span class="si">:</span><span class="s1">S</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                                <span class="sa">f</span><span class="s1">&#39;Progress: </span><span class="si">{</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s1">, energy = </span><span class="si">{</span><span class="n">energies</span><span class="si">}</span><span class="s1">&#39;</span>
+                            <span class="p">)</span>
                     <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;training&#39;</span><span class="p">:</span>
                             <span class="c1"># the convention is that chkpt-i contains the step i-1 -&gt; i</span>
-                            <span class="n">chkpts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_state</span><span class="p">,</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;E_loc/std&#39;</span><span class="p">])</span>
-                        <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_loc</span>
-                        <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_ewm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span>
-                        <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;sign_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sign</span>
-                        <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;log_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">log</span>
+                            <span class="n">chkpts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                                <span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                <span class="n">train_state</span><span class="p">,</span>
+                                <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;per_mol&#39;</span><span class="p">][</span><span class="s1">&#39;E_loc/std&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                            <span class="p">)</span>
+                        <span class="k">for</span> <span class="n">table</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">ewm_state</span><span class="p">,</span> <span class="n">smpl_state</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                            <span class="n">tables</span><span class="p">,</span> <span class="n">per_mol_energy</span><span class="p">,</span> <span class="n">ewm_states</span><span class="p">,</span> <span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span>
+                        <span class="p">):</span>
+                            <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span>
+                            <span class="k">if</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_ewm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span>
+                            <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;sign_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smpl_state</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sign</span>
+                            <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;log_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smpl_state</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">log</span>
                         <span class="n">h5file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-                        <span class="n">update_tensorboard_writer</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">metric_logger</span><span class="p">:</span>
+                            <span class="n">metric_logger</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s1"> has been completed!&#39;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">train_state</span>
             <span class="k">except</span> <span class="n">NanError</span><span class="p">:</span>
@@ -610,77 +737,82 @@
             <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
             <span class="n">chkpts</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">metric_logger</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">h5file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 </pre></div>
 
-            </article>
-            
-            
-            
-            <footer class="bd-footer-article">
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
 </div>
-            </footer>
+
+                </footer>
+              
+            </div>
+            
+            
+              
             
           </div>
-          
-          
-          
-          
-        </div>
-        <footer class="bd-footer-content">
-          <div class="bd-footer-content__inner">
+          <footer class="bd-footer-content">
             
-          </div>
-        </footer>
+          </footer>
         
       </main>
     </div>
   </div>
-
   
-    
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-  <footer class="bd-footer"><div class="bd-footer__inner container">
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
   
-  <div class="footer-item">
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
     
-<p class="copyright">
-
-    &copy; Copyright 2019-2022, Frank Noé and collaborators.<br>
-
-</p>
-
-  </div>
-  
-  <div class="footer-item">
+      © Copyright 2019-2023, Frank Noé and collaborators.
+      <br/>
     
-<p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br>
-</p>
-
-  </div>
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
   
-  <div class="footer-item">
-    <p class="theme-version">
-    Built with the
-    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
-        PyData Sphinx Theme
-    </a>
-    0.12.0.
-</p>
-  </div>
   
-  <div class="footer-item">
-    
-  </div>
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
   
 </div>
+
   </footer>
   </body>
 </html>
