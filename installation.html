@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Installation &#8212; DeepQMC 1.0.0 documentation</title>
+    <title>Installation &#8212; DeepQMC 1.0.2 documentation</title>
   
   
   
@@ -49,7 +49,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'installation';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="Command-line interface" href="cli.html" />
     <link rel="prev" title="Welcome to DeepQMC" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -112,7 +112,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.0.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.0.2 documentation</p>
   
 </a></div>
     
@@ -140,15 +140,15 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="tutorial.html">
-                        Tutorial
+                      <a class="nav-link nav-internal" href="cli.html">
+                        Command-line interface
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="cli.html">
-                        Command-line interface
+                      <a class="nav-link nav-internal" href="tutorial.html">
+                        Tutorial
                       </a>
                     </li>
                 
@@ -263,15 +263,15 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="tutorial.html">
-                        Tutorial
+                      <a class="nav-link nav-internal" href="cli.html">
+                        Command-line interface
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="cli.html">
-                        Command-line interface
+                      <a class="nav-link nav-internal" href="tutorial.html">
+                        Tutorial
                       </a>
                     </li>
                 
@@ -417,7 +417,7 @@ document.write(`
 </ul>
 <section id="optional-dependencies">
 <h3>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this heading">#</a></h3>
-<p>The following dependencies are used for developement and their installation must be requested explicitly, as documented below.</p>
+<p>The following dependencies are used for development and their installation must be requested explicitly, as documented below.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/psf/black">black</a> formats code according to PEP 8 standard.</p></li>
 <li><p><a class="reference external" href="https://github.com/PyCQA/flake8">flake8</a> implement style guidelines.</p></li>
@@ -442,24 +442,31 @@ $ source venv/bin/activate
 </section>
 <section id="install-deepqmc">
 <h2>Install DeepQMC<a class="headerlink" href="#install-deepqmc" title="Permalink to this heading">#</a></h2>
-<p>Within the activated virtual environment, DeepQMC can be installed with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U deepqmc -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-</pre></div>
-</div>
-<p>Where specifying the additional URL is necessary, as the CUDA compatible versions of <a class="reference external" href="https://github.com/google/jax">jaxlib</a> are not hosted <a class="reference external" href="https://pypi.org/">pypi</a>.
-To install all optional dependencies, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U deepqmc[dev] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+<p>The latest official release of DeepQMC can be installed from the Python Package Index using <a class="reference external" href="https://pip.pypa.io/en/stable/quickstart/">Pip</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U deepqmc
 </pre></div>
 </div>
 </section>
 <section id="developing">
 <h2>Developing<a class="headerlink" href="#developing" title="Permalink to this heading">#</a></h2>
-<p>To install DeepQMC from a local Git repository run:</p>
+<p>In order to have access to the source code and stay up-to-date with the latest developments, DeepQMC can be installed directly from the <a class="github reference external" href="https://github.com/deepqmc/deepqmc">deepqmc/deepqmc</a> GitHub repository.</p>
+<p>To install DeepQMC from the Git repository run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/deepqmc/deepqmc
 $ cd deepqmc
-$ pip install -e .[dev] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+$ pip install -e .[dev]
 </pre></div>
 </div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option installs the repository in editable mode and the <code class="docutils literal notranslate"><span class="pre">.[dev]</span></code> specification includes the optional dependencies for development.</p>
+<p>If <a class="reference external" href="https://pip.pypa.io/en/stable/quickstart/">Pip</a> complains about <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> not being found, please update to the latest version.</p>
+<p>The above installation will result in the CPU version of JAX. However, running DeepQMC on the GPU is highly recommended. To enable GPU support make sure to upgrade JAX to match the CUDA and cuDNN versions of your system. For most users this can be achieved with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ # CUDA 12 installation
+$ pip install --upgrade &quot;jax[cuda12_pip]&quot; -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+$ # CUDA 11 installation
+$ pip install --upgrade &quot;jax[cuda11_pip]&quot; -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+</pre></div>
+</div>
+<p>If issues arise during the installation of JAX, or if errors related to CUDA or cuDNN occur at runtime, please visit the <a class="reference external" href="https://github.com/google/jax#installation">JAX Install Guide</a>.</p>
 </section>
 </section>
 
@@ -484,11 +491,11 @@ $ pip install -e .[dev] -f https://storage.googleapis.com/jax-releases/jax_cuda_
       </div>
     </a>
     <a class="right-next"
-       href="tutorial.html"
+       href="cli.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorial</p>
+        <p class="prev-next-title">Command-line interface</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -528,25 +535,6 @@ $ pip install -e .[dev] -f https://storage.googleapis.com/jax-releases/jax_cuda_
       <br/>
     
   </p>
-</div>
-      
-        <div class="footer-item">
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
-    <br/>
-  </p>
-</div>
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
-      
-        <div class="footer-item">
-  <div class="tocsection sourcelink">
-    <a href="_sources/installation.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
 </div>
       
     </div>

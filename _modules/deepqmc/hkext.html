@@ -382,6 +382,7 @@ document.write(`
 <span></span><span class="kn">import</span> <span class="nn">haiku</span> <span class="k">as</span> <span class="nn">hk</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">haiku.initializers</span> <span class="kn">import</span> <span class="n">VarianceScaling</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">tree_util</span>
 <span class="kn">from</span> <span class="nn">jax.nn</span> <span class="kn">import</span> <span class="n">softplus</span>
 
 
@@ -402,6 +403,8 @@ document.write(`
 <span class="sd">    Args:</span>
 <span class="sd">        in_dim (int): the input dimension.</span>
 <span class="sd">        out_dim (int): the output dimension.</span>
+<span class="sd">        residual (bool): whether to include a residual connection</span>
+<span class="sd">        name (str): optional, the name of the network.</span>
 <span class="sd">        hidden_layers (tuple): optional, either (&#39;log&#39;, :math:`N_\text{layers}`),</span>
 <span class="sd">            in which case the network will have :math:`N_\text{layers}` layers</span>
 <span class="sd">            with logarithmically changing widths, or a tuple of ints specifying</span>
@@ -415,7 +418,6 @@ document.write(`
 <span class="sd">        last_linear (bool): optional, if :data:`True` the activation function</span>
 <span class="sd">            is not applied to the activation of the last layer.</span>
 <span class="sd">        activation (Callable): optional, the activation function.</span>
-<span class="sd">        name (str): optional, the name of the network.</span>
 <span class="sd">        w_init (str or Callable): optional, specifies the initialization of the</span>
 <span class="sd">            linear weights. Possible string values are:</span>
 
@@ -426,52 +428,101 @@ document.write(`
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">in_dim</span><span class="p">,</span>
         <span class="n">out_dim</span><span class="p">,</span>
-        <span class="n">hidden_layers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">last_linear</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">activation</span><span class="o">=</span><span class="n">ssp</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">residual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">w_init</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">hidden_layers</span><span class="p">,</span>
+        <span class="n">bias</span><span class="p">,</span>
+        <span class="n">last_linear</span><span class="p">,</span>
+        <span class="n">activation</span><span class="p">,</span>
+        <span class="n">init</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">assert</span> <span class="n">bias</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;not_last&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">activation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_linear</span> <span class="o">=</span> <span class="n">last_linear</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">residual</span> <span class="o">=</span> <span class="n">residual</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w_init</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">w_init</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span> <span class="o">=</span> <span class="n">out_dim</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">w_init</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;deeperwin&#39;</span><span class="p">:</span> <span class="n">VarianceScaling</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;fan_avg&#39;</span><span class="p">,</span> <span class="s1">&#39;uniform&#39;</span><span class="p">),</span>
                 <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="n">VarianceScaling</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;fan_in&#39;</span><span class="p">,</span> <span class="s1">&#39;truncated_normal&#39;</span><span class="p">),</span>
-            <span class="p">}[</span><span class="n">w_init</span><span class="p">]</span>
-        <span class="n">hidden_layers</span> <span class="o">=</span> <span class="n">hidden_layers</span> <span class="ow">or</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hidden_layers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">hidden_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
-            <span class="n">n_hidden</span> <span class="o">=</span> <span class="n">hidden_layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="o">/</span> <span class="n">n_hidden</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_hidden</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">in_dim</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">out_dim</span><span class="o">**</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">qs</span><span class="p">]</span>
+                <span class="s1">&#39;ferminet&#39;</span><span class="p">:</span> <span class="n">VarianceScaling</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;fan_in&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">),</span>
+            <span class="p">}[</span><span class="n">init</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b_init</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;deeperwin&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">d</span><span class="p">),</span>
+                <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">d</span><span class="p">),</span>
+                <span class="s1">&#39;ferminet&#39;</span><span class="p">:</span> <span class="n">VarianceScaling</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;fan_out&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">),</span>
+            <span class="p">}[</span><span class="n">init</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">hidden_layers</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">w_init</span> <span class="o">=</span> <span class="n">init</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b_init</span> <span class="o">=</span> <span class="n">init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span> <span class="o">=</span> <span class="n">hidden_layers</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+            <span class="n">n_hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="o">/</span> <span class="n">n_hidden</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_hidden</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span><span class="o">**</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">qs</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span><span class="p">]</span>
+        <span class="n">n_layers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dims</span><span class="p">):</span>
-            <span class="n">with_bias</span> <span class="o">=</span> <span class="n">bias</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="p">(</span><span class="n">bias</span> <span class="o">==</span> <span class="s1">&#39;not_last&#39;</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">with_bias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">==</span> <span class="s1">&#39;not_last&#39;</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n_layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">hk</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
                     <span class="n">output_size</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span>
                     <span class="n">with_bias</span><span class="o">=</span><span class="n">with_bias</span><span class="p">,</span>
                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;linear_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">idx</span><span class="p">,</span>
-                    <span class="n">w_init</span><span class="o">=</span><span class="n">w_init</span><span class="p">,</span>
+                    <span class="n">w_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">w_init</span><span class="p">,</span>
+                    <span class="n">b_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b_init</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">inputs</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_linear</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n_layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_linear</span><span class="p">:</span>
                 <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">out</span> <span class="o">+</span> <span class="n">inputs</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual</span> <span class="k">else</span> <span class="n">out</span></div>
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="ResidualConnection"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.ResidualConnection">[docs]</a><span class="k">class</span> <span class="nc">ResidualConnection</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represent a residual connection between pytrees.</span>
+
+<span class="sd">    The residual connection is only added if :data:`inp` and :data:`update`</span>
+<span class="sd">    have the same shape.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        - normalize (bool): if :data:`True` the sum of :data:`inp` and :data:`update`</span>
+<span class="sd">            is normalized with :data:`sqrt(2)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">normalize</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">leaf_residual</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">y</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+            <span class="k">return</span> <span class="n">z</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="n">z</span>
+
+        <span class="k">return</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="n">leaf_residual</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SumPool"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.SumPool">[docs]</a><span class="k">class</span> <span class="nc">SumPool</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represent a global sum pooling operation.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">out_dim</span> <span class="o">==</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">leaf</span><span class="p">:</span> <span class="n">leaf</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span></div>
 </pre></div>
 
                 </article>
@@ -528,10 +579,6 @@ document.write(`
     <br/>
   </p>
 </div>
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
       
     </div>
   

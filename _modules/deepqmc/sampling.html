@@ -817,13 +817,8 @@ document.write(`
 
 
 <span class="k">def</span> <span class="nf">clean_force</span><span class="p">(</span><span class="n">force</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
-    <span class="n">z</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">diffs_to_nearest_nuc</span><span class="p">(</span>
-        <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">phys_conf</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">crossover_parameter</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">force</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">mol</span><span class="o">.</span><span class="n">charges</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-    <span class="n">z</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">r</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
-        <span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">r</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="p">)</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">diffs_to_nearest_nuc</span><span class="p">)(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">phys_conf</span><span class="o">.</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">crossover_parameter</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">charges</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
     <span class="n">av2tau</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">force</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">tau</span>
     <span class="c1"># av2tau can be small or zero, so the following expression must handle that</span>
     <span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">av2tau</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -924,10 +919,6 @@ document.write(`
     <br/>
   </p>
 </div>
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
       
     </div>
   

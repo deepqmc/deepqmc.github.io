@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Tutorial &#8212; DeepQMC 1.0.0 documentation</title>
+    <title>Tutorial &#8212; DeepQMC 1.0.2 documentation</title>
   
   
   
@@ -49,8 +49,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Command-line interface" href="cli.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Command-line interface" href="cli.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -112,7 +112,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.0.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.0.2 documentation</p>
   
 </a></div>
     
@@ -139,16 +139,16 @@
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
-                        Tutorial
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="cli.html">
+                        Command-line interface
                       </a>
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="cli.html">
-                        Command-line interface
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Tutorial
                       </a>
                     </li>
                 
@@ -262,16 +262,16 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
-                        Tutorial
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="cli.html">
+                        Command-line interface
                       </a>
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="cli.html">
-                        Command-line interface
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Tutorial
                       </a>
                     </li>
                 
@@ -343,6 +343,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-the-ansatz">Optimize the ansatz</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-energy">Evaluate the energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudopotentials">Pseudopotentials</a></li>
 </ul>
   </nav></div>
     </div>
@@ -448,7 +449,7 @@ document.write(`
 <span class="n">config_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">deepqmc_dir</span><span class="p">,</span> <span class="s1">&#39;conf/ansatz&#39;</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">initialize_config_dir</span><span class="p">(</span><span class="n">version_base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config_dir</span><span class="o">=</span><span class="n">config_dir</span><span class="p">):</span>
-    <span class="n">cfg</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s1">&#39;paulinet&#39;</span><span class="p">)</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
 
 <span class="n">_ansatz</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">_recursive_</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -463,7 +464,7 @@ document.write(`
 </section>
 <section id="instantiate-a-sampler">
 <h2>Instantiate a sampler<a class="headerlink" href="#instantiate-a-sampler" title="Permalink to this heading">#</a></h2>
-<p>The variational Monte Carlo method requires sampling the propability density associated with the square of the wave function. A <a class="reference internal" href="api.html#deepqmc.sampling.Sampler" title="deepqmc.sampling.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a> can be instantiated from a <a class="reference internal" href="api.html#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a>:</p>
+<p>The variational Monte Carlo method requires sampling the propability density associated with the square of the wave function. A <a class="reference internal" href="api.html#deepqmc.sampling.Sampler" title="deepqmc.sampling.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a> can be instantiated from a <a class="reference internal" href="api.html#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc.sampling</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">MetropolisSampler</span><span class="p">,</span> <span class="n">DecorrSampler</span>
 
 <span class="n">sampler</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">DecorrSampler</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span><span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">H</span><span class="p">))</span>
@@ -475,16 +476,16 @@ document.write(`
 <h2>Optimize the ansatz<a class="headerlink" href="#optimize-the-ansatz" title="Permalink to this heading">#</a></h2>
 <p>The high-level <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function is used to train the deep neural networks in the ansatz. The train function takes a <a class="reference internal" href="api.html#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a>, a <a class="reference internal" href="api.html#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a> and a <a class="reference internal" href="api.html#deepqmc.sampling.Sampler" title="deepqmc.sampling.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>. Further necessary arguments are an optimizer (<code class="docutils literal notranslate"><span class="pre">opt</span></code>), the number of training steps (<code class="docutils literal notranslate"><span class="pre">steps</span></code>), the number of samples used in a training batch (<code class="docutils literal notranslate"><span class="pre">sample_size</span></code>), and a seed (<code class="docutils literal notranslate"><span class="pre">seed</span></code>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">train</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="go">training:   0%|▋       | 102/10000 [01:00&lt;23:01, 7.16it/s, E=-8.042(10)]</span>
 </pre></div>
 </div>
-<p>If the argument <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code> is set, the ansatz is pretrained with respect to a Hartree-Fock or CASSCF baseline obtained with <a class="reference external" href="https://pyscf.org/pyscf_api_docs/pyscf.html#module-pyscf" title="(in PySCF v2.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf</span></code></a>. For more details as well as further training hyperparameters consult the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> reference.</p>
+<p>If the argument <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code> is set, the ansatz is pretrained with respect to a Hartree-Fock or CASSCF baseline obtained with <a class="reference external" href="https://pyscf.org/pyscf_api_docs/pyscf.html#module-pyscf" title="(in PySCF v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf</span></code></a>. For more details as well as further training hyperparameters consult the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> reference.</p>
 </section>
 <section id="logging">
 <h2>Logging<a class="headerlink" href="#logging" title="Permalink to this heading">#</a></h2>
 <p>The terminal output shows only how far has the training progressed and the current estimate of the energy. More detailed monitoring of the training is available via <a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a>. When <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> is called with an optional <code class="docutils literal notranslate"><span class="pre">workdir</span></code> argument, the training run creates a Tensorboard event file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s1">&#39;runs/01&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s1">&#39;runs/01&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tensorboard --logdir runs/
@@ -494,23 +495,56 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
 </pre></div>
 </div>
 <p>This launches a Tensorboard server which can be accessed via a web browser at the printed URL.</p>
-<p>Furthermore the training run is logged to the <code class="docutils literal notranslate"><span class="pre">workdir</span></code>. The <code class="docutils literal notranslate"><span class="pre">training</span></code> directory contains training checkpoints as well as an hdf5 file <code class="docutils literal notranslate"><span class="pre">result.h5</span></code> that holds the local energies throughout the training, an exponential moving average of the training energy and the values of the wave function at every iteration:</p>
+<p>Furthermore the training run is logged to the <code class="docutils literal notranslate"><span class="pre">workdir</span></code>. The <code class="docutils literal notranslate"><span class="pre">training</span></code> directory contains training checkpoints as well as an HDF5 file <code class="docutils literal notranslate"><span class="pre">result.h5</span></code> that holds the local energies throughout the training, an exponential moving average of the training energy and the values of the wave function at every iteration:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">h5py</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;workdir/training/result.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;runs/01/training/result.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="go">&lt;KeysViewHDF5 [&#39;E_ewm&#39;, &#39;E_loc&#39;, &#39;log_psi&#39;, &#39;sign_psi&#39;]&gt;</span>
 </pre></div>
 </div>
 </section>
 <section id="evaluate-the-energy">
 <h2>Evaluate the energy<a class="headerlink" href="#evaluate-the-energy" title="Permalink to this heading">#</a></h2>
-<p>A rough estimate of the expectation value of the energy of a trained wave function can be obtained already from the local energies of the training run. A rigorous estimation of the energy expectation value up to the statistical sampling error can be obtained when evaluating the energy expectation value of the trained wavefunction without further optimization. This is achieved by passing a training checkpoint is passed to the <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function, but the optimizer is specified to be <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
+<p>A rough estimate of the expectation value of the energy of a trained wave function can be obtained already from the local energies of the training run. A rigorous estimation of the energy expectation value up to the statistical sampling error can be obtained when evaluating the energy expectation value of the trained wavefunction without further optimization. This is achieved by passing a training checkpoint to the <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function, and specifying the optimizer to be <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">train_state</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;workdir/training/chkpt-10000.pt&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">train_state</span><span class="o">=</span><span class="n">train_state</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">step</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;runs/01/training/chkpt-10000.pt&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">train_state</span><span class="o">=</span><span class="n">train_state</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="go">evaluating: 100%|█████████| 500/500 [01:20&lt;00:00,  6.20it/s, E=-8.07000(19)]</span>
 </pre></div>
 </div>
 <p>The evaluation generates the same type of logs as the training, but writes to <code class="docutils literal notranslate"><span class="pre">workdir/evaluation</span></code> instead. The final energy can be read from the progress bar, the Tensorboard event file or computed from the local enregies in the hdf5 file respectively.</p>
+</section>
+<section id="pseudopotentials">
+<h2>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this heading">#</a></h2>
+<p>DeepQMC currently supports <code class="docutils literal notranslate"><span class="pre">bfd</span></code> <a class="reference internal" href="refs.html#burkatzki07" id="id2"><span>[Burkatzki07]</span></a> and <code class="docutils literal notranslate"><span class="pre">ccECP</span></code> <a class="reference internal" href="refs.html#bennett17" id="id3"><span>[Bennett17]</span></a> pseudopotentials, which can be enabled by passing the <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> argument to the molecule definition. This replaces a certain number of core electrons with a pseudopotential, reducing the total number of electrons explicitly treated and thus decreasing the computational cost. If the argument <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> is passed, the pseudopotentials are used for all the nuclei in the molecule considered, but can be turned off for individual nuclei by specifying <code class="docutils literal notranslate"><span class="pre">pp_mask</span></code>, a boolean array with <code class="docutils literal notranslate"><span class="pre">True</span></code> for each nucleus with pseudopotential turned on. The following example defines a TiO molecule where the titanium core is replaced by a pseudopotential and the oxygen core is left unaffected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>  <span class="c1"># TiO</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.668</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span>
+    <span class="n">charges</span><span class="o">=</span><span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">spin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">,</span>
+    <span class="n">pp_type</span><span class="o">=</span><span class="s1">&#39;ccECP&#39;</span><span class="p">,</span>
+    <span class="n">pp_mask</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The systems containing heavier atoms sometimes tend to produce NaN errors. To avoid these issues, it was found useful to use a smaller variance for the initial distribution of electrons around the nuclei (via the <code class="docutils literal notranslate"><span class="pre">elec_std</span></code> argument) and a larger decorrelation length for sampling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">MolecularHamiltonian</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">elec_std</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">DecorrSampler</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span><span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">H</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@hk</span><span class="o">.</span><span class="n">without_apply_rng</span>
+<span class="nd">@hk</span><span class="o">.</span><span class="n">transform</span>
+<span class="k">def</span> <span class="nf">ansatz</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">,</span> <span class="n">return_mos</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_ansatz</span><span class="p">(</span><span class="n">H</span><span class="p">)(</span><span class="n">phys_conf</span><span class="p">,</span> <span class="n">return_mos</span><span class="o">=</span><span class="n">return_mos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pretraining for a couple of thousands <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code> is also very beneficial for systems with heavier atoms. The following command starts the 3000-step pretraining followed by 10000 training steps, however more variational training steps are usually necessary to reach a good accuracy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">pretrain_steps</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="go">pratrain: 100%|█████████| 3000/3000 [54:27&lt;00:00,  1.02it/s, MSE=5.82e-05]</span>
+<span class="go">equilibrate sampler: 18%|██      | 176/1000 [02:59&lt;13:42,  1.00it/s, tau=0.045]</span>
+<span class="go">train: 19%|██      | 1914/10000 [2:52:27&lt;13:31:35,  6.03it/s, E=-133.2503(29)]</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -526,20 +560,20 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="installation.html"
+       href="cli.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Installation</p>
+        <p class="prev-next-title">Command-line interface</p>
       </div>
     </a>
     <a class="right-next"
-       href="cli.html"
+       href="api.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Command-line interface</p>
+        <p class="prev-next-title">API</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -579,25 +613,6 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
       <br/>
     
   </p>
-</div>
-      
-        <div class="footer-item">
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
-    <br/>
-  </p>
-</div>
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
-      
-        <div class="footer-item">
-  <div class="tocsection sourcelink">
-    <a href="_sources/tutorial.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
 </div>
       
     </div>

@@ -434,14 +434,13 @@ document.write(`
     <span class="n">ansatz</span><span class="p">,</span>
     <span class="n">opt</span><span class="p">,</span>
     <span class="n">sampler</span><span class="p">,</span>
-    <span class="n">mols</span><span class="p">,</span>
-    <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">train_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">init_step</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
     <span class="n">steps</span><span class="p">,</span>
     <span class="n">sample_size</span><span class="p">,</span>
     <span class="n">seed</span><span class="p">,</span>
+    <span class="n">mols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">train_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">init_step</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">max_restarts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">max_eq_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">pretrain_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -477,16 +476,17 @@ document.write(`
 <span class="sd">            - :data:`None`: no optimizer is used, e.g. the evaluation of the Ansatz</span>
 <span class="sd">                is performed.</span>
 <span class="sd">        sampler (~deepqmc.sampling.Sampler): a sampler instance</span>
-<span class="sd">        mols (~deepqmc.molecule.Molecule): a molecule or a sequence of molecules to</span>
-<span class="sd">            consider.</span>
+<span class="sd">        steps (int): number of optimization steps.</span>
+<span class="sd">        sample_size (int): the number of samples considered in a batch</span>
+<span class="sd">        seed (int): the seed used for PRNG.</span>
+<span class="sd">        mols (Sequence(~deepqmc.molecule.Molecule)): optional, a sequence of molecules</span>
+<span class="sd">            to consider for transferable training. If None the default molecule from</span>
+<span class="sd">            hamil is used.</span>
 <span class="sd">        workdir (str): optional, path, where results should be saved.</span>
 <span class="sd">        train_state (~deepqmc.fit.TrainState): optional, training checkpoint to</span>
 <span class="sd">            restore training or run evaluation.</span>
 <span class="sd">        init_step (int): optional, initial step index, useful if</span>
 <span class="sd">            calculation is restarted from checkpoint saved on disk.</span>
-<span class="sd">        steps (int): optional, number of optimization steps.</span>
-<span class="sd">        sample_size (int): the number of samples considered in a batch</span>
-<span class="sd">        seed (int): the seed used for PRNG.</span>
 <span class="sd">        max_restarts (int): optional, the maximum number of times the training is</span>
 <span class="sd">            retried before a :class:`NaNError` is raised.</span>
 <span class="sd">        max_eq_steps (int): optional, maximum number of equilibration steps if not</span>
@@ -510,6 +510,7 @@ document.write(`
 
     <span class="n">rng</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;evaluation&#39;</span> <span class="k">if</span> <span class="n">opt</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;training&#39;</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="ow">or</span> <span class="n">hamil</span><span class="o">.</span><span class="n">mol</span>
     <span class="n">sampler</span> <span class="o">=</span> <span class="n">MultimoleculeSampler</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">mol_idx_factory</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">opt_kwargs</span> <span class="o">=</span> <span class="n">OPT_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="p">{})</span> <span class="o">|</span> <span class="p">(</span><span class="n">opt_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
@@ -531,7 +532,7 @@ document.write(`
         <span class="n">h5file</span><span class="o">.</span><span class="n">swmr_mode</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">mols</span><span class="p">):</span>
-            <span class="n">group</span> <span class="o">=</span> <span class="n">h5file</span><span class="o">.</span><span class="n">require_group</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">h5file</span><span class="o">.</span><span class="n">require_group</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">mols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">h5file</span>
             <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
             <span class="n">table</span> <span class="o">=</span> <span class="n">H5LogTable</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
             <span class="n">table</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">init_step</span><span class="p">)</span>
@@ -575,6 +576,7 @@ document.write(`
                     <span class="n">rng_pretrain</span><span class="p">,</span>
                     <span class="n">hamil</span><span class="p">,</span>
                     <span class="n">ansatz</span><span class="p">,</span>
+                    <span class="n">params</span><span class="p">,</span>
                     <span class="n">opt_pretrain</span><span class="p">,</span>
                     <span class="n">sampler</span><span class="p">,</span>
                     <span class="n">steps</span><span class="o">=</span><span class="n">pbar</span><span class="p">,</span>
@@ -710,10 +712,10 @@ document.write(`
                                 <span class="n">train_state</span><span class="p">,</span>
                                 <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;per_mol&#39;</span><span class="p">][</span><span class="s1">&#39;E_loc/std&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
                             <span class="p">)</span>
-                        <span class="k">for</span> <span class="n">table</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">ewm_state</span><span class="p">,</span> <span class="n">smpl_state</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
-                            <span class="n">tables</span><span class="p">,</span> <span class="n">per_mol_energy</span><span class="p">,</span> <span class="n">ewm_states</span><span class="p">,</span> <span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span>
+                        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">ewm_state</span><span class="p">,</span> <span class="n">smpl_state</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                            <span class="nb">zip</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">ewm_states</span><span class="p">,</span> <span class="n">train_state</span><span class="o">.</span><span class="n">sampler</span><span class="p">)</span>
                         <span class="p">):</span>
-                            <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span>
+                            <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_loc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_loc</span><span class="p">[</span><span class="n">mol_idx</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                                 <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;E_ewm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ewm_state</span><span class="o">.</span><span class="n">mean</span>
                             <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;sign_psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smpl_state</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sign</span>
@@ -795,10 +797,6 @@ document.write(`
     <br/>
   </p>
 </div>
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
       
     </div>
   
