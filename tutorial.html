@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Tutorial &#8212; DeepQMC 1.0.2 documentation</title>
+    <title>Tutorial &#8212; DeepQMC 1.1.0 documentation</title>
   
   
   
@@ -19,23 +19,24 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -61,6 +62,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -101,7 +111,8 @@
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
   
@@ -112,12 +123,11 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.0.2 documentation</p>
+    <p class="title logo__title">DeepQMC 1.1.0 documentation</p>
   
 </a></div>
     
   </div>
-  
   
   <div class="col-lg-9 navbar-header-items">
     
@@ -176,23 +186,25 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
         <div class="navbar-item">
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
@@ -208,8 +220,8 @@ document.write(`
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
       
@@ -219,13 +231,15 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
@@ -301,10 +315,10 @@ document.write(`
           <div class="navbar-item">
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
@@ -320,8 +334,8 @@ document.write(`
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
         
@@ -372,8 +386,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="index.html" class="nav-link" aria-label="Home">
@@ -436,7 +450,7 @@ document.write(`
 </section>
 <section id="create-a-wave-function-ansatz">
 <h2>Create a wave function ansatz<a class="headerlink" href="#create-a-wave-function-ansatz" title="Permalink to this heading">#</a></h2>
-<p>The neural network wave function ansatz is available in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code> subpackage. A convinient way of initializing a wave function instance is to use a <code class="xref py py-mod docutils literal notranslate"><span class="pre">hydra</span></code> config file. DeepQMC comes with config files for predefined wave functions (at <code class="docutils literal notranslate"><span class="pre">../deepqmc/src/deepqmc/conf/ansatz</span></code>), however custom configurations may be used. Being a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#module-0" title="(in Haiku)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">haiku</span></code></a> module the ansatz has to be initialized inside a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#haiku.transform" title="(in Haiku)"><code class="xref py py-func docutils literal notranslate"><span class="pre">haiku.transform()</span></code></a>:</p>
+<p>The neural network wave function ansatz is available in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code> subpackage. A convinient way of initializing a wave function instance is to use a <code class="xref py py-mod docutils literal notranslate"><span class="pre">hydra</span></code> config file. DeepQMC comes with config files for predefined wave functions (at <code class="docutils literal notranslate"><span class="pre">../deepqmc/src/deepqmc/conf/ansatz</span></code>), however custom configurations may be used. Being a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#module-1" title="(in Haiku)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">haiku</span></code></a> module the ansatz has to be initialized inside a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#haiku.transform" title="(in Haiku)"><code class="xref py py-func docutils literal notranslate"><span class="pre">haiku.transform()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">deepqmc</span>
@@ -451,7 +465,7 @@ document.write(`
 <span class="k">with</span> <span class="n">initialize_config_dir</span><span class="p">(</span><span class="n">version_base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config_dir</span><span class="o">=</span><span class="n">config_dir</span><span class="p">):</span>
     <span class="n">cfg</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
 
-<span class="n">_ansatz</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">_recursive_</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">_ansatz</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">_recursive_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">_convert_</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 
 
 <span class="nd">@hk</span><span class="o">.</span><span class="n">without_apply_rng</span>
@@ -476,7 +490,7 @@ document.write(`
 <h2>Optimize the ansatz<a class="headerlink" href="#optimize-the-ansatz" title="Permalink to this heading">#</a></h2>
 <p>The high-level <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function is used to train the deep neural networks in the ansatz. The train function takes a <a class="reference internal" href="api.html#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a>, a <a class="reference internal" href="api.html#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a> and a <a class="reference internal" href="api.html#deepqmc.sampling.Sampler" title="deepqmc.sampling.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>. Further necessary arguments are an optimizer (<code class="docutils literal notranslate"><span class="pre">opt</span></code>), the number of training steps (<code class="docutils literal notranslate"><span class="pre">steps</span></code>), the number of samples used in a training batch (<code class="docutils literal notranslate"><span class="pre">sample_size</span></code>), and a seed (<code class="docutils literal notranslate"><span class="pre">seed</span></code>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">train</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">electron_batch_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="go">training:   0%|▋       | 102/10000 [01:00&lt;23:01, 7.16it/s, E=-8.042(10)]</span>
 </pre></div>
 </div>
@@ -515,23 +529,20 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
 </section>
 <section id="pseudopotentials">
 <h2>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this heading">#</a></h2>
-<p>DeepQMC currently supports <code class="docutils literal notranslate"><span class="pre">bfd</span></code> <a class="reference internal" href="refs.html#burkatzki07" id="id2"><span>[Burkatzki07]</span></a> and <code class="docutils literal notranslate"><span class="pre">ccECP</span></code> <a class="reference internal" href="refs.html#bennett17" id="id3"><span>[Bennett17]</span></a> pseudopotentials, which can be enabled by passing the <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> argument to the molecule definition. This replaces a certain number of core electrons with a pseudopotential, reducing the total number of electrons explicitly treated and thus decreasing the computational cost. If the argument <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> is passed, the pseudopotentials are used for all the nuclei in the molecule considered, but can be turned off for individual nuclei by specifying <code class="docutils literal notranslate"><span class="pre">pp_mask</span></code>, a boolean array with <code class="docutils literal notranslate"><span class="pre">True</span></code> for each nucleus with pseudopotential turned on. The following example defines a TiO molecule where the titanium core is replaced by a pseudopotential and the oxygen core is left unaffected:</p>
+<p>DeepQMC currently supports <code class="docutils literal notranslate"><span class="pre">bfd</span></code> <a class="reference internal" href="refs.html#burkatzki07" id="id2"><span>[Burkatzki07]</span></a> and <code class="docutils literal notranslate"><span class="pre">ccECP</span></code> <a class="reference internal" href="refs.html#bennett17" id="id3"><span>[Bennett17]</span></a> pseudopotentials, which can be enabled by passing the <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> argument to the hamiltonian definition. This replaces a certain number of core electrons with a pseudopotential, reducing the total number of electrons explicitly treated and thus decreasing the computational cost. The pseudopotentials for all nuclei heavier than He in the molecule will be used if the argument <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> is passed. They can be turned off or on for individual nuclei by specifying <code class="docutils literal notranslate"><span class="pre">pp_mask</span></code>, a boolean array with <code class="docutils literal notranslate"><span class="pre">True</span></code> for each nucleus with pseudopotential turned on. The following example defines a hamiltonian of a TiO molecule where the titanium core is replaced by a pseudopotential and the oxygen core is left unaffected:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>  <span class="c1"># TiO</span>
     <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.668</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span>
     <span class="n">charges</span><span class="o">=</span><span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
     <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">spin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">,</span>
-    <span class="n">pp_type</span><span class="o">=</span><span class="s1">&#39;ccECP&#39;</span><span class="p">,</span>
-    <span class="n">pp_mask</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-<p>The systems containing heavier atoms sometimes tend to produce NaN errors. To avoid these issues, it was found useful to use a smaller variance for the initial distribution of electrons around the nuclei (via the <code class="docutils literal notranslate"><span class="pre">elec_std</span></code> argument) and a larger decorrelation length for sampling:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">MolecularHamiltonian</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">elec_std</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">MolecularHamiltonian</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">pp_type</span><span class="o">=</span><span class="s1">&#39;ccECP&#39;</span><span class="p">,</span> <span class="n">pp_mask</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span> <span class="n">elec_std</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">sampler</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">DecorrSampler</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span><span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">H</span><span class="p">))</span>
 </pre></div>
 </div>
+<p>The systems containing heavier atoms sometimes tend to produce NaN errors. To avoid these issues, it was found useful to use a smaller variance for the initial distribution of electrons around the nuclei (via the <code class="docutils literal notranslate"><span class="pre">elec_std</span></code> argument) and a larger decorrelation length for sampling
+.. code:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@hk</span><span class="o">.</span><span class="n">without_apply_rng</span>
 <span class="nd">@hk</span><span class="o">.</span><span class="n">transform</span>
 <span class="k">def</span> <span class="nf">ansatz</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">,</span> <span class="n">return_mos</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -553,11 +564,10 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
               
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="cli.html"
@@ -577,10 +587,7 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -598,8 +605,8 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -618,10 +625,11 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
     </div>
   
   
+  
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.1.
 </p></div>
       
     </div>
