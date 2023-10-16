@@ -667,7 +667,7 @@ document.write(`
                 <span class="s1">&#39;electrons&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">n_up</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_down</span> <span class="o">*</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n_up</span> <span class="o">!=</span> <span class="n">n_down</span><span class="p">)])</span>
             <span class="p">},</span>
         <span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">edge_features</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">edge_features</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">layer_factory</span><span class="p">(</span>
                 <span class="n">n_interactions</span><span class="p">,</span>
