@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -9,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Installation &#8212; DeepQMC 1.1.0 documentation</title>
+    <title>Installation &#8212; DeepQMC 1.1.1 documentation</title>
   
   
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/katex.min.js"></script>
-    <script src="_static/auto-render.min.js"></script>
-    <script src="_static/katex_autorenderer.js"></script>
+    <script src="_static/documentation_options.js?v=83302504"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/katex.min.js?v=13f246ff"></script>
+    <script src="_static/auto-render.min.js?v=8b9f325c"></script>
+    <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'installation';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -123,7 +119,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.1.1 documentation</p>
   
 </a></div>
     
@@ -409,17 +405,17 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="id1">
-<h1>Installation<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>Installation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="python-version">
-<h2>Python version<a class="headerlink" href="#python-version" title="Permalink to this heading">#</a></h2>
+<h2>Python version<a class="headerlink" href="#python-version" title="Link to this heading">#</a></h2>
 <p>DeepQMC is compatible with Python 3.9 and higher.</p>
 </section>
 <section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading">#</a></h2>
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
 <p>These packages will be installed automatically when installing DeepQMC.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/google/jax">JAX</a> is a popular Python framework that combines NumPy, Autograd and XLA to give highly efficient just-in-time compiled code with GPU and TPU support.</p></li>
-<li><p><a class="reference external" href="https://github.com/deepmind/dm-haiku">Haiku</a> is a neural network libary for JAX that enables object oriented programming of models in the purely functional jax environment.</p></li>
+<li><p><a class="reference external" href="https://github.com/deepmind/dm-haiku">Haiku</a> is a neural network library for JAX that enables object oriented programming of models in the purely functional jax environment.</p></li>
 <li><p><a class="reference external" href="http://uncertainties-python-package.readthedocs.io">uncertainties</a> helps with propagation of uncertainties in calculations.</p></li>
 <li><p><a class="reference external" href="https://github.com/tqdm/tqdm">TQDM</a> provides progress bars.</p></li>
 <li><p><a class="reference external" href="https://github.com/deepmind/kfac-jax">kfac</a> is a jax implementation of the KFAC second order optimizer.</p></li>
@@ -430,12 +426,12 @@ document.write(`
 <li><p><a class="reference external" href="http://pyscf.org">PySCF</a> implements quantum chemistry methods in Python. This is used to obtain the baseline for pretraining.</p></li>
 </ul>
 <section id="optional-dependencies">
-<h3>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this heading">#</a></h3>
+<h3>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading">#</a></h3>
 <p>The following dependencies are used for development and their installation must be requested explicitly, as documented below.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/psf/black">black</a> formats code according to PEP 8 standard.</p></li>
 <li><p><a class="reference external" href="https://github.com/PyCQA/flake8">flake8</a> implement style guidelines.</p></li>
-<li><p><a class="reference external" href="https://github.com/PyCQA/isort">isort</a> helps to keep consitent order of imports.</p></li>
+<li><p><a class="reference external" href="https://github.com/PyCQA/isort">isort</a> helps to keep consistent order of imports.</p></li>
 <li><p><a class="reference external" href="https://docs.pytest.org/en/7.2.x">pytest</a> for testing the code.</p></li>
 <li><p><a class="reference external" href="https://github.com/ESSS/pytest-regressions">pytest-regressions</a> for testing numerical regressions in the code.</p></li>
 <li><p><a class="reference external" href="https://github.com/PyCQA/pydocstyle">pydocstyle</a>  check compliance with Python docstring conventions.</p></li>
@@ -444,7 +440,7 @@ document.write(`
 </section>
 </section>
 <section id="virtual-environments">
-<h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this heading">#</a></h2>
+<h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Link to this heading">#</a></h2>
 <p>It is a good practice to separate the dependencies of different Python projects with the use of virtual environments:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir myproject
 $ cd myproject
@@ -455,14 +451,14 @@ $ source venv/bin/activate
 <p>This code creates a virtual environment in the <code class="docutils literal notranslate"><span class="pre">venv</span></code> directory and actives it. As a result, the <code class="docutils literal notranslate"><span class="pre">python</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> executables available in the shell are now in the <code class="docutils literal notranslate"><span class="pre">venv/bin</span></code> directory, and any package and its dependencies are installed locally.</p>
 </section>
 <section id="install-deepqmc">
-<h2>Install DeepQMC<a class="headerlink" href="#install-deepqmc" title="Permalink to this heading">#</a></h2>
+<h2>Install DeepQMC<a class="headerlink" href="#install-deepqmc" title="Link to this heading">#</a></h2>
 <p>The latest official release of DeepQMC can be installed from the Python Package Index using <a class="reference external" href="https://pip.pypa.io/en/stable/quickstart/">Pip</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U deepqmc
 </pre></div>
 </div>
 </section>
 <section id="developing">
-<h2>Developing<a class="headerlink" href="#developing" title="Permalink to this heading">#</a></h2>
+<h2>Developing<a class="headerlink" href="#developing" title="Link to this heading">#</a></h2>
 <p>In order to have access to the source code and stay up-to-date with the latest developments, DeepQMC can be installed directly from the <a class="github reference external" href="https://github.com/deepqmc/deepqmc">deepqmc/deepqmc</a> GitHub repository.</p>
 <p>To install DeepQMC from the Git repository run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/deepqmc/deepqmc

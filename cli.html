@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -9,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Command-line interface &#8212; DeepQMC 1.1.0 documentation</title>
+    <title>Command-line interface &#8212; DeepQMC 1.1.1 documentation</title>
   
   
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/katex.min.js"></script>
-    <script src="_static/auto-render.min.js"></script>
-    <script src="_static/katex_autorenderer.js"></script>
+    <script src="_static/documentation_options.js?v=83302504"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/katex.min.js?v=13f246ff"></script>
+    <script src="_static/auto-render.min.js?v=8b9f325c"></script>
+    <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cli';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -123,7 +119,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.1.1 documentation</p>
   
 </a></div>
     
@@ -351,7 +347,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-on-mulitple-gpus">Execution on mulitple GPUs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-on-multiple-gpus">Execution on multiple GPUs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task">Task</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian">Hamiltonian</a></li>
@@ -414,7 +410,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="command-line-interface">
-<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading">#</a></h1>
+<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">#</a></h1>
 <p>This section describes the <a class="reference external" href="https://hydra.cc/">hydra</a> based command-line interface (CLI) to DeepQMC. The tutorial exemplifies a basic training and evaluation through the command line. For more advanced functionality such as multiruns or interaction with slurm see the <a class="reference external" href="https://hydra.cc/docs/intro/">hydra docs</a>.</p>
 <p>The CLI provides simple access to the functionalities of the <a class="reference internal" href="api.html#module-deepqmc" title="deepqmc"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepqmc</span></code></a> package. The main tasks comprise <code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">restart</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code>, which are thin wrappers around the <a class="reference internal" href="api.html#module-deepqmc.train"><span class="std std-ref">train</span></a> function.</p>
 <blockquote>
@@ -427,7 +423,7 @@ document.write(`
 </div></blockquote>
 <p>The train function creates a directory which contains the logs as well as the hyperparameters for the training (<code class="docutils literal notranslate"><span class="pre">.hydra</span></code>). For <code class="docutils literal notranslate"><span class="pre">restart</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> the restdir of the former training run has to be provided. Specifying arguments when executing the command will overwrite the configuration stored in the restdir. This enables changing certain parameters, such as the number of training / evaluation steps, but can result in errors if the requested hyperparameters conflict with the recovered train state.</p>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
 <p>A training can be run via:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc hydra.run.dir=workdir
 </pre></div>
@@ -448,17 +444,17 @@ document.write(`
 </div>
 <p>This again generates a Tensorboard event file <code class="docutils literal notranslate"><span class="pre">evaluation/events.out.tfevents.*</span></code> and an HDF5 file <code class="docutils literal notranslate"><span class="pre">evaluation/result.h5</span></code> file holding the sampled local energies.</p>
 </section>
-<section id="execution-on-mulitple-gpus">
-<h2>Execution on mulitple GPUs<a class="headerlink" href="#execution-on-mulitple-gpus" title="Permalink to this heading">#</a></h2>
+<section id="execution-on-multiple-gpus">
+<h2>Execution on multiple GPUs<a class="headerlink" href="#execution-on-multiple-gpus" title="Link to this heading">#</a></h2>
 <p>DeepQMC can utilize multiple GPUs of a single host for increased performance. The algorithm is parallelised over the electron position samples, therefore the number of such samples in a batch (<code class="docutils literal notranslate"><span class="pre">electron_batch_size</span></code>) must be divisible with the number of utilized GPUs. DeepQMC relies on JAX to automatically detect and use all available GPUs, without any configuration from the user. It respects the <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> environment variable if it’s defined, and only uses the GPUs specified there. A short log message at the beginning of the run informs the user of the number of utilized GPUs.</p>
 </section>
 <section id="hyperparameters">
-<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">#</a></h2>
 <p>In the following the most relevant settings for running experiments with DeepQMC are discussed.</p>
 <section id="task">
-<h3>Task<a class="headerlink" href="#task" title="Permalink to this heading">#</a></h3>
-<p>DeepQMC provides the above mentioned conigurations for the <code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> and <code class="docutils literal notranslate"><span class="pre">restart</span></code> task. In order to override default hyperparameters of the experimental setup, such as the <code class="docutils literal notranslate"><span class="pre">sample_size</span></code> or the number of training <code class="docutils literal notranslate"><span class="pre">steps</span></code> or <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code>, hydra provides a simple syntax:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=train task.sample_size=2048 task.steps=50_000 +task.pretrain_steps=1000
+<h3>Task<a class="headerlink" href="#task" title="Link to this heading">#</a></h3>
+<p>DeepQMC provides the above mentioned configurations for the <code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> and <code class="docutils literal notranslate"><span class="pre">restart</span></code> task. In order to override default hyperparameters of the experimental setup, such as the <code class="docutils literal notranslate"><span class="pre">sample_size</span></code> or the number of training <code class="docutils literal notranslate"><span class="pre">steps</span></code> or <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code>, hydra provides a simple syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=train task.electron_batch_size=2048 task.steps=50_000 task.pretrain_steps=1000
 </pre></div>
 </div>
 <p>The working directory for logging and checkpointing is is defined through:</p>
@@ -468,7 +464,7 @@ document.write(`
 <p>Note that the working directory of an <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> and <code class="docutils literal notranslate"><span class="pre">restart</span></code> task cannot match the value of their <code class="docutils literal notranslate"><span class="pre">restdir</span></code> option (which specifies the working directory of the previous job that we want to evaluate or restart).</p>
 </section>
 <section id="hamiltonian">
-<h3>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Permalink to this heading">#</a></h3>
+<h3>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Link to this heading">#</a></h3>
 <p>DeepQMC aims at solving the molecular Hamiltonian. Molecules can be selected from a range of predefined configurations located in <code class="docutils literal notranslate"><span class="pre">.../deepqmc/src/deepqmc/conf/hamil/mol</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc hamil/mol=LiH
 </pre></div>
@@ -483,26 +479,26 @@ document.write(`
 </div>
 </section>
 <section id="sampling">
-<h3>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h3>
+<h3>Sampling<a class="headerlink" href="#sampling" title="Link to this heading">#</a></h3>
 <p>Different sampler configurations can be found in <code class="docutils literal notranslate"><span class="pre">.../deepqmc/src/deepqmc/conf/task/sampler</span></code>. A typical usecase would be to pick as sampler form these configurations and, if required, change some argument from the command line:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$deepqmc task/sampler=decorr_langevin task.sampler.0.length=30
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task/sampler=decorr_langevin task.sampler.0.length=30
 </pre></div>
 </div>
 </section>
 <section id="optimization">
-<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h3>
-<p>For the optimization either <a class="reference external" href="https://kfac-jax.readthedocs.io/en/latest/">KFAC</a> or optimizers from <a class="reference external" href="https://optax.readthedocs.io/en/latest/">optax</a> may be used. While the use of <a class="reference external" href="https://kfac-jax.readthedocs.io/en/latest/">KFAC</a> is highly recommended due to the significantly imporved convergence, at times it can be useful to run with other optimizers such as <a class="reference external" href="https://optax.readthedocs.io/en/latest/api.html#adamw">AdamW</a>:</p>
+<h3>Optimization<a class="headerlink" href="#optimization" title="Link to this heading">#</a></h3>
+<p>For the optimization either <a class="reference external" href="https://kfac-jax.readthedocs.io/en/latest/">KFAC</a> or optimizers from <a class="reference external" href="https://optax.readthedocs.io/en/latest/">optax</a> may be used. While the use of <a class="reference external" href="https://kfac-jax.readthedocs.io/en/latest/">KFAC</a> is highly recommended due to the significantly improved convergence, at times it can be useful to run with other optimizers such as <a class="reference external" href="https://optax.readthedocs.io/en/latest/api.html#adamw">AdamW</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task/opt=adamw
 </pre></div>
 </div>
 </section>
 <section id="ansatz">
-<h3>Ansatz<a class="headerlink" href="#ansatz" title="Permalink to this heading">#</a></h3>
+<h3>Ansatz<a class="headerlink" href="#ansatz" title="Link to this heading">#</a></h3>
 <p>The hyperparameters of the training and the wave function ansatz are specified through hydra config files. Predefined ansatzes can be found in <code class="docutils literal notranslate"><span class="pre">.../deepqmc/src/deepqmc/conf/ansatz</span></code> and selected via:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc ansatz=ferminet
 </pre></div>
 </div>
-<p>The hyperparameters of such a predifined ansatz can also be overwritten at the command line:</p>
+<p>The hyperparameters of such a predefined ansatz can also be overwritten at the command line:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc ansatz=ferminet ansatz.omni_factory.gnn_factory.n_interactions=2
 </pre></div>
 </div>
@@ -580,7 +576,7 @@ document.write(`
 <span class="w">      </span><span class="nt">positional_embeddings</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">ne</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.CombinedEdgeFeature</span>
-<span class="w">          </span><span class="nt">edge_features</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">features</span><span class="p">:</span>
 <span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.DistancePowerEdgeFeature</span>
 <span class="w">            </span><span class="nt">powers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]</span>
 <span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.DifferenceEdgeFeature</span>
@@ -591,13 +587,13 @@ document.write(`
 <span class="w">    </span><span class="nt">edge_features</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">same</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.CombinedEdgeFeature</span>
-<span class="w">        </span><span class="nt">edge_features</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">features</span><span class="p">:</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.DistancePowerEdgeFeature</span>
 <span class="w">          </span><span class="nt">powers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.DifferenceEdgeFeature</span>
 <span class="w">      </span><span class="nt">anti</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.CombinedEdgeFeature</span>
-<span class="w">        </span><span class="nt">edge_features</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">features</span><span class="p">:</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.DistancePowerEdgeFeature</span>
 <span class="w">          </span><span class="nt">powers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.edge_features.DifferenceEdgeFeature</span>

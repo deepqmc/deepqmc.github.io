@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -8,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>deepqmc.gnn.electron_gnn &#8212; DeepQMC 1.1.0 documentation</title>
+    <title>deepqmc.gnn.electron_gnn &#8212; DeepQMC 1.1.1 documentation</title>
   
   
   
@@ -28,24 +27,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
-    <script src="../../../_static/katex.min.js"></script>
-    <script src="../../../_static/auto-render.min.js"></script>
-    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/documentation_options.js?v=83302504"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/katex.min.js?v=13f246ff"></script>
+    <script src="../../../_static/auto-render.min.js?v=8b9f325c"></script>
+    <script src="../../../_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/gnn/electron_gnn';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -120,7 +116,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.1.1 documentation</p>
   
 </a></div>
     
@@ -405,33 +401,31 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NodeEdgeMapping</span>
 
 
-<div class="viewcode-block" id="ElectronGNNLayer"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNNLayer">[docs]</a><span class="k">class</span> <span class="nc">ElectronGNNLayer</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNNLayer">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNNLayer">[docs]</a>
+<span class="k">class</span> <span class="nc">ElectronGNNLayer</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The message passing layer of :class:`ElectronGNN`.</span>
 
 <span class="sd">    Derived from :class:`~deepqmc.gnn.gnn.MessagePassingLayer`.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        residual (bool): whether a residual connection is used when updating</span>
-<span class="sd">            the electron embeddings.</span>
-<span class="sd">        deep_features (bool): if :data:`true` edge features are updated through</span>
-<span class="sd">            an MLP (:data:`u`), else initial edge features are reused.</span>
-<span class="sd">        update_features (list[str]): which features to collect for the update</span>
-<span class="sd">            of the electron embeddings.</span>
-<span class="sd">            Possible values:</span>
-
-<span class="sd">            - ``&#39;residual&#39;``: electron embedding from the previous interaction layer</span>
-<span class="sd">            - ``&#39;edge_ne&#39;``: sum over messages from nuclei</span>
-<span class="sd">            - ``&#39;edge_same&#39;``: sum over messages from electrons with same spin</span>
-<span class="sd">            - ``&#39;edge_anti&#39;``: sum over messages from electrons with opposite spin</span>
-<span class="sd">            - ``&#39;edge_up&#39;``: sum over messages from spin up electrons</span>
-<span class="sd">            - ``&#39;edge_down&#39;``: sum over messages from spin down electrons</span>
-<span class="sd">            - ``&#39;edge_ee&#39;``: sum of over messages from all electrons</span>
-<span class="sd">            - ``&#39;node_up&#39;``: sum over embeddings from spin-up electrons</span>
-<span class="sd">            - ``&#39;node_down&#39;``: sum over embeddings from spin-down electrons</span>
-
-<span class="sd">        update_rule (str): how to combine features for the update of the</span>
-<span class="sd">            electron embeddings.</span>
+<span class="sd">        one_particle_residual: whether a residual connection is used when updating</span>
+<span class="sd">            the one particle embeddings, either :data:`False`, or an instance of</span>
+<span class="sd">            :class:`~deepqmc.hkext.ResidualConnection`.</span>
+<span class="sd">        two_particle_residual: whether a residual connection is used when updating</span>
+<span class="sd">            the two particle embeddings, either :data:`False`, or an instance of</span>
+<span class="sd">            :class:`~deepqmc.hkext.ResidualConnection`.</span>
+<span class="sd">        deep_features: if :data:`False`, the edge features are not updated throughout</span>
+<span class="sd">            the GNN layers, if :data:`shared` than in each layer a single MLP</span>
+<span class="sd">            (:data:`u`) is used to update all edge types, if :data:`separate` then in</span>
+<span class="sd">            each layer separate MLPs are used to update the different edge types.</span>
+<span class="sd">        update_features (List[~deepqmc.gnn.update_features.UpdateFeature]): a list of</span>
+<span class="sd">            partially initialized update feature classes to use when computing the</span>
+<span class="sd">            update features of the one particle embeddings. For more details see the</span>
+<span class="sd">            documentation of :class:`deepqmc.gnn.update_features`.</span>
+<span class="sd">        update_rule (str): how to combine the update features for the update of the</span>
+<span class="sd">            one particle embeddings.</span>
 <span class="sd">            Possible values:</span>
 
 <span class="sd">            - ``&#39;concatenate&#39;``: run concatenated features through MLP</span>
@@ -439,8 +433,8 @@ document.write(`
 <span class="sd">            - ``&#39;featurewise_shared&#39;``: apply the same MLP across feature channels</span>
 <span class="sd">            - ``&#39;sum&#39;``: sum features before sending through an MLP</span>
 
-<span class="sd">            note that `sum` and `featurewise_shared` imply features of same size</span>
-
+<span class="sd">            note that :data:`&#39;sum&#39;` and :data:`&#39;featurewise_shared&#39;` imply features</span>
+<span class="sd">            of same size.</span>
 <span class="sd">        subnet_factory (Callable): A function that constructs the subnetworks of</span>
 <span class="sd">            the GNN layer.</span>
 <span class="sd">        subnet_factory_by_lbl (dict): optional, a dictionary of functions that construct</span>
@@ -606,29 +600,39 @@ document.write(`
         <span class="k">return</span> <span class="n">update_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ElectronGNN"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN">[docs]</a><span class="k">class</span> <span class="nc">ElectronGNN</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ElectronGNN">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN">[docs]</a>
+<span class="k">class</span> <span class="nc">ElectronGNN</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A neural network acting on graphs defined by electrons and nuclei.</span>
 
 <span class="sd">    Derived from :class:`~deepqmc.gnn.gnn.GraphNeuralNetwork`.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mol (:class:`~deepqmc.Molecule`): the molecule on which the graph is defined.</span>
+<span class="sd">        hamil (:class:`~deepqmc.MolecularHamiltonian`): the Hamiltonian of the system</span>
+<span class="sd">            on which the graph is defined.</span>
 <span class="sd">        embedding_dim (int): the length of the electron embedding vectors.</span>
 <span class="sd">        n_interactions (int): number of message passing interactions.</span>
-<span class="sd">        positional_electron_embeddings(bool): whether to initialize the electron</span>
-<span class="sd">            embbedings with the concatenated edge features.</span>
-<span class="sd">        edge_features: a function or a :data:`dict` of functions for each edge</span>
-<span class="sd">            type, embedding the interparticle differences.</span>
-<span class="sd">        edge_types: the types of edges to consider in the molecular graph. It should</span>
-<span class="sd">            be a sequence of unique :data:`str`s from the follwing options:</span>
-<span class="sd">            - ``&#39;nn&#39;``: nucleus-nucleus edges</span>
-<span class="sd">            - ``&#39;ne&#39;``: nucleus-electron edges</span>
-<span class="sd">            - ``&#39;en&#39;``: electron-nucleus edges</span>
-<span class="sd">            - ``&#39;same&#39;``: electron-electron edges between electrons of the same spin</span>
-<span class="sd">            - ``&#39;anti&#39;``: electron-electron edges between electrons of opposite spins</span>
+<span class="sd">        edge_features (dict): a :data:`dict` of functions for each edge</span>
+<span class="sd">            type, embedding the interparticle differences. Valid keys are:</span>
+
+<span class="sd">            - ``&#39;ne&#39;``: for nucleus-electron edges</span>
+<span class="sd">            - ``&#39;nn&#39;``: for nucleus-nucleus edges</span>
+<span class="sd">            - ``&#39;same&#39;``: for same spin electron-electron edges</span>
+<span class="sd">            - ``&#39;anti&#39;``: for opposite spin electron-electron edges</span>
+<span class="sd">            - ``&#39;up&#39;``: for edges going from spin up electrons to all electrons</span>
+<span class="sd">            - ``&#39;down&#39;``: for edges going from spin down electrons to all electrons</span>
+
+<span class="sd">        self_interaction (bool): whether to consider edges where the sender and</span>
+<span class="sd">            receiver electrons are the same.</span>
 <span class="sd">        two_particle_stream_dim (int): the feature dimension of the two particle</span>
 <span class="sd">            streams. Only active if :data:`deep_features` are used.</span>
+<span class="sd">        nuclei_embedding (Union[None,~deepqmc.gnn.electron_gnn.NucleiEmbedding]):</span>
+<span class="sd">            optional, the instance responsible for creating the initial nuclear</span>
+<span class="sd">            embeddings. Set to :data:`None` if nuclear embeddings are not needed.</span>
+<span class="sd">        electron_embedding (~deepqmc.gnn.electron_gnn.ElectronEmbedding): the instance</span>
+<span class="sd">            that creates the initial electron embeddings.</span>
 <span class="sd">        layer_factory (Callable): a callable that generates a layer of the GNN.</span>
 <span class="sd">        ghost_coords: optional, specifies the coordinates of one or more ghost atoms,</span>
 <span class="sd">            useful for breaking spatial symmetries of the nuclear geometry.</span>
@@ -702,7 +706,9 @@ document.write(`
         <span class="n">nucleus_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">GraphNodes</span><span class="p">(</span><span class="n">nucleus_embedding</span><span class="p">,</span> <span class="n">electron_embedding</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ElectronGNN.edge_factory"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN.edge_factory">[docs]</a>    <span class="k">def</span> <span class="nf">edge_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNN.edge_factory">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN.edge_factory">[docs]</a>
+    <span class="k">def</span> <span class="nf">edge_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute all the graph edges used in the GNN.&quot;&quot;&quot;</span>
 
         <span class="n">edge_factory</span> <span class="o">=</span> <span class="n">MolecularGraphEdgeBuilder</span><span class="p">(</span>
@@ -719,6 +725,7 @@ document.write(`
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">typ</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span>
         <span class="p">}</span></div>
+
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -752,7 +759,10 @@ document.write(`
         <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span></div>
 
 
-<div class="viewcode-block" id="NucleiEmbedding"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.NucleiEmbedding">[docs]</a><span class="k">class</span> <span class="nc">NucleiEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NucleiEmbedding">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.NucleiEmbedding">[docs]</a>
+<span class="k">class</span> <span class="nc">NucleiEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for nuclei.</span>
 
 <span class="sd">    Args:</span>
@@ -801,8 +811,40 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subnet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ElectronEmbedding"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronEmbedding">[docs]</a><span class="k">class</span> <span class="nc">ElectronEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for electrons.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ElectronEmbedding">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronEmbedding">[docs]</a>
+<span class="k">class</span> <span class="nc">ElectronEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for electrons.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_nuc (int): the number of nuclei.</span>
+<span class="sd">        n_up (int): the number of spin up electrons.</span>
+<span class="sd">        n_down (int): the number of spin down electrons.</span>
+<span class="sd">        embedding_dim (int): the desired length of the embedding vectors.</span>
+<span class="sd">        n_elec_types (int): the number of electron types to differentiate.</span>
+<span class="sd">            Usual values are:</span>
+
+<span class="sd">            - ``1``: treat all electrons as indistinguishable. Note that electrons</span>
+<span class="sd">                with different spins can still become distinguishable during the later</span>
+<span class="sd">                embedding update steps of the GNN.</span>
+<span class="sd">            - ``2``: treat spin up and spin down electrons as distinguishable already</span>
+<span class="sd">                in the initial embeddings.</span>
+
+<span class="sd">        elec_types (jax.Array): an integer array with length equal to the number of</span>
+<span class="sd">            electrons, with entries between ``0`` and ``n_elec_types``. Specifies the</span>
+<span class="sd">            type for each electron.</span>
+<span class="sd">        positional_embeddings (Union[Literal[False],dict]): if not ``False``, a</span>
+<span class="sd">            ``dict`` with edge types as keys, and edge features as values. Specifies</span>
+<span class="sd">            the edge types and edge features to use when constructing the positional</span>
+<span class="sd">            initial electron embeddings.</span>
+<span class="sd">        use_spin (bool): only relevant if ``positional_embeddings`` is not ``False``,</span>
+<span class="sd">            if ``True``, concatenate the spin of the given electron after the</span>
+<span class="sd">            positional embedding features.</span>
+<span class="sd">        project_to_embedding_dim (bool): only relevant if ``positional_embeddings``</span>
+<span class="sd">            is not ``False``, if ``True``, use a linear layer to project the initial</span>
+<span class="sd">            embeddings to have length ``embedding_dim``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -858,6 +900,7 @@ document.write(`
             <span class="p">)</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elec_types</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span></div>
+
 </pre></div>
 
                 </article>

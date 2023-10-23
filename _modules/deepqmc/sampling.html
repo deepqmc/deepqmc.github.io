@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -8,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>deepqmc.sampling &#8212; DeepQMC 1.1.0 documentation</title>
+    <title>deepqmc.sampling &#8212; DeepQMC 1.1.1 documentation</title>
   
   
   
@@ -28,24 +27,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/katex.min.js"></script>
-    <script src="../../_static/auto-render.min.js"></script>
-    <script src="../../_static/katex_autorenderer.js"></script>
+    <script src="../../_static/documentation_options.js?v=83302504"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/katex.min.js?v=13f246ff"></script>
+    <script src="../../_static/auto-render.min.js?v=8b9f325c"></script>
+    <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/sampling';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -120,7 +116,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.1.1 documentation</p>
   
 </a></div>
     
@@ -396,6 +392,7 @@ document.write(`
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stdev</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
 
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
@@ -418,7 +415,9 @@ document.write(`
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Sampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.Sampler">[docs]</a><span class="k">class</span> <span class="nc">Sampler</span><span class="p">:</span>
+<div class="viewcode-block" id="Sampler">
+<a class="viewcode-back" href="../../api.html#deepqmc.sampling.Sampler">[docs]</a>
+<span class="k">class</span> <span class="nc">Sampler</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Base class for all QMC samplers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">wf</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -428,7 +427,10 @@ document.write(`
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-<div class="viewcode-block" id="MetropolisSampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.MetropolisSampler">[docs]</a><span class="k">class</span> <span class="nc">MetropolisSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="MetropolisSampler">
+<a class="viewcode-back" href="../../api.html#deepqmc.sampling.MetropolisSampler">[docs]</a>
+<span class="k">class</span> <span class="nc">MetropolisSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Metropolis--Hastings Monte Carlo sampler.</span>
 
@@ -527,7 +529,10 @@ document.write(`
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="LangevinSampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.LangevinSampler">[docs]</a><span class="k">class</span> <span class="nc">LangevinSampler</span><span class="p">(</span><span class="n">MetropolisSampler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LangevinSampler">
+<a class="viewcode-back" href="../../api.html#deepqmc.sampling.LangevinSampler">[docs]</a>
+<span class="k">class</span> <span class="nc">LangevinSampler</span><span class="p">(</span><span class="n">MetropolisSampler</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Langevin Monte Carlo sampler.</span>
 
@@ -567,7 +572,10 @@ document.write(`
         <span class="k">return</span> <span class="n">log_G_ratios</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">prop</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">log</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">log</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="DecorrSampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.DecorrSampler">[docs]</a><span class="k">class</span> <span class="nc">DecorrSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DecorrSampler">
+<a class="viewcode-back" href="../../api.html#deepqmc.sampling.DecorrSampler">[docs]</a>
+<span class="k">class</span> <span class="nc">DecorrSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Insert decorrelating steps into chained samplers.</span>
 
@@ -592,31 +600,34 @@ document.write(`
         <span class="k">return</span> <span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">phys_conf</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]),</span> <span class="n">stats</span></div>
 
 
-<div class="viewcode-block" id="ResampledSampler"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.ResampledSampler">[docs]</a><span class="k">class</span> <span class="nc">ResampledSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ResampledSampler">
+<a class="viewcode-back" href="../../api.html#deepqmc.sampling.ResampledSampler">[docs]</a>
+<span class="k">class</span> <span class="nc">ResampledSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add resampling to chained samplers.</span>
 
 <span class="sd">    This sampler cannot be used as the last element of a sampler chain.</span>
 <span class="sd">    The resampling is performed by accumulating weights on each MCMC walker</span>
 <span class="sd">    in each step. Based on a fixed resampling period :data:`period` and/or a</span>
-<span class="sd">    threshold :data:`treshold` on the normalized effective sample size the walker</span>
+<span class="sd">    threshold :data:`threshold` on the normalized effective sample size the walker</span>
 <span class="sd">    positions are sampled according to the multinomial distribution defined by</span>
 <span class="sd">    these weights, and the weights are reset to one. Either :data:`period` or</span>
-<span class="sd">    :data:`treshold` have to be specified.</span>
+<span class="sd">    :data:`threshold` have to be specified.</span>
 
 
 <span class="sd">    Args:</span>
 <span class="sd">        period (int): optional, if specified the walkers are resampled every</span>
 <span class="sd">            :data:`period` MCMC steps.</span>
-<span class="sd">        treshold (float): optional, if specified the walkers are resampled if</span>
+<span class="sd">        threshold (float): optional, if specified the walkers are resampled if</span>
 <span class="sd">            the effective sample size normalized with the batch size is below</span>
-<span class="sd">            :data:`treshold`.</span>
+<span class="sd">            :data:`threshold`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">treshold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">treshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">treshold</span> <span class="o">=</span> <span class="n">treshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">wf</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
         <span class="n">state</span><span class="p">[</span><span class="s1">&#39;log_weight&#39;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">log</span>
@@ -654,13 +665,14 @@ document.write(`
         <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;sampling/effective sample size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ess</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span>
             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
-            <span class="o">|</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ess</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">treshold</span><span class="p">),</span>
+            <span class="o">|</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ess</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">resample_walkers</span><span class="p">,</span>
             <span class="k">lambda</span> <span class="n">rng</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span>
             <span class="n">rng_re</span><span class="p">,</span>
             <span class="n">state</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">phys_conf</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]),</span> <span class="n">stats</span></div>
+
 
 
 <span class="k">class</span> <span class="nc">MoleculeIdxSampler</span><span class="p">:</span>
@@ -726,7 +738,7 @@ document.write(`
             <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">mol_idxs</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">state</span><span class="p">,</span> <span class="n">sampled_states</span>
         <span class="p">)</span>
         <span class="n">phys_conf</span> <span class="o">=</span> <span class="n">jdc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-            <span class="n">phys_conf</span><span class="p">,</span> <span class="n">mol_idx</span><span class="o">=</span><span class="n">mol_idxs</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">phys_conf</span><span class="p">,</span> <span class="n">mol_idx</span><span class="o">=</span><span class="n">mol_idxs</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">phys_conf</span><span class="o">.</span><span class="n">batch_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">state</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">,</span> <span class="n">stats</span>
 
@@ -740,7 +752,9 @@ document.write(`
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nuclear_coordinates</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="chain"><a class="viewcode-back" href="../../api.html#deepqmc.sampling.chain">[docs]</a><span class="k">def</span> <span class="nf">chain</span><span class="p">(</span><span class="o">*</span><span class="n">samplers</span><span class="p">):</span>
+<div class="viewcode-block" id="chain">
+<a class="viewcode-back" href="../../api.html#deepqmc.sampling.chain">[docs]</a>
+<span class="k">def</span> <span class="nf">chain</span><span class="p">(</span><span class="o">*</span><span class="n">samplers</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Combine multiple sampler types, to create advanced sampling schemes.</span>
 
@@ -763,6 +777,7 @@ document.write(`
     <span class="k">for</span> <span class="n">sampler</span> <span class="ow">in</span> <span class="n">samplers</span><span class="p">:</span>
         <span class="n">chained</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">chained</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">diffs_to_nearest_nuc</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span>
@@ -827,6 +842,45 @@ document.write(`
         <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">[:</span><span class="n">block_size</span><span class="p">],</span> <span class="n">buffer</span><span class="p">[</span><span class="o">-</span><span class="n">block_size</span><span class="p">:]</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">-</span> <span class="n">mean</span><span class="p">(</span><span class="n">b2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">stdev</span><span class="p">(</span><span class="n">b1</span><span class="p">),</span> <span class="n">stdev</span><span class="p">(</span><span class="n">b2</span><span class="p">)):</span>
             <span class="k">break</span>
+
+
+<span class="k">def</span> <span class="nf">initialize_sampling</span><span class="p">(</span>
+    <span class="n">rng</span><span class="p">,</span>
+    <span class="n">hamil</span><span class="p">,</span>
+    <span class="n">mols</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="p">,</span>
+    <span class="n">pretrain_sampler</span><span class="p">,</span>
+    <span class="n">electron_batch_size</span><span class="p">,</span>
+    <span class="n">molecule_batch_size</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">electron_batch_size</span> <span class="o">%</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="ow">or</span> <span class="n">hamil</span><span class="o">.</span><span class="n">mol</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">molecule_batch_size</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
+    <span class="n">molecule_idx_sampler</span> <span class="o">=</span> <span class="n">MoleculeIdxSampler</span><span class="p">(</span>
+        <span class="n">rng</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">),</span> <span class="n">molecule_batch_size</span><span class="p">,</span> <span class="s1">&#39;once&#39;</span>
+    <span class="p">)</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">MultiNuclearGeometrySampler</span><span class="p">(</span>
+        <span class="n">sampler</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">coords</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">pretrain_sampler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">sampler</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">pretrain_sampler</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">pretrain_sampler</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">hamil</span><span class="p">))</span>
+        <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">MultiNuclearGeometrySampler</span><span class="p">(</span>
+            <span class="n">pretrain_sampler</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">coords</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">])</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">mols</span><span class="p">,</span> <span class="n">molecule_idx_sampler</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">pretrain_sampler</span>
+
+
+<span class="k">def</span> <span class="nf">initialize_sampler_state</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">electron_batch_size</span><span class="p">):</span>
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">select_one_device</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+
+    <span class="nd">@jax</span><span class="o">.</span><span class="n">pmap</span>
+    <span class="k">def</span> <span class="nf">sampler_state_initializer</span><span class="p">(</span><span class="n">rng</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">wf</span><span class="p">,</span> <span class="n">electron_batch_size</span> <span class="o">//</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_count</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">sampler_state_initializer</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
 </pre></div>
 
                 </article>

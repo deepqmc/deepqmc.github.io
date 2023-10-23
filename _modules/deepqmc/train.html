@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -8,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>deepqmc.train &#8212; DeepQMC 1.1.0 documentation</title>
+    <title>deepqmc.train &#8212; DeepQMC 1.1.1 documentation</title>
   
   
   
@@ -28,24 +27,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/katex.min.js"></script>
-    <script src="../../_static/auto-render.min.js"></script>
-    <script src="../../_static/katex_autorenderer.js"></script>
+    <script src="../../_static/documentation_options.js?v=83302504"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/katex.min.js?v=13f246ff"></script>
+    <script src="../../_static/auto-render.min.js?v=8b9f325c"></script>
+    <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/train';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -120,7 +116,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.0 documentation</p>
+    <p class="title logo__title">DeepQMC 1.1.1 documentation</p>
   
 </a></div>
     
@@ -394,55 +390,35 @@ document.write(`
                   
   <h1>Source code for deepqmc.train</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">operator</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">import</span> <span class="nn">kfac_jax</span>
-<span class="kn">import</span> <span class="nn">optax</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">tree_util</span>
 <span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
 <span class="kn">from</span> <span class="nn">uncertainties</span> <span class="kn">import</span> <span class="n">ufloat</span>
+
+<span class="kn">from</span> <span class="nn">deepqmc.optimizer</span> <span class="kn">import</span> <span class="n">construct_optimizer</span>
 
 <span class="kn">from</span> <span class="nn">.ewm</span> <span class="kn">import</span> <span class="n">init_ewm</span>
 <span class="kn">from</span> <span class="nn">.fit</span> <span class="kn">import</span> <span class="n">fit_wf</span>
 <span class="kn">from</span> <span class="nn">.log</span> <span class="kn">import</span> <span class="n">CheckpointStore</span><span class="p">,</span> <span class="n">H5LogTable</span><span class="p">,</span> <span class="n">TensorboardMetricLogger</span>
 <span class="kn">from</span> <span class="nn">.parallel</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">gather_electrons_on_one_device</span><span class="p">,</span>
-    <span class="n">replicate_on_devices</span><span class="p">,</span>
     <span class="n">select_one_device</span><span class="p">,</span>
     <span class="n">split_on_devices</span><span class="p">,</span>
     <span class="n">split_rng_key_to_devices</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.physics</span> <span class="kn">import</span> <span class="n">pairwise_self_distance</span>
 <span class="kn">from</span> <span class="nn">.pretrain</span> <span class="kn">import</span> <span class="n">pretrain</span>
-<span class="kn">from</span> <span class="nn">.sampling</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">MoleculeIdxSampler</span><span class="p">,</span>
-    <span class="n">MultiNuclearGeometrySampler</span><span class="p">,</span>
-    <span class="n">chain</span><span class="p">,</span>
-    <span class="n">equilibrate</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">ConstantSchedule</span><span class="p">,</span> <span class="n">InverseSchedule</span>
+<span class="kn">from</span> <span class="nn">.sampling</span> <span class="kn">import</span> <span class="n">equilibrate</span><span class="p">,</span> <span class="n">initialize_sampler_state</span><span class="p">,</span> <span class="n">initialize_sampling</span>
 <span class="kn">from</span> <span class="nn">.wf.base</span> <span class="kn">import</span> <span class="n">init_wf_params</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-<span class="n">OPT_KWARGS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;adam&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">1.0e-3</span><span class="p">,</span> <span class="s1">&#39;b1&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">},</span>
-    <span class="s1">&#39;adamw&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">1.0e-3</span><span class="p">,</span> <span class="s1">&#39;b1&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">},</span>
-    <span class="s1">&#39;kfac&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;learning_rate_schedule&#39;</span><span class="p">:</span> <span class="n">InverseSchedule</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span>
-        <span class="s1">&#39;damping_schedule&#39;</span><span class="p">:</span> <span class="n">ConstantSchedule</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span>
-        <span class="s1">&#39;norm_constraint&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">}</span>
 
 
 <span class="k">class</span> <span class="nc">NanError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -456,7 +432,9 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span> <span class="o">=</span> <span class="n">train_state</span>
 
 
-<div class="viewcode-block" id="train"><a class="viewcode-back" href="../../api.html#deepqmc.train.train">[docs]</a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span>  <span class="c1"># noqa: C901</span>
+<div class="viewcode-block" id="train">
+<a class="viewcode-back" href="../../api.html#deepqmc.train.train">[docs]</a>
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span>  <span class="c1"># noqa: C901</span>
     <span class="n">hamil</span><span class="p">,</span>
     <span class="n">ansatz</span><span class="p">,</span>
     <span class="n">opt</span><span class="p">,</span>
@@ -499,7 +477,7 @@ document.write(`
 <span class="sd">            - an :data:`optax` optimizer instance: the supplied :data:`optax`</span>
 <span class="sd">                optimizer is used.</span>
 <span class="sd">            - :class:`str`: the name of the optimizer to use (:data:`&#39;kfac&#39;` or an</span>
-<span class="sd">                :data:`optax` optimzier name). Arguments to the optimizer can be</span>
+<span class="sd">                :data:`optax` optimizer name). Arguments to the optimizer can be</span>
 <span class="sd">                passed in :data:`opt_kwargs`.</span>
 <span class="sd">            - :data:`None`: no optimizer is used, e.g. the evaluation of the Ansatz</span>
 <span class="sd">                is performed.</span>
@@ -513,7 +491,7 @@ document.write(`
 <span class="sd">            to consider for transferable training. If None the default molecule from</span>
 <span class="sd">            hamil is used.</span>
 <span class="sd">        workdir (str): optional, path, where results should be saved.</span>
-<span class="sd">        train_state (~deepqmc.fit.TrainState): optional, training checkpoint to</span>
+<span class="sd">        train_state (~deepqmc.types.TrainState): optional, training checkpoint to</span>
 <span class="sd">            restore training or run evaluation.</span>
 <span class="sd">        init_step (int): optional, initial step index, useful if</span>
 <span class="sd">            calculation is restarted from checkpoint saved on disk.</span>
@@ -535,45 +513,28 @@ document.write(`
 <span class="sd">            If not specified, the default `~.log.TensorboardMetricLogger` is used</span>
 <span class="sd">            to create tensorboard logs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">electron_batch_size</span> <span class="o">%</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;evaluation&#39;</span> <span class="k">if</span> <span class="n">opt</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;training&#39;</span>
-    <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="ow">or</span> <span class="n">hamil</span><span class="o">.</span><span class="n">mol</span>
-    <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="n">molecule_batch_size</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
-    <span class="n">rng</span><span class="p">,</span> <span class="n">rng_mol_smpl</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
-    <span class="n">molecule_idx_sampler</span> <span class="o">=</span> <span class="n">MoleculeIdxSampler</span><span class="p">(</span>
-        <span class="n">rng_mol_smpl</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">),</span> <span class="n">molecule_batch_size</span><span class="p">,</span> <span class="s1">&#39;once&#39;</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">rng</span><span class="p">,</span> <span class="n">rng_smpl</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+    <span class="n">mols</span><span class="p">,</span> <span class="n">molecule_idx_sampler</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">initialize_sampling</span><span class="p">(</span>
+        <span class="n">rng_smpl</span><span class="p">,</span>
+        <span class="n">hamil</span><span class="p">,</span>
+        <span class="n">mols</span><span class="p">,</span>
+        <span class="n">sampler</span><span class="p">,</span>
+        <span class="n">pretrain_sampler</span><span class="p">,</span>
+        <span class="n">electron_batch_size</span><span class="p">,</span>
+        <span class="n">molecule_batch_size</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">sampler</span> <span class="o">=</span> <span class="n">MultiNuclearGeometrySampler</span><span class="p">(</span>
-        <span class="n">sampler</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">coords</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">])</span>
-    <span class="p">)</span>
-    <span class="k">if</span> <span class="n">pretrain_sampler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">sampler</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">pretrain_sampler</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">pretrain_sampler</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">hamil</span><span class="p">))</span>
-        <span class="n">pretrain_sampler</span> <span class="o">=</span> <span class="n">MultiNuclearGeometrySampler</span><span class="p">(</span>
-            <span class="n">pretrain_sampler</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">coords</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">])</span>
-        <span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">opt_kwargs</span> <span class="o">=</span> <span class="n">OPT_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="p">{})</span> <span class="o">|</span> <span class="p">(</span><span class="n">opt_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
-        <span class="n">opt</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">partial</span><span class="p">(</span><span class="n">kfac_jax</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="o">**</span><span class="n">opt_kwargs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;kfac&#39;</span>
-            <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">optax</span><span class="p">,</span> <span class="n">opt</span><span class="p">)(</span><span class="o">**</span><span class="n">opt_kwargs</span><span class="p">)</span>
-        <span class="p">)</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">construct_optimizer</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">opt_kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
         <span class="n">workdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
         <span class="n">chkptdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chkptdir</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">chkptdir</span> <span class="k">else</span> <span class="n">workdir</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">chkptdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">chkpts</span> <span class="o">=</span> <span class="n">CheckpointStore</span><span class="p">(</span><span class="n">chkptdir</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">chkpts_kwargs</span> <span class="ow">or</span> <span class="p">{}))</span>
-        <span class="k">if</span> <span class="n">workdir</span><span class="p">:</span>
-            <span class="n">metric_logger</span> <span class="o">=</span> <span class="p">(</span><span class="n">metric_logger</span> <span class="ow">or</span> <span class="n">TensorboardMetricLogger</span><span class="p">)(</span>
-                <span class="n">workdir</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">)</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">metric_logger</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">metric_logger</span> <span class="o">=</span> <span class="p">(</span><span class="n">metric_logger</span> <span class="ow">or</span> <span class="n">TensorboardMetricLogger</span><span class="p">)(</span>
+            <span class="n">workdir</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sampler</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Setting up HDF5 file...&#39;</span><span class="p">)</span>
         <span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="s1">&#39;result.h5&#39;</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">libver</span><span class="o">=</span><span class="s1">&#39;v110&#39;</span><span class="p">)</span>
         <span class="n">h5file</span><span class="o">.</span><span class="n">swmr_mode</span> <span class="o">=</span> <span class="kc">True</span>
@@ -594,24 +555,15 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rng</span><span class="p">,</span> <span class="n">rng_init</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
             <span class="n">params</span> <span class="o">=</span> <span class="n">init_wf_params</span><span class="p">(</span><span class="n">rng_init</span><span class="p">,</span> <span class="n">hamil</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">)</span>
-            <span class="n">num_params</span> <span class="o">=</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_reduce</span><span class="p">(</span>
-                <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of model parameters: </span><span class="si">{</span><span class="n">num_params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="n">params</span> <span class="o">=</span> <span class="n">replicate_on_devices</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">pretrain_steps</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;training&#39;</span><span class="p">:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Pretraining wrt. baseline wave function&#39;</span><span class="p">)</span>
                 <span class="n">rng</span><span class="p">,</span> <span class="n">rng_pretrain</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
                 <span class="n">pretrain_kwargs</span> <span class="o">=</span> <span class="n">pretrain_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
-                <span class="n">opt_pretrain</span> <span class="o">=</span> <span class="n">pretrain_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;opt&#39;</span><span class="p">,</span> <span class="s1">&#39;adamw&#39;</span><span class="p">)</span>
-                <span class="n">opt_pretrain_kwargs</span> <span class="o">=</span> <span class="n">OPT_KWARGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                    <span class="n">opt_pretrain</span><span class="p">,</span> <span class="p">{}</span>
-                <span class="p">)</span> <span class="o">|</span> <span class="n">pretrain_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;opt_kwargs&#39;</span><span class="p">,</span> <span class="p">{})</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opt_pretrain</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">opt_pretrain</span> <span class="o">==</span> <span class="s1">&#39;kfac&#39;</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-                    <span class="n">opt_pretrain</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">optax</span><span class="p">,</span> <span class="n">opt_pretrain</span><span class="p">)</span>
-                <span class="n">opt_pretrain</span> <span class="o">=</span> <span class="n">opt_pretrain</span><span class="p">(</span><span class="o">**</span><span class="n">opt_pretrain_kwargs</span><span class="p">)</span>
+                <span class="n">opt_pretrain</span> <span class="o">=</span> <span class="n">construct_optimizer</span><span class="p">(</span>
+                    <span class="n">pretrain_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;opt&#39;</span><span class="p">,</span> <span class="s1">&#39;adamw&#39;</span><span class="p">),</span>
+                    <span class="n">pretrain_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;opt_kwargs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="n">wrap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
                 <span class="n">ewm_state</span><span class="p">,</span> <span class="n">update_ewm</span> <span class="o">=</span> <span class="n">init_ewm</span><span class="p">(</span><span class="n">decay_alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
                 <span class="n">ewm_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pretrain_sampler</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="n">ewm_state</span><span class="p">]</span>
                 <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">pretrain_steps</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;pretrain&#39;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -651,13 +603,9 @@ document.write(`
         <span class="n">rng</span> <span class="o">=</span> <span class="n">split_rng_key_to_devices</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">train_state</span> <span class="ow">or</span> <span class="n">train_state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">rng</span><span class="p">,</span> <span class="n">rng_eq</span><span class="p">,</span> <span class="n">rng_smpl_init</span> <span class="o">=</span> <span class="n">split_on_devices</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-            <span class="n">wf</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">select_one_device</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
-            <span class="n">sample_initializer</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
-                <span class="n">sampler</span><span class="o">.</span><span class="n">init</span><span class="p">,</span>
-                <span class="n">wf</span><span class="o">=</span><span class="n">wf</span><span class="p">,</span>
-                <span class="n">electron_batch_size</span><span class="o">=</span><span class="n">electron_batch_size</span> <span class="o">//</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_count</span><span class="p">(),</span>
+            <span class="n">smpl_state</span> <span class="o">=</span> <span class="n">initialize_sampler_state</span><span class="p">(</span>
+                <span class="n">rng_smpl_init</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">electron_batch_size</span>
             <span class="p">)</span>
-            <span class="n">smpl_state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">pmap</span><span class="p">(</span><span class="n">sample_initializer</span><span class="p">)(</span><span class="n">rng_smpl_init</span><span class="p">)</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Equilibrating sampler...&#39;</span><span class="p">)</span>
             <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
                 <span class="n">count</span><span class="p">()</span> <span class="k">if</span> <span class="n">max_eq_steps</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_eq_steps</span><span class="p">),</span>
@@ -666,7 +614,7 @@ document.write(`
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">smpl_state</span><span class="p">,</span> <span class="n">mol_idxs</span><span class="p">,</span> <span class="n">smpl_stats</span> <span class="ow">in</span> <span class="n">equilibrate</span><span class="p">(</span>  <span class="c1"># noqa: B007</span>
                 <span class="n">rng_eq</span><span class="p">,</span>
-                <span class="n">wf</span><span class="p">,</span>
+                <span class="n">partial</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">select_one_device</span><span class="p">(</span><span class="n">params</span><span class="p">)),</span>
                 <span class="n">molecule_idx_sampler</span><span class="p">,</span>
                 <span class="n">sampler</span><span class="p">,</span>
                 <span class="n">smpl_state</span><span class="p">,</span>
@@ -778,6 +726,7 @@ document.write(`
             <span class="n">chkpts</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">metric_logger</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">h5file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
 </pre></div>
 
                 </article>
