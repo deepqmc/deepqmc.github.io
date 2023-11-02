@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 
@@ -17,31 +18,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css?v=91adb8b6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
-    <script src="../../../_static/documentation_options.js?v=83302504"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/katex.min.js?v=13f246ff"></script>
-    <script src="../../../_static/auto-render.min.js?v=8b9f325c"></script>
-    <script src="../../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/gnn/electron_gnn';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -111,6 +115,7 @@
   
 
 <a class="navbar-brand logo" href="../../../index.html">
+  
   
   
   
@@ -401,9 +406,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NodeEdgeMapping</span>
 
 
-<div class="viewcode-block" id="ElectronGNNLayer">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNNLayer">[docs]</a>
-<span class="k">class</span> <span class="nc">ElectronGNNLayer</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNNLayer"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNNLayer">[docs]</a><span class="k">class</span> <span class="nc">ElectronGNNLayer</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The message passing layer of :class:`ElectronGNN`.</span>
 
@@ -600,10 +603,7 @@ document.write(`
         <span class="k">return</span> <span class="n">update_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="ElectronGNN">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN">[docs]</a>
-<span class="k">class</span> <span class="nc">ElectronGNN</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNN"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN">[docs]</a><span class="k">class</span> <span class="nc">ElectronGNN</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A neural network acting on graphs defined by electrons and nuclei.</span>
 
@@ -706,9 +706,7 @@ document.write(`
         <span class="n">nucleus_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">GraphNodes</span><span class="p">(</span><span class="n">nucleus_embedding</span><span class="p">,</span> <span class="n">electron_embedding</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ElectronGNN.edge_factory">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN.edge_factory">[docs]</a>
-    <span class="k">def</span> <span class="nf">edge_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNN.edge_factory"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN.edge_factory">[docs]</a>    <span class="k">def</span> <span class="nf">edge_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute all the graph edges used in the GNN.&quot;&quot;&quot;</span>
 
         <span class="n">edge_factory</span> <span class="o">=</span> <span class="n">MolecularGraphEdgeBuilder</span><span class="p">(</span>
@@ -725,7 +723,6 @@ document.write(`
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">typ</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span>
         <span class="p">}</span></div>
-
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -759,10 +756,7 @@ document.write(`
         <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span></div>
 
 
-
-<div class="viewcode-block" id="NucleiEmbedding">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.NucleiEmbedding">[docs]</a>
-<span class="k">class</span> <span class="nc">NucleiEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="NucleiEmbedding"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.NucleiEmbedding">[docs]</a><span class="k">class</span> <span class="nc">NucleiEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for nuclei.</span>
 
 <span class="sd">    Args:</span>
@@ -811,10 +805,7 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subnet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="ElectronEmbedding">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronEmbedding">[docs]</a>
-<span class="k">class</span> <span class="nc">ElectronEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronEmbedding"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronEmbedding">[docs]</a><span class="k">class</span> <span class="nc">ElectronEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for electrons.</span>
 
 <span class="sd">    Args:</span>
@@ -900,7 +891,6 @@ document.write(`
             <span class="p">)</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elec_types</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span></div>
-
 </pre></div>
 
                 </article>
@@ -930,8 +920,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -954,7 +944,7 @@ document.write(`
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.2.
 </p></div>
       
     </div>

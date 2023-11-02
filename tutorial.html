@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 
@@ -18,31 +19,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=91adb8b6" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
-    <script src="_static/documentation_options.js?v=83302504"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/katex.min.js?v=13f246ff"></script>
-    <script src="_static/auto-render.min.js?v=8b9f325c"></script>
-    <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -114,6 +118,7 @@
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -408,10 +413,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="tutorial">
-<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">#</a></h1>
 <p>This section exemplifies the use of the API of DeepQMC. For the high-level command line API see <a class="reference internal" href="cli.html#cli"><span class="std std-ref">cli</span></a>. For further information and a more detailed descriptions of the functions presented here consult the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> documentation.</p>
 <section id="create-a-molecule">
-<h2>Create a molecule<a class="headerlink" href="#create-a-molecule" title="Link to this heading">#</a></h2>
+<h2>Create a molecule<a class="headerlink" href="#create-a-molecule" title="Permalink to this heading">#</a></h2>
 <p>A molecule is represented by the <a class="reference internal" href="api.html#deepqmc.Molecule" title="deepqmc.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> class in DeepQMC. The easiest way to get started is to work with one of the predefined molecules:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">Molecule</span>
 
@@ -435,7 +440,7 @@ document.write(`
 </div>
 </section>
 <section id="create-the-molecular-hamiltonian">
-<h2>Create the molecular Hamiltonian<a class="headerlink" href="#create-the-molecular-hamiltonian" title="Link to this heading">#</a></h2>
+<h2>Create the molecular Hamiltonian<a class="headerlink" href="#create-the-molecular-hamiltonian" title="Permalink to this heading">#</a></h2>
 <p>From the molecule the <a class="reference internal" href="api.html#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a> is constructed:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">MolecularHamiltonian</span>
 
@@ -445,7 +450,7 @@ document.write(`
 <p>The Hamiltonian provides the local energy function for the evaluation of the energy expectation value, as well as an educated guess for initial electron configurations to start the sampling.</p>
 </section>
 <section id="create-a-wave-function-ansatz">
-<h2>Create a wave function ansatz<a class="headerlink" href="#create-a-wave-function-ansatz" title="Link to this heading">#</a></h2>
+<h2>Create a wave function ansatz<a class="headerlink" href="#create-a-wave-function-ansatz" title="Permalink to this heading">#</a></h2>
 <p>The neural network wave function ansatz is available in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">deepqmc.wf</span></code> subpackage. A convenient way of initializing a wave function instance is to use a <code class="xref py py-mod docutils literal notranslate"><span class="pre">hydra</span></code> config file. DeepQMC comes with config files for predefined wave functions (at <code class="docutils literal notranslate"><span class="pre">../deepqmc/src/deepqmc/conf/ansatz</span></code>), however custom configurations may be used. Being a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#module-1" title="(in Haiku)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">haiku</span></code></a> module the ansatz has to be initialized inside a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#haiku.transform" title="(in Haiku)"><code class="xref py py-func docutils literal notranslate"><span class="pre">haiku.transform()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
@@ -472,7 +477,7 @@ document.write(`
 <p>The hyperparameters and their physical meaning are described in the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> reference.</p>
 </section>
 <section id="instantiate-a-sampler">
-<h2>Instantiate a sampler<a class="headerlink" href="#instantiate-a-sampler" title="Link to this heading">#</a></h2>
+<h2>Instantiate a sampler<a class="headerlink" href="#instantiate-a-sampler" title="Permalink to this heading">#</a></h2>
 <p>The variational Monte Carlo method requires sampling the probability density associated with the square of the wave function. A <a class="reference internal" href="api.html#deepqmc.sampling.Sampler" title="deepqmc.sampling.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a> can be instantiated from a <a class="reference internal" href="api.html#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc.sampling</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">MetropolisSampler</span><span class="p">,</span> <span class="n">DecorrSampler</span>
 
@@ -482,7 +487,7 @@ document.write(`
 <p>Different samplers can be chained together via the <a class="reference internal" href="api.html#deepqmc.sampling.chain" title="deepqmc.sampling.chain"><code class="xref py py-func docutils literal notranslate"><span class="pre">chain()</span></code></a> command.</p>
 </section>
 <section id="optimize-the-ansatz">
-<h2>Optimize the ansatz<a class="headerlink" href="#optimize-the-ansatz" title="Link to this heading">#</a></h2>
+<h2>Optimize the ansatz<a class="headerlink" href="#optimize-the-ansatz" title="Permalink to this heading">#</a></h2>
 <p>The high-level <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function is used to train the deep neural networks in the ansatz. The train function takes a <a class="reference internal" href="api.html#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a>, a <a class="reference internal" href="api.html#deepqmc.wf.WaveFunction" title="deepqmc.wf.WaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveFunction</span></code></a> and a <a class="reference internal" href="api.html#deepqmc.sampling.Sampler" title="deepqmc.sampling.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>. Further necessary arguments are an optimizer (<code class="docutils literal notranslate"><span class="pre">opt</span></code>), the number of training steps (<code class="docutils literal notranslate"><span class="pre">steps</span></code>), the number of samples used in a training batch (<code class="docutils literal notranslate"><span class="pre">sample_size</span></code>), and a seed (<code class="docutils literal notranslate"><span class="pre">seed</span></code>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepqmc</span> <span class="kn">import</span> <span class="n">train</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">electron_batch_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -492,7 +497,7 @@ document.write(`
 <p>If the argument <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code> is set, the ansatz is pretrained with respect to a Hartree-Fock or CASSCF baseline obtained with <a class="reference external" href="https://pyscf.org/pyscf_api_docs/pyscf.html#module-pyscf" title="(in PySCF v2.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf</span></code></a>. For more details as well as further training hyperparameters consult the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> reference.</p>
 </section>
 <section id="logging">
-<h2>Logging<a class="headerlink" href="#logging" title="Link to this heading">#</a></h2>
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this heading">#</a></h2>
 <p>The terminal output shows only how far has the training progressed and the current estimate of the energy. More detailed monitoring of the training is available via <a class="reference external" href="https://www.tensorflow.org/tensorboard">Tensorboard</a>. When <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> is called with an optional <code class="docutils literal notranslate"><span class="pre">workdir</span></code> argument, the training run creates a Tensorboard event file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="s1">&#39;kfac&#39;</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">electron_batch_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s1">&#39;runs/01&#39;</span><span class="p">)</span>
 </pre></div>
@@ -512,7 +517,7 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
 </div>
 </section>
 <section id="evaluate-the-energy">
-<h2>Evaluate the energy<a class="headerlink" href="#evaluate-the-energy" title="Link to this heading">#</a></h2>
+<h2>Evaluate the energy<a class="headerlink" href="#evaluate-the-energy" title="Permalink to this heading">#</a></h2>
 <p>A rough estimate of the expectation value of the energy of a trained wave function can be obtained already from the local energies of the training run. A rigorous estimation of the energy expectation value up to the statistical sampling error can be obtained when evaluating the energy expectation value of the trained wavefunction without further optimization. This is achieved by passing a training checkpoint to the <a class="reference internal" href="api.html#module-deepqmc.train" title="deepqmc.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a> function, and specifying the optimizer to be <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">step</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;runs/01/training/chkpt-10000.pt&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -523,7 +528,7 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
 <p>The evaluation generates the same type of logs as the training, but writes to <code class="docutils literal notranslate"><span class="pre">workdir/evaluation</span></code> instead. The final energy can be read from the progress bar, the Tensorboard event file or computed from the local enregies in the hdf5 file respectively.</p>
 </section>
 <section id="pseudopotentials">
-<h2>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Link to this heading">#</a></h2>
+<h2>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this heading">#</a></h2>
 <p>DeepQMC currently supports <code class="docutils literal notranslate"><span class="pre">bfd</span></code> <a class="reference internal" href="refs.html#burkatzki07" id="id2"><span>[Burkatzki07]</span></a> and <code class="docutils literal notranslate"><span class="pre">ccECP</span></code> <a class="reference internal" href="refs.html#bennett17" id="id3"><span>[Bennett17]</span></a> pseudopotentials, which can be enabled by passing the <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> argument to the hamiltonian definition. This replaces a certain number of core electrons with a pseudopotential, reducing the total number of electrons explicitly treated and thus decreasing the computational cost. The pseudopotentials for all nuclei heavier than He in the molecule will be used if the argument <code class="docutils literal notranslate"><span class="pre">pp_type</span></code> is passed. They can be turned off or on for individual nuclei by specifying <code class="docutils literal notranslate"><span class="pre">pp_mask</span></code>, a boolean array with <code class="docutils literal notranslate"><span class="pre">True</span></code> for each nucleus with pseudopotential turned on. The following example defines a hamiltonian of a TiO molecule where the titanium core is replaced by a pseudopotential and the oxygen core is left unaffected:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>  <span class="c1"># TiO</span>
     <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.668</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span>
@@ -593,8 +598,8 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -617,7 +622,7 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.2.
 </p></div>
       
     </div>

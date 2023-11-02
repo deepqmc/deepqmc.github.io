@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 
@@ -18,31 +19,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=91adb8b6" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
-    <script src="_static/documentation_options.js?v=83302504"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/katex.min.js?v=13f246ff"></script>
-    <script src="_static/auto-render.min.js?v=8b9f325c"></script>
-    <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cli';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -114,6 +118,7 @@
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -410,7 +415,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="command-line-interface">
-<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">#</a></h1>
+<span id="cli"></span><h1>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading">#</a></h1>
 <p>This section describes the <a class="reference external" href="https://hydra.cc/">hydra</a> based command-line interface (CLI) to DeepQMC. The tutorial exemplifies a basic training and evaluation through the command line. For more advanced functionality such as multiruns or interaction with slurm see the <a class="reference external" href="https://hydra.cc/docs/intro/">hydra docs</a>.</p>
 <p>The CLI provides simple access to the functionalities of the <a class="reference internal" href="api.html#module-deepqmc" title="deepqmc"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepqmc</span></code></a> package. The main tasks comprise <code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">restart</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code>, which are thin wrappers around the <a class="reference internal" href="api.html#module-deepqmc.train"><span class="std std-ref">train</span></a> function.</p>
 <blockquote>
@@ -423,7 +428,7 @@ document.write(`
 </div></blockquote>
 <p>The train function creates a directory which contains the logs as well as the hyperparameters for the training (<code class="docutils literal notranslate"><span class="pre">.hydra</span></code>). For <code class="docutils literal notranslate"><span class="pre">restart</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> the restdir of the former training run has to be provided. Specifying arguments when executing the command will overwrite the configuration stored in the restdir. This enables changing certain parameters, such as the number of training / evaluation steps, but can result in errors if the requested hyperparameters conflict with the recovered train state.</p>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
 <p>A training can be run via:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc hydra.run.dir=workdir
 </pre></div>
@@ -435,24 +440,24 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">training/state-*.pt</span></code> - Checkpoint files with the saved state of the ansatz at particular steps</p></li>
 </ul>
 <p>The training can be continued or recoverd from a training checkpoint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=restart task.restdir=workdir
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=restart task.restdir=workdir/training
 </pre></div>
 </div>
 <p>The evaluation of the energy of a trained wavefunction ansatz is obtained via:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=evaluate task.restdir=workdir
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=evaluate task.restdir=workdir/training
 </pre></div>
 </div>
 <p>This again generates a Tensorboard event file <code class="docutils literal notranslate"><span class="pre">evaluation/events.out.tfevents.*</span></code> and an HDF5 file <code class="docutils literal notranslate"><span class="pre">evaluation/result.h5</span></code> file holding the sampled local energies.</p>
 </section>
 <section id="execution-on-multiple-gpus">
-<h2>Execution on multiple GPUs<a class="headerlink" href="#execution-on-multiple-gpus" title="Link to this heading">#</a></h2>
+<h2>Execution on multiple GPUs<a class="headerlink" href="#execution-on-multiple-gpus" title="Permalink to this heading">#</a></h2>
 <p>DeepQMC can utilize multiple GPUs of a single host for increased performance. The algorithm is parallelised over the electron position samples, therefore the number of such samples in a batch (<code class="docutils literal notranslate"><span class="pre">electron_batch_size</span></code>) must be divisible with the number of utilized GPUs. DeepQMC relies on JAX to automatically detect and use all available GPUs, without any configuration from the user. It respects the <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> environment variable if it’s defined, and only uses the GPUs specified there. A short log message at the beginning of the run informs the user of the number of utilized GPUs.</p>
 </section>
 <section id="hyperparameters">
-<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h2>
 <p>In the following the most relevant settings for running experiments with DeepQMC are discussed.</p>
 <section id="task">
-<h3>Task<a class="headerlink" href="#task" title="Link to this heading">#</a></h3>
+<h3>Task<a class="headerlink" href="#task" title="Permalink to this heading">#</a></h3>
 <p>DeepQMC provides the above mentioned configurations for the <code class="docutils literal notranslate"><span class="pre">train</span></code>, <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> and <code class="docutils literal notranslate"><span class="pre">restart</span></code> task. In order to override default hyperparameters of the experimental setup, such as the <code class="docutils literal notranslate"><span class="pre">sample_size</span></code> or the number of training <code class="docutils literal notranslate"><span class="pre">steps</span></code> or <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code>, hydra provides a simple syntax:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task=train task.electron_batch_size=2048 task.steps=50_000 task.pretrain_steps=1000
 </pre></div>
@@ -464,7 +469,7 @@ document.write(`
 <p>Note that the working directory of an <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> and <code class="docutils literal notranslate"><span class="pre">restart</span></code> task cannot match the value of their <code class="docutils literal notranslate"><span class="pre">restdir</span></code> option (which specifies the working directory of the previous job that we want to evaluate or restart).</p>
 </section>
 <section id="hamiltonian">
-<h3>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Link to this heading">#</a></h3>
+<h3>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Permalink to this heading">#</a></h3>
 <p>DeepQMC aims at solving the molecular Hamiltonian. Molecules can be selected from a range of predefined configurations located in <code class="docutils literal notranslate"><span class="pre">.../deepqmc/src/deepqmc/conf/hamil/mol</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc hamil/mol=LiH
 </pre></div>
@@ -479,21 +484,21 @@ document.write(`
 </div>
 </section>
 <section id="sampling">
-<h3>Sampling<a class="headerlink" href="#sampling" title="Link to this heading">#</a></h3>
+<h3>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h3>
 <p>Different sampler configurations can be found in <code class="docutils literal notranslate"><span class="pre">.../deepqmc/src/deepqmc/conf/task/sampler</span></code>. A typical usecase would be to pick as sampler form these configurations and, if required, change some argument from the command line:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task/sampler=decorr_langevin task.sampler.0.length=30
 </pre></div>
 </div>
 </section>
 <section id="optimization">
-<h3>Optimization<a class="headerlink" href="#optimization" title="Link to this heading">#</a></h3>
+<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h3>
 <p>For the optimization either <a class="reference external" href="https://kfac-jax.readthedocs.io/en/latest/">KFAC</a> or optimizers from <a class="reference external" href="https://optax.readthedocs.io/en/latest/">optax</a> may be used. While the use of <a class="reference external" href="https://kfac-jax.readthedocs.io/en/latest/">KFAC</a> is highly recommended due to the significantly improved convergence, at times it can be useful to run with other optimizers such as <a class="reference external" href="https://optax.readthedocs.io/en/latest/api.html#adamw">AdamW</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc task/opt=adamw
 </pre></div>
 </div>
 </section>
 <section id="ansatz">
-<h3>Ansatz<a class="headerlink" href="#ansatz" title="Link to this heading">#</a></h3>
+<h3>Ansatz<a class="headerlink" href="#ansatz" title="Permalink to this heading">#</a></h3>
 <p>The hyperparameters of the training and the wave function ansatz are specified through hydra config files. Predefined ansatzes can be found in <code class="docutils literal notranslate"><span class="pre">.../deepqmc/src/deepqmc/conf/ansatz</span></code> and selected via:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deepqmc ansatz=ferminet
 </pre></div>
@@ -542,7 +547,7 @@ document.write(`
 <span class="w">  </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.wf.nn_wave_function.omni.OmniNet</span>
 <span class="w">  </span><span class="nt">_partial_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">embedding_dim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128</span>
-<span class="w">  </span><span class="nt">jastrow_factory</span><span class="p">:</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">jastrow_factory</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.wf.nn_wave_function.omni.Jastrow</span>
 <span class="w">    </span><span class="nt">_partial_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">sum_first</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -554,7 +559,7 @@ document.write(`
 <span class="w">      </span><span class="nt">last_linear</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">activation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
 <span class="w">      </span><span class="nt">init</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
-<span class="w">  </span><span class="nt">backflow_factory</span><span class="p">:</span><span class="w">  </span>
+<span class="w">  </span><span class="nt">backflow_factory</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.wf.nn_wave_function.omni.Backflow</span>
 <span class="w">    </span><span class="nt">_partial_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">subnet_factory</span><span class="p">:</span>
@@ -629,7 +634,7 @@ document.write(`
 <span class="w">        </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">deep_features</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
 <span class="w">      </span><span class="nt">update_rule</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concatenate</span>
-<span class="w">      </span><span class="nt">update_features</span><span class="p">:</span><span class="w"> </span>
+<span class="w">      </span><span class="nt">update_features</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.update_features.ResidualUpdateFeature</span>
 <span class="w">        </span><span class="nt">_partial_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deepqmc.gnn.update_features.NodeSumUpdateFeature</span>
@@ -712,8 +717,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -736,7 +741,7 @@ document.write(`
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.2.
 </p></div>
       
     </div>

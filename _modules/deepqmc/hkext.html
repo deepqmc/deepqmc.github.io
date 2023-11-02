@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 
@@ -27,21 +28,24 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=91adb8b6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="../../_static/documentation_options.js?v=83302504"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/katex.min.js?v=13f246ff"></script>
-    <script src="../../_static/auto-render.min.js?v=8b9f325c"></script>
-    <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/katex.min.js"></script>
+    <script src="../../_static/auto-render.min.js"></script>
+    <script src="../../_static/katex_autorenderer.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/hkext';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -396,9 +400,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">jax.nn</span> <span class="kn">import</span> <span class="n">softplus</span>
 
 
-<div class="viewcode-block" id="ssp">
-<a class="viewcode-back" href="../../api.html#deepqmc.hkext.ssp">[docs]</a>
-<span class="k">def</span> <span class="nf">ssp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="ssp"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.ssp">[docs]</a><span class="k">def</span> <span class="nf">ssp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the shifted softplus activation function.</span>
 
@@ -408,10 +410,7 @@ document.write(`
     <span class="k">return</span> <span class="n">softplus</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="MLP">
-<a class="viewcode-back" href="../../api.html#deepqmc.hkext.MLP">[docs]</a>
-<span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="MLP"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.MLP">[docs]</a><span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represent a multilayer perceptron.</span>
 
@@ -505,10 +504,7 @@ document.write(`
         <span class="k">return</span> <span class="n">out</span></div>
 
 
-
-<div class="viewcode-block" id="ResidualConnection">
-<a class="viewcode-back" href="../../api.html#deepqmc.hkext.ResidualConnection">[docs]</a>
-<span class="k">class</span> <span class="nc">ResidualConnection</span><span class="p">:</span>
+<div class="viewcode-block" id="ResidualConnection"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.ResidualConnection">[docs]</a><span class="k">class</span> <span class="nc">ResidualConnection</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represent a residual connection between pytrees.</span>
 
@@ -533,10 +529,7 @@ document.write(`
         <span class="k">return</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="n">leaf_residual</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="SumPool">
-<a class="viewcode-back" href="../../api.html#deepqmc.hkext.SumPool">[docs]</a>
-<span class="k">class</span> <span class="nc">SumPool</span><span class="p">:</span>
+<div class="viewcode-block" id="SumPool"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.SumPool">[docs]</a><span class="k">class</span> <span class="nc">SumPool</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represent a global sum pooling operation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -546,10 +539,7 @@ document.write(`
         <span class="k">return</span> <span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">leaf</span><span class="p">:</span> <span class="n">leaf</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="Identity">
-<a class="viewcode-back" href="../../api.html#deepqmc.hkext.Identity">[docs]</a>
-<span class="k">class</span> <span class="nc">Identity</span><span class="p">:</span>
+<div class="viewcode-block" id="Identity"><a class="viewcode-back" href="../../api.html#deepqmc.hkext.Identity">[docs]</a><span class="k">class</span> <span class="nc">Identity</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represent the identity operation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -557,7 +547,6 @@ document.write(`
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span></div>
-
 </pre></div>
 
                 </article>

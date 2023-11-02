@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 
@@ -27,21 +28,24 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css?v=91adb8b6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="../../../_static/documentation_options.js?v=83302504"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/katex.min.js?v=13f246ff"></script>
-    <script src="../../../_static/auto-render.min.js?v=8b9f325c"></script>
-    <script src="../../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/gnn/edge_features';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -394,9 +398,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">norm</span>
 
 
-<div class="viewcode-block" id="EdgeFeature">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.EdgeFeature">[docs]</a>
-<span class="k">class</span> <span class="nc">EdgeFeature</span><span class="p">:</span>
+<div class="viewcode-block" id="EdgeFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.EdgeFeature">[docs]</a><span class="k">class</span> <span class="nc">EdgeFeature</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Base class for all edge features.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -404,10 +406,7 @@ document.write(`
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-
-<div class="viewcode-block" id="DifferenceEdgeFeature">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.DifferenceEdgeFeature">[docs]</a>
-<span class="k">class</span> <span class="nc">DifferenceEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
+<div class="viewcode-block" id="DifferenceEdgeFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.DifferenceEdgeFeature">[docs]</a><span class="k">class</span> <span class="nc">DifferenceEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the difference vector as the edge features.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">log_rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -423,10 +422,7 @@ document.write(`
         <span class="k">return</span> <span class="mi">3</span></div>
 
 
-
-<div class="viewcode-block" id="DistancePowerEdgeFeature">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.DistancePowerEdgeFeature">[docs]</a>
-<span class="k">class</span> <span class="nc">DistancePowerEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
+<div class="viewcode-block" id="DistancePowerEdgeFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.DistancePowerEdgeFeature">[docs]</a><span class="k">class</span> <span class="nc">DistancePowerEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return powers of the distance as edge features.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">powers</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -451,10 +447,7 @@ document.write(`
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">powers</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="GaussianEdgeFeature">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.GaussianEdgeFeature">[docs]</a>
-<span class="k">class</span> <span class="nc">GaussianEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
+<div class="viewcode-block" id="GaussianEdgeFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.GaussianEdgeFeature">[docs]</a><span class="k">class</span> <span class="nc">GaussianEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expand the distance in a Gaussian basis.</span>
 
@@ -481,10 +474,7 @@ document.write(`
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mus</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="CombinedEdgeFeature">
-<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.CombinedEdgeFeature">[docs]</a>
-<span class="k">class</span> <span class="nc">CombinedEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
+<div class="viewcode-block" id="CombinedEdgeFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.edge_features.CombinedEdgeFeature">[docs]</a><span class="k">class</span> <span class="nc">CombinedEdgeFeature</span><span class="p">(</span><span class="n">EdgeFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Combine multiple edge features.</span>
 
 <span class="sd">    Args:</span>
@@ -500,7 +490,6 @@ document.write(`
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">))</span></div>
-
 </pre></div>
 
                 </article>
