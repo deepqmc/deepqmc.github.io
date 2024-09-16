@@ -1,51 +1,47 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>deepqmc.gnn.update_features &#8212; DeepQMC 1.1.2 documentation</title>
+    <title>deepqmc.gnn.update_features &#8212; DeepQMC 1.2.0 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
-    <script src="../../../_static/katex.min.js"></script>
-    <script src="../../../_static/auto-render.min.js"></script>
-    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/documentation_options.js?v=6efca38a"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/katex.min.js?v=be8ff15f"></script>
+    <script src="../../../_static/auto-render.min.js?v=ad136472"></script>
+    <script src="../../../_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/gnn/update_features';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,28 +54,23 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -101,17 +92,25 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../../../index.html">
@@ -121,7 +120,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.2 documentation</p>
+    <p class="title logo__title">DeepQMC 1.2.0 documentation</p>
   
 </a></div>
     
@@ -131,49 +130,44 @@
     
     <div class="me-auto navbar-header-items__center">
       
-        <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+        <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../cli.html">
-                        Command-line interface
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../tutorial.html">
-                        Tutorial
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../cli.html">
+    Command-line interface
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../api.html">
-                        API
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../refs.html">
-                        References
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../refs.html">
+    References
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -184,9 +178,10 @@
       
         <div class="navbar-item navbar-persistent--container">
           
+
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -197,17 +192,18 @@
       
       
         <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -218,7 +214,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -229,9 +225,10 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
+
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -244,10 +241,15 @@ document.write(`
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
@@ -258,51 +260,49 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../cli.html">
-                        Command-line interface
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../tutorial.html">
-                        Tutorial
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../cli.html">
+    Command-line interface
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../api.html">
-                        API
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../refs.html">
-                        References
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../refs.html">
+    References
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -311,17 +311,18 @@ document.write(`
       <div class="sidebar-header-items__end">
         
           <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -332,7 +333,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -350,13 +351,13 @@ document.write(`
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -365,7 +366,7 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -391,21 +392,39 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <h1>Source code for deepqmc.gnn.update_features</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
 
 <span class="kn">import</span> <span class="nn">haiku</span> <span class="k">as</span> <span class="nn">hk</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
 <span class="kn">from</span> <span class="nn">..hkext</span> <span class="kn">import</span> <span class="n">Identity</span>
+<span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">GraphEdges</span><span class="p">,</span> <span class="n">GraphNodes</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NodeEdgeMapping</span>
 
 
-<div class="viewcode-block" id="UpdateFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.UpdateFeature">[docs]</a><span class="k">class</span> <span class="nc">UpdateFeature</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Base class for all update features.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="UpdateFeature">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.UpdateFeature">[docs]</a>
+<span class="k">class</span> <span class="nc">UpdateFeature</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Base class for all update features.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">,</span> <span class="n">two_particle_stream_dim</span><span class="p">,</span> <span class="n">node_edge_mapping</span><span class="p">):</span>
+<span class="sd">    Args:</span>
+<span class="sd">        n_up (int): number of spin up electrons</span>
+<span class="sd">        n_down (int): number of spin down electrons</span>
+<span class="sd">        two_particle_stream_dim (int): dimension of the two-particle stream</span>
+<span class="sd">        node_edge_mapping (~deepqmc.gnn.utils.NodeEdgeMapping): mapping between the</span>
+<span class="sd">            various node and edge types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n_up</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">n_down</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">two_particle_stream_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">node_edge_mapping</span><span class="p">:</span> <span class="n">NodeEdgeMapping</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">=</span> <span class="n">n_up</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span> <span class="o">=</span> <span class="n">n_down</span>
@@ -413,33 +432,52 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">two_particle_stream_dim</span> <span class="o">=</span> <span class="n">two_particle_stream_dim</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-<div class="viewcode-block" id="ResidualUpdateFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.ResidualUpdateFeature">[docs]</a><span class="k">class</span> <span class="nc">ResidualUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ResidualElectronUpdateFeature">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.ResidualElectronUpdateFeature">[docs]</a>
+<span class="k">class</span> <span class="nc">ResidualElectronUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Residual update feature.</span>
 
 <span class="sd">    Returns the unchanged electron embeddings from the previous layer as</span>
 <span class="sd">    a single update feature.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">]</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GraphNodes</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;residual&#39;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="NodeSumUpdateFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.NodeSumUpdateFeature">[docs]</a><span class="k">class</span> <span class="nc">NodeSumUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NodeSumElectronUpdateFeature">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.NodeSumElectronUpdateFeature">[docs]</a>
+<span class="k">class</span> <span class="nc">NodeSumElectronUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The (normalized) sum of the node embeddings as an update feature.</span>
 
 <span class="sd">    Returns the (normalized) sum of the electron embeddings from the previous layer as</span>
 <span class="sd">    a single update feature.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_up (int): number of spin up electrons</span>
+<span class="sd">        n_down (int): number of spin down electrons</span>
+<span class="sd">        two_particle_stream_dim (int): dimension of the two-particle stream</span>
+<span class="sd">        node_edge_mapping (~deepqmc.gnn.utils.NodeEdgeMapping): mapping between the</span>
+<span class="sd">            various node and edge types.</span>
+<span class="sd">        node_types (list[str]): list of node types to update</span>
+<span class="sd">        normalize (bool): whether to normalize the sum by the number of nodes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">node_types</span><span class="p">,</span> <span class="n">normalize</span><span class="p">):</span>
@@ -448,27 +486,46 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_types</span> <span class="o">=</span> <span class="n">node_types</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
         <span class="n">node_idx</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;up&#39;</span><span class="p">:</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">),</span> <span class="s1">&#39;down&#39;</span><span class="p">:</span> <span class="nb">slice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">,</span> <span class="kc">None</span><span class="p">)}</span>
         <span class="n">reduce_fn</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span>
         <span class="k">return</span> <span class="p">[</span>
-            <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
-                <span class="n">reduce_fn</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">[</span><span class="n">node_idx</span><span class="p">[</span><span class="n">node_type</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">GraphNodes</span><span class="p">(</span>
+                <span class="kc">None</span><span class="p">,</span>
+                <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+                    <span class="n">reduce_fn</span><span class="p">(</span>
+                        <span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">[</span><span class="n">node_idx</span><span class="p">[</span><span class="n">node_type</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span>
+                    <span class="p">),</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="p">),</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">node_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_types</span>
         <span class="p">]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;node_</span><span class="si">{</span><span class="n">node_type</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">node_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_types</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="EdgeSumUpdateFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.EdgeSumUpdateFeature">[docs]</a><span class="k">class</span> <span class="nc">EdgeSumUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
+
+<div class="viewcode-block" id="EdgeSumElectronUpdateFeature">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.EdgeSumElectronUpdateFeature">[docs]</a>
+<span class="k">class</span> <span class="nc">EdgeSumElectronUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The (normalized) sum of the edge embeddings as an update feature.</span>
 
 <span class="sd">    Returns the (normalized) sum of the edge embeddings for various edge types</span>
 <span class="sd">    as separate update features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_up (int): number of spin up electrons</span>
+<span class="sd">        n_down (int): number of spin down electrons</span>
+<span class="sd">        two_particle_stream_dim (int): dimension of the two-particle stream</span>
+<span class="sd">        node_edge_mapping (~deepqmc.gnn.utils.NodeEdgeMapping): mapping between the</span>
+<span class="sd">            various node and edge types.</span>
+<span class="sd">        edge_types (list[str]): list of edge types to sum over</span>
+<span class="sd">        normalize (bool): whether to normalize the sum by the number of senders</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">edge_types</span><span class="p">,</span> <span class="n">normalize</span><span class="p">):</span>
@@ -480,32 +537,55 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span> <span class="o">=</span> <span class="n">edge_types</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
         <span class="n">updates</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">edge_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">edge_type</span> <span class="o">==</span> <span class="s1">&#39;ee&#39;</span><span class="p">:</span>
                 <span class="n">factor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="mf">1.0</span>
                 <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="p">(</span>
-                        <span class="n">edges</span><span class="p">[</span><span class="s1">&#39;same&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum_senders</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-                        <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="s1">&#39;anti&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum_senders</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">GraphNodes</span><span class="p">(</span>
+                        <span class="kc">None</span><span class="p">,</span>
+                        <span class="p">(</span>
+                            <span class="n">edges</span><span class="p">[</span><span class="s1">&#39;same&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum_senders</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="s1">&#39;anti&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum_senders</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="p">)</span>
+                        <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
                     <span class="p">)</span>
-                    <span class="o">/</span> <span class="n">factor</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_type</span><span class="p">]</span><span class="o">.</span><span class="n">sum_senders</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">))</span>
+                <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">GraphNodes</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">edges</span><span class="p">[</span><span class="n">edge_type</span><span class="p">]</span><span class="o">.</span><span class="n">sum_senders</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">))</span>
+                <span class="p">)</span>
         <span class="k">return</span> <span class="n">updates</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;edge_</span><span class="si">{</span><span class="n">edge_type</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">edge_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="ConvolutionUpdateFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.ConvolutionUpdateFeature">[docs]</a><span class="k">class</span> <span class="nc">ConvolutionUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ConvolutionElectronUpdateFeature">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.ConvolutionElectronUpdateFeature">[docs]</a>
+<span class="k">class</span> <span class="nc">ConvolutionElectronUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The convolution of node and edge embeddings as an update feature.</span>
 
 <span class="sd">    Returns the convolution of the node and edge embeddings for various edge types</span>
 <span class="sd">    as separate update features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_up (int): number of spin up electrons</span>
+<span class="sd">        n_down (int): number of spin down electrons</span>
+<span class="sd">        two_particle_stream_dim (int): dimension of the two-particle stream</span>
+<span class="sd">        node_edge_mapping (~deepqmc.gnn.utils.NodeEdgeMapping): mapping between the</span>
+<span class="sd">            various node and edge types.</span>
+<span class="sd">        edge_types (list[str]): list of edge types to sum over</span>
+<span class="sd">        normalize (bool): whether to normalize the sum by the number of senders</span>
+<span class="sd">        w_factory (~collections.abc.Callable): factory function for the :math:`w` matrix</span>
+<span class="sd">        h_factory (~collections.abc.Callable): factory function for the :math:`h` matrix</span>
+<span class="sd">        w_for_ne (bool): whether to use the :math:`w` matrix for the :math:`ne` edge</span>
+<span class="sd">            type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -539,7 +619,9 @@ document.write(`
             <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">hx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">two_particle_stream_dim</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">edges</span><span class="p">[</span><span class="n">edge_type</span><span class="p">]</span><span class="o">.</span><span class="n">update_from_single_array</span><span class="p">(</span><span class="n">we</span><span class="p">)</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">hx</span><span class="p">,</span> <span class="n">normalize</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
         <span class="n">updates</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">edge_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">edge_type</span> <span class="o">==</span> <span class="s1">&#39;ee&#39;</span><span class="p">:</span>
@@ -548,24 +630,43 @@ document.write(`
                     <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="s1">&#39;anti&#39;</span><span class="p">]</span>
                 <span class="p">)</span>
                 <span class="n">factor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="mf">1.0</span>
-                <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ee</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
+                <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">GraphNodes</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">ee</span> <span class="o">/</span> <span class="n">factor</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">single_edge_type_update</span><span class="p">(</span>
-                        <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">edge_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span>
+                    <span class="n">GraphNodes</span><span class="p">(</span>
+                        <span class="kc">None</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">single_edge_type_update</span><span class="p">(</span>
+                            <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">edge_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span>
+                        <span class="p">),</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">updates</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;conv_</span><span class="si">{</span><span class="n">edge_type</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">edge_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="NodeAttentionUpdateFeature"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.NodeAttentionUpdateFeature">[docs]</a><span class="k">class</span> <span class="nc">NodeAttentionUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NodeAttentionElectronUpdateFeature">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.update_features.NodeAttentionElectronUpdateFeature">[docs]</a>
+<span class="k">class</span> <span class="nc">NodeAttentionElectronUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create a single update feature by attenting over the nodes.</span>
 
 <span class="sd">    Returns the Psiformer update feature based on attention over the nodes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_up (int): number of spin up electrons</span>
+<span class="sd">        n_down (int): number of spin down electrons</span>
+<span class="sd">        two_particle_stream_dim (int): dimension of the two-particle stream</span>
+<span class="sd">        node_edge_mapping (~deepqmc.gnn.utils.NodeEdgeMapping): mapping between the</span>
+<span class="sd">            various node and edge types.</span>
+<span class="sd">        num_heads (int): number of attention heads</span>
+<span class="sd">        mlp_factory (~typing.Type[~deepqmc.hkext.MLP]): factory function for the MLP</span>
+<span class="sd">        attention_residual (Optional[~deepqmc.hkext.Residual]): optional residual</span>
+<span class="sd">            connection after the attention layer</span>
+<span class="sd">        mlp_residual (Optional[~deepqmc.hkext.Residual]): optional residual</span>
+<span class="sd">            connection after the MLP layer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">mlp_factory</span><span class="p">,</span> <span class="n">attention_residual</span><span class="p">,</span> <span class="n">mlp_residual</span><span class="p">):</span>
@@ -575,7 +676,9 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">mlp_residual</span> <span class="o">=</span> <span class="n">mlp_residual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mlp_factory</span> <span class="o">=</span> <span class="n">mlp_factory</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span>
         <span class="n">heads_dim</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span>
         <span class="k">assert</span> <span class="n">heads_dim</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span> <span class="o">==</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -592,7 +695,77 @@ document.write(`
         <span class="n">mlp_out</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">attended</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp_residual</span><span class="p">:</span>
             <span class="n">mlp_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp_residual</span><span class="p">(</span><span class="n">attended</span><span class="p">,</span> <span class="n">mlp_out</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">mlp_out</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GraphNodes</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">mlp_out</span><span class="p">)]</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">CombinedNodeAttentionUpdateFeature</span><span class="p">(</span><span class="n">UpdateFeature</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create an attention update feature for both electrons and nuclei.</span>
+
+<span class="sd">    The update feature is created by attending over both electrons and nuclei.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_up (int): number of spin up electrons</span>
+<span class="sd">        n_down (int): number of spin down electrons</span>
+<span class="sd">        two_particle_stream_dim (int): dimension of the two-particle stream</span>
+<span class="sd">        node_edge_mapping (~deepqmc.gnn.utils.NodeEdgeMapping): mapping between the</span>
+<span class="sd">            various node and edge types.</span>
+<span class="sd">        num_heads (int): number of attention heads</span>
+<span class="sd">        mlp_factory (~typing.Type[~deepqmc.hkext.MLP]): factory function for the MLP</span>
+<span class="sd">        attention_residual (~deepqmc.hkext.Residual): optional, optional residual</span>
+<span class="sd">            connection after the attention layer</span>
+<span class="sd">        mlp_residual (~deepqmc.hkext.Residual): optional, residual connection after the</span>
+<span class="sd">            MLP layer</span>
+<span class="sd">        elec_to_nuc (bool): whether to allow attention over the electrons</span>
+<span class="sd">            to influence the nuclei</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">num_heads</span><span class="p">,</span>
+        <span class="n">mlp_factory</span><span class="p">,</span>
+        <span class="n">attention_residual</span><span class="p">,</span>
+        <span class="n">mlp_residual</span><span class="p">,</span>
+        <span class="n">elec_to_nuc</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span> <span class="o">=</span> <span class="n">num_heads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention_residual</span> <span class="o">=</span> <span class="n">attention_residual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp_residual</span> <span class="o">=</span> <span class="n">mlp_residual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp_factory</span> <span class="o">=</span> <span class="n">mlp_factory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elec_to_nuc</span> <span class="o">=</span> <span class="n">elec_to_nuc</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphEdges</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">GraphNodes</span><span class="p">]:</span>
+        <span class="n">n_nuc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="p">)</span>
+        <span class="n">n_el</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="kc">None</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">elec_to_nuc</span>
+            <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_nuc</span> <span class="o">+</span> <span class="n">n_el</span><span class="p">,</span> <span class="n">n_nuc</span> <span class="o">+</span> <span class="n">n_el</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">at</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_nuc</span><span class="p">,</span> <span class="n">n_nuc</span><span class="p">:]</span>
+            <span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">heads_dim</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span>
+        <span class="k">assert</span> <span class="n">heads_dim</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span> <span class="o">==</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">attention_layer</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">MultiHeadAttention</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span>
+            <span class="n">heads_dim</span><span class="p">,</span>
+            <span class="n">w_init</span><span class="o">=</span><span class="n">hk</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">VarianceScaling</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;fan_in&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">),</span>
+            <span class="n">with_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mlp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp_factory</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mlp&#39;</span><span class="p">)</span>
+        <span class="n">attended</span> <span class="o">=</span> <span class="n">attention_layer</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention_residual</span><span class="p">:</span>
+            <span class="n">attended</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention_residual</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">attended</span><span class="p">)</span>
+        <span class="n">mlp_out</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">attended</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp_residual</span><span class="p">:</span>
+            <span class="n">mlp_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp_residual</span><span class="p">(</span><span class="n">attended</span><span class="p">,</span> <span class="n">mlp_out</span><span class="p">)</span>
+        <span class="n">nuclei_out</span><span class="p">,</span> <span class="n">electrons_out</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">mlp_out</span><span class="p">,</span> <span class="p">[</span><span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GraphNodes</span><span class="p">(</span><span class="n">nuclei_out</span><span class="p">,</span> <span class="n">electrons_out</span><span class="p">)]</span>
 </pre></div>
 
                 </article>
@@ -601,8 +774,8 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
 </div>
                 </footer>
@@ -622,8 +795,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -631,9 +804,10 @@ document.write(`
     <div class="footer-items__start">
       
         <div class="footer-item">
+
   <p class="copyright">
     
-      © Copyright 2019-2023, Frank Noé and collaborators.
+      © Copyright 2019-2024, Frank Noé and collaborators.
       <br/>
     
   </p>
@@ -645,8 +819,9 @@ document.write(`
   
     <div class="footer-items__end">
       
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.2.
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
 </p></div>
       
     </div>

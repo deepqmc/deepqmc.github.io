@@ -1,51 +1,47 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>deepqmc.gnn.electron_gnn &#8212; DeepQMC 1.1.2 documentation</title>
+    <title>deepqmc.gnn.electron_gnn &#8212; DeepQMC 1.2.0 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css?v=91adb8b6" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
-    <script src="../../../_static/katex.min.js"></script>
-    <script src="../../../_static/auto-render.min.js"></script>
-    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/documentation_options.js?v=6efca38a"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/katex.min.js?v=be8ff15f"></script>
+    <script src="../../../_static/auto-render.min.js?v=ad136472"></script>
+    <script src="../../../_static/katex_autorenderer.js?v=bebc588a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/deepqmc/gnn/electron_gnn';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,28 +54,23 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -101,17 +92,25 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../../../index.html">
@@ -121,7 +120,7 @@
   
   
   
-    <p class="title logo__title">DeepQMC 1.1.2 documentation</p>
+    <p class="title logo__title">DeepQMC 1.2.0 documentation</p>
   
 </a></div>
     
@@ -131,49 +130,44 @@
     
     <div class="me-auto navbar-header-items__center">
       
-        <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+        <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../cli.html">
-                        Command-line interface
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../tutorial.html">
-                        Tutorial
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../cli.html">
+    Command-line interface
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../api.html">
-                        API
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../refs.html">
-                        References
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../refs.html">
+    References
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -184,9 +178,10 @@
       
         <div class="navbar-item navbar-persistent--container">
           
+
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -197,17 +192,18 @@
       
       
         <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -218,7 +214,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -229,9 +225,10 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
+
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -244,10 +241,15 @@ document.write(`
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
@@ -258,51 +260,49 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../cli.html">
-                        Command-line interface
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../tutorial.html">
-                        Tutorial
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../cli.html">
+    Command-line interface
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../api.html">
-                        API
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../refs.html">
-                        References
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../refs.html">
+    References
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -311,17 +311,18 @@ document.write(`
       <div class="sidebar-header-items__end">
         
           <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -332,7 +333,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/deepqmc/deepqmc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -350,13 +351,13 @@ document.write(`
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -365,7 +366,7 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -391,13 +392,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <h1>Source code for deepqmc.gnn.electron_gnn</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">accumulate</span>
 
 <span class="kn">import</span> <span class="nn">haiku</span> <span class="k">as</span> <span class="nn">hk</span>
+<span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">tree_util</span>
 
@@ -406,15 +408,33 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NodeEdgeMapping</span>
 
 
-<div class="viewcode-block" id="ElectronGNNLayer"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNNLayer">[docs]</a><span class="k">class</span> <span class="nc">ElectronGNNLayer</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNNLayer">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNNLayer">[docs]</a>
+<span class="k">class</span> <span class="nc">ElectronGNNLayer</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The message passing layer of :class:`ElectronGNN`.</span>
 
 <span class="sd">    Derived from :class:`~deepqmc.gnn.gnn.MessagePassingLayer`.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        one_particle_residual: whether a residual connection is used when updating</span>
-<span class="sd">            the one particle embeddings, either :data:`False`, or an instance of</span>
+<span class="sd">        n_interactions (int): the number of message passing interactions.</span>
+<span class="sd">        ilayer (int): the index of this layer (0 &lt;= ilayer &lt; n_interactions).</span>
+<span class="sd">        n_nuc (int): the number of nuclei.</span>
+<span class="sd">        n_up (int): the number of spin up electrons.</span>
+<span class="sd">        n_down (int): the number of spin down electrons.</span>
+<span class="sd">        embedding_dim (int): the length of the electron embedding vectors.</span>
+<span class="sd">        edge_types (Tuple[str]): the types of edges to consider.</span>
+<span class="sd">        self_interaction (bool): whether to consider edges where the sender and</span>
+<span class="sd">            receiver electrons are the same.</span>
+<span class="sd">        node_data (Dict[str, Any]): a dictionary containing information about the</span>
+<span class="sd">            nodes of the graph.</span>
+<span class="sd">        two_particle_stream_dim (int): the feature dimension of the two particle</span>
+<span class="sd">            streams.</span>
+<span class="sd">        electron_residual: whether a residual connection is used when updating</span>
+<span class="sd">            the electron embeddings, either :data:`False`, or an instance of</span>
+<span class="sd">            :class:`~deepqmc.hkext.ResidualConnection`.</span>
+<span class="sd">        nucleus_residual: whether a residual connection is used when updating</span>
+<span class="sd">            the nucleus embeddings, either :data:`False`, or an instance of</span>
 <span class="sd">            :class:`~deepqmc.hkext.ResidualConnection`.</span>
 <span class="sd">        two_particle_residual: whether a residual connection is used when updating</span>
 <span class="sd">            the two particle embeddings, either :data:`False`, or an instance of</span>
@@ -423,7 +443,7 @@ document.write(`
 <span class="sd">            the GNN layers, if :data:`shared` than in each layer a single MLP</span>
 <span class="sd">            (:data:`u`) is used to update all edge types, if :data:`separate` then in</span>
 <span class="sd">            each layer separate MLPs are used to update the different edge types.</span>
-<span class="sd">        update_features (List[~deepqmc.gnn.update_features.UpdateFeature]): a list of</span>
+<span class="sd">        update_features (list[~deepqmc.gnn.update_features.UpdateFeature]): a list of</span>
 <span class="sd">            partially initialized update feature classes to use when computing the</span>
 <span class="sd">            update features of the one particle embeddings. For more details see the</span>
 <span class="sd">            documentation of :class:`deepqmc.gnn.update_features`.</span>
@@ -438,8 +458,8 @@ document.write(`
 
 <span class="sd">            note that :data:`&#39;sum&#39;` and :data:`&#39;featurewise_shared&#39;` imply features</span>
 <span class="sd">            of same size.</span>
-<span class="sd">        subnet_factory (Callable): A function that constructs the subnetworks of</span>
-<span class="sd">            the GNN layer.</span>
+<span class="sd">        subnet_factory (~collections.abc.Callable): optional, a function that constructs</span>
+<span class="sd">            the subnetworks of the GNN layer.</span>
 <span class="sd">        subnet_factory_by_lbl (dict): optional, a dictionary of functions that construct</span>
 <span class="sd">            subnetworks of the GNN layer. If both this and :data:`subnet_factory` is</span>
 <span class="sd">            specified, the specified values of :data:`subnet_factory_by_lbl` will take</span>
@@ -461,7 +481,8 @@ document.write(`
         <span class="n">node_data</span><span class="p">,</span>
         <span class="n">two_particle_stream_dim</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">one_particle_residual</span><span class="p">,</span>
+        <span class="n">electron_residual</span><span class="p">,</span>
+        <span class="n">nucleus_residual</span><span class="p">,</span>
         <span class="n">two_particle_residual</span><span class="p">,</span>
         <span class="n">deep_features</span><span class="p">,</span>
         <span class="n">update_features</span><span class="p">,</span>
@@ -508,22 +529,24 @@ document.write(`
             <span class="n">uf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span><span class="p">,</span> <span class="n">two_particle_stream_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">uf</span> <span class="ow">in</span> <span class="n">update_features</span>
         <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g_factory</span> <span class="o">=</span> <span class="n">subnet_factory_by_lbl</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">subnet_factory_by_lbl</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">](</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">g_factory</span><span class="p">(</span>
                 <span class="n">embedding_dim</span><span class="p">,</span>
                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;featurewise&#39;</span>
             <span class="k">else</span> <span class="p">{</span>
-                <span class="n">name</span><span class="p">:</span> <span class="n">subnet_factory_by_lbl</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">](</span>
+                <span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_factory</span><span class="p">(</span>
                     <span class="n">embedding_dim</span><span class="p">,</span>
                     <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;g_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
                 <span class="p">)</span>
-                <span class="k">for</span> <span class="n">uf</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_features</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">uf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_features</span>
                 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">uf</span><span class="o">.</span><span class="n">names</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">one_particle_residual</span> <span class="o">=</span> <span class="n">one_particle_residual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">electron_residual</span> <span class="o">=</span> <span class="n">electron_residual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nucleus_residual</span> <span class="o">=</span> <span class="n">nucleus_residual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">two_particle_residual</span> <span class="o">=</span> <span class="n">two_particle_residual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">self_interaction</span> <span class="o">=</span> <span class="n">self_interaction</span>
 
@@ -531,6 +554,7 @@ document.write(`
         <span class="k">def</span> <span class="nf">update_edges</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_features</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_features</span> <span class="o">==</span> <span class="s1">&#39;shared&#39;</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
                     <span class="c1"># combine features along leading dim, apply MLP and split</span>
                     <span class="c1"># into channels again to please kfac</span>
                     <span class="n">keys</span><span class="p">,</span> <span class="n">edge_objects</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
@@ -549,6 +573,8 @@ document.write(`
                         <span class="p">)</span>
                         <span class="k">for</span> <span class="n">typ</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                     <span class="p">}</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown deep features: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">deep_features</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">two_particle_residual</span><span class="p">:</span>
                     <span class="n">updated_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">two_particle_residual</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">updated_edges</span><span class="p">)</span>
@@ -560,30 +586,70 @@ document.write(`
 
     <span class="k">def</span> <span class="nf">get_aggregate_edges_for_nodes_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">aggregate_edges_for_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">uf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_features</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">uf</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">f</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">uf</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="k">for</span> <span class="n">uf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_features</span><span class="p">),</span>
+                <span class="n">start</span><span class="o">=</span><span class="p">[],</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">GraphNodes</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">nuclei</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">nuclei</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">electrons</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">electrons</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">],</span>
+            <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">aggregate_edges_for_nodes</span>
 
     <span class="k">def</span> <span class="nf">get_update_nodes_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">update_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;concatenate&#39;</span><span class="p">:</span>
-                <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;featurewise&#39;</span><span class="p">:</span>
-                <span class="n">updated</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">[</span><span class="n">name</span><span class="p">](</span><span class="n">fi</span><span class="p">)</span> <span class="k">for</span> <span class="n">fi</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;sum&#39;</span><span class="p">:</span>
-                <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;featurewise_shared&#39;</span><span class="p">:</span>
-                <span class="n">updated</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">f</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_particle_residual</span><span class="p">:</span>
-                <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_particle_residual</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
-            <span class="n">nodes</span> <span class="o">=</span> <span class="n">GraphNodes</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
-
-            <span class="k">return</span> <span class="n">nodes</span>
+        <span class="k">def</span> <span class="nf">update_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">update_features</span><span class="p">:</span> <span class="n">GraphNodes</span><span class="p">):</span>
+            <span class="n">updated_electrons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_update_rule</span><span class="p">(</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+                <span class="n">update_features</span><span class="o">.</span><span class="n">electrons</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">electron_residual</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">update_features</span><span class="o">.</span><span class="n">nuclei</span><span class="p">:</span>
+                <span class="n">g_nuc</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">g_factory</span><span class="p">(</span>
+                        <span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;g_nuc&#39;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;featurewise&#39;</span>
+                    <span class="k">else</span> <span class="p">{</span>
+                        <span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_factory</span><span class="p">(</span>
+                            <span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;g_nuc_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                        <span class="p">)</span>
+                        <span class="k">for</span> <span class="n">uf</span> <span class="ow">in</span> <span class="p">(</span><span class="n">update_features</span><span class="o">.</span><span class="n">nuclei</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">uf</span><span class="o">.</span><span class="n">names</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+                <span class="n">updated_nuclei</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_update_rule</span><span class="p">(</span>
+                    <span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span><span class="p">,</span>
+                    <span class="n">g_nuc</span><span class="p">,</span>
+                    <span class="n">update_features</span><span class="o">.</span><span class="n">nuclei</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">nucleus_residual</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">updated_nuclei</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">nuclei</span>
+            <span class="k">return</span> <span class="n">GraphNodes</span><span class="p">(</span><span class="n">updated_nuclei</span><span class="p">,</span> <span class="n">updated_electrons</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">update_nodes</span>
+
+    <span class="k">def</span> <span class="nf">apply_update_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">update_network</span><span class="p">,</span> <span class="n">update_features</span><span class="p">,</span> <span class="n">residual</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;concatenate&#39;</span><span class="p">:</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="n">update_network</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">update_features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;featurewise&#39;</span><span class="p">:</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">update_network</span><span class="p">[</span><span class="n">name</span><span class="p">](</span><span class="n">fi</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">fi</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">update_features</span><span class="p">,</span> <span class="n">update_network</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;sum&#39;</span><span class="p">:</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="n">update_network</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">update_features</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span> <span class="o">==</span> <span class="s1">&#39;featurewise_shared&#39;</span><span class="p">:</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">update_network</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">update_features</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown update rule: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">update_rule</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">residual</span><span class="p">:</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="n">residual</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">updated</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -603,15 +669,18 @@ document.write(`
         <span class="k">return</span> <span class="n">update_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ElectronGNN"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN">[docs]</a><span class="k">class</span> <span class="nc">ElectronGNN</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ElectronGNN">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN">[docs]</a>
+<span class="k">class</span> <span class="nc">ElectronGNN</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A neural network acting on graphs defined by electrons and nuclei.</span>
 
 <span class="sd">    Derived from :class:`~deepqmc.gnn.gnn.GraphNeuralNetwork`.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        hamil (:class:`~deepqmc.MolecularHamiltonian`): the Hamiltonian of the system</span>
-<span class="sd">            on which the graph is defined.</span>
+<span class="sd">        hamil (:class:`~deepqmc.hamil.MolecularHamiltonian`): the Hamiltonian of</span>
+<span class="sd">            the system on which the graph is defined.</span>
 <span class="sd">        embedding_dim (int): the length of the electron embedding vectors.</span>
 <span class="sd">        n_interactions (int): number of message passing interactions.</span>
 <span class="sd">        edge_features (dict): a :data:`dict` of functions for each edge</span>
@@ -628,14 +697,15 @@ document.write(`
 <span class="sd">            receiver electrons are the same.</span>
 <span class="sd">        two_particle_stream_dim (int): the feature dimension of the two particle</span>
 <span class="sd">            streams. Only active if :data:`deep_features` are used.</span>
-<span class="sd">        nuclei_embedding (Union[None,~deepqmc.gnn.electron_gnn.NucleiEmbedding]):</span>
+<span class="sd">        nuclei_embedding (~typing.Type[~deepqmc.gnn.electron_gnn.NucleiEmbedding]):</span>
 <span class="sd">            optional, the instance responsible for creating the initial nuclear</span>
 <span class="sd">            embeddings. Set to :data:`None` if nuclear embeddings are not needed.</span>
-<span class="sd">        electron_embedding (~deepqmc.gnn.electron_gnn.ElectronEmbedding): the instance</span>
-<span class="sd">            that creates the initial electron embeddings.</span>
-<span class="sd">        layer_factory (Callable): a callable that generates a layer of the GNN.</span>
-<span class="sd">        ghost_coords: optional, specifies the coordinates of one or more ghost atoms,</span>
-<span class="sd">            useful for breaking spatial symmetries of the nuclear geometry.</span>
+<span class="sd">        electron_embedding (~typing.Type[~deepqmc.gnn.electron_gnn.ElectronEmbedding]):</span>
+<span class="sd">            the instance that creates the initial electron embeddings.</span>
+<span class="sd">        layer_factory (~typing.Type[~deepqmc.gnn.electron_gnn.ElectronGNNLayer]): a</span>
+<span class="sd">            callable that generates a layer of the GNN.</span>
+<span class="sd">        ghost_coords (jax.Array): optional, specifies the coordinates of one or more</span>
+<span class="sd">            ghost atoms, useful for breaking spatial symmetries of the nuclear geometry.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -689,7 +759,9 @@ document.write(`
         <span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span> <span class="o">=</span> <span class="n">edge_features</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">nuclei_embedding</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">n_atom_types</span><span class="p">)</span> <span class="k">if</span> <span class="n">nuclei_embedding</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">nuclei_embedding</span><span class="p">(</span><span class="n">n_up</span><span class="p">,</span> <span class="n">n_down</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">n_atom_types</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nuclei_embedding</span>
+            <span class="k">else</span> <span class="kc">None</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">electron_embedding</span> <span class="o">=</span> <span class="n">electron_embedding</span><span class="p">(</span>
             <span class="n">n_nuc</span><span class="p">,</span>
@@ -702,11 +774,15 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">self_interaction</span> <span class="o">=</span> <span class="n">self_interaction</span>
 
     <span class="k">def</span> <span class="nf">node_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
-        <span class="n">electron_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">electron_embedding</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">)</span>
-        <span class="n">nucleus_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">nucleus_embedding</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei_embedding</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">electron_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">electron_embedding</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">,</span> <span class="n">nucleus_embedding</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">GraphNodes</span><span class="p">(</span><span class="n">nucleus_embedding</span><span class="p">,</span> <span class="n">electron_embedding</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ElectronGNN.edge_factory"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN.edge_factory">[docs]</a>    <span class="k">def</span> <span class="nf">edge_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
+<div class="viewcode-block" id="ElectronGNN.edge_factory">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronGNN.edge_factory">[docs]</a>
+    <span class="k">def</span> <span class="nf">edge_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute all the graph edges used in the GNN.&quot;&quot;&quot;</span>
 
         <span class="n">edge_factory</span> <span class="o">=</span> <span class="n">MolecularGraphEdgeBuilder</span><span class="p">(</span>
@@ -723,6 +799,7 @@ document.write(`
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">typ</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_types</span>
         <span class="p">}</span></div>
+
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -753,14 +830,19 @@ document.write(`
         <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
             <span class="n">graph</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">electrons</span></div>
+        <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span></div>
 
 
-<div class="viewcode-block" id="NucleiEmbedding"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.NucleiEmbedding">[docs]</a><span class="k">class</span> <span class="nc">NucleiEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NucleiEmbedding">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.NucleiEmbedding">[docs]</a>
+<span class="k">class</span> <span class="nc">NucleiEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for nuclei.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        charges (jnp.ndarray): the nuclear charges of the molecule.</span>
+<span class="sd">        n_up (int): the number of spin up electrons.</span>
+<span class="sd">        n_down (int): the number of spin down electrons.</span>
+<span class="sd">        charges (jax.Array): the nuclear charges of the molecule.</span>
 <span class="sd">        n_atom_types (int): the number of different atom types in the molecule.</span>
 <span class="sd">        embedding_dim (int): the length of the output embedding vector</span>
 <span class="sd">        atom_type_embedding (bool): if :data:`True`, initial embeddings are the same</span>
@@ -769,13 +851,59 @@ document.write(`
 <span class="sd">        subnet_type (str): the type of subnetwork to use for the embedding generation:</span>
 <span class="sd">            - ``&#39;mlp&#39;``: an MLP is used</span>
 <span class="sd">            - ``&#39;embed&#39;``: a :class:`haiku.Embed` block is used</span>
+<span class="sd">        edge_features (~deepqmc.gnn.edge_features.EdgeFeature): optional, the edge</span>
+<span class="sd">            features to use when constructing the initial nuclear embeddings.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">n_atom_types</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">atom_type_embedding</span><span class="p">,</span> <span class="n">subnet_type</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n_up</span><span class="p">,</span>
+        <span class="n">n_down</span><span class="p">,</span>
+        <span class="n">charges</span><span class="p">,</span>
+        <span class="n">n_atom_types</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">embedding_dim</span><span class="p">,</span>
+        <span class="n">atom_type_embedding</span><span class="p">,</span>
+        <span class="n">subnet_type</span><span class="p">,</span>
+        <span class="n">edge_features</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">subnet_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;mlp&#39;</span><span class="p">,</span> <span class="s1">&#39;embed&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span> <span class="o">=</span> <span class="n">edge_features</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_factory</span> <span class="o">=</span> <span class="n">MolecularGraphEdgeBuilder</span><span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span>
+                <span class="n">n_up</span><span class="p">,</span>
+                <span class="n">n_down</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;nn&#39;</span><span class="p">],</span>
+                <span class="n">self_interaction</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+                <span class="mi">32</span><span class="p">,</span>
+                <span class="s1">&#39;edge_mlp&#39;</span><span class="p">,</span>
+                <span class="n">hidden_layers</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,),</span>
+                <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">last_linear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">silu</span><span class="p">,</span>
+                <span class="n">init</span><span class="o">=</span><span class="s1">&#39;ferminet&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">embed_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+                <span class="n">embedding_dim</span><span class="p">,</span>
+                <span class="s1">&#39;embed_mlp&#39;</span><span class="p">,</span>
+                <span class="n">hidden_layers</span><span class="o">=</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,),</span>
+                <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">last_linear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">silu</span><span class="p">,</span>
+                <span class="n">init</span><span class="o">=</span><span class="s1">&#39;ferminet&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+            <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span>
+                <span class="n">jnp</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span>
+            <span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">)</span>
+
         <span class="n">n_nuc_types</span> <span class="o">=</span> <span class="n">n_atom_types</span> <span class="k">if</span> <span class="n">atom_type_embedding</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">subnet_type</span> <span class="o">==</span> <span class="s1">&#39;mlp&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">subnet</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
@@ -801,11 +929,22 @@ document.write(`
         <span class="k">if</span> <span class="n">subnet_type</span> <span class="o">==</span> <span class="s1">&#39;mlp&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subnet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span><span class="p">:</span>
+            <span class="n">nn_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_factory</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">)[</span><span class="s1">&#39;nn&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">single_array</span>
+            <span class="p">)</span>
+            <span class="n">nn_features</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">nn_features</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">nn_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_mlp</span><span class="p">(</span><span class="n">nn_features</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed_mlp</span><span class="p">(</span><span class="n">nn_edges</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subnet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ElectronEmbedding"><a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronEmbedding">[docs]</a><span class="k">class</span> <span class="nc">ElectronEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ElectronEmbedding">
+<a class="viewcode-back" href="../../../api.html#deepqmc.gnn.electron_gnn.ElectronEmbedding">[docs]</a>
+<span class="k">class</span> <span class="nc">ElectronEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create initial embeddings for electrons.</span>
 
 <span class="sd">    Args:</span>
@@ -825,10 +964,10 @@ document.write(`
 <span class="sd">        elec_types (jax.Array): an integer array with length equal to the number of</span>
 <span class="sd">            electrons, with entries between ``0`` and ``n_elec_types``. Specifies the</span>
 <span class="sd">            type for each electron.</span>
-<span class="sd">        positional_embeddings (Union[Literal[False],dict]): if not ``False``, a</span>
-<span class="sd">            ``dict`` with edge types as keys, and edge features as values. Specifies</span>
-<span class="sd">            the edge types and edge features to use when constructing the positional</span>
-<span class="sd">            initial electron embeddings.</span>
+<span class="sd">        positional_embeddings (dict): optional, if not ``None``, a ``dict`` with edge</span>
+<span class="sd">            types as keys, and edge features as values. Specifies the edge types and</span>
+<span class="sd">            edge features to use when constructing the positional initial electron</span>
+<span class="sd">            embeddings.</span>
 <span class="sd">        use_spin (bool): only relevant if ``positional_embeddings`` is not ``False``,</span>
 <span class="sd">            if ``True``, concatenate the spin of the given electron after the</span>
 <span class="sd">            positional embedding features.</span>
@@ -861,7 +1000,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">use_spin</span> <span class="o">=</span> <span class="n">use_spin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">project_to_embedding_dim</span> <span class="o">=</span> <span class="n">project_to_embedding_dim</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">,</span> <span class="n">nucleus_embedding</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">positional_embeddings</span><span class="p">:</span>
             <span class="n">edge_factory</span> <span class="o">=</span> <span class="n">MolecularGraphEdgeBuilder</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">n_nuc</span><span class="p">,</span>
@@ -891,6 +1030,98 @@ document.write(`
             <span class="p">)</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elec_types</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">PermutationInvariantEmbedding</span><span class="p">(</span><span class="n">hk</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Electron embeddings that are invariant to exchanges of identical nuclei.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n_nuc</span><span class="p">,</span>
+        <span class="n">n_up</span><span class="p">,</span>
+        <span class="n">n_down</span><span class="p">,</span>
+        <span class="n">embedding_dim</span><span class="p">,</span>
+        <span class="n">n_elec_types</span><span class="p">,</span>
+        <span class="n">elec_types</span><span class="p">,</span>
+        <span class="n">charges</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">edge_dim</span><span class="p">,</span>
+        <span class="n">edge_features</span><span class="p">,</span>
+        <span class="n">nuclear_charge_dependence</span><span class="p">,</span>
+        <span class="n">use_spin</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">assert</span> <span class="n">nuclear_charge_dependence</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;concatenate&#39;</span><span class="p">,</span> <span class="s1">&#39;elementwise-product&#39;</span><span class="p">}</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">=</span> <span class="n">n_up</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span> <span class="o">=</span> <span class="n">n_down</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dim</span> <span class="o">=</span> <span class="n">embedding_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_factory</span> <span class="o">=</span> <span class="n">MolecularGraphEdgeBuilder</span><span class="p">(</span>
+            <span class="n">n_nuc</span><span class="p">,</span>
+            <span class="n">n_up</span><span class="p">,</span>
+            <span class="n">n_down</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;ne&#39;</span><span class="p">],</span>
+            <span class="n">self_interaction</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span> <span class="o">=</span> <span class="n">edge_features</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nuclear_charge_dependence</span> <span class="o">=</span> <span class="n">nuclear_charge_dependence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span>
+            <span class="n">jnp</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">charges</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">charges</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_spin</span> <span class="o">=</span> <span class="n">use_spin</span>
+        <span class="k">if</span> <span class="n">nuclear_charge_dependence</span> <span class="o">==</span> <span class="s1">&#39;elementwise-product&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">charge_linear</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">edge_dim</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;edge_linear&#39;</span><span class="p">,</span> <span class="n">with_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">edge_dim</span><span class="p">,</span> <span class="n">with_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_up</span> <span class="o">+</span> <span class="n">n_down</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+                <span class="n">edge_dim</span><span class="p">,</span>
+                <span class="s1">&#39;edge_mlp&#39;</span><span class="p">,</span>
+                <span class="n">hidden_layers</span><span class="o">=</span><span class="p">(</span><span class="n">edge_dim</span><span class="p">,),</span>
+                <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">last_linear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">silu</span><span class="p">,</span>
+                <span class="n">init</span><span class="o">=</span><span class="s1">&#39;ferminet&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embed_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+            <span class="n">embedding_dim</span><span class="p">,</span>
+            <span class="s1">&#39;embed_mlp&#39;</span><span class="p">,</span>
+            <span class="n">hidden_layers</span><span class="o">=</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,),</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">last_linear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">silu</span><span class="p">,</span>
+            <span class="n">init</span><span class="o">=</span><span class="s1">&#39;ferminet&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phys_conf</span><span class="p">,</span> <span class="n">nucleus_embedding</span><span class="p">):</span>
+        <span class="n">ne_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_features</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_factory</span><span class="p">(</span><span class="n">phys_conf</span><span class="p">)[</span><span class="s1">&#39;ne&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">single_array</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclear_charge_dependence</span> <span class="o">==</span> <span class="s1">&#39;elementwise-product&#39;</span><span class="p">:</span>
+            <span class="n">ne_edges</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">ne_features</span><span class="p">))</span>
+                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge_linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nucleus_embedding</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">charge_embedding</span>
+                <span class="k">if</span> <span class="n">nucleus_embedding</span> <span class="ow">is</span> <span class="kc">None</span>
+                <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+                    <span class="n">nucleus_embedding</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_up</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_down</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">ne_features</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">ne_features</span><span class="p">,</span> <span class="n">nucleus_embedding</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">ne_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_mlp</span><span class="p">(</span><span class="n">ne_features</span><span class="p">)</span>
+        <span class="n">electron_features</span> <span class="o">=</span> <span class="n">ne_edges</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_spin</span><span class="p">:</span>
+            <span class="n">spins</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_up</span><span class="p">),</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_down</span><span class="p">)])[</span>
+                <span class="p">:,</span> <span class="kc">None</span>
+            <span class="p">]</span>
+            <span class="n">electron_features</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">electron_features</span><span class="p">,</span> <span class="n">spins</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed_mlp</span><span class="p">(</span><span class="n">electron_features</span><span class="p">)</span>
 </pre></div>
 
                 </article>
@@ -899,8 +1130,8 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
 </div>
                 </footer>
@@ -920,8 +1151,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -929,9 +1160,10 @@ document.write(`
     <div class="footer-items__start">
       
         <div class="footer-item">
+
   <p class="copyright">
     
-      © Copyright 2019-2023, Frank Noé and collaborators.
+      © Copyright 2019-2024, Frank Noé and collaborators.
       <br/>
     
   </p>
@@ -943,8 +1175,9 @@ document.write(`
   
     <div class="footer-items__end">
       
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.2.
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
 </p></div>
       
     </div>
