@@ -38,7 +38,7 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=6efca38a"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/katex.min.js?v=be8ff15f"></script>
     <script src="_static/auto-render.min.js?v=ad136472"></script>
@@ -508,7 +508,7 @@ document.write(`
 <span class="go">training:   0%|▋       | 102/10000 [01:00&lt;23:01, 7.16it/s, E=-8.042(10)]</span>
 </pre></div>
 </div>
-<p>If the argument <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code> is set, the ansatz is pretrained with respect to a Hartree-Fock or CASSCF baseline obtained with <a class="reference external" href="https://pyscf.org/pyscf_api_docs/pyscf.html#module-pyscf" title="(in PySCF v2.6)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf</span></code></a>. For more details as well as further training hyperparameters consult the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> reference.</p>
+<p>If the argument <code class="docutils literal notranslate"><span class="pre">pretrain_steps</span></code> is set, the ansatz is pretrained with respect to a Hartree-Fock or CASSCF baseline obtained with <a class="reference external" href="https://pyscf.org/pyscf_api_docs/pyscf.html#module-pyscf" title="(in PySCF v2.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf</span></code></a>. For more details as well as further training hyperparameters consult the <a class="reference internal" href="api.html#api"><span class="std std-ref">api</span></a> reference.</p>
 <section id="optimizing-electronic-excited-states">
 <h3>Optimizing electronic excited states<a class="headerlink" href="#optimizing-electronic-excited-states" title="Link to this heading">#</a></h3>
 <p>DeepQMC can simultaneously optimize the lowest <code class="docutils literal notranslate"><span class="pre">n</span></code> electronic states of a molecule. By default, <code class="docutils literal notranslate"><span class="pre">n</span></code> is set to one, but it can be increased via the <code class="docutils literal notranslate"><span class="pre">electronic_states</span></code> argument to <a class="reference internal" href="api.html#deepqmc.train.train" title="deepqmc.train.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a>. In order to efficiently pretrain for more than one electronic state, a CASSCF pretraining target should be used, with an active space that contains at least <code class="docutils literal notranslate"><span class="pre">n</span></code> states.</p>
@@ -534,7 +534,16 @@ TensorBoard 2.11.0 at http://localhost:6006/ (Press CTRL+C to quit)
 <span class="go">&lt;KeysViewHDF5 [&#39;local_energy&#39;]&gt; &lt;KeysViewHDF5 [&#39;max&#39;, &#39;mean&#39;, &#39;min&#39;, &#39;samples&#39;, &#39;std&#39;]&gt;</span>
 </pre></div>
 </div>
-<p>Additional observables can also be computed and logged during a run by specifying the <code class="docutils literal notranslate"><span class="pre">observable_monitors</span></code> argument to <a class="reference internal" href="api.html#deepqmc.train.train" title="deepqmc.train.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a>. See also the <code class="xref py py-mod docutils literal notranslate"><span class="pre">observable</span></code> submodule for more details.</p>
+<p>Additional observables can also be computed and logged during a run by specifying the <code class="docutils literal notranslate"><span class="pre">observable_monitors</span></code> argument to <a class="reference internal" href="api.html#deepqmc.train.train" title="deepqmc.train.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code></a>.
+For example, to evaluate the spin of the wave function during training one can use the <code class="xref py py-class docutils literal notranslate"><span class="pre">SpinMonitor</span></code> class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepqmc.observable</span> <span class="kn">import</span> <span class="n">SpinMonitor</span>
+<span class="n">observable_monitors</span> <span class="o">=</span> <span class="p">[</span><span class="n">SpinMonitor</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_samples</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+<span class="n">train</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="n">kfac</span><span class="p">,</span> <span class="n">sampler_factory</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">electron_batch_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s1">&#39;runs/02&#39;</span><span class="p">,</span> <span class="n">observable_monitors</span><span class="o">=</span><span class="n">observable_monitors</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then the <code class="docutils literal notranslate"><span class="pre">runs/02/training/result.h5</span></code> file will contain the keys <code class="docutils literal notranslate"><span class="pre">spin/samples</span></code>, <code class="docutils literal notranslate"><span class="pre">spin/mean</span></code>, and <code class="docutils literal notranslate"><span class="pre">spin/std</span></code>.
+Note: since logging all samples can result in very large <code class="docutils literal notranslate"><span class="pre">result.h5</span></code> files, it may be useful to disable saving of individual samples by setting save_samples=False if not explicitly required.
+See also the <code class="xref py py-mod docutils literal notranslate"><span class="pre">observable</span></code> submodule for more details.</p>
 </section>
 <section id="evaluate-the-energy">
 <h2>Evaluate the energy<a class="headerlink" href="#evaluate-the-energy" title="Link to this heading">#</a></h2>

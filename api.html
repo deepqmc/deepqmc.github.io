@@ -38,7 +38,7 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=6efca38a"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/katex.min.js?v=be8ff15f"></script>
     <script src="_static/auto-render.min.js?v=ad136472"></script>
@@ -433,12 +433,12 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>coords</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – nuclear coordinates ((<span class="math">\(N_\text{nuc}\)</span>, 3), a.u.) as rows</p></li>
-<li><p><strong>charges</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – atom charges (<span class="math">\(N_\text{nuc}\)</span>)</p></li>
-<li><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – total charge of a molecule</p></li>
-<li><p><strong>spin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – total spin multiplicity</p></li>
-<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – units of the coordinates, either ‘bohr’ or ‘angstrom’</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – additional data stored with the molecule</p></li>
+<li><p><strong>coords</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – nuclear coordinates ((<span class="math">\(N_\text{nuc}\)</span>, 3), a.u.) as rows</p></li>
+<li><p><strong>charges</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – atom charges (<span class="math">\(N_\text{nuc}\)</span>)</p></li>
+<li><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – total charge of a molecule</p></li>
+<li><p><strong>spin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – total spin multiplicity</p></li>
+<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – units of the coordinates, either ‘bohr’ or ‘angstrom’</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – additional data stored with the molecule</p></li>
 </ul>
 </dd>
 </dl>
@@ -448,7 +448,7 @@ document.write(`
 <dd><p>Create a molecule from a YAML file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – path to the YAML file</p>
+<dd class="field-odd"><p><strong>file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – path to the YAML file</p>
 </dd>
 </dl>
 </dd></dl>
@@ -460,7 +460,7 @@ document.write(`
 <p>The available names are in <code class="xref py py-attr docutils literal notranslate"><span class="pre">Molecule.all_names</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name of the molecule (one of <code class="xref py py-attr docutils literal notranslate"><span class="pre">Molecule.all_names</span></code>)</p>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – name of the molecule (one of <code class="xref py py-attr docutils literal notranslate"><span class="pre">Molecule.all_names</span></code>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -488,13 +488,13 @@ kinetic energy of the electrons:
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mol</strong> (<a class="reference internal" href="#deepqmc.molecule.Molecule" title="deepqmc.molecule.Molecule"><em>Molecule</em></a>) – the molecule to consider</p></li>
-<li><p><strong>ecp_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – If set, use the appropriate effective core potential (ECP). The
+<li><p><strong>ecp_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – If set, use the appropriate effective core potential (ECP). The
 string is passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">pyscf.gto.M()</span></code> as <code class="xref py py-data docutils literal notranslate"><span class="pre">'ecp'</span></code> argument.
 Supports ECPs that are implemented in the pyscf package, e.g. <code class="xref py py-data docutils literal notranslate"><span class="pre">'bfd'</span></code>
 [Burkatzki et al. 2007] or <code class="xref py py-data docutils literal notranslate"><span class="pre">'ccECP'</span></code> [Bennett et al. 2017].</p></li>
-<li><p><strong>ecp_mask</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>]</em>) – list of True and False values (<span class="math">\(N_\text{nuc}\)</span>)
+<li><p><strong>ecp_mask</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>]</em>) – list of True and False values (<span class="math">\(N_\text{nuc}\)</span>)
 specifying whether to use an ECP for each nucleus.</p></li>
-<li><p><strong>elec_std</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – optional, a default value of the scaling factor
+<li><p><strong>elec_std</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – optional, a default value of the scaling factor
 of the spread of electrons around the nuclei.</p></li>
 <li><p><strong>laplacian_factory</strong> (<a class="reference internal" href="#deepqmc.hamil.LaplacianFactory" title="deepqmc.hamil.LaplacianFactory"><em>LaplacianFactory</em></a>) – creates a function that
 returns a tuple containing the laplacian and gradient of the wave function.</p></li>
@@ -527,7 +527,7 @@ are usually very crude, a subsequent, thorough equilibration is needed.</p>
 <li><p><strong>rng</strong> (<em>KeyArray</em>) – key used for PRNG.</p></li>
 <li><p><strong>R</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a>) – nuclear coordinates of a single molecular geometry
 (<span class="math">\(N_\text{nuc}\)</span>, 3)</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of initial electron configurations to generate.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of initial electron configurations to generate.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -556,14 +556,14 @@ Some additional neural network functionality is implemented in the package and d
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>out_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the output dimension.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – optional, the name of the network.</p></li>
-<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – optional, whether to include a bias term.</p></li>
-<li><p><strong>layer_norm_before</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – optional, whether to apply layer normalization before
+<li><p><strong>out_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the output dimension.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – optional, the name of the network.</p></li>
+<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – optional, whether to include a bias term.</p></li>
+<li><p><strong>layer_norm_before</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – optional, whether to apply layer normalization before
 the GLU operation.</p></li>
-<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – default is sigmoid, the activation
+<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – default is sigmoid, the activation
 function.</p></li>
-<li><p><strong>b_init</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – default is zeros, the initialization
+<li><p><strong>b_init</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – default is zeros, the initialization
 function for the bias term.</p></li>
 </ul>
 </dd>
@@ -583,24 +583,24 @@ function for the bias term.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>out_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the output dimension.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – optional, the name of the network.</p></li>
-<li><p><strong>hidden_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a>) – optional, either (‘log’, <span class="math">\(N_\text{layers}\)</span>),
+<li><p><strong>out_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the output dimension.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – optional, the name of the network.</p></li>
+<li><p><strong>hidden_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a>) – optional, either (‘log’, <span class="math">\(N_\text{layers}\)</span>),
 in which case the network will have <span class="math">\(N_\text{layers}\)</span> layers
 with logarithmically changing widths, or a tuple of ints specifying
 the width of each layer.</p></li>
-<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – <p>optional, specifies which layers should have a bias term.
+<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – <p>optional, specifies which layers should have a bias term.
 Possible values are</p>
 <ul>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>: all layers will have a bias term</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>: no layers will have a bias term</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>: all layers will have a bias term</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>: no layers will have a bias term</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'not_last'</span></code>: all but the last layer will have a bias term</p></li>
 </ul>
 </p></li>
-<li><p><strong>last_linear</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – optional, if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> the activation function
+<li><p><strong>last_linear</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – optional, if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> the activation function
 is not applied to the activation of the last layer.</p></li>
-<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – optional, the activation function.</p></li>
-<li><p><strong>init</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>Callable</em>) – <p>optional, specifies the initialization of the
+<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – optional, the activation function.</p></li>
+<li><p><strong>init</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><em>Callable</em>) – <p>optional, specifies the initialization of the
 linear weights. Possible string values are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">'default'</span></code>: the default haiku initialization method is used.</p></li>
@@ -629,7 +629,7 @@ linear weights. Possible string values are:</p>
 have the same shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>normalize</strong> (<em>-</em>) – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> the sum of <code class="xref py py-data docutils literal notranslate"><span class="pre">inp</span></code> and <code class="xref py py-data docutils literal notranslate"><span class="pre">update</span></code>
+<dd class="field-odd"><p><strong>normalize</strong> (<em>-</em>) – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> the sum of <code class="xref py py-data docutils literal notranslate"><span class="pre">inp</span></code> and <code class="xref py py-data docutils literal notranslate"><span class="pre">update</span></code>
 is normalized with <code class="xref py py-data docutils literal notranslate"><span class="pre">sqrt(2)</span></code>.</p>
 </dd>
 </dl>
@@ -642,8 +642,8 @@ is normalized with <code class="xref py py-data docutils literal notranslate"><s
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>out_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the output dimension.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – optional, the name of the network.</p></li>
+<li><p><strong>out_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the output dimension.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – optional, the name of the network.</p></li>
 </ul>
 </dd>
 </dl>
@@ -699,7 +699,7 @@ only sampled.</p>
 <li><p><strong>hamil</strong> (<a class="reference internal" href="#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><em>MolecularHamiltonian</em></a>) – the Hamiltonian of the
 physical system.</p></li>
 <li><p><strong>ansatz</strong> (<a class="reference internal" href="#deepqmc.types.Ansatz" title="deepqmc.types.Ansatz"><em>Ansatz</em></a>) – the wave function Ansatz.</p></li>
-<li><p><strong>opt</strong> (<code class="docutils literal notranslate"><span class="pre">kfac_jax</span></code> or <code class="docutils literal notranslate"><span class="pre">optax</span></code> optimizers | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>) – <p>the optimizer. Possible values are:</p>
+<li><p><strong>opt</strong> (<code class="docutils literal notranslate"><span class="pre">kfac_jax</span></code> or <code class="docutils literal notranslate"><span class="pre">optax</span></code> optimizers | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>) – <p>the optimizer. Possible values are:</p>
 <ul>
 <li><dl class="simple">
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">kfac_jax.Optimizer</span></code>:</dt><dd><p>the partially initialized KFAC optimizer is used</p>
@@ -712,53 +712,53 @@ physical system.</p></li>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>:</dt><dd><p>no optimizer is used, e.g. the evaluation of the Ansatz is performed.</p>
+<dt><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>:</dt><dd><p>no optimizer is used, e.g. the evaluation of the Ansatz is performed.</p>
 </dd>
 </dl>
 </li>
 </ul>
 </p></li>
-<li><p><strong>sampler_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – a function that returns a Sampler
+<li><p><strong>sampler_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – a function that returns a Sampler
 instance</p></li>
-<li><p><strong>steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of optimization steps.</p></li>
-<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the seed used for PRNG.</p></li>
-<li><p><strong>electron_batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of electron samples considered in a batch</p></li>
-<li><p><strong>molecule_batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, the number of molecules considered in a
+<li><p><strong>steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of optimization steps.</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the seed used for PRNG.</p></li>
+<li><p><strong>electron_batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of electron samples considered in a batch</p></li>
+<li><p><strong>molecule_batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, the number of molecules considered in a
 batch. Only needed for transferable training.</p></li>
-<li><p><strong>electronic_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, the number of electronic states to consider.</p></li>
-<li><p><strong>mols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.molecule.Molecule" title="deepqmc.molecule.Molecule"><em>Molecule</em></a><em>]</em>) – optional, a sequence of molecules
+<li><p><strong>electronic_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, the number of electronic states to consider.</p></li>
+<li><p><strong>mols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.molecule.Molecule" title="deepqmc.molecule.Molecule"><em>Molecule</em></a><em>]</em>) – optional, a sequence of molecules
 to consider for transferable training. If None the default molecule from
 hamil is used.</p></li>
-<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – optional, path, where results should be saved.</p></li>
+<li><p><strong>workdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – optional, path, where results should be saved.</p></li>
 <li><p><strong>train_state</strong> (<a class="reference internal" href="#deepqmc.types.TrainState" title="deepqmc.types.TrainState"><em>TrainState</em></a>) – optional, training checkpoint to
 restore training or run evaluation.</p></li>
-<li><p><strong>init_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, initial step index, useful if
+<li><p><strong>init_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, initial step index, useful if
 calculation is restarted from checkpoint saved on disk.</p></li>
-<li><p><strong>max_restarts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, the maximum number of times the training is
+<li><p><strong>max_restarts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, the maximum number of times the training is
 retried before a <code class="xref py py-class docutils literal notranslate"><span class="pre">NaNError</span></code> is raised.</p></li>
-<li><p><strong>max_eq_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, maximum number of equilibration steps if not
+<li><p><strong>max_eq_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, maximum number of equilibration steps if not
 detected earlier.</p></li>
-<li><p><strong>eq_allow_early_stopping</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – default <code class="docutils literal notranslate"><span class="pre">True</span></code>, whether to allow the
+<li><p><strong>eq_allow_early_stopping</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – default <code class="docutils literal notranslate"><span class="pre">True</span></code>, whether to allow the
 equilibration to stop early when the equilibration criterion has been met.</p></li>
-<li><p><strong>pretrain_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, the number of pretraining steps wrt. to the
+<li><p><strong>pretrain_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, the number of pretraining steps wrt. to the
 Baseline wave function obtained with pyscf.</p></li>
-<li><p><strong>pretrain_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – optional, extra arguments for pretraining.</p></li>
-<li><p><strong>chkpt_constructor</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><em>CheckpointStore</em><em>]</em>) – optional, an
+<li><p><strong>pretrain_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – optional, extra arguments for pretraining.</p></li>
+<li><p><strong>chkpt_constructor</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><em>CheckpointStore</em><em>]</em>) – optional, an
 object that saves training checkpoints to the working directory.</p></li>
-<li><p><strong>metric_logger_constructor</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><em>MetricLogger</em><em>]</em>) – optional,
+<li><p><strong>metric_logger_constructor</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><em>MetricLogger</em><em>]</em>) – optional,
 an object that consumes metric logging information. If not specified, the
 default <code class="xref py py-class docutils literal notranslate"><span class="pre">TensorboardMetricLogger</span></code> is used to create
 tensorboard logs.</p></li>
-<li><p><strong>h5_logger_constructor</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><em>H5Logger</em><em>]</em>) – optional, an object
+<li><p><strong>h5_logger_constructor</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><em>H5Logger</em><em>]</em>) – optional, an object
 that consumes metric logging information. If not specified, the default
 <code class="xref py py-class docutils literal notranslate"><span class="pre">H5Logger</span></code> is used to write comprehensive training
 statistics to an h5file.</p></li>
-<li><p><strong>merge_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – optional, list of strings for selecting parameters to be
+<li><p><strong>merge_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – optional, list of strings for selecting parameters to be
 shared across electronic states. Matching merge keys with (substrings of)
 parameter keys.</p></li>
 <li><p><strong>loss_function_factory</strong> (<em>LossFunctionFactory</em>) – optional, a callable returning a suitable loss function for the
 optimization.</p></li>
-<li><p><strong>observable_monitors</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><em>ObservableMonitor</em><em>]</em>) – optional,
+<li><p><strong>observable_monitors</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><em>ObservableMonitor</em><em>]</em>) – optional,
 list of observable monitors to be evaluated during training or evaluation.</p></li>
 </ul>
 </dd>
@@ -771,7 +771,7 @@ list of observable monitors to be evaluated during training or evaluation.</p></
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.SamplerState">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">SamplerState</span></span><a class="headerlink" href="#deepqmc.types.SamplerState" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
@@ -794,7 +794,7 @@ with <a class="reference internal" href="#deepqmc.sampling.chain" title="deepqmc
 positions.</p></li>
 <li><p><strong>params</strong> (<em>Params</em>) – the parameters of the wave function that is
 being sampled.</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of walkers to propagate in parallel.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of walkers to propagate in parallel.</p></li>
 <li><p><strong>R</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a>) – the nuclei positions of the molecular configuration.</p></li>
 </ul>
 </dd>
@@ -867,7 +867,7 @@ electron positions and data about the sampler trajectory.</p>
 <p>This sampler cannot be used as the last element of a sampler chain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the samples will be taken in every <code class="xref py py-data docutils literal notranslate"><span class="pre">length</span></code> MCMC step,
+<dd class="field-odd"><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the samples will be taken in every <code class="xref py py-data docutils literal notranslate"><span class="pre">length</span></code> MCMC step,
 that is, <code class="xref py py-data docutils literal notranslate"><span class="pre">length</span></code> <span class="math">\(-1\)</span> decorrelating steps are inserted.</p>
 </dd>
 </dl>
@@ -884,12 +884,12 @@ that is, <code class="xref py py-data docutils literal notranslate"><span class=
 <li><p><strong>hamil</strong> (<a class="reference internal" href="#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><em>MolecularHamiltonian</em></a>) – the Hamiltonian of the physical
 system.</p></li>
 <li><p><strong>wf</strong> – the <code class="xref py py-data docutils literal notranslate"><span class="pre">apply</span></code> method of the <code class="xref py py-data docutils literal notranslate"><span class="pre">haiku</span></code> transformed ansatz object.</p></li>
-<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – optional, the proposal step size scaling factor. Adjusted during
+<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – optional, the proposal step size scaling factor. Adjusted during
 every step if <code class="xref py py-data docutils literal notranslate"><span class="pre">target_acceptance</span></code> is specified.</p></li>
-<li><p><strong>target_acceptance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – optional, if specified the proposal step size
+<li><p><strong>target_acceptance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – optional, if specified the proposal step size
 will be scaled such that the ratio of accepted proposal steps approaches
 <code class="xref py py-data docutils literal notranslate"><span class="pre">target_acceptance</span></code>.</p></li>
-<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, if specified the next proposed step will always be
+<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, if specified the next proposed step will always be
 accepted for a walker that hasn’t moved in the last <code class="xref py py-data docutils literal notranslate"><span class="pre">max_age</span></code> steps.</p></li>
 </ul>
 </dd>
@@ -908,12 +908,12 @@ from the distribution defined by the square of the sampled wave function.</p>
 <li><p><strong>hamil</strong> (<a class="reference internal" href="#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><em>MolecularHamiltonian</em></a>) – the Hamiltonian of the physical
 system.</p></li>
 <li><p><strong>wf</strong> – the <code class="xref py py-data docutils literal notranslate"><span class="pre">apply</span></code> method of the <code class="xref py py-data docutils literal notranslate"><span class="pre">haiku</span></code> transformed ansatz object.</p></li>
-<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – optional, the proposal step size scaling factor. Adjusted during
+<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – optional, the proposal step size scaling factor. Adjusted during
 every step if <code class="xref py py-data docutils literal notranslate"><span class="pre">target_acceptance</span></code> is specified.</p></li>
-<li><p><strong>target_acceptance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – optional, if specified the proposal step size
+<li><p><strong>target_acceptance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – optional, if specified the proposal step size
 will be scaled such that the ratio of accepted proposal steps approaches
 <code class="xref py py-data docutils literal notranslate"><span class="pre">target_acceptance</span></code>.</p></li>
-<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, if specified the next proposed step will always be
+<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, if specified the next proposed step will always be
 accepted for a walker that hasn’t moved in the last <code class="xref py py-data docutils literal notranslate"><span class="pre">max_age</span></code> steps.</p></li>
 </ul>
 </dd>
@@ -938,8 +938,8 @@ accepted for a walker that hasn’t moved in the last <code class="xref py py-da
 sampler to use.</p></li>
 <li><p><strong>warp_elec_fn</strong> (<em>ElectronWarp</em>) – the function
 that warps the electrons to the new nuclear geometry.</p></li>
-<li><p><strong>update_nuc_period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, the number of steps between nuclear updates.</p></li>
-<li><p><strong>elec_equilibration_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, the number of steps to equilibrate the
+<li><p><strong>update_nuc_period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, the number of steps between nuclear updates.</p></li>
+<li><p><strong>elec_equilibration_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, the number of steps to equilibrate the
 electronic state after a nuclear update.</p></li>
 </ul>
 </dd>
@@ -960,9 +960,9 @@ these weights, and the weights are reset to one. Either <code class="xref py py-
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional, if specified the walkers are resampled every
+<li><p><strong>period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – optional, if specified the walkers are resampled every
 <code class="xref py py-data docutils literal notranslate"><span class="pre">period</span></code> MCMC steps.</p></li>
-<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – optional, if specified the walkers are resampled if
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – optional, if specified the walkers are resampled if
 the effective sample size normalized with the batch size is below
 <code class="xref py py-data docutils literal notranslate"><span class="pre">threshold</span></code>.</p></li>
 </ul>
@@ -999,7 +999,7 @@ to combine.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>samplers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.sampling.base.ElectronSampler" title="deepqmc.sampling.base.ElectronSampler"><em>ElectronSampler</em></a><em>]</em>) – one or more sampler
+<li><p><strong>samplers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.sampling.base.ElectronSampler" title="deepqmc.sampling.base.ElectronSampler"><em>ElectronSampler</em></a><em>]</em>) – one or more sampler
 instances to combine.</p></li>
 <li><p><strong>hamil</strong> (<a class="reference internal" href="#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><em>MolecularHamiltonian</em></a>) – the molecular Hamiltonian.</p></li>
 <li><p><strong>wf</strong> (<em>ParametrizedWaveFunction</em>) – the wave function to sample.</p></li>
@@ -1091,13 +1091,13 @@ obtained during the evaluation of the loss dunction and further statistics.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.WaveFunction">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">WaveFunction</span></span><a class="headerlink" href="#deepqmc.types.WaveFunction" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">pytree_dataclass</span></code>], <a class="reference internal" href="#deepqmc.types.Psi" title="deepqmc.types.Psi"><code class="xref py py-class docutils literal notranslate"><span class="pre">Psi</span></code></a>]</p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">pytree_dataclass</span></code>], <a class="reference internal" href="#deepqmc.types.Psi" title="deepqmc.types.Psi"><code class="xref py py-class docutils literal notranslate"><span class="pre">Psi</span></code></a>]</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.ParametrizedWaveFunction">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">ParametrizedWaveFunction</span></span><a class="headerlink" href="#deepqmc.types.ParametrizedWaveFunction" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pytree_dataclass</span></code>], <a class="reference internal" href="#deepqmc.types.Psi" title="deepqmc.types.Psi"><code class="xref py py-class docutils literal notranslate"><span class="pre">Psi</span></code></a>]</p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pytree_dataclass</span></code>], <a class="reference internal" href="#deepqmc.types.Psi" title="deepqmc.types.Psi"><code class="xref py py-class docutils literal notranslate"><span class="pre">Psi</span></code></a>]</p>
 </dd></dl>
 
 <dl class="py class">
@@ -1121,7 +1121,7 @@ is <code class="docutils literal notranslate"><span class="pre">vmap</span></cod
 evaluate the Ansatz.</p></li>
 <li><p><strong>phys_conf</strong> (<a class="reference internal" href="#deepqmc.types.PhysicalConfiguration" title="deepqmc.types.PhysicalConfiguration"><em>PhysicalConfiguration</em></a>) – a single sample on which
 to evaluate the Ansatz.</p></li>
-<li><p><strong>return_mos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to return the many-body orbitals instead of the
+<li><p><strong>return_mos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to return the many-body orbitals instead of the
 wave function.</p></li>
 </ul>
 </dd>
@@ -1170,17 +1170,17 @@ detailed description of the implemented architecture see <a class="reference int
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hamil</strong> (<a class="reference internal" href="#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><em>MolecularHamiltonian</em></a>) – the Hamiltonian of the system.</p></li>
-<li><p><strong>omni_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – creates the omni net.</p></li>
+<li><p><strong>omni_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – creates the omni net.</p></li>
 <li><p><strong>envelope</strong> (<em>ExponentialEnvelopes</em>) – the orbital envelopes.</p></li>
-<li><p><strong>backflow_op</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – specifies how the backflow is applied
+<li><p><strong>backflow_op</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – specifies how the backflow is applied
 to the orbitals.</p></li>
-<li><p><strong>n_determinants</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – specifies the number of determinants</p></li>
-<li><p><strong>full_determinant</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, the determinants are
+<li><p><strong>n_determinants</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – specifies the number of determinants</p></li>
+<li><p><strong>full_determinant</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, the determinants are
 factorized into spin-up and spin-down parts.</p></li>
-<li><p><strong>cusp_electrons</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – constructor of the electronic cusp
+<li><p><strong>cusp_electrons</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – constructor of the electronic cusp
 module.</p></li>
-<li><p><strong>cusp_nuclei</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – constructor of the nuclear cusp module.</p></li>
-<li><p><strong>backflow_transform</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – <p>describes the backflow transformation.
+<li><p><strong>cusp_nuclei</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – constructor of the nuclear cusp module.</p></li>
+<li><p><strong>backflow_transform</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – <p>describes the backflow transformation.
 Possible values:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">'mult'</span></code>: the backflow is a multiplicative factor</p></li>
@@ -1192,7 +1192,7 @@ Possible values:</p>
 </li>
 </ul>
 </p></li>
-<li><p><strong>conf_coeff</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – returns a function that combines the
+<li><p><strong>conf_coeff</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – returns a function that combines the
 determinants to obtain the WF value</p></li>
 </ul>
 </dd>
@@ -1213,7 +1213,7 @@ This module implements a general gnn framework, that can be configured to obtain
 <dd><p>Create a function that builds graph edges.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mask_self</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to mask edges that begin and end in the same node.</p>
+<dd class="field-odd"><p><strong>mask_self</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to mask edges that begin and end in the same node.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1226,11 +1226,11 @@ This module implements a general gnn framework, that can be configured to obtain
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>aggregate_edges_for_nodes_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to perform the aggregation
+<li><p><strong>aggregate_edges_for_nodes_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to perform the aggregation
 of edges for nodes.</p></li>
-<li><p><strong>update_nodes_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – optional, function that updates the
+<li><p><strong>update_nodes_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – optional, function that updates the
 nodes.</p></li>
-<li><p><strong>update_edges_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – optional, function that updates the
+<li><p><strong>update_edges_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – optional, function that updates the
 edges.</p></li>
 </ul>
 </dd>
@@ -1244,10 +1244,10 @@ edges.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_nuc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of nuclei.</p></li>
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin-up electrons.</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin-down electrons.</p></li>
-<li><p><strong>edge_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – <p>list of edge type names to build. Possible names are:</p>
+<li><p><strong>n_nuc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of nuclei.</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin-up electrons.</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin-down electrons.</p></li>
+<li><p><strong>edge_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – <p>list of edge type names to build. Possible names are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">'nn'</span></code>: nuclei-&gt;nuclei edges</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'ne'</span></code>: nuclei-&gt;electrons edges</p></li>
@@ -1258,7 +1258,7 @@ edges.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'down'</span></code>: edges going from spin-down electrons to all electrons</p></li>
 </ul>
 </p></li>
-<li><p><strong>self_interaction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether edges between a particle and itself are
+<li><p><strong>self_interaction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether edges between a particle and itself are
 considered</p></li>
 </ul>
 </dd>
@@ -1271,7 +1271,7 @@ considered</p></li>
 <dd><p>Combine multiple edge features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.edge_features.EdgeFeature" title="deepqmc.gnn.edge_features.EdgeFeature"><em>EdgeFeature</em></a><em>]</em>) – a list of edge feature
+<dd class="field-odd"><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.edge_features.EdgeFeature" title="deepqmc.gnn.edge_features.EdgeFeature"><em>EdgeFeature</em></a><em>]</em>) – a list of edge feature
 objects to combine.</p>
 </dd>
 </dl>
@@ -1283,7 +1283,7 @@ objects to combine.</p>
 <dd><p>Return the difference vector as the edge features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>log_rescale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to rescale the features by
+<dd class="field-odd"><p><strong>log_rescale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to rescale the features by
 <span class="math">\(\log(1 + d) / d\)</span> where <span class="math">\(d\)</span> is the length of the edge.</p>
 </dd>
 </dl>
@@ -1296,10 +1296,10 @@ objects to combine.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>powers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – a <code class="xref py py-data docutils literal notranslate"><span class="pre">list</span></code> of powers to apply to the edge length.</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> | </em><em>None</em>) – a small value to add to the denominator when the power is
+<li><p><strong>powers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – a <code class="xref py py-data docutils literal notranslate"><span class="pre">list</span></code> of powers to apply to the edge length.</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> | </em><em>None</em>) – a small value to add to the denominator when the power is
 negative.</p></li>
-<li><p><strong>log_rescale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to rescale the features by
+<li><p><strong>log_rescale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to rescale the features by
 <span class="math">\(\log(1 + d) / d\)</span> where <span class="math">\(d\)</span> is the length of the edge.</p></li>
 </ul>
 </dd>
@@ -1319,10 +1319,10 @@ negative.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_gaussian</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of gaussians to use,
+<li><p><strong>n_gaussian</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of gaussians to use,
 consequently the length of the feature vector</p></li>
-<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – the radius within which to place gaussians</p></li>
-<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to offset the position of the first
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – the radius within which to place gaussians</p></li>
+<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to offset the position of the first
 Gaussian from zero.</p></li>
 </ul>
 </dd>
@@ -1341,11 +1341,11 @@ parametrized functions acting on graphs of electrons and nuclei.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_nuc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of nuclei.</p></li>
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of spin up electrons.</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of spin down electrons.</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the desired length of the embedding vectors.</p></li>
-<li><p><strong>n_elec_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – <p>the number of electron types to differentiate.
+<li><p><strong>n_nuc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of nuclei.</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of spin up electrons.</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of spin down electrons.</p></li>
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the desired length of the embedding vectors.</p></li>
+<li><p><strong>n_elec_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>the number of electron types to differentiate.
 Usual values are:</p>
 <ul>
 <li><dl class="simple">
@@ -1364,14 +1364,14 @@ embedding update steps of the GNN.</p>
 <li><p><strong>elec_types</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a>) – an integer array with length equal to the number of
 electrons, with entries between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">n_elec_types</span></code>. Specifies the
 type for each electron.</p></li>
-<li><p><strong>positional_embeddings</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – optional, if not <code class="docutils literal notranslate"><span class="pre">None</span></code>, a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with edge
+<li><p><strong>positional_embeddings</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – optional, if not <code class="docutils literal notranslate"><span class="pre">None</span></code>, a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with edge
 types as keys, and edge features as values. Specifies the edge types and
 edge features to use when constructing the positional initial electron
 embeddings.</p></li>
-<li><p><strong>use_spin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – only relevant if <code class="docutils literal notranslate"><span class="pre">positional_embeddings</span></code> is not <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+<li><p><strong>use_spin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – only relevant if <code class="docutils literal notranslate"><span class="pre">positional_embeddings</span></code> is not <code class="docutils literal notranslate"><span class="pre">False</span></code>,
 if <code class="docutils literal notranslate"><span class="pre">True</span></code>, concatenate the spin of the given electron after the
 positional embedding features.</p></li>
-<li><p><strong>project_to_embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – only relevant if <code class="docutils literal notranslate"><span class="pre">positional_embeddings</span></code>
+<li><p><strong>project_to_embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – only relevant if <code class="docutils literal notranslate"><span class="pre">positional_embeddings</span></code>
 is not <code class="docutils literal notranslate"><span class="pre">False</span></code>, if <code class="docutils literal notranslate"><span class="pre">True</span></code>, use a linear layer to project the initial
 embeddings to have length <code class="docutils literal notranslate"><span class="pre">embedding_dim</span></code>.</p></li>
 </ul>
@@ -1389,9 +1389,9 @@ embeddings to have length <code class="docutils literal notranslate"><span class
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hamil</strong> (<a class="reference internal" href="#deepqmc.hamil.MolecularHamiltonian" title="deepqmc.hamil.MolecularHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolecularHamiltonian</span></code></a>) – the Hamiltonian of
 the system on which the graph is defined.</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the length of the electron embedding vectors.</p></li>
-<li><p><strong>n_interactions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of message passing interactions.</p></li>
-<li><p><strong>edge_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p>a <code class="xref py py-data docutils literal notranslate"><span class="pre">dict</span></code> of functions for each edge
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the length of the electron embedding vectors.</p></li>
+<li><p><strong>n_interactions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of message passing interactions.</p></li>
+<li><p><strong>edge_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – <p>a <code class="xref py py-data docutils literal notranslate"><span class="pre">dict</span></code> of functions for each edge
 type, embedding the interparticle differences. Valid keys are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">'ne'</span></code>: for nucleus-electron edges</p></li>
@@ -1402,14 +1402,14 @@ type, embedding the interparticle differences. Valid keys are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">'down'</span></code>: for edges going from spin down electrons to all electrons</p></li>
 </ul>
 </p></li>
-<li><p><strong>self_interaction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to consider edges where the sender and
+<li><p><strong>self_interaction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to consider edges where the sender and
 receiver electrons are the same.</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the feature dimension of the two particle
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the feature dimension of the two particle
 streams. Only active if <code class="xref py py-data docutils literal notranslate"><span class="pre">deep_features</span></code> are used.</p></li>
-<li><p><strong>nuclei_embedding</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.electron_gnn.NucleiEmbedding" title="deepqmc.gnn.electron_gnn.NucleiEmbedding"><em>NucleiEmbedding</em></a><em>]</em>) – optional, the instance responsible for creating the initial nuclear
-embeddings. Set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> if nuclear embeddings are not needed.</p></li>
-<li><p><strong>electron_embedding</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.electron_gnn.ElectronEmbedding" title="deepqmc.gnn.electron_gnn.ElectronEmbedding"><em>ElectronEmbedding</em></a><em>]</em>) – the instance that creates the initial electron embeddings.</p></li>
-<li><p><strong>layer_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.electron_gnn.ElectronGNNLayer" title="deepqmc.gnn.electron_gnn.ElectronGNNLayer"><em>ElectronGNNLayer</em></a><em>]</em>) – a
+<li><p><strong>nuclei_embedding</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.electron_gnn.NucleiEmbedding" title="deepqmc.gnn.electron_gnn.NucleiEmbedding"><em>NucleiEmbedding</em></a><em>]</em>) – optional, the instance responsible for creating the initial nuclear
+embeddings. Set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a> if nuclear embeddings are not needed.</p></li>
+<li><p><strong>electron_embedding</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.electron_gnn.ElectronEmbedding" title="deepqmc.gnn.electron_gnn.ElectronEmbedding"><em>ElectronEmbedding</em></a><em>]</em>) – the instance that creates the initial electron embeddings.</p></li>
+<li><p><strong>layer_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.electron_gnn.ElectronGNNLayer" title="deepqmc.gnn.electron_gnn.ElectronGNNLayer"><em>ElectronGNNLayer</em></a><em>]</em>) – a
 callable that generates a layer of the GNN.</p></li>
 <li><p><strong>ghost_coords</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a>) – optional, specifies the coordinates of one or more
 ghost atoms, useful for breaking spatial symmetries of the nuclear geometry.</p></li>
@@ -1432,37 +1432,37 @@ ghost atoms, useful for breaking spatial symmetries of the nuclear geometry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_interactions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of message passing interactions.</p></li>
-<li><p><strong>ilayer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the index of this layer (0 &lt;= ilayer &lt; n_interactions).</p></li>
-<li><p><strong>n_nuc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of nuclei.</p></li>
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of spin up electrons.</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of spin down electrons.</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the length of the electron embedding vectors.</p></li>
-<li><p><strong>edge_types</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – the types of edges to consider.</p></li>
-<li><p><strong>self_interaction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to consider edges where the sender and
+<li><p><strong>n_interactions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of message passing interactions.</p></li>
+<li><p><strong>ilayer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the index of this layer (0 &lt;= ilayer &lt; n_interactions).</p></li>
+<li><p><strong>n_nuc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of nuclei.</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of spin up electrons.</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of spin down electrons.</p></li>
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the length of the electron embedding vectors.</p></li>
+<li><p><strong>edge_types</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – the types of edges to consider.</p></li>
+<li><p><strong>self_interaction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to consider edges where the sender and
 receiver electrons are the same.</p></li>
-<li><p><strong>node_data</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – a dictionary containing information about the
+<li><p><strong>node_data</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – a dictionary containing information about the
 nodes of the graph.</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the feature dimension of the two particle
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the feature dimension of the two particle
 streams.</p></li>
 <li><p><strong>electron_residual</strong> – whether a residual connection is used when updating
-the electron embeddings, either <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, or an instance of
+the electron embeddings, either <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, or an instance of
 <a class="reference internal" href="#deepqmc.hkext.ResidualConnection" title="deepqmc.hkext.ResidualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidualConnection</span></code></a>.</p></li>
 <li><p><strong>nucleus_residual</strong> – whether a residual connection is used when updating
-the nucleus embeddings, either <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, or an instance of
+the nucleus embeddings, either <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, or an instance of
 <a class="reference internal" href="#deepqmc.hkext.ResidualConnection" title="deepqmc.hkext.ResidualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidualConnection</span></code></a>.</p></li>
 <li><p><strong>two_particle_residual</strong> – whether a residual connection is used when updating
-the two particle embeddings, either <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, or an instance of
+the two particle embeddings, either <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, or an instance of
 <a class="reference internal" href="#deepqmc.hkext.ResidualConnection" title="deepqmc.hkext.ResidualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidualConnection</span></code></a>.</p></li>
-<li><p><strong>deep_features</strong> – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, the edge features are not updated throughout
+<li><p><strong>deep_features</strong> – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, the edge features are not updated throughout
 the GNN layers, if <code class="xref py py-data docutils literal notranslate"><span class="pre">shared</span></code> than in each layer a single MLP
 (<code class="xref py py-data docutils literal notranslate"><span class="pre">u</span></code>) is used to update all edge types, if <code class="xref py py-data docutils literal notranslate"><span class="pre">separate</span></code> then in
 each layer separate MLPs are used to update the different edge types.</p></li>
-<li><p><strong>update_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.update_features.UpdateFeature" title="deepqmc.gnn.update_features.UpdateFeature"><em>UpdateFeature</em></a><em>]</em>) – a list of
+<li><p><strong>update_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference internal" href="#deepqmc.gnn.update_features.UpdateFeature" title="deepqmc.gnn.update_features.UpdateFeature"><em>UpdateFeature</em></a><em>]</em>) – a list of
 partially initialized update feature classes to use when computing the
 update features of the one particle embeddings. For more details see the
 documentation of <a class="reference internal" href="#module-deepqmc.gnn.update_features" title="deepqmc.gnn.update_features"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepqmc.gnn.update_features</span></code></a>.</p></li>
-<li><p><strong>update_rule</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – <p>how to combine the update features for the update of the
+<li><p><strong>update_rule</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – <p>how to combine the update features for the update of the
 one particle embeddings.
 Possible values:</p>
 <ul>
@@ -1474,9 +1474,9 @@ Possible values:</p>
 <p>note that <code class="xref py py-data docutils literal notranslate"><span class="pre">'sum'</span></code> and <code class="xref py py-data docutils literal notranslate"><span class="pre">'featurewise_shared'</span></code> imply features
 of same size.</p>
 </p></li>
-<li><p><strong>subnet_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – optional, a function that constructs
+<li><p><strong>subnet_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – optional, a function that constructs
 the subnetworks of the GNN layer.</p></li>
-<li><p><strong>subnet_factory_by_lbl</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – optional, a dictionary of functions that construct
+<li><p><strong>subnet_factory_by_lbl</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – optional, a dictionary of functions that construct
 subnetworks of the GNN layer. If both this and <code class="xref py py-data docutils literal notranslate"><span class="pre">subnet_factory</span></code> is
 specified, the specified values of <code class="xref py py-data docutils literal notranslate"><span class="pre">subnet_factory_by_lbl</span></code> will take
 precedence. If some keys are missing, the default value of
@@ -1494,15 +1494,15 @@ precedence. If some keys are missing, the default value of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of spin up electrons.</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of spin down electrons.</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of spin up electrons.</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of spin down electrons.</p></li>
 <li><p><strong>charges</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><em>jax.Array</em></a>) – the nuclear charges of the molecule.</p></li>
-<li><p><strong>n_atom_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of different atom types in the molecule.</p></li>
-<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the length of the output embedding vector</p></li>
-<li><p><strong>atom_type_embedding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>, initial embeddings are the same
+<li><p><strong>n_atom_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of different atom types in the molecule.</p></li>
+<li><p><strong>embedding_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the length of the output embedding vector</p></li>
+<li><p><strong>atom_type_embedding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – if <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>, initial embeddings are the same
 for atoms of the same type (nuclear charge), otherwise they are different
 for all nuclei.</p></li>
-<li><p><strong>subnet_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the type of subnetwork to use for the embedding generation:
+<li><p><strong>subnet_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – the type of subnetwork to use for the embedding generation:
 - <code class="docutils literal notranslate"><span class="pre">'mlp'</span></code>: an MLP is used
 - <code class="docutils literal notranslate"><span class="pre">'embed'</span></code>: a <a class="reference external" href="https://dm-haiku.readthedocs.io/en/latest/api.html#haiku.Embed" title="(in Haiku)"><code class="xref py py-class docutils literal notranslate"><span class="pre">haiku.Embed</span></code></a> block is used</p></li>
 <li><p><strong>edge_features</strong> (<a class="reference internal" href="#deepqmc.gnn.edge_features.EdgeFeature" title="deepqmc.gnn.edge_features.EdgeFeature"><em>EdgeFeature</em></a>) – optional, the edge
@@ -1526,16 +1526,16 @@ as separate update features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin up electrons</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin down electrons</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin down electrons</p></li>
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
 <li><p><strong>node_edge_mapping</strong> (<a class="reference internal" href="#deepqmc.gnn.utils.NodeEdgeMapping" title="deepqmc.gnn.utils.NodeEdgeMapping"><em>NodeEdgeMapping</em></a>) – mapping between the
 various node and edge types.</p></li>
-<li><p><strong>edge_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – list of edge types to sum over</p></li>
-<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to normalize the sum by the number of senders</p></li>
-<li><p><strong>w_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – factory function for the <span class="math">\(w\)</span> matrix</p></li>
-<li><p><strong>h_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a>) – factory function for the <span class="math">\(h\)</span> matrix</p></li>
-<li><p><strong>w_for_ne</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to use the <span class="math">\(w\)</span> matrix for the <span class="math">\(ne\)</span> edge
+<li><p><strong>edge_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – list of edge types to sum over</p></li>
+<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to normalize the sum by the number of senders</p></li>
+<li><p><strong>w_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – factory function for the <span class="math">\(w\)</span> matrix</p></li>
+<li><p><strong>h_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>) – factory function for the <span class="math">\(h\)</span> matrix</p></li>
+<li><p><strong>w_for_ne</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to use the <span class="math">\(w\)</span> matrix for the <span class="math">\(ne\)</span> edge
 type</p></li>
 </ul>
 </dd>
@@ -1551,13 +1551,13 @@ as separate update features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin up electrons</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin down electrons</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin down electrons</p></li>
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
 <li><p><strong>node_edge_mapping</strong> (<a class="reference internal" href="#deepqmc.gnn.utils.NodeEdgeMapping" title="deepqmc.gnn.utils.NodeEdgeMapping"><em>NodeEdgeMapping</em></a>) – mapping between the
 various node and edge types.</p></li>
-<li><p><strong>edge_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – list of edge types to sum over</p></li>
-<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to normalize the sum by the number of senders</p></li>
+<li><p><strong>edge_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – list of edge types to sum over</p></li>
+<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to normalize the sum by the number of senders</p></li>
 </ul>
 </dd>
 </dl>
@@ -1571,13 +1571,13 @@ various node and edge types.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin up electrons</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin down electrons</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin down electrons</p></li>
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
 <li><p><strong>node_edge_mapping</strong> (<a class="reference internal" href="#deepqmc.gnn.utils.NodeEdgeMapping" title="deepqmc.gnn.utils.NodeEdgeMapping"><em>NodeEdgeMapping</em></a>) – mapping between the
 various node and edge types.</p></li>
-<li><p><strong>num_heads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of attention heads</p></li>
-<li><p><strong>mlp_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.hkext.MLP" title="deepqmc.hkext.MLP"><em>MLP</em></a><em>]</em>) – factory function for the MLP</p></li>
+<li><p><strong>num_heads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of attention heads</p></li>
+<li><p><strong>mlp_factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><em>Type</em></a><em>[</em><a class="reference internal" href="#deepqmc.hkext.MLP" title="deepqmc.hkext.MLP"><em>MLP</em></a><em>]</em>) – factory function for the MLP</p></li>
 <li><p><strong>attention_residual</strong> (<em>Optional</em><em>[</em><em>Residual</em><em>]</em>) – optional residual
 connection after the attention layer</p></li>
 <li><p><strong>mlp_residual</strong> (<em>Optional</em><em>[</em><em>Residual</em><em>]</em>) – optional residual
@@ -1596,13 +1596,13 @@ a single update feature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin up electrons</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin down electrons</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin down electrons</p></li>
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
 <li><p><strong>node_edge_mapping</strong> (<a class="reference internal" href="#deepqmc.gnn.utils.NodeEdgeMapping" title="deepqmc.gnn.utils.NodeEdgeMapping"><em>NodeEdgeMapping</em></a>) – mapping between the
 various node and edge types.</p></li>
-<li><p><strong>node_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – list of node types to update</p></li>
-<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – whether to normalize the sum by the number of nodes</p></li>
+<li><p><strong>node_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – list of node types to update</p></li>
+<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – whether to normalize the sum by the number of nodes</p></li>
 </ul>
 </dd>
 </dl>
@@ -1623,9 +1623,9 @@ a single update feature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin up electrons</p></li>
-<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of spin down electrons</p></li>
-<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
+<li><p><strong>n_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin up electrons</p></li>
+<li><p><strong>n_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – number of spin down electrons</p></li>
+<li><p><strong>two_particle_stream_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – dimension of the two-particle stream</p></li>
 <li><p><strong>node_edge_mapping</strong> (<a class="reference internal" href="#deepqmc.gnn.utils.NodeEdgeMapping" title="deepqmc.gnn.utils.NodeEdgeMapping"><em>NodeEdgeMapping</em></a>) – mapping between the
 various node and edge types.</p></li>
 </ul>
@@ -1644,8 +1644,8 @@ edge, or generate all the edge types with a given sender/receiver node.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>edges</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – all the edge types present in the graph</p></li>
-<li><p><strong>node_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – optional, data to store for the node types</p></li>
+<li><p><strong>edges</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – all the edge types present in the graph</p></li>
+<li><p><strong>node_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – optional, data to store for the node types</p></li>
 </ul>
 </dd>
 </dl>
@@ -1668,7 +1668,7 @@ states in parallel.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sampler</strong> (<a class="reference internal" href="#deepqmc.sampling.base.ElectronSampler" title="deepqmc.sampling.base.ElectronSampler"><em>ElectronSampler</em></a>) – the electron sampler to use.</p></li>
-<li><p><strong>n_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the number of electronic states to sample from.</p></li>
+<li><p><strong>n_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – the number of electronic states to sample from.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1699,7 +1699,7 @@ shape: <code class="xref py py-data docutils literal notranslate"><span class="p
 <code class="docutils literal notranslate"><span class="pre">[mol_batch_size,</span> <span class="pre">n_wfs,</span> <span class="pre">n_wfs]</span></code>, and overlap statistics.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)">jax.Array</a>, Stats]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a>[<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)">jax.Array</a>, Stats]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1757,7 +1757,7 @@ shape: <code class="docutils literal notranslate"><span class="pre">[mol_batch_s
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)">jax.Array</a>, <em>Stats</em>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a>[<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)">jax.Array</a>, <em>Stats</em>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1799,7 +1799,7 @@ shape <code class="xref py py-data docutils literal notranslate"><span class="pr
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – PyTree of WF parameters, with leading axis over the
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – PyTree of WF parameters, with leading axis over the
 different WFs. Shape: <code class="xref py py-data docutils literal notranslate"><span class="pre">[n_wfs,</span> <span class="pre">...]</span></code>.</p></li>
 <li><p><strong>phys_conf</strong> (<a class="reference internal" href="#deepqmc.types.PhysicalConfiguration" title="deepqmc.types.PhysicalConfiguration"><em>PhysicalConfiguration</em></a>) – input physical
 configuration samples, with leading axis over the different WFs
@@ -1885,42 +1885,28 @@ was obtained from.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.Params">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">Params</span></span><a class="headerlink" href="#deepqmc.types.Params" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></a></p>
 </dd></dl>
 
 <p>Auxiliary data need for the evaluation of the loss comes as a DataDict type.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.DataDict">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">DataDict</span></span><a class="headerlink" href="#deepqmc.types.DataDict" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
-</dd></dl>
-
-<p>Keys for random number generators have the KeyArray type.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="deepqmc.types.KeyArray">
-<span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">KeyArray</span></span><a class="headerlink" href="#deepqmc.types.KeyArray" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd></dl>
 
 <p>Statistics obtained during training or evaluation use the Stats type.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.Stats">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">Stats</span></span><a class="headerlink" href="#deepqmc.types.Stats" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
-</dd></dl>
-
-<p>Local energies are commonoly needed throughout the algorithm and have their own Energy type.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="deepqmc.types.Energy">
-<span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">Energy</span></span><a class="headerlink" href="#deepqmc.types.Energy" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd></dl>
 
 <p>Data for the evaluation of the training loss is bundeld as a Batch type.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepqmc.types.Batch">
 <span class="sig-prename descclassname"><span class="pre">deepqmc.types.</span></span><span class="sig-name descname"><span class="pre">Batch</span></span><a class="headerlink" href="#deepqmc.types.Batch" title="Link to this definition">#</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">pytree_dataclass</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">pytree_dataclass</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
 </dd></dl>
 
 </section>

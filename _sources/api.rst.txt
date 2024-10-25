@@ -129,17 +129,9 @@ Auxiliary data need for the evaluation of the loss comes as a DataDict type.
 
 .. autoclass:: deepqmc.types.DataDict
 
-Keys for random number generators have the KeyArray type.
-
-.. autoclass:: deepqmc.types.KeyArray
-
 Statistics obtained during training or evaluation use the Stats type.
 
 .. autoclass:: deepqmc.types.Stats
-
-Local energies are commonoly needed throughout the algorithm and have their own Energy type.
-
-.. autoclass:: deepqmc.types.Energy
 
 Data for the evaluation of the training loss is bundeld as a Batch type.
 
